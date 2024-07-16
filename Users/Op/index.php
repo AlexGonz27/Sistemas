@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="./estilos.css">
+</head>
+
+<body>
+    <!-- =============== navegacion ================ -->
+    <div class="contenedor-nav">
+        <div class="navegacion">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="desktop-outline"></ion-icon>
+                        </span>
+                        <span class="title" id="Titulo">Sitema de reservas</span>
+                    </a>
+                </li>
+
+                <li id="Inicio">
+                    <a href="./index.php">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Inicio</span>
+                    </a>
+                </li>
+                <li id="Reservas">
+                    <a href="./reservas.php">
+                        <span class="icon">
+                            <ion-icon name="id-card-outline"></ion-icon>
+                        </span>
+                        <span class="title">Reservas</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= principal ==================== -->
+        <div class="principal">
+            <div class="barratop">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="buscar">
+                    <label>
+                        <input type="text" placeholder="Buscar">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+            </div>
+
+            <!-- ======================= cartas ================== -->
+            <div class="cartaCaja">
+                <div class="carta">
+                    <div>
+                        <div class="numeros">99</div>
+                        <div class="cartaNombre">Reservas</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="id-card-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================ Order Details List ================= -->
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cartaHeader">
+                        <h2>Reservas recientes</h2>
+                        <a href="#" class="btn">Ver Todas</a>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Nomre </td>
+                                <td>Precio</td>
+                                <td>Pago</td>
+                                <td>Fecha</td>
+                                <td>Estado</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Alejandra</td>
+                                <td>$35</td>
+                                <td>Pagado</td>
+                                <td>01/01/2024</td>
+                                <td><span class="status listo">Listo</span></td>
+                            </tr>
+                            <tr>
+                                <td>Alejandra</td>
+                                <td>$45</td>
+                                <td>Pagado</td>
+                                <td>01/01/2024</td>
+                                <td><span class="status listo">Listo</span></td>
+                            </tr>
+                            <tr>
+                                <td>Alejandra</td>
+                                <td>$55</td>
+                                <td>Pagado</td>
+                                <td>01/01/2024</td>
+                                <td><span class="status listo">Listo</span></td>
+                            </tr>
+                            <tr>
+                                <td>Alejandra</td>
+                                <td>$65</td>
+                                <td>Pagado</td>
+                                <td>01/01/2024</td>
+                                <td><span class="status listo">Listo</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =========== Scripts =========  -->
+    <script src="main.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
