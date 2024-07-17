@@ -84,6 +84,14 @@
                         <span class="title">Reservas</span>
                     </a>
                 </li>
+                <li id="categorias">
+                    <a href="./categorias.php">
+                        <span class="icon">
+                            <ion-icon name="bookmarks-outline"></ion-icon>
+                        </span>
+                        <span class="title">Categorias</span>
+                    </a>
+                </li>
                 <li id="Habitaciones">
                     <a href="./habitaciones.php">
                         <span class="icon">

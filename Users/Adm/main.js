@@ -77,6 +77,26 @@ function ConfgVentModifi(C_ID,ID) {
   document.getElementById("text-desc").value = fila.cells[1].textContent;
   document.getElementById("text-cost").value = fila.cells[2].textContent;
 }
+
+function ConfgVentModifiCat(C_ID,ID) {
+  let fila;
+
+  if (C_ID === 1) {
+    fila = document.querySelector("#Tabla_Categorias tr:first-child");
+  } else {
+    fila = document.querySelector("#Tabla_Categorias tr:nth-child(" + (C_ID) + ")");
+  }
+  document.getElementById("ID_Cat").value = ID;
+  document.getElementById("text-nombre").value = fila.cells[0].textContent;
+  document.getElementById("text-desc").value = fila.cells[1].textContent;
+  document.getElementById("text-cap").value = fila.cells[2].textContent;
+  document.getElementById("text-cost").value = fila.cells[3].textContent;
+}
+
 function ConfgVentElim(ID) {
   document.getElementById("ID_ServElim").value = ID;
+}
+
+function ConfgVentElimCat(ID) {
+  document.getElementById("ID_CatElim").value = ID;
 }
