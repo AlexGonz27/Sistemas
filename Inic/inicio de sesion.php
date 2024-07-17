@@ -21,7 +21,7 @@
      
          // Verificar la conexión
          if ($conn->connect_error) {
-             die("La conexión falló: " . $conn->connect_error);//pendejo
+             die("La conexión falló: " . $conn->connect_error);//pendejoooooooooo
          }
          return $conn;
       }
