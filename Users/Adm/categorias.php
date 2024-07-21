@@ -160,24 +160,24 @@
         <div class="serviciosTable">
             <div class="cartaHeader">
                 <h2>Categorias</h2>
-                <a href="#" class="btn">Ver Todas</a>
             </div>
             <div class="conte-btns">
                 <div>
                     <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                 </div>
                 <div>
-                    <input type="text">
+                    <input id="buscador_tabla" type="text" placeholder="Buscar">
                 </div>
             </div>
 
-            <table id="Tabla_Categorias">
+            <table id="Tabla_Servicios">
                 <thead>
                     <tr>
                         <td>Nombre</td>
                         <td>Descripción</td>
                         <td>Capacidad</td>
                         <td>Precio</td>
+                        <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -185,7 +185,6 @@
                     $conn = conectarDB();
                     $sql = "SELECT * FROM tbl_categorias;";
                     $resultado = mysqli_query($conn, $sql);
-                    $num = 1;
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>
                                 <td>" . $fila['Nombre'] . "</td>
@@ -197,9 +196,9 @@
                                     <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Categoria'].");'>Eliminar</span>
                                 </td>
                             </tr>";
-                        $num = $num + 1;
+                        
                     }
-                    ?>
+                ?>
                 </tbody>
             </table>
         </div>
@@ -245,10 +244,13 @@
     <!-- =========== Scripts =========  -->
     <script src="main.js"></script>
     <script src="/Sistemas/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
 </body>
 
 </html>
