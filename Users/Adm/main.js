@@ -104,11 +104,11 @@ function ConfgVentModifi(FilaJson) {
 function ConfgVentModifiCat(FilaJson) {
   console.log(FilaJson)
 
-  document.querySelector("#form-modificar ID_Cat").value = FilaJson.ID_Categoria;
-  document.querySelector("#form-modificar text-nombreCat").value = FilaJson.Nombre;
-  document.querySelector("#form-modificar text-descCat").value = FilaJson.Descripción;
-  document.querySelector("#form-modificar text-capCat").value = FilaJson.Capacidad;
-  document.querySelector("#form-modificar text-costCat").value = FilaJson.Precio;
+  document.querySelector("#form-modificar #ID_Cat").value = FilaJson.ID_Categoria;
+  document.querySelector("#form-modificar #text-nombreCat").value = FilaJson.Nombre;
+  document.querySelector("#form-modificar #text-descCat").value = FilaJson.Descripción;
+  document.querySelector("#form-modificar #text-capCat").value = FilaJson.Capacidad;
+  document.querySelector("#form-modificar #text-costCat").value = FilaJson.Precio;
 }
 
 function ConfgVentModifiHabit(FilaJson) {
