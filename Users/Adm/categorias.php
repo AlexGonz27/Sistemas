@@ -86,7 +86,7 @@
                         <span class="title">Reservas</span>
                     </a>
                 </li>
-                <li id="categorias">
+                <li id="Categorias">
                     <a href="./categorias.php">
                         <span class="icon">
                             <ion-icon name="bookmarks-outline"></ion-icon>
@@ -193,7 +193,7 @@
                                 <td>" . $fila['Capacidad'] . "</td>
                                 <td>" . $fila['Precio'] . "$</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(".$num.",".$fila['ID_Categoria'].")'>Modificar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(".json_encode($fila).")'>Modificar</span>
                                     <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Categoria'].");'>Eliminar</span>
                                 </td>
                             </tr>";
@@ -223,10 +223,10 @@
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
             <form id="form-modificar"action="" method="post" name="modificar">
                 <input id="ID_Cat" type="hidden" name="ID_Cat">
-                <input id="text-nombre" name="nombre" type="text" placeholder="Nombre">
-                <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
-                <input id="text-cap" name="cap" type="int" placeholder="Capacidad">
-                <input id="text-cost" name="cost" type="text" placeholder="Precio">
+                <input id="text-nombreCat" name="nombre" type="text" placeholder="Nombre">
+                <input id="text-descCat" name="desc" type="text" placeholder="Descripcion">
+                <input id="text-capCat" name="cap" type="int" placeholder="Capacidad">
+                <input id="text-costCat" name="cost" type="text" placeholder="Precio">
                 <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">modificar</button>
             </form>
         </div>

@@ -84,7 +84,7 @@
                         <span class="title">Reservas</span>
                     </a>
                 </li>
-                <li id="categorias">
+                <li id="Categorias">
                     <a href="./categorias.php">
                         <span class="icon">
                             <ion-icon name="bookmarks-outline"></ion-icon>
@@ -134,7 +134,9 @@
                 </li>
             </ul>
         </div>
+
         <!-- ========================= principal ==================== -->
+        
         <div class="principal">
             <div class="barratop">
                 <div class="toggle">
@@ -158,14 +160,13 @@
         <div class="serviciosTable">
             <div class="cartaHeader">
                 <h2>Servicios</h2>
-                <a href="#" class="btn">Ver Todas</a>
             </div>
             <div class="conte-btns">
                 <div>
                     <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                 </div>
                 <div>
-                    <input type="text">
+                    <input id="buscador_tabla" type="text" placeholder="Buscar">
                 </div>
             </div>
 
@@ -183,20 +184,18 @@
                     $conn = conectarDB();
                     $sql = "SELECT * FROM tbl_servicios;";
                     $resultado = mysqli_query($conn, $sql);
-                    $num = 1;
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>
                                 <td>" . $fila['Tipo'] . "</td>
                                 <td>" . $fila['Descripción'] . "</td>
                                 <td>" . $fila['Costo'] . "$</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".$num.",".$fila['ID_Servicios'].")'>Modificar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).")'>Modificar</span>
                                     <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Servicios'].");'>Eliminar</span>
                                 </td>
                             </tr>";
-                        $num = $num + 1;
                     }
-                    ?>
+                ?>
                 </tbody>
             </table>
         </div>
@@ -209,7 +208,7 @@
                 <input id="text-tipo" name="tipo" type="text" placeholder="Tipo">
                 <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
                 <input id="text-cost" name="cost" type="text" placeholder="Costo">
-                <button type="submit" name="agregar">agregar</button>
+                <button class="btns btn-agregar" type="submit" name="agregar" class="forma btn-modificar">Agregar</button>
             </form>
         </div>
     </div>
@@ -222,7 +221,7 @@
                 <input id="text-tipo" name="tipo" type="text" placeholder="Tipo">
                 <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
                 <input id="text-cost" name="cost" type="text" placeholder="Costo">
-                <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">modificar</button>
+                <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">Modificar</button>
             </form>
         </div>
     </div>
@@ -240,6 +239,8 @@
     <!-- =========== Scripts =========  -->
     <script src="main.js"></script>
     <script src="/Sistemas/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

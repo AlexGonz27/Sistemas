@@ -456,6 +456,19 @@ body {
   align-items: flex-start;
   margin: 10px;
 }
+#buscador_tabla {
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 20px;
+  margin-right: 20px;
+}
+
+div.dataTables_wrapper input[type="search"] {
+  display: none;
+}
+div.dataTables_wrapper .dataTables_filter {
+  display: none;
+}
 
 .dt-serv .conte-btns .btn-agregar{
   padding: 10px;
@@ -471,6 +484,10 @@ body {
   border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
+}
+.btns.btn-agregar{
+  background: var(--blue);
+  color: var(--white);
 }
 .btns.btn-modificar{
   background: var(--black2);
@@ -514,10 +531,13 @@ body {
   right: 0;
   font-size: 1.2rem;
 }
-.ventana .conte-vent input{
-  margin-bottom: 10px;
+
+.ventana .conte-vent select{
+  border: 1px solid black;
 }
-.ventana .conte-vent #form-modificar input{
+
+.ventana .conte-vent #form-modificar input,
+.ventana .conte-vent select{
   padding: 8px;
   border: 1px solid black;
   border-radius: 10px;
@@ -525,7 +545,25 @@ body {
 }
 .ventana .conte-vent #form-modificar button{
   border: 0px solid black;
+  padding: 5px;
 }
+
+.ventana .conte-vent input,
+.ventana .conte-vent select
+{
+  margin-bottom: 10px;
+}
+.ventana .conte-vent #form-agregar input{
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.ventana .conte-vent #form-agregar button{
+  padding: 5px;
+  border: 0px solid black;
+}
+
 
 #venteliminar {
   display: none;

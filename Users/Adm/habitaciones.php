@@ -10,6 +10,53 @@
 </head>
 
 <body>
+    <?php
+        include 'conexion.php';
+        $conn = conectarDB(); 
+        
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            if (isset($_POST['agregar'])) {
+                $categoria = $_POST['Categoria'];
+                $N_Habitacion = $_POST['NumHabitaciones'];
+                $estado = $_POST['Estado'];
+
+                $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria,N_Habitación,Estado) VALUES ('$categoria','$N_Habitacion','$estado')";
+                
+                if (mysqli_query($conn, $sql)) {
+                    echo "<script>alert('Fila insertada correctamente.');</script>";
+                } else {
+                    echo "Error al insertar fila: " . mysqli_error($conn);
+                }
+            }
+            if (isset($_POST['modificar'])){
+                $ID = $_POST['ID_Cat'];
+                $nombre = $_POST['nombre'];
+                $descripcion = $_POST['desc'];
+                $capacidad = $_POST['cap'];
+                $costo = $_POST['cost'];
+
+                $sql = "UPDATE tbl_habitaciones_categoria SET ID_Categoria='$nombre',Descripción='$descripcion',Capacidad='$capacidad',Precio='$costo' WHERE ID_Categoria = '$ID'";
+                
+                if (mysqli_query($conn, $sql)) {
+                    echo "<script>alert('Fila modificada correctamente.');</script>";
+                } else {
+                    echo "Error al modificar fila: " . mysqli_error($conn);
+                }
+            }
+            if (isset($_POST['eliminar'])){
+                $ID = $_POST['ID_Cat'];
+
+                $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
+                
+                if (mysqli_query($conn, $sql)) {
+                    echo "<script>alert('Fila eliminada correctamente.');</script>";
+                } else {
+                    echo "Error al modificar fila: " . mysqli_error($conn);
+                }
+            }
+        }
+        mysqli_close($conn);
+    ?>
     <!-- =============== navegacion ================ -->
     <div class="contenedor-nav">
         <div class="navegacion">
@@ -22,7 +69,6 @@
                         <span class="title" id="Titulo">Sitema de reservas</span>
                     </a>
                 </li>
-
                 <li id="Inicio">
                     <a href="./index.php">
                         <span class="icon">
@@ -39,7 +85,7 @@
                         <span class="title">Reservas</span>
                     </a>
                 </li>
-                <li id="categorias">
+                <li id="Categorias">
                     <a href="./categorias.php">
                         <span class="icon">
                             <ion-icon name="bookmarks-outline"></ion-icon>
@@ -89,8 +135,8 @@
                 </li>
             </ul>
         </div>
-
-        <!-- ========================= contenedor-nav ==================== -->
+        <!-- ========================= principal ==================== -->
+        
         <div class="principal">
             <div class="barratop">
                 <div class="toggle">
@@ -108,150 +154,128 @@
                     <img src="assets/imgs/customer01.jpg" alt="">
                 </div>
             </div>
-
-            <!-- ======================= cartas ================== -->
-            <div class="cartaCaja">
-                <div class="carta">
-                    <div>
-                        <div class="numeros">99</div>
-                        <div class="cartaNombre">Reservas</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="id-card-outline"></ion-icon>
-                    </div>
+        <div> 
+    </div>
+    <div class="dt-serv">
+        <div class="serviciosTable">
+            <div class="cartaHeader">
+                <h2>Habitaciones</h2>
+            </div>
+            <div class="conte-btns">
+                <div>
+                    <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                 </div>
-
-                <div class="carta">
-                    <div>
-                        <div class="numeros">49</div>
-                        <div class="cartaNombre">Habitaciones</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="bookmarks-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="carta">
-                    <div>
-                        <div class="numeros">12</div>
-                        <div class="cartaNombre">Servicios</div>
-                    </div>
-                
-                    <div class="iconBx">
-                        <ion-icon name="hand-right-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="carta">
-                    <div>
-                        <div class="numeros">99</div>
-                        <div class="cartaNombre">Usuarios</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="person-circle-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="carta">
-                    <div>
-                        <div class="numeros">7</div>
-                        <div class="cartaNombre">Huespedes</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="body-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="carta">
-                    <div>
-                        <div class="numeros">7</div>
-                        <div class="cartaNombre">Promociones</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="cash-outline"></ion-icon>
-                    </div>
+                <div>
+                    <input id="buscador_tabla" type="text" placeholder="Buscar">
                 </div>
             </div>
 
-            <!-- ================ Order Details List ================= -->
-            <div class="details">
-                <div class="recentOrders">
-                    <div class="cartaHeader">
-                        <h2>Reservas recientes</h2>
-                        <a href="#" class="btn">Ver Todas</a>
-                    </div>
+            <table id="Tabla_Servicios">
+                <thead>
+                    <tr>
+                        <td>Categoria</td>
+                        <td>Num Habitaciones</td>
+                        <td>Estado</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    $conn = conectarDB();
+                    $sql = "SELECT * FROM tbl_habitaciones_categoria;";
+                    $resultado = mysqli_query($conn, $sql);
+                    while ($fila = mysqli_fetch_assoc($resultado)) {
+                        $idCat = $fila['ID_Categoria'];
+                        $sqlCat = "SELECT Nombre FROM tbl_categorias WHERE ID_Categoria = '$idCat'";
+                        $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlCat));
+                        echo "<tr>  
+                                <td>" . $result['Nombre'] . "</td>
+                                <td>" . $fila['N_Habitación'] . "</td>
+                                <td>" . $fila['Estado'] . "</td>
+                                <td>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Habitaciones'].");'>Eliminar</span>
+                                </td>
+                            </tr>";
+                    }
+                    mysqli_close($conn);
+                ?>
+                </tbody>
+            </table>
+        </div>
+    </div></div>    
+    
+    <div id="ventagregar" class="ventana">
+        <div class="conte-vent">
+            <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
+            <form id="form-agregar" action="" method="post">
+                <select id="Categoria_agregar" class="mi-select" name="Categoria">
+                    <option value="">Seleccionar una opción</option>
+                    <?php
+                        $conn = conectarDB();
+                        $sql = "SELECT * FROM tbl_categorias;";
+                        $resultado = mysqli_query($conn, $sql);
+                        while ($fila = mysqli_fetch_assoc($resultado)) {
+                            echo '<option value="' . $fila['ID_Categoria'] . '">' . $fila['Nombre'] . '</option>';
+                        }
+                        mysqli_close($conn);
+                    ?>
+                </select>
+                <input id="text-desc" name="NumHabitaciones" type="text" placeholder="No Habitaciones">
+                <select id="Estado_agregar" class="mi-select" name="Estado">
+                    <option value="">Seleccionar una opción</option>
+                    <option value="Activo">Activo</option>
+                    <option value="Mantemiento">Mantemiento</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+                <button class="btns btn-agregar" type="submit" name="agregar" class="forma btn-modificar">Agregar</button>
+            </form>
+        </div>
+    </div>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Nomre </td>
-                                <td>Precio</td>
-                                <td>Pago</td>
-                                <td>Fecha</td>
-                                <td>Estado</td>
-                            </tr>
-                        </thead>
+    <div id="ventmodifi" class="ventana">
+        <div class="conte-vent">
+            <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
+            <form id="form-modificar"action="" method="post" name="modificar">
+                <select id="Categoria_agregar" class="mi-select" name="Categoria">
+                    <option value="">Seleccionar una opción</option>
+                    <?php
+                        $conn = conectarDB();
+                        $sql = "SELECT * FROM tbl_categorias;";
+                        $resultado = mysqli_query($conn, $sql);
+                        while ($fila = mysqli_fetch_assoc($resultado)) {
+                            echo '<option value="' . $fila['ID_Categoria'] . '">' . $fila['Nombre'] . '</option>';
+                        }
+                        mysqli_close($conn);
+                    ?>
+                </select>
+                <input id="text-desc" name="NumHabitaciones" type="text" placeholder="No Habitaciones">
+                <select id="Estado_agregar" class="mi-select" name="Estado">
+                    <option value="">Seleccionar una opción</option>
+                    <option value="Activo">Activo</option>
+                    <option value="Mantemiento">Mantemiento</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+                <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">Modificar</button>
+            </form>
+        </div>
+    </div>
 
-                        <tbody>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status delivered">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status delivered">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status delivered">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status delivered">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status delivered">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status delivered">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status delivered">Listo</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div id="venteliminar" class="ventana">
+        <div class="conte-vent">
+            <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
+            <form id="form-agregar" action="" method="post" name="agregar">
+                <input id="ID_ServElim" type="hidden" name="ID_Serv">
+                <p>Seguro que desea eliminar esta fila?</p>
+                <button type="submit" name="eliminar">eliminar</button>
+            </form>
+        </div>
+    </div>
     <!-- =========== Scripts =========  -->
     <script src="main.js"></script>
+    <script src="/Sistemas/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

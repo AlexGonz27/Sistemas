@@ -19,6 +19,34 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('venteliminar').style.display = 'block';
     })
   })
+  let idiomaPersonalizado = {
+    "sEmptyTable": "No hay datos disponibles en esta tabla",
+    "sZeroRecords": "No se encontraron resultados",
+    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+    "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+    "infoPostFix": "",
+    "thousands": ",",
+    "lengthMenu": "Mostrar _MENU_ Entradas",
+    "paginate": {
+        "first": "Primero",
+        "last": "Ultimo",
+        "next": "Siguiente",
+        "previous": "Anterior"
+    }
+  };
+  $(document).ready(function() {
+    var table = $('#Tabla_Servicios').DataTable({
+        paging: false,
+        ordering: false,
+        Selection: true,
+        language: idiomaPersonalizado
+    });
+
+    $('#buscador_tabla').on('keyup', function () {
+        table.columns(0).search(this.value).draw();
+    });
+  });
 });
 let lista = document.querySelectorAll(".navegacion li")
 
@@ -64,33 +92,41 @@ document.getElementById("form-agregar").addEventListener("submit", function(even
   event.preventDefault();
 });
 
-function ConfgVentModifi(C_ID,ID) {
-  let fila;
+function ConfgVentModifi(FilaJson) {
+  console.log(FilaJson)
 
-  if (C_ID === 1) {
-    fila = document.querySelector("#Tabla_Servicios tr:first-child");
-  } else {
-    fila = document.querySelector("#Tabla_Servicios tr:nth-child(" + (C_ID) + ")");
-  }
-  document.getElementById("ID_Serv").value = ID;
-  document.getElementById("text-tipo").value = fila.cells[0].textContent;
-  document.getElementById("text-desc").value = fila.cells[1].textContent;
-  document.getElementById("text-cost").value = fila.cells[2].textContent;
+  document.querySelector("#form-modificar #ID_Serv").value = FilaJson.ID_Servicios;
+  document.querySelector("#form-modificar #text-tipo").value = FilaJson.Tipo;
+  document.querySelector("#form-modificar #text-desc").value = FilaJson.Descripción;
+  document.querySelector("#form-modificar #text-cost").value = FilaJson.Costo;
 }
 
-function ConfgVentModifiCat(C_ID,ID) {
-  let fila;
+function ConfgVentModifiCat(FilaJson) {
+  console.log(FilaJson)
 
-  if (C_ID === 1) {
-    fila = document.querySelector("#Tabla_Categorias tr:first-child");
-  } else {
-    fila = document.querySelector("#Tabla_Categorias tr:nth-child(" + (C_ID) + ")");
-  }
-  document.getElementById("ID_Cat").value = ID;
-  document.getElementById("text-nombre").value = fila.cells[0].textContent;
-  document.getElementById("text-desc").value = fila.cells[1].textContent;
-  document.getElementById("text-cap").value = fila.cells[2].textContent;
-  document.getElementById("text-cost").value = fila.cells[3].textContent;
+  document.querySelector("#form-modificar ID_Cat").value = FilaJson.ID_Categoria;
+  document.querySelector("#form-modificar text-nombreCat").value = FilaJson.Nombre;
+  document.querySelector("#form-modificar text-descCat").value = FilaJson.Descripción;
+  document.querySelector("#form-modificar text-capCat").value = FilaJson.Capacidad;
+  document.querySelector("#form-modificar text-costCat").value = FilaJson.Precio;
+}
+
+function ConfgVentModifiHabit(FilaJson) {
+  console.log(FilaJson)
+
+  document.querySelector("#form-modificar #ID_Serv").value = FilaJson.ID_Servicios;
+  document.querySelector("#form-modificar #text-tipo").value = FilaJson.Tipo;
+  document.querySelector("#form-modificar #text-desc").value = FilaJson.Descripción;
+  document.querySelector("#form-modificar #text-cost").value = FilaJson.Costo;
+}
+
+function ConfgVentModifiPromo(FilaJson) {
+  console.log(FilaJson)
+
+  document.querySelector("#form-modificar #ID_Promo").value = FilaJson.ID_Promociones;
+  document.querySelector("#form-modificar #text-nombre").value = FilaJson.Nombre;
+  document.querySelector("#form-modificar #text-descrip").value = FilaJson.Descripción;
+  document.querySelector("#form-modificar #text-descuento").value = FilaJson.Descuento;
 }
 
 function ConfgVentElim(ID) {
@@ -99,4 +135,7 @@ function ConfgVentElim(ID) {
 
 function ConfgVentElimCat(ID) {
   document.getElementById("ID_CatElim").value = ID;
+}
+function ConfgVentElimPromo(ID) {
+  document.getElementById("ID_elimPromo").value = ID;
 }
