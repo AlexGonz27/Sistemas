@@ -117,6 +117,14 @@
                         <span class="title">Usuarios</span>
                     </a>
                 </li>
+                <li id="Clientes">
+                    <a href="../clientes/clientes.php">
+                        <span class="icon">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Clientes</span>
+                    </a>
+                </li>
                 <li id="Huespedes">
                     <a href="./huespedes.php">
                         <span class="icon">

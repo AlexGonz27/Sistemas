@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios</title>
+    <title>Clientes</title>
     <link rel="stylesheet" href="./estilos.css">
 </head>
 
@@ -16,11 +16,12 @@
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if (isset($_POST['agregar'])) {
-                $tipo = $_POST['tipo'];
+                $nombre = $_POST['nombre'];
                 $descripcion = $_POST['desc'];
+                $capacidad = $_POST['cap'];
                 $costo = $_POST['cost'];
 
-                $sql = "INSERT INTO tbl_servicios (Tipo,Descripción,Costo) VALUES ('$tipo','$descripcion','$costo')";
+                $sql = "INSERT INTO tbl_categorias (Nombre,Descripción,Capacidad,Precio) VALUES ('$nombre','$descripcion','$capacidad','$costo')";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila insertada correctamente.');</script>";
@@ -29,12 +30,13 @@
                 }
             }
             if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_Serv'];
-                $tipo = $_POST['tipo'];
+                $ID = $_POST['ID_Cat'];
+                $nombre = $_POST['nombre'];
                 $descripcion = $_POST['desc'];
+                $capacidad = $_POST['cap'];
                 $costo = $_POST['cost'];
 
-                $sql = "UPDATE tbl_servicios SET Tipo='$tipo',Descripción='$descripcion',Costo='$costo' WHERE ID_Servicios = '$ID'";
+                $sql = "UPDATE tbl_categorias SET Nombre='$nombre',Descripción='$descripcion',Capacidad='$capacidad',Precio='$costo' WHERE ID_Categoria = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila modificada correctamente.');</script>";
@@ -43,9 +45,9 @@
                 }
             }
             if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Serv'];
+                $ID = $_POST['ID_Cat'];
 
-                $sql = "DELETE FROM tbl_servicios WHERE ID_Servicios = '$ID'";
+                $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila eliminada correctamente.');</script>";
@@ -117,7 +119,7 @@
                     </a>
                 </li>
                 <li id="Clientes">
-                    <a href="../clientes/clientes.php">
+                    <a href="./clientes.php">
                         <span class="icon">
                             <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
@@ -142,9 +144,7 @@
                 </li>
             </ul>
         </div>
-
         <!-- ========================= principal ==================== -->
-        
         <div class="principal">
             <div class="barratop">
                 <div class="toggle">
@@ -167,8 +167,9 @@
     <div class="dt-serv">
         <div class="serviciosTable">
             <div class="cartaHeader">
-                <h2>Servicios</h2>
+                <h2>Clientes</h2>
             </div>
+
             <div class="conte-btns">
                 <div>
                     <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
@@ -181,27 +182,32 @@
             <table id="Tabla_Datos">
                 <thead>
                     <tr>
-                        <td>Tipo</td>
-                        <td>Descripción</td>
-                        <td>Precio</td>
+                        <td>Identificacion</td>
+                        <td>Nombre/Razón Social</td>
+                        <td>Dirección</td>
+                        <td>Teléfono</td>
+                        <td>Fecha de Nacimiento</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                     $conn = conectarDB();
-                    $sql = "SELECT * FROM tbl_servicios;";
+                    $sql = "SELECT * FROM tbl_cliente_persona;";
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>
-                                <td>" . $fila['Tipo'] . "</td>
-                                <td>" . $fila['Descripción'] . "</td>
-                                <td>" . $fila['Costo'] . "$</td>
+                                <td>" . $fila['Identificación'] . "</td>
+                                <td>" . $fila['Nombre_Razón_Social'] . "</td>
+                                <td>" . $fila['Dirección'] . "</td>
+                                <td>" . $fila['Teléfono'] . "</td>
+                                <td>" . $fila['Teléfono'] . "</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Servicios'].");'>Eliminar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(".json_encode($fila).")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Cliente'].");'>Eliminar</span>
                                 </td>
                             </tr>";
+                        
                     }
                 ?>
                 </tbody>
@@ -213,10 +219,11 @@
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
             <form id="form-agregar" action="" method="post">
-                <input id="text-tipo" name="tipo" type="text" placeholder="Tipo">
+                <input id="text-nombre" name="nombre" type="text" placeholder="Nombre">
                 <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
-                <input id="text-cost" name="cost" type="text" placeholder="Costo">
-                <button class="btns btn-agregar" type="submit" name="agregar" class="forma btn-modificar">Agregar</button>
+                <input id="text-cap" name="cap" type="int" placeholder="Capacidad">
+                <input id="text-cost" name="cost" type="text" placeholder="Precio">
+                <button class="btns btn-agregar" type="submit" name="agregar" >Agregar</button>
             </form>
         </div>
     </div>
@@ -225,11 +232,12 @@
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
             <form id="form-modificar"action="" method="post" name="modificar">
-                <input id="ID_Serv" type="hidden" name="ID_Serv">
-                <input id="text-tipo" name="tipo" type="text" placeholder="Tipo">
-                <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
-                <input id="text-cost" name="cost" type="text" placeholder="Costo">
-                <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">Modificar</button>
+                <input id="ID_Cat" type="hidden" name="ID_Cat">
+                <input id="text-nombreCat" name="nombre" type="text" placeholder="Nombre">
+                <input id="text-descCat" name="desc" type="text" placeholder="Descripcion">
+                <input id="text-capCat" name="cap" type="int" placeholder="Capacidad">
+                <input id="text-costCat" name="cost" type="text" placeholder="Precio">
+                <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">modificar</button>
             </form>
         </div>
     </div>
@@ -238,7 +246,7 @@
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
             <form id="form-agregar" action="" method="post" name="agregar">
-                <input id="ID_ServElim" type="hidden" name="ID_Serv">
+                <input id="ID_CatElim" type="hidden" name="ID_Cat">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit" name="eliminar">eliminar</button>
             </form>
@@ -253,6 +261,7 @@
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
 </body>
 
 </html>
