@@ -17,11 +17,11 @@
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if (isset($_POST['agregar'])) {
                 $ID_Cliente = $_POST['Clientes'];
-                $Nivel = $_POST['text-nivel'];
-                $Correo = $_POST['text-correo'];
-                $Contreseña = $_POST['text-contraseña'];
+                $Nivel = $_POST['Nivel'];
+                $Correo = $_POST['Correo'];
+                $Contreseña = $_POST['Contraseña'];
 
-                $sql = "INSERT INTO tbl_usuario (ID_Cliente,Nivel,Corre,Contraseña) VALUES ('$ID_Cliente','$Nivel','$Correo','$Contreseña')";
+                $sql = "INSERT INTO tbl_usuario (ID_Cliente,Nivel,Correo,Contraseña) VALUES ('$ID_Cliente','$Nivel','$Correo','$Contreseña')";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila insertada correctamente.');</script>";
@@ -234,11 +234,16 @@
                     ?>
                 </select>
                 
-                <input id="text-nivel" name="Nivel" type="text" placeholder="Nivel">
+                <select class="mi-select" name="Nivel">
+                    <option value="">Seleccionar una opción</option>
+                    <option value="1">Administrador</option>
+                    <option value="2">Operador</option>
+                    <option value="3">Usuario</option>
+                </select>
 
-                <input id="text-correo" name="Correo" type="text" placeholder="Correo">
+                <input name="Correo" type="text" placeholder="Correo">
 
-                <input id="text-contraseña" name="Contraseña" type="text" placeholder="Contraseña">
+                <input name="Contraseña" type="text" placeholder="Contraseña">
 
                 <button class="btns btn-modificar"  type="submit" name="agregar" class="forma btn-modificar">Agregar</button>
             
@@ -259,11 +264,16 @@
                 
                 <h2></h2>
                 
-                <input id="text-nivel" name="Nivel" type="text" placeholder="Nivel">
+                <select id="text_nivel" class="mi-select" name="text_nivel">
+                    <option value="">Seleccionar una opción</option>
+                    <option value="1">Administrador</option>
+                    <option value="2">Operador</option>
+                    <option value="3">Usuario</option>
+                </select>
 
-                <input id="text-correo" name="Correo" type="text" placeholder="Correo">
+                <input id="text_correo" name="text_correo" type="text" placeholder="Correo">
 
-                <input id="text-contraseña" name="Contraseña" type="text" placeholder="Contraseña">
+                <input id="text_contraseña" name="text_contraseña" type="text" placeholder="Contraseña">
 
                 <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">Modificar</button>
             

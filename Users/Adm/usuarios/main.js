@@ -96,9 +96,9 @@ function ConfgVentModifi(FilaJson,nombre) {
   console.log(FilaJson)
 
   document.querySelector("#form-modificar h2").textContent = nombre;
-  document.querySelector("#form-modificar #text-nivel").value = FilaJson.Nivel;
-  document.querySelector("#form-modificar #text-correo").value = FilaJson.Correo;
-  document.querySelector("#form-modificar #text-contraseña").value = FilaJson.Contraseña;
+  document.querySelector("#form-modificar #text_nivel").value = FilaJson.Nivel;
+  document.querySelector("#form-modificar #text_correo").value = FilaJson.Correo;
+  document.querySelector("#form-modificar #text_contraseña").value = FilaJson.Contraseña;
 }
 
 function ConfgVentElim(ID) {

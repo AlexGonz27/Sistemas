@@ -291,7 +291,7 @@ td {
 }
 .dt-serv .serviciosTable table tr td:last-child {
   text-align: center;
-  max-width: 60px;
+  max-width: 65px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(1) {
   max-width: 100px;

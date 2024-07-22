@@ -64,7 +64,7 @@
                     </a>
                 </li>
                 <li id="Usuarios">
-                    <a href="../usuarios/usuarios.php">
+                    <a href="./usuarios/usuarios.php">
                         <span class="icon">
                             <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
