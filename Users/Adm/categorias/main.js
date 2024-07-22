@@ -89,10 +89,6 @@ toggle.onclick = function () {
   main.classList.toggle("active")
 };
 
-document.getElementById("form-agregar").addEventListener("submit", function(event) {
-  event.preventDefault();
-});
-
 function ConfgVentModifiCat(FilaJson) {
   console.log(FilaJson)
 
