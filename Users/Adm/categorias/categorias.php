@@ -212,7 +212,7 @@
                 <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
                 <input id="text-cap" name="cap" type="int" placeholder="Capacidad">
                 <input id="text-cost" name="cost" type="text" placeholder="Precio">
-                <button type="submit" name="agregar">agregar</button>
+                <button class="btns btn-agregar" type="submit" name="agregar" >Agregar</button>
             </form>
         </div>
     </div>

@@ -245,7 +245,7 @@
 
                 <input name="Contraseña" type="text" placeholder="Contraseña">
 
-                <button class="btns btn-modificar"  type="submit" name="agregar" class="forma btn-modificar">Agregar</button>
+                <button class="btns btn-agregar" type="submit" name="agregar" >Agregar</button>
             
             </form>
         </div>
