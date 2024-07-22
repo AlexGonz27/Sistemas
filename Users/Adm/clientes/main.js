@@ -89,16 +89,17 @@ toggle.onclick = function () {
   main.classList.toggle("active")
 };
 
-function ConfgVentModifiCat(FilaJson) {
+function ConfgVentModifi(FilaJson) {
   console.log(FilaJson)
 
-  document.querySelector("#form-modificar #ID_Cat").value = FilaJson.ID_Categoria;
-  document.querySelector("#form-modificar #text-nombreCat").value = FilaJson.Nombre;
-  document.querySelector("#form-modificar #text-descCat").value = FilaJson.Descripción;
-  document.querySelector("#form-modificar #text-capCat").value = FilaJson.Capacidad;
-  document.querySelector("#form-modificar #text-costCat").value = FilaJson.Precio;
+  document.querySelector("#form-modificar #ID_Clt").value = FilaJson.ID_Cliente;
+  document.querySelector("#form-modificar #text_CI").value = FilaJson.Identificación;
+  document.querySelector("#form-modificar #text_Name_RS").value = FilaJson.Nombre_Razón_Social;
+  document.querySelector("#form-modificar #text_Direc").value = FilaJson.Dirección;
+  document.querySelector("#form-modificar #text_Tlf").value = FilaJson.Teléfono;
+  document.querySelector("#form-modificar #text_Fn").value = FilaJson.Fecha_Nacimiento;
 }
 
-function ConfgVentElimCat(ID) {
-  document.getElementById("ID_CatElim").value = ID;
+function ConfgVentElim(ID) {
+  document.getElementById("ID_CltElim").value = ID;
 }
