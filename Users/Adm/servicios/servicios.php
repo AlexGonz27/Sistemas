@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promociones</title>
+    <title>Servicios</title>
     <link rel="stylesheet" href="./estilos.css">
 </head>
 
 <body>
     <?php
-        include 'conexion.php';
+        include '../conexion.php';
         $conn = conectarDB(); 
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if (isset($_POST['agregar'])) {
-                $nombre = $_POST['nombre'];
-                $descripcion = $_POST['descrip'];
-                $descuento = $_POST['descuento'];
+                $tipo = $_POST['tipo'];
+                $descripcion = $_POST['desc'];
+                $costo = $_POST['cost'];
 
-                $sql = "INSERT INTO tbl_promociones (Nombre,Descripción,Descuento) VALUES ('$nombre','$descripcion','$descuento')";
+                $sql = "INSERT INTO tbl_servicios (Tipo,Descripción,Costo) VALUES ('$tipo','$descripcion','$costo')";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila insertada correctamente.');</script>";
@@ -29,12 +29,12 @@
                 }
             }
             if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_Promo'];
-                $nombre = $_POST['nombre'];
-                $descripcion = $_POST['descrip'];
-                $descuento = $_POST['descuento'];
+                $ID = $_POST['ID_Serv'];
+                $tipo = $_POST['tipo'];
+                $descripcion = $_POST['desc'];
+                $costo = $_POST['cost'];
 
-                $sql = "UPDATE tbl_promociones SET Nombre='$nombre',Descripción='$descripcion',Descuento='$descuento' WHERE ID_Promociones = '$ID'";
+                $sql = "UPDATE tbl_servicios SET Tipo='$tipo',Descripción='$descripcion',Costo='$costo' WHERE ID_Servicios = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila modificada correctamente.');</script>";
@@ -43,9 +43,9 @@
                 }
             }
             if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Promo'];
+                $ID = $_POST['ID_Serv'];
 
-                $sql = "DELETE FROM tbl_promociones WHERE ID_Promociones = '$ID'";
+                $sql = "DELETE FROM tbl_servicios WHERE ID_Servicios = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila eliminada correctamente.');</script>";
@@ -69,7 +69,7 @@
                     </a>
                 </li>
                 <li id="Inicio">
-                    <a href="./index.php">
+                    <a href="../index.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -85,7 +85,7 @@
                     </a>
                 </li>
                 <li id="Categorias">
-                    <a href="./categorias.php">
+                    <a href="../categorias/categorias.php">
                         <span class="icon">
                             <ion-icon name="bookmarks-outline"></ion-icon>
                         </span>
@@ -93,7 +93,7 @@
                     </a>
                 </li>
                 <li id="Habitaciones">
-                    <a href="./habitaciones.php">
+                    <a href="../habitaciones/habitaciones.php">
                         <span class="icon">
                             <ion-icon name="bookmarks-outline"></ion-icon>
                         </span>
@@ -101,7 +101,7 @@
                     </a>
                 </li>
                 <li id="Servicios">
-                    <a href="./servicios.php">
+                    <a href="../servicios/servicios.php">
                         <span class="icon">
                             <ion-icon name="hand-right-outline"></ion-icon>
                         </span>
@@ -109,7 +109,7 @@
                     </a>
                 </li>
                 <li id="Usuarios">
-                    <a href="./usuarios.php">
+                    <a href="../usuarios/usuarios.php">
                         <span class="icon">
                             <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
@@ -125,7 +125,7 @@
                     </a>
                 </li>
                 <li id="Promociones">
-                    <a href="./promociones.php">
+                    <a href="../promociones/promociones.php">
                         <span class="icon">
                             <ion-icon name="cash-outline"></ion-icon>
                         </span>
@@ -159,7 +159,7 @@
     <div class="dt-serv">
         <div class="serviciosTable">
             <div class="cartaHeader">
-                <h2>Promociones</h2>
+                <h2>Servicios</h2>
             </div>
             <div class="conte-btns">
                 <div>
@@ -170,28 +170,28 @@
                 </div>
             </div>
 
-            <table id="Tabla_Servicios">
+            <table id="Tabla_Datos">
                 <thead>
                     <tr>
                         <td>Tipo</td>
                         <td>Descripción</td>
-                        <td>Descuento</td>
+                        <td>Precio</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                     $conn = conectarDB();
-                    $sql = "SELECT * FROM tbl_promociones;";
+                    $sql = "SELECT * FROM tbl_servicios;";
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>
-                                <td>" . $fila['Nombre'] . "</td>
+                                <td>" . $fila['Tipo'] . "</td>
                                 <td>" . $fila['Descripción'] . "</td>
-                                <td>" . $fila['Descuento'] . "%</td>
+                                <td>" . $fila['Costo'] . "$</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifiPromo(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElimPromo(".$fila['ID_Promociones'].");'>Eliminar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Servicios'].");'>Eliminar</span>
                                 </td>
                             </tr>";
                     }
@@ -205,9 +205,9 @@
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
             <form id="form-agregar" action="" method="post">
-                <input id="text-nombre" name="nombre" type="text" placeholder="Tipo">
-                <input id="text-descrip" name="descrip" type="text" placeholder="Descripcion">
-                <input id="text-descuento" name="descuento" type="text" placeholder="Descuento">
+                <input id="text-tipo" name="tipo" type="text" placeholder="Tipo">
+                <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
+                <input id="text-cost" name="cost" type="text" placeholder="Costo">
                 <button class="btns btn-agregar" type="submit" name="agregar" class="forma btn-modificar">Agregar</button>
             </form>
         </div>
@@ -217,10 +217,10 @@
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
             <form id="form-modificar"action="" method="post" name="modificar">
-                <input id="ID_Promo" type="hidden" name="ID_Promo">
-                <input id="text-nombre" name="nombre" type="text" placeholder="Tipo">
-                <input id="text-descrip" name="descrip" type="text" placeholder="Descripcion">
-                <input id="text-descuento" name="descuento" type="text" placeholder="Descuento">
+                <input id="ID_Serv" type="hidden" name="ID_Serv">
+                <input id="text-tipo" name="tipo" type="text" placeholder="Tipo">
+                <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
+                <input id="text-cost" name="cost" type="text" placeholder="Costo">
                 <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">Modificar</button>
             </form>
         </div>
@@ -230,7 +230,7 @@
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
             <form id="form-agregar" action="" method="post" name="agregar">
-                <input id="ID_elimPromo" type="hidden" name="ID_Promo">
+                <input id="ID_ServElim" type="hidden" name="ID_Serv">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit" name="eliminar">eliminar</button>
             </form>

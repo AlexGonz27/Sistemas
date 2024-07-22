@@ -24,7 +24,7 @@
                 </li>
 
                 <li id="Inicio">
-                    <a href="./index.php">
+                    <a href="../index.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>

@@ -342,7 +342,6 @@ body {
 .dt-serv .serviciosTable {
   position: relative;
   display: grid;
-  min-height: 500px;
   background: var(--white);
   padding: 20px;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -367,6 +366,26 @@ body {
   border-radius: 6px;
 }
 
+td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.ocultar{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  word-wrap: normal;
+}
+.mostrar{
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  cursor: pointer;
+  word-wrap: break-word;
+}
 .dt-serv table {
   width: 100%;
   border-collapse: collapse;

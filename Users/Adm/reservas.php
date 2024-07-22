@@ -24,7 +24,7 @@
                 </li>
 
                 <li id="Inicio">
-                    <a href="./index.php">
+                    <a href="../index.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -39,8 +39,8 @@
                         <span class="title">Reservas</span>
                     </a>
                 </li>
-                <li id="categorias">
-                    <a href="./categorias.php">
+                <li id="Categorias">
+                    <a href="../categorias/categorias.php">
                         <span class="icon">
                             <ion-icon name="bookmarks-outline"></ion-icon>
                         </span>
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li id="Habitaciones">
-                    <a href="./habitaciones.php">
+                    <a href="./habitaciones/habitaciones.php">
                         <span class="icon">
                             <ion-icon name="bookmarks-outline"></ion-icon>
                         </span>
@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li id="Servicios">
-                    <a href="./servicios.php">
+                    <a href="../servicios/servicios.php">
                         <span class="icon">
                             <ion-icon name="hand-right-outline"></ion-icon>
                         </span>
@@ -64,7 +64,7 @@
                     </a>
                 </li>
                 <li id="Usuarios">
-                    <a href="./usuarios.php">
+                    <a href="../usuarios/usuarios.php">
                         <span class="icon">
                             <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
@@ -80,7 +80,7 @@
                     </a>
                 </li>
                 <li id="Promociones">
-                    <a href="./promociones.php">
+                    <a href="../promociones/promociones.php">
                         <span class="icon">
                             <ion-icon name="cash-outline"></ion-icon>
                         </span>

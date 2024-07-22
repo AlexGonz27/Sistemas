@@ -79,7 +79,7 @@ lista.forEach((item) => {
 });
 
 // Menu Toggle
-let toggle = document.querySelector(".toggle");
+let toggle = document.querySelector(".toggle")
 let navigation = document.querySelector(".navegacion")
 let main = document.querySelector(".principal")
 
@@ -88,66 +88,19 @@ toggle.onclick = function () {
   main.classList.toggle("active")
 };
 
-const contenedorCartas = document.querySelector(".cartaCaja");
-const cartas = contenedorCartas.querySelectorAll(".carta");
-
-// Agrega un event listener a cada carta
-cartas.forEach((carta) => {
-    const cartaNombre = carta.querySelector(".cartaNombre").textContent;
-    carta.addEventListener("click", function() {
-        const url = "./" + cartaNombre + ".php";
-        window.location.href = url;
-    });
-});
-
 document.getElementById("form-agregar").addEventListener("submit", function(event) {
   event.preventDefault();
 });
 
-function ConfgVentModifi(FilaJson) {
+function ConfgVentModifi(FilaJson,nombre) {
   console.log(FilaJson)
 
-  document.querySelector("#form-modificar #ID_Serv").value = FilaJson.ID_Servicios;
-  document.querySelector("#form-modificar #text-tipo").value = FilaJson.Tipo;
-  document.querySelector("#form-modificar #text-desc").value = FilaJson.Descripción;
-  document.querySelector("#form-modificar #text-cost").value = FilaJson.Costo;
-}
-
-function ConfgVentModifiCat(FilaJson) {
-  console.log(FilaJson)
-
-  document.querySelector("#form-modificar #ID_Cat").value = FilaJson.ID_Categoria;
-  document.querySelector("#form-modificar #text-nombreCat").value = FilaJson.Nombre;
-  document.querySelector("#form-modificar #text-descCat").value = FilaJson.Descripción;
-  document.querySelector("#form-modificar #text-capCat").value = FilaJson.Capacidad;
-  document.querySelector("#form-modificar #text-costCat").value = FilaJson.Precio;
-}
-
-function ConfgVentModifiHabit(FilaJson) {
-  console.log(FilaJson)
-
-  document.querySelector("#form-modificar #ID_habit_modifi").value = FilaJson.ID_Habitaciones;
-  document.querySelector("#form-modificar #Cat_modifi").value = FilaJson.ID_Categoria;
-  document.querySelector("#form-modificar #text-cant_modifi").value = FilaJson.N_Habitación;
-  document.querySelector("#form-modificar #Est_modifi").value = FilaJson.Estado;
-}
-
-function ConfgVentModifiPromo(FilaJson) {
-  console.log(FilaJson)
-
-  document.querySelector("#form-modificar #ID_Promo").value = FilaJson.ID_Promociones;
-  document.querySelector("#form-modificar #text-nombre").value = FilaJson.Nombre;
-  document.querySelector("#form-modificar #text-descrip").value = FilaJson.Descripción;
-  document.querySelector("#form-modificar #text-descuento").value = FilaJson.Descuento;
+  document.querySelector("#form-modificar h2").textContent = nombre;
+  document.querySelector("#form-modificar #text-nivel").value = FilaJson.Nivel;
+  document.querySelector("#form-modificar #text-correo").value = FilaJson.Correo;
+  document.querySelector("#form-modificar #text-contraseña").value = FilaJson.Contraseña;
 }
 
 function ConfgVentElim(ID) {
-  document.getElementById("ID_ServElim").value = ID;
-}
-
-function ConfgVentElimCat(ID) {
-  document.getElementById("ID_CatElim").value = ID;
-}
-function ConfgVentElimPromo(ID) {
-  document.getElementById("ID_elimPromo").value = ID;
+  document.getElementById("ID_UserElim").value = ID;
 }

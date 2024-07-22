@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habitaciones</title>
+    <title>Promociones</title>
     <link rel="stylesheet" href="./estilos.css">
 </head>
 
 <body>
     <?php
-        include 'conexion.php';
+        include '../conexion.php';
         $conn = conectarDB(); 
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if (isset($_POST['agregar'])) {
-                $categoria = $_POST['Categoria'];
-                $N_Habitacion = $_POST['NumHabitaciones'];
-                $estado = $_POST['Estado'];
+                $nombre = $_POST['nombre'];
+                $descripcion = $_POST['descrip'];
+                $descuento = $_POST['descuento'];
 
-                $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria,N_Habitación,Estado) VALUES ('$categoria','$N_Habitacion','$estado')";
+                $sql = "INSERT INTO tbl_promociones (Nombre,Descripción,Descuento) VALUES ('$nombre','$descripcion','$descuento')";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila insertada correctamente.');</script>";
@@ -29,13 +29,12 @@
                 }
             }
             if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_Cat'];
+                $ID = $_POST['ID_Promo'];
                 $nombre = $_POST['nombre'];
-                $descripcion = $_POST['desc'];
-                $capacidad = $_POST['cap'];
-                $costo = $_POST['cost'];
+                $descripcion = $_POST['descrip'];
+                $descuento = $_POST['descuento'];
 
-                $sql = "UPDATE tbl_habitaciones_categoria SET ID_Categoria='$nombre',Descripción='$descripcion',Capacidad='$capacidad',Precio='$costo' WHERE ID_Categoria = '$ID'";
+                $sql = "UPDATE tbl_promociones SET Nombre='$nombre',Descripción='$descripcion',Descuento='$descuento' WHERE ID_Promociones = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila modificada correctamente.');</script>";
@@ -44,9 +43,9 @@
                 }
             }
             if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Cat'];
+                $ID = $_POST['ID_Promo'];
 
-                $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
+                $sql = "DELETE FROM tbl_promociones WHERE ID_Promociones = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila eliminada correctamente.');</script>";
@@ -70,7 +69,7 @@
                     </a>
                 </li>
                 <li id="Inicio">
-                    <a href="./index.php">
+                    <a href="../index.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -86,7 +85,7 @@
                     </a>
                 </li>
                 <li id="Categorias">
-                    <a href="./categorias.php">
+                    <a href="../categorias/categorias.php">
                         <span class="icon">
                             <ion-icon name="bookmarks-outline"></ion-icon>
                         </span>
@@ -94,7 +93,7 @@
                     </a>
                 </li>
                 <li id="Habitaciones">
-                    <a href="./habitaciones.php">
+                    <a href="./habitaciones/habitaciones.php">
                         <span class="icon">
                             <ion-icon name="bookmarks-outline"></ion-icon>
                         </span>
@@ -102,7 +101,7 @@
                     </a>
                 </li>
                 <li id="Servicios">
-                    <a href="./servicios.php">
+                    <a href="../servicios/servicios.php">
                         <span class="icon">
                             <ion-icon name="hand-right-outline"></ion-icon>
                         </span>
@@ -110,7 +109,7 @@
                     </a>
                 </li>
                 <li id="Usuarios">
-                    <a href="./usuarios.php">
+                    <a href="../usuarios/usuarios.php">
                         <span class="icon">
                             <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
@@ -126,7 +125,7 @@
                     </a>
                 </li>
                 <li id="Promociones">
-                    <a href="./promociones.php">
+                    <a href="../promociones/promociones.php">
                         <span class="icon">
                             <ion-icon name="cash-outline"></ion-icon>
                         </span>
@@ -135,6 +134,7 @@
                 </li>
             </ul>
         </div>
+
         <!-- ========================= principal ==================== -->
         
         <div class="principal">
@@ -159,7 +159,7 @@
     <div class="dt-serv">
         <div class="serviciosTable">
             <div class="cartaHeader">
-                <h2>Habitaciones</h2>
+                <h2>Promociones</h2>
             </div>
             <div class="conte-btns">
                 <div>
@@ -170,35 +170,31 @@
                 </div>
             </div>
 
-            <table id="Tabla_Servicios">
+            <table id="Tabla_Datos">
                 <thead>
                     <tr>
-                        <td>Categoria</td>
-                        <td>Num Habitaciones</td>
-                        <td>Estado</td>
+                        <td>Tipo</td>
+                        <td>Descripción</td>
+                        <td>Descuento</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                     $conn = conectarDB();
-                    $sql = "SELECT * FROM tbl_habitaciones_categoria;";
+                    $sql = "SELECT * FROM tbl_promociones;";
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                        $idCat = $fila['ID_Categoria'];
-                        $sqlCat = "SELECT Nombre FROM tbl_categorias WHERE ID_Categoria = '$idCat'";
-                        $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlCat));
-                        echo "<tr>  
-                                <td>" . $result['Nombre'] . "</td>
-                                <td>" . $fila['N_Habitación'] . "</td>
-                                <td>" . $fila['Estado'] . "</td>
+                        echo "<tr>
+                                <td>" . $fila['Nombre'] . "</td>
+                                <td>" . $fila['Descripción'] . "</td>
+                                <td>" . $fila['Descuento'] . "%</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Habitaciones'].");'>Eliminar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifiPromo(".json_encode($fila).")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElimPromo(".$fila['ID_Promociones'].");'>Eliminar</span>
                                 </td>
                             </tr>";
                     }
-                    mysqli_close($conn);
                 ?>
                 </tbody>
             </table>
@@ -209,25 +205,9 @@
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
             <form id="form-agregar" action="" method="post">
-                <select id="Categoria_agregar" class="mi-select" name="Categoria">
-                    <option value="">Seleccionar una opción</option>
-                    <?php
-                        $conn = conectarDB();
-                        $sql = "SELECT * FROM tbl_categorias;";
-                        $resultado = mysqli_query($conn, $sql);
-                        while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['ID_Categoria'] . '">' . $fila['Nombre'] . '</option>';
-                        }
-                        mysqli_close($conn);
-                    ?>
-                </select>
-                <input id="text-desc" name="NumHabitaciones" type="text" placeholder="No Habitaciones">
-                <select id="Estado_agregar" class="mi-select" name="Estado">
-                    <option value="">Seleccionar una opción</option>
-                    <option value="Activo">Activo</option>
-                    <option value="Mantemiento">Mantemiento</option>
-                    <option value="Inactivo">Inactivo</option>
-                </select>
+                <input id="text-nombre" name="nombre" type="text" placeholder="Tipo">
+                <input id="text-descrip" name="descrip" type="text" placeholder="Descripcion">
+                <input id="text-descuento" name="descuento" type="text" placeholder="Descuento">
                 <button class="btns btn-agregar" type="submit" name="agregar" class="forma btn-modificar">Agregar</button>
             </form>
         </div>
@@ -237,25 +217,10 @@
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
             <form id="form-modificar"action="" method="post" name="modificar">
-                <select id="Categoria_agregar" class="mi-select" name="Categoria">
-                    <option value="">Seleccionar una opción</option>
-                    <?php
-                        $conn = conectarDB();
-                        $sql = "SELECT * FROM tbl_categorias;";
-                        $resultado = mysqli_query($conn, $sql);
-                        while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['ID_Categoria'] . '">' . $fila['Nombre'] . '</option>';
-                        }
-                        mysqli_close($conn);
-                    ?>
-                </select>
-                <input id="text-desc" name="NumHabitaciones" type="text" placeholder="No Habitaciones">
-                <select id="Estado_agregar" class="mi-select" name="Estado">
-                    <option value="">Seleccionar una opción</option>
-                    <option value="Activo">Activo</option>
-                    <option value="Mantemiento">Mantemiento</option>
-                    <option value="Inactivo">Inactivo</option>
-                </select>
+                <input id="ID_Promo" type="hidden" name="ID_Promo">
+                <input id="text-nombre" name="nombre" type="text" placeholder="Tipo">
+                <input id="text-descrip" name="descrip" type="text" placeholder="Descripcion">
+                <input id="text-descuento" name="descuento" type="text" placeholder="Descuento">
                 <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">Modificar</button>
             </form>
         </div>
@@ -265,7 +230,7 @@
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
             <form id="form-agregar" action="" method="post" name="agregar">
-                <input id="ID_ServElim" type="hidden" name="ID_Serv">
+                <input id="ID_elimPromo" type="hidden" name="ID_Promo">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit" name="eliminar">eliminar</button>
             </form>
