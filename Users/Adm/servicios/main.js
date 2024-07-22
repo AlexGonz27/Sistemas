@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     $('#buscador_tabla').on('keyup', function () {
-        table.columns(0).search(this.value).draw();
+        table.search(this.value).draw();
     });
   });
 
