@@ -227,6 +227,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             </tr>";
                         
                     }
+                    mysqli_close($conn);
                 ?>
                 </tbody>
             </table>

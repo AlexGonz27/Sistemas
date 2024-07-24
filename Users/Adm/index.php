@@ -6,7 +6,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../../../");
     exit;
 }
+$conn = conectarDB();
+$sql = "SHOW TABLES";
+$resultado = mysqli_query($conn, $sql);
+$tabla_conts = array();
 
+if($resultado->num_rows > 0){
+    while ($fila = mysqli_fetch_array($resultado)) {
+        $tabla = $fila[0];
+        $cont_sql = "SELECT COUNT(*) AS total FROM $tabla";
+        $cont_result = mysqli_query($conn, $cont_sql);
+        $cont = mysqli_fetch_array($cont_result);
+        $tabla_conts[$tabla] = $cont['total'];
+    }
+}
+mysqli_close($conn);
 
 ?>
 <!DOCTYPE html>
@@ -131,7 +145,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="cartaCaja">
                 <div class="carta">
                     <div>
-                        <div class="numeros">99</div>
+                        <div class="numeros">
+                            <?php
+                                echo $tabla_conts['tbl_reservacion'];
+                            ?>
+                        </div>
                         <div class="cartaNombre">Reservas</div>
                     </div>
 
@@ -142,7 +160,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                 <div class="carta">
                     <div>
-                        <div class="numeros">12</div>
+                        <div class="numeros">
+                            <?php
+                                echo $tabla_conts['tbl_categorias'];
+                            ?>
+                            </div>
                         <div class="cartaNombre">Categorias</div>
                     </div>
 
@@ -153,7 +175,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                 <div class="carta">
                     <div>
-                        <div class="numeros">49</div>
+                        <div class="numeros">
+                            <?php
+                                echo $tabla_conts['tbl_habitaciones_categoria'];
+                            ?>
+                            </div>
                         <div class="cartaNombre">Habitaciones</div>
                     </div>
 
@@ -164,7 +190,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                 <div class="carta">
                     <div>
-                        <div class="numeros">12</div>
+                        <div class="numeros">
+                            <?php
+                                echo $tabla_conts['tbl_servicios'];
+                            ?>
+                            </div>
                         <div class="cartaNombre">Servicios</div>
                     </div>
                 
@@ -175,7 +205,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                 <div class="carta">
                     <div>
-                        <div class="numeros">99</div>
+                        <div class="numeros">
+                            <?php
+                                echo $tabla_conts['tbl_usuario'];
+                            ?>
+                            </div>
                         <div class="cartaNombre">Usuarios</div>
                     </div>
 
@@ -186,7 +220,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                 <div class="carta">
                     <div>
-                        <div class="numeros">99</div>
+                        <div class="numeros">
+                            <?php
+                                echo $tabla_conts['tbl_cliente_persona'];
+                            ?>
+                            </div>
                         <div class="cartaNombre">Clientes</div>
                     </div>
 
@@ -197,7 +235,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                 <div class="carta">
                     <div>
-                        <div class="numeros">7</div>
+                        <div class="numeros">0</div>
                         <div class="cartaNombre">Huespedes</div>
                     </div>
 
@@ -208,7 +246,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                 <div class="carta">
                     <div>
-                        <div class="numeros">7</div>
+                        <div class="numeros">
+                            <?php
+                                echo $tabla_conts['tbl_promociones'];
+                            ?>
+                        </div>
                         <div class="cartaNombre">Promociones</div>
                     </div>
 
@@ -292,7 +334,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </table>
                 </div>
                 <div class="recentOrders">
-                    
+
                 </div>
             </div>
         </div>

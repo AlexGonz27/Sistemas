@@ -19,46 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('venteliminar').style.display = 'block';
     })
   })
-  let idiomaPersonalizado = {
-    "sEmptyTable": "No hay datos disponibles en esta tabla",
-    "sZeroRecords": "No se encontraron resultados",
-    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-    "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
-    "infoPostFix": "",
-    "thousands": ",",
-    "lengthMenu": "Mostrar _MENU_ Entradas",
-    "paginate": {
-        "first": "Primero",
-        "last": "Ultimo",
-        "next": "Siguiente",
-        "previous": "Anterior"
-    }
-  };
-  $(document).ready(function() {
-    var table = $('#Tabla_Datos').DataTable({
-        paging: false,
-        ordering: false,
-        Selection: true,
-        language: idiomaPersonalizado
-    });
-
-    $('#buscador_tabla').on('keyup', function () {
-        table.search(this.value).draw();
-    });
-  });
-
-  const cells = document.querySelectorAll('tbody tr td');
-
-  cells.forEach(cell => {
-    cell.addEventListener('click', function() {
-      if (this.style.whiteSpace === 'nowrap') {
-        this.classList.toggle('ocultar');
-      } else {
-        this.classList.toggle('mostrar');
-      }
-    });
-  });
+  fetch('index.php')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => console.error('Error:', error));
 });
 let lista = document.querySelectorAll(".navegacion li")
 
@@ -99,3 +65,7 @@ cartas.forEach((carta) => {
         window.location.href = url;
     });
 });
+
+function mostrarConsola(data){
+  console.log(data);
+}
