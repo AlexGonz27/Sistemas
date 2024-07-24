@@ -24,11 +24,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if (isset($_POST['agregar'])) {
-                $categoria = $_POST['Categoria'];
-                $N_Habitacion = $_POST['NumHabitaciones'];
-                $estado = $_POST['Estado'];
+                $ID = $_POST['Cliente'];
+                $Fch_reserva = $_POST['Fch_Reserva'];
+                $Fch_entrada = $_POST['Fch_Entrada'];
+                $Fch_salida = $_POST['Fch_Salida'];
+                $Estado = $_POST['Estado'];
 
-                $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria,N_Habitación,Estado) VALUES ('$categoria','$N_Habitacion','$estado')";
+                $sql = "INSERT INTO tbl_reservacion (ID_Cliente,Fecha_Reservación,Fecha_Entrada,Fecha_Salida,Estado) VALUES ('$ID','$Fch_reserva','$Fch_entrada','$Fch_salida','$Estado')";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila insertada correctamente.');</script>";
@@ -37,12 +39,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 }
             }
             if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_habit_modifi'];
-                $Categoria = $_POST['Categoria'];
-                $N_Habit = $_POST['NumHabitaciones'];
+                $ID = $_POST['Cliente'];
+                $Fch_reserva = $_POST['Fch_Reserva'];
+                $Fch_entrada = $_POST['Fch_Entrada'];
+                $Fch_salida = $_POST['Fch_Salida'];
                 $Estado = $_POST['Estado'];
 
-                $sql = "UPDATE tbl_habitaciones_categoria SET ID_Categoria='$Categoria',N_Habitación='$N_Habit',Estado='$Estado' WHERE ID_Habitaciones = '$ID'";
+                $sql = "UPDATE tbl_reservacion SET Fecha_Reservación='$Fch_reserva',Fecha_Entrada='$Fch_entrada',Fecha_Salida='$Fch_salida',Estado='$Estado' WHERE ID_Cliente = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila modificada correctamente.');</script>";
@@ -51,7 +54,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 }
             }
             if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Cat'];
+                $ID = $_POST['Cliente'];
 
                 $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
                 
@@ -199,27 +202,31 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <thead>
                     <tr>
                         <td>Cliente</td>
+                        <td>Fecha de Reservación</td>
+                        <td>Fecha de Entrada</td>
+                        <td>Fecha de Salida</td>
                         <td>Estado</td>
-                        <td>N Habitaciones</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                     $conn = conectarDB();
-                    $sql = "SELECT * FROM tbl_habitaciones_categoria;";
+                    $sql = "SELECT * FROM tbl_reservacion;";
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                        $idCat = $fila['ID_Categoria'];
-                        $sqlCat = "SELECT Nombre FROM tbl_categorias WHERE ID_Categoria = '$idCat'";
+                        $id = $fila['ID_Reservación'];
+                        $sqlCat = "SELECT Nombre_Razón_Social FROM tbl_cliente_persona WHERE ID_Cliente = '$id'";
                         $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlCat));
                         echo "<tr>  
-                                <td>" . $result['Nombre'] . "</td>
+                                <td>" . $result['Nombre_Razón_Social'] . "</td>
+                                <td>" . $fila['Fecha_Reservación'] . "</td>
+                                <td>" . $fila['Fecha_Entrada'] . "</td>
+                                <td>" . $fila['Fecha_Salida'] . "</td>
                                 <td>" . $fila['Estado'] . "</td>
-                                <td>" . $fila['N_Habitación'] . "</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifiHabit(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Habitaciones'].");'>Eliminar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Reservación'].");'>Eliminar</span>
                                 </td>
                             </tr>";
                     }
@@ -236,21 +243,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
             
             <!-- Forma para agregar  -->
-            <form id="form-modificar"action="" method="post" name="agregar">
-                <select class="mi-select" name="Categoria">
+            <form id="form-agregar"action="" method="post" name="agregar">
+                <select class="mi-select" name="Cliente">
                     <option value="">Seleccionar una opción</option>
                     <?php
                         $conn = conectarDB();
-                        $sql = "SELECT * FROM tbl_categorias;";
+                        $sql = "SELECT * FROM tbl_cliente_persona;";
                         $resultado = mysqli_query($conn, $sql);
                         while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['ID_Categoria'] . '">' . $fila['Nombre'] . '</option>';
+                            echo '<option value="' . $fila['ID_Cliente'] . '">' . $fila['Nombre_Razón_Social'] . '</option>';
                         }
                         mysqli_close($conn);
                     ?>
                 </select>
 
-                <input name="NumHabitaciones" type="text" placeholder="No Habitaciones">
+                <input name="Fch_Reserva" type="date" placeholder="Fecha de Reservación">
+
+                <input name="Fch_Entrada" type="date" placeholder="Fecha de Entrada">
+
+                <input name="Fch_Salida" type="date" placeholder="Fecha de Salida">
 
                 <select class="mi-select" name="Estado">
                     <option value="">Seleccionar una opción</option>
@@ -273,24 +284,27 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <!-- Forma para modificar -->
             <form id="form-modificar"action="" method="post" name="modificar">
 
-                <input id="ID_habit_modifi" type="hidden" name="ID_habit_modifi">
-
-                <select id="Cat_modifi" class="mi-select" name="Categoria">
+                <input id="ID_Reserva" type="hidden" name="ID_Reserva">
+                <select id="ID_Cliente" class="mi-select" name="Cliente">
                     <option value="">Seleccionar una opción</option>
                     <?php
                         $conn = conectarDB();
-                        $sql = "SELECT * FROM tbl_categorias;";
+                        $sql = "SELECT * FROM tbl_cliente_persona;";
                         $resultado = mysqli_query($conn, $sql);
                         while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['ID_Categoria'] . '">' . $fila['Nombre'] . '</option>';
+                            echo '<option value="' . $fila['ID_Cliente'] . '">' . $fila['Nombre_Razón_Social'] . '</option>';
                         }
                         mysqli_close($conn);
                     ?>
                 </select>
 
-                <input id="text-cant_modifi" name="NumHabitaciones" type="text" placeholder="No Habitaciones">
+                <input id="Fch_Reserva" name="Fch_Reserva" type="date" placeholder="Fecha de Reservación">
 
-                <select id="Est_modifi" class="mi-select" name="Estado">
+                <input id="Fch_Entrada" name="Fch_Entrada" type="date" placeholder="Fecha de Entrada">
+
+                <input id="Fch_Salida" name="Fch_Salida" type="date" placeholder="Fecha de Salida">
+
+                <select id="Estado" class="mi-select" name="Estado">
                     <option value="">Seleccionar una opción</option>
                     <option value="Activo">Activo</option>
                     <option value="Mantemiento">Mantemiento</option>

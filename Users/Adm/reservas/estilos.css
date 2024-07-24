@@ -246,6 +246,10 @@ body {
   color: var(--white);
   border-radius: 6px;
 }
+
+#form-agregar input {
+  width: 100%;
+}
 td {
   white-space: nowrap;
   overflow: hidden;
@@ -293,13 +297,19 @@ td {
   max-width: 60px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(1) {
-  max-width: 80px;
+  max-width: 50px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(2) {
-  max-width: 40px;
+  max-width: 50px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(3) {
+  max-width: 40px;
+}
+.dt-serv .serviciosTable table tr td:nth-child(4) {
   max-width: 35px;
+}
+.dt-serv .serviciosTable table tr td:nth-child(5) {
+  max-width: 20px;
 }
 .dt-serv .serviciosTable table tbody tr td:nth-child(3) {
   text-align: center;

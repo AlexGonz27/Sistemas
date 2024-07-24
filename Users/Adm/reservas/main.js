@@ -88,11 +88,13 @@ toggle.onclick = function () {
   main.classList.toggle("active")
 };
 
-function ConfgVentModifiHabit(FilaJson) {
+function ConfgVentModifi(FilaJson) {
   console.log(FilaJson)
 
-  document.querySelector("#form-modificar #ID_habit_modifi").value = FilaJson.ID_Habitaciones;
-  document.querySelector("#form-modificar #Cat_modifi").value = FilaJson.ID_Categoria;
-  document.querySelector("#form-modificar #text-cant_modifi").value = FilaJson.N_Habitación;
-  document.querySelector("#form-modificar #Est_modifi").value = FilaJson.Estado;
+  document.querySelector("#form-modificar #ID_Reserva").value = FilaJson.ID_Reservación;
+  document.querySelector("#form-modificar #ID_Cliente").value = FilaJson.ID_Cliente;
+  document.querySelector("#form-modificar #Fch_Reserva").value = FilaJson.Fecha_Reservación;
+  document.querySelector("#form-modificar #Fch_Entrada").value = FilaJson.Fecha_Entrada;
+  document.querySelector("#form-modificar #Fch_Salida").value = FilaJson.Fecha_Salida;
+  document.querySelector("#form-modificar #Estado").value = FilaJson.Estado;
 }
