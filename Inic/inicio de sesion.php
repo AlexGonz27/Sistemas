@@ -10,58 +10,38 @@
 </head>
 <body>
    <?php
-      function conectarDB(){
-         $serverName = "localhost"; // Cambia esto al nombre de tu servidor SQL
-         $databaseName = "gestion_reservas"; // Cambia esto al nombre de tu base de datos
-         $username = "root"; // Cambia esto al nombre de usuario
-         $password = ""; // Cambia esto a la contraseña
-     
-         // Crear conexión
-         $conn = new mysqli($serverName, $username, $password, $databaseName);
-     
-         // Verificar la conexión
-         if ($conn->connect_error) {
-             die("La conexión falló: " . $conn->connect_error);//pendejoooooooooo
-         }
-         return $conn;
-      }
+      session_start();
+      // Recibir datos del formulario
+      $usuario = $_POST['usuario'];
+      $contrasenia = $_POST['contrasena'];
+      
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-         $usuario = $_POST['usuario'];
-         $contrasenia = $_POST['contrasena'];
          $conn = conectarDB();
          $sql = "SELECT * FROM tbl_usuario WHERE Correo = '$usuario'";
 
          $resultado = mysqli_query($conn,$sql);
             
-         if($fila = mysqli_fetch_assoc($resultado)){
-            if ($fila['Contraseña'] === $contrasenia) {
-               switch ($fila['Nivel']) {
-                  case "1":
-                     header('Location: ../Users/Adm/index.php');
-                     exit;
-                     break;
-                  case "2":
-                     header('Location: ../Users/Op/index.php');
-                     exit;
-                     break;
-                  case "3":
-                     header('Location: ../Users/User/index.php');
-                     exit;
-                     break;
-                  default:
-                     echo "Error";
-                     exit;
-                     break;
-               }
+         
+         if ($resultado->num_rows > 0) {
+            $row = $resultado->fetch_assoc();
+            // Verificar la contraseña en texto plano
+            if ($clave == $row['clave']) {
+                // Contraseña correcta, iniciar sesión
+                $_SESSION['loggedin'] = true;
+                $_SESSION['user_id'] = $row['ID_Usuario'];
+                $_SESSION['user_email'] = $row['Correo'];
+            
+                exit();
+            
+            } else {
+                // Contraseña incorrecta
+                echo "Correo electrónico o contraseña incorrectos.";
             }
-            else{
-               echo '<p>El usuario o contraseña son incorrectas</p>';
-            }
+         } else {
+             // Usuario no encontrado
+             echo "Usuario no encontrado";
          }
-         else {
-            echo '<p>El usuario no existe</p>';
-         }
-    }
+      }
     ?>
     <div class="container">
         <div class="container-form">
