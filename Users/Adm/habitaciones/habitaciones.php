@@ -1,3 +1,11 @@
+<?php 
+//LOGEADO??
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: ../../../");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -138,6 +146,14 @@
                             <ion-icon name="cash-outline"></ion-icon>
                         </span>
                         <span class="title">Promociones</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="..../Inic/loggout.php">
+                        <span class="icon">
+                            <ion-icon name="cash-outline"></ion-icon>
+                        </span>
+                        <span class="title">Cerrar Sesion</span>
                     </a>
                 </li>
             </ul>

@@ -1,3 +1,14 @@
+<?php 
+include 'conexion.php';
+//LOGEADO??
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: ../../../");
+    exit;
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -207,6 +218,7 @@
                 </div>
             </div>
 
+            <!-- ================ Busqueda Cliente ================= -->
             <!-- ================ Order Details List ================= -->
             <div class="details">
                 <div class="recentOrders">
@@ -278,6 +290,9 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="recentOrders">
+                    
                 </div>
             </div>
         </div>

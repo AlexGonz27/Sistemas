@@ -258,6 +258,24 @@ body {
   color: var(--white);
 }
 
+/* ================== Cuadro de Busqueda Usuario ============== */
+.cont_busqueda{
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-gap: 30px;
+}
+.cont_busqueda .recentOrders {
+  position: relative;
+  text-align: center;
+  display: grid;
+  min-height: 100px;
+  background: var(--white);
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+}
 /* ================== Lista de Detalles Index ============== */
 .details {
   position: relative;
@@ -266,13 +284,11 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 30px;
-  /* margin-top: 10px; */
 }
 
 .details .recentOrders {
   position: relative;
   display: grid;
-  min-height: 500px;
   background: var(--white);
   padding: 20px;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);

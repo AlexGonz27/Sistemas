@@ -1,9 +1,9 @@
 <?php
     function conectarDB(){
-        $serverName = "localhost"; // Cambia esto al nombre de tu servidor SQL
-        $databaseName = "gestion_reservas"; // Cambia esto al nombre de tu base de datos
-        $username = "root"; // Cambia esto al nombre de usuario
-        $password = ""; // Cambia esto a la contraseña
+        $serverName = "b03oim8xwvf4jpuq5buf-mysql.services.clever-cloud.com"; // Cambia esto al nombre de tu servidor SQL
+        $databaseName = "b03oim8xwvf4jpuq5buf"; // Cambia esto al nombre de tu base de datos
+        $username = "uqcyvv3hrdg9nufd"; // Cambia esto al nombre de usuario
+        $password = "Rbi6QbmCFiZViAS8dcvY"; // Cambia esto a la contraseña
            // Crear conexión
         $conn = new mysqli($serverName, $username, $password, $databaseName);
            // Verificar la conexión

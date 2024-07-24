@@ -9,43 +9,9 @@
     
 </head>
 <body>
-   <?php
-      session_start();
-      // Recibir datos del formulario
-      $usuario = $_POST['usuario'];
-      $contrasenia = $_POST['contrasena'];
-      
-      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-         $conn = conectarDB();
-         $sql = "SELECT * FROM tbl_usuario WHERE Correo = '$usuario'";
-
-         $resultado = mysqli_query($conn,$sql);
-            
-         
-         if ($resultado->num_rows > 0) {
-            $row = $resultado->fetch_assoc();
-            // Verificar la contraseña en texto plano
-            if ($clave == $row['clave']) {
-                // Contraseña correcta, iniciar sesión
-                $_SESSION['loggedin'] = true;
-                $_SESSION['user_id'] = $row['ID_Usuario'];
-                $_SESSION['user_email'] = $row['Correo'];
-            
-                exit();
-            
-            } else {
-                // Contraseña incorrecta
-                echo "Correo electrónico o contraseña incorrectos.";
-            }
-         } else {
-             // Usuario no encontrado
-             echo "Usuario no encontrado";
-         }
-      }
-    ?>
     <div class="container">
         <div class="container-form">
-            <form method="post" action="" class="sign-in">
+            <form method="post" action="login.php" class="sign-in">
                  <h2>Iniciar Sesion</h2>
                  <div class="social-networks">
                     <ion-icon name="call-outline"></ion-icon>
@@ -57,7 +23,7 @@
                  </div>
                  <div class="container-input">
                     <ion-icon name="lock-closed-outline"></ion-icon>
-                    <input name="contrasena" type="password" placeholder="Contrasena"> 
+                    <input name="contra" type="password" placeholder="Contraseña"> 
                  </div>
                  <a href="#">Olvidaste tu contrasena</a>
                  <button class="button" style="background-color: #ff8000;">INICIAR SESION</button>
