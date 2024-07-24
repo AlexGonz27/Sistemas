@@ -22,7 +22,6 @@
                         <span class="title" id="Titulo">Sitema de reservas</span>
                     </a>
                 </li>
-
                 <li id="Inicio">
                     <a href="./index.php">
                         <span class="icon">
@@ -71,6 +70,14 @@
                         <span class="title">Usuarios</span>
                     </a>
                 </li>
+                <li id="Clientes">
+                    <a href="./clientes/clientes.php">
+                        <span class="icon">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Clientes</span>
+                    </a>
+                </li>
                 <li id="Huespedes">
                     <a href="./huespedes.php">
                         <span class="icon">
@@ -80,7 +87,7 @@
                     </a>
                 </li>
                 <li id="Promociones">
-                    <a href="../promociones/promociones.php">
+                    <a href="./promociones/promociones.php">
                         <span class="icon">
                             <ion-icon name="cash-outline"></ion-icon>
                         </span>
@@ -124,6 +131,17 @@
 
                 <div class="carta">
                     <div>
+                        <div class="numeros">12</div>
+                        <div class="cartaNombre">Categorias</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="bookmarks-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="carta">
+                    <div>
                         <div class="numeros">49</div>
                         <div class="cartaNombre">Habitaciones</div>
                     </div>
@@ -148,6 +166,17 @@
                     <div>
                         <div class="numeros">99</div>
                         <div class="cartaNombre">Usuarios</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="carta">
+                    <div>
+                        <div class="numeros">99</div>
+                        <div class="cartaNombre">Clientes</div>
                     </div>
 
                     <div class="iconBx">
