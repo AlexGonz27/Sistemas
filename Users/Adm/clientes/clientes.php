@@ -89,7 +89,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </a>
                 </li>
                 <li id="Reservas">
-                    <a href="./reservas.php">
+                    <a href="../reservas/reservas.php">
                         <span class="icon">
                             <ion-icon name="id-card-outline"></ion-icon>
                         </span>
