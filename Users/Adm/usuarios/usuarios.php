@@ -23,33 +23,48 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         $conn = conectarDB(); 
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if (isset($_POST['agregar'])) {
-                $ID_Cliente = $_POST['Clientes'];
-                $Nivel = $_POST['Nivel'];
-                $Correo = $_POST['Correo'];
-                $Contreseña = $_POST['Contraseña'];
+            $numE = 0;
+            if (empty($_POST['Clientes'])or empty($_POST['Nivel'])or empty($_POST['Correo']or empty('Contraseña'))) {
+                $numE = 1;   
+            }
 
-                $sql = "INSERT INTO tbl_usuario (ID_Cliente,Nivel,Correo,Contraseña) VALUES ('$ID_Cliente','$Nivel','$Correo','$Contreseña')";
+            if (isset($_POST['agregar'])) {
+                if ($numE == 1) {
+                    echo "<script>alert('No deben haber campos vacios.');</script>";  
+                }else{
+                    $ID_Cliente = $_POST['Clientes'];
+                    $Nivel = $_POST['Nivel'];
+                    $Correo = $_POST['Correo'];
+                    $Contreseña = $_POST['Contraseña'];
+                    
+                    $sql = "INSERT INTO tbl_usuario (ID_Cliente,Nivel,Correo,Contraseña) VALUES ('$ID_Cliente','$Nivel','$Correo','$Contreseña')";
                 
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila insertada correctamente.');</script>";
-                } else {
-                    echo "Error al insertar fila: " . mysqli_error($conn);
+                    if (mysqli_query($conn, $sql)) {
+                        echo "<script>alert('Fila insertada correctamente.');</script>";
+                    } else {
+                        echo "Error al insertar fila: " . mysqli_error($conn);
+                    }
                 }
+                  
             }
             if (isset($_POST['modificar'])){
-                $ID_usuario = $_POST['ID_usuario'];
-                $Nivel = $_POST['text-nivel'];
-                $Correo = $_POST['text-correo'];
-                $Contreseña = $_POST['text-contraseña'];
-
-                $sql = "UPDATE tbl_usuario SET Nivel='$Nivel', Correo='$Correo', Contraseña='$Contraseña' WHERE ID_Usuario = '$ID'";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila modificada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
+                if ($numE == 1) {
+                    echo "<script>alert('No deben haber campos vacios.');</script>";  
+                }else{
+                    $ID_usuario = $_POST['ID_usuario'];
+                    $Nivel = $_POST['text-nivel'];
+                    $Correo = $_POST['text-correo'];
+                    $Contreseña = $_POST['text-contraseña'];
+    
+                    $sql = "UPDATE tbl_usuario SET Nivel='$Nivel', Correo='$Correo', Contraseña='$Contraseña' WHERE ID_Usuario = '$ID'";
+                    
+                    if (mysqli_query($conn, $sql)) {
+                        echo "<script>alert('Fila modificada correctamente.');</script>";
+                    } else {
+                        echo "Error al modificar fila: " . mysqli_error($conn);
+                    }
                 }
+                
             }
             if (isset($_POST['eliminar'])){
                 $ID = $_POST['ID_Cat'];

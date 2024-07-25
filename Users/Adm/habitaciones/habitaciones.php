@@ -23,32 +23,60 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         $conn = conectarDB(); 
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if (isset($_POST['agregar'])) {
-                $categoria = $_POST['Categoria'];
-                $N_Habitacion = $_POST['NumHabitaciones'];
-                $estado = $_POST['Estado'];
+            $numE = 0;
+            if (empty($_POST['Categoria'])or empty($_POST['NumHabitaciones'])or empty($_POST['Estado'])) {
+                $numE = 1;   
+            }
 
-                $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria,N_Habitación,Estado) VALUES ('$categoria','$N_Habitacion','$estado')";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila insertada correctamente.');</script>";
-                } else {
-                    echo "Error al insertar fila: " . mysqli_error($conn);
+            if (isset($_POST['agregar'])) {
+                if ($numE == 1) {
+                    echo "<script>alert('Los campos Categoria,numero y estado son obligatorios.');</script>";  
+                }else
+                {
+                    $categoria = $_POST['Categoria'];
+                    $N_Habitacion = $_POST['NumHabitaciones'];
+                    $estado = $_POST['Estado'];
+
+                    if(!is_numeric($N_Habitacion))
+                    {
+                        echo "<script>alert('Ingrese un numero de habitacion valido.');</script>";
+                    }else{
+                        $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria,N_Habitación,Estado) VALUES ('$categoria','$N_Habitacion','$estado')";
+                    
+                        if (mysqli_query($conn, $sql)) {
+                            echo "<script>alert('Fila insertada correctamente.');</script>";
+                        } else {
+                            echo "Error al insertar fila: " . mysqli_error($conn);
+                        }
+                    }
                 }
+                
             }
             if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_habit_modifi'];
-                $Categoria = $_POST['Categoria'];
-                $N_Habit = $_POST['NumHabitaciones'];
-                $Estado = $_POST['Estado'];
+                if ($numE == 1) {
+                    echo "<script>alert('Los campos Categoria,numero y estado son obligatorios.');</script>";  
+                }else{
+                    $ID = $_POST['ID_habit_modifi'];
+                    $Categoria = $_POST['Categoria'];
+                    $N_Habit = $_POST['NumHabitaciones'];
+                    $Estado = $_POST['Estado'];
 
-                $sql = "UPDATE tbl_habitaciones_categoria SET ID_Categoria='$Categoria',N_Habitación='$N_Habit',Estado='$Estado' WHERE ID_Habitaciones = '$ID'";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila modificada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
+                    if(!is_numeric($N_Habit))
+                    {
+                        echo "<script>alert('Ingrese un numero de habitacion valido.');</script>";
+                    }else{
+                        $sql = "UPDATE tbl_habitaciones_categoria SET ID_Categoria='$Categoria',N_Habitación='$N_Habit',Estado='$Estado' WHERE ID_Habitaciones = '$ID'";
+                    
+                        if (mysqli_query($conn, $sql)) {
+                            echo "<script>alert('Fila modificada correctamente.');</script>";
+                        } else {
+                            echo "Error al modificar fila: " . mysqli_error($conn);
+                        }
+                    }
+    
+                   
                 }
+                
             }
             if (isset($_POST['eliminar'])){
                 $ID = $_POST['ID_Cat'];

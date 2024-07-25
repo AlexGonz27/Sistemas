@@ -23,32 +23,73 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         $conn = conectarDB(); 
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if (isset($_POST['agregar'])) {
-                $tipo = $_POST['tipo'];
-                $descripcion = $_POST['desc'];
-                $costo = $_POST['cost'];
+            $numE = 0;
+            if (empty($_POST['tipo'])or empty($_POST['desc'])or empty($_POST['cost'])) {
+                $numE = 1;   
+            }
 
-                $sql = "INSERT INTO tbl_servicios (Tipo,Descripción,Costo) VALUES ('$tipo','$descripcion','$costo')";
+            if (isset($_POST['agregar'])) {
+
+                if ($numE == 1) {
+                    echo "<script>alert('No deben haber campos vacios.');</script>";  
+                }else{
+                    $tipo = $_POST['tipo'];
+                    $descripcion = $_POST['desc'];
+                    $costo = $_POST['cost'];
+
+                    if(!is_numeric($costo))
+                    {
+                        echo "<script>alert('Ingrese un costo valido.');</script>";
+                    }else{
+                        if(false)
+                        {
+                            echo "<script>alert('Los tipos no pueden llevar caracteres numericos.');</script>";
+                        }else
+                        {
+                            $sql = "INSERT INTO tbl_servicios (Tipo,Descripción,Costo) VALUES ('$tipo','$descripcion','$costo')";
                 
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila insertada correctamente.');</script>";
-                } else {
-                    echo "Error al insertar fila: " . mysqli_error($conn);
+                            if (mysqli_query($conn, $sql)) {
+                                echo "<script>alert('Fila insertada correctamente.');</script>";
+                            } else {
+                                echo "Error al insertar fila: " . mysqli_error($conn);
+                            }
+                        }
+                    }    
                 }
+                
+
+               
             }
             if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_Serv'];
-                $tipo = $_POST['tipo'];
-                $descripcion = $_POST['desc'];
-                $costo = $_POST['cost'];
+                if ($numE == 1) {
+                    echo "<script>alert('No deben haber campos vacios.');</script>";  
+                }else{
 
-                $sql = "UPDATE tbl_servicios SET Tipo='$tipo',Descripción='$descripcion',Costo='$costo' WHERE ID_Servicios = '$ID'";
+                    $ID = $_POST['ID_Serv'];
+                    $tipo = $_POST['tipo'];
+                    $descripcion = $_POST['desc'];
+                    $costo = $_POST['cost'];
                 
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila modificada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
+                    if(!is_numeric($costo))
+                    {
+                        echo "<script>alert('Ingrese un costo valido.');</script>";
+                    }else{
+                        if(false)
+                        {
+                            echo "<script>alert('Los tipos no pueden llevar caracteres numericos.');</script>";
+                        }else{
+                            $sql = "UPDATE tbl_servicios SET Tipo='$tipo',Descripción='$descripcion',Costo='$costo' WHERE ID_Servicios = '$ID'";
+                
+                            if (mysqli_query($conn, $sql)) {
+                                echo "<script>alert('Fila modificada correctamente.');</script>";
+                            } else {
+                                echo "Error al modificar fila: " . mysqli_error($conn);
+                            }
+                        }
+                    }    
                 }
+
+                
             }
             if (isset($_POST['eliminar'])){
                 $ID = $_POST['ID_Serv'];

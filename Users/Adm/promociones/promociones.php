@@ -23,32 +23,61 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         $conn = conectarDB(); 
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if (isset($_POST['agregar'])) {
-                $nombre = $_POST['nombre'];
-                $descripcion = $_POST['descrip'];
-                $descuento = $_POST['descuento'];
+            $numE = 0;
+            if (empty($_POST['nombre'])or empty($_POST['descrip'])or empty($_POST['descuento'])) {
+                $numE = 1;   
+            }
 
-                $sql = "INSERT INTO tbl_promociones (Nombre,Descripción,Descuento) VALUES ('$nombre','$descripcion','$descuento')";
+            if (isset($_POST['agregar'])) {
+                if ($numE == 1) {
+                    echo "<script>alert('No deben haber campos vacios.');</script>";  
+                }else{
+                    $nombre = $_POST['nombre'];
+                    $descripcion = $_POST['descrip'];
+                    $descuento = $_POST['descuento'];
+
+                    if(!is_numeric($descuento))
+                    {
+                        echo "<script>alert('Los descuentos deben ser numericos.');</script>";
+                    }else{
+                        $sql = "INSERT INTO tbl_promociones (Nombre,Descripción,Descuento) VALUES ('$nombre','$descripcion','$descuento')";
                 
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila insertada correctamente.');</script>";
-                } else {
-                    echo "Error al insertar fila: " . mysqli_error($conn);
+                        if (mysqli_query($conn, $sql)) {
+                            echo "<script>alert('Fila insertada correctamente.');</script>";
+                        } else {
+                            echo "Error al insertar fila: " . mysqli_error($conn);
+                        }
+                    }
                 }
+                
+
+                
             }
             if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_Promo'];
-                $nombre = $_POST['nombre'];
-                $descripcion = $_POST['descrip'];
-                $descuento = $_POST['descuento'];
+                if ($numE == 1) {
+                    echo "<script>alert('No deben haber campos vacios.');</script>";  
+                }else{
+                    $ID = $_POST['ID_Promo'];
+                    $nombre = $_POST['nombre'];
+                    $descripcion = $_POST['descrip'];
+                    $descuento = $_POST['descuento'];
 
-                $sql = "UPDATE tbl_promociones SET Nombre='$nombre',Descripción='$descripcion',Descuento='$descuento' WHERE ID_Promociones = '$ID'";
+                    if(!is_numeric($descuento))
+                    {
+                        echo "<script>alert('Los descuentos deben ser numericos.');</script>";
+                    }else{
+                        $sql = "UPDATE tbl_promociones SET Nombre='$nombre',Descripción='$descripcion',Descuento='$descuento' WHERE ID_Promociones = '$ID'";
                 
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila modificada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
+                        if (mysqli_query($conn, $sql)) {
+                            echo "<script>alert('Fila modificada correctamente.');</script>";
+                        } else {
+                            echo "Error al modificar fila: " . mysqli_error($conn);
+                        }
+                    }
                 }
+                
+
+                
             }
             if (isset($_POST['eliminar'])){
                 $ID = $_POST['ID_Promo'];

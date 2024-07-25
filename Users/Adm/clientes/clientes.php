@@ -23,36 +23,55 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         $conn = conectarDB(); 
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if (isset($_POST['agregar'])) {
-                $CI = $_POST['CI'];
-                $name_rs = $_POST['name_rs'];
-                $direc = $_POST['direc'];
-                $tlf = $_POST['tlf'];
-                $fn = $_POST['fn'];
+            $numE = 0;
+            if (empty($_POST['CI'])or empty($_POST['name_rs'])or empty($_POST['direc'])or empty($_POST['tlf'])or empty($_POST['fn'])) {
+                $numE = 1;   
+            }
 
-                $sql = "INSERT INTO tbl_cliente_persona (Identificación,Nombre_Razón_Social,Dirección,Teléfono,Fecha_Nacimiento) VALUES ('$CI','$name_rs','$direc','$tlf','$fn')";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila insertada correctamente.');</script>";
-                } else {
-                    echo "Error al insertar fila: " . mysqli_error($conn);
+            if (isset($_POST['agregar'])) {
+                if($numE ==1)
+                {
+                    echo "<script>alert('Todos los campos son obligatorios.');</script>"; 
+                }else
+                {
+                    $CI = $_POST['CI'];
+                    $name_rs = $_POST['name_rs'];
+                    $direc = $_POST['direc'];
+                    $tlf = $_POST['tlf'];
+                    $fn = $_POST['fn'];
+    
+                    $sql = "INSERT INTO tbl_cliente_persona (Identificación,Nombre_Razón_Social,Dirección,Teléfono,Fecha_Nacimiento) VALUES ('$CI','$name_rs','$direc','$tlf','$fn')";
+                    
+                    if (mysqli_query($conn, $sql)) {
+                        echo "<script>alert('Fila insertada correctamente.');</script>";
+                    } else {
+                        echo "Error al insertar fila: " . mysqli_error($conn);
+                    }
                 }
+                
             }
             if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_Clt'];
-                $CI = $_POST['CI'];
-                $name_rs = $_POST['name_rs'];
-                $direc = $_POST['direc'];
-                $tlf = $_POST['tlf'];
-                $fn = $_POST['fn'];
-
-                $sql = "UPDATE tbl_cliente_persona SET Identificación='$CI',Nombre_Razón_Social='$name_rs',Dirección='$direc',Teléfono='$tlf',Fecha_Nacimiento='$fn' WHERE ID_Cliente = '$ID'";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila modificada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
+                if($numE ==1)
+                {
+                    echo "<script>alert('Todos los campos son obligatorios.');</script>"; 
+                }else
+                {
+                    $ID = $_POST['ID_Clt'];
+                    $CI = $_POST['CI'];
+                    $name_rs = $_POST['name_rs'];
+                    $direc = $_POST['direc'];
+                    $tlf = $_POST['tlf'];
+                    $fn = $_POST['fn'];
+    
+                    $sql = "UPDATE tbl_cliente_persona SET Identificación='$CI',Nombre_Razón_Social='$name_rs',Dirección='$direc',Teléfono='$tlf',Fecha_Nacimiento='$fn' WHERE ID_Cliente = '$ID'";
+                    
+                    if (mysqli_query($conn, $sql)) {
+                        echo "<script>alert('Fila modificada correctamente.');</script>";
+                    } else {
+                        echo "Error al modificar fila: " . mysqli_error($conn);
+                    }                   
                 }
+                
             }
             if (isset($_POST['eliminar'])){
                 $ID = $_POST['ID_Clt'];
