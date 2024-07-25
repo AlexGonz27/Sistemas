@@ -228,7 +228,7 @@ body {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
 }
 
 .cartaCaja .carta .numeros {
@@ -275,7 +275,7 @@ body {
   min-height: 500px;
   background: var(--white);
   padding: 20px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
 }
 
@@ -344,7 +344,7 @@ body {
   display: grid;
   background: var(--white);
   padding: 20px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
 }
 
@@ -492,7 +492,7 @@ div.dataTables_wrapper .dataTables_filter {
 .dt-serv .conte-btns .btn-agregar{
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
   background: var(--blue);
   color: var(--white);
   cursor: pointer;
@@ -537,7 +537,7 @@ div.dataTables_wrapper .dataTables_filter {
   transform: translate(-50%, -50%); 
   text-align: center;
   border-radius: 10px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
   background: #f5f5f5;
   padding: 80px;
   max-width: 400px;
@@ -601,7 +601,7 @@ div.dataTables_wrapper .dataTables_filter {
   transform: translate(-50%, -50%); 
   text-align: center;
   border-radius: 10px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
   background: #f5f5f5;
   padding: 100px;
 }
@@ -624,7 +624,7 @@ div.dataTables_wrapper .dataTables_filter {
   transform: translate(-50%, -50%); 
   text-align: center;
   border-radius: 10px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
   background: #f5f5f5;
   padding: 100px;
 }
