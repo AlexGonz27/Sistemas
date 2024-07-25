@@ -2,7 +2,7 @@
 session_start();
 
 // Datos de conexión a la base de datos
-$conn = mysqli_connect('localhost', 'root', '', 'gestion_reservas');
+$conn = mysqli_connect('localhost', 'root', '1234', 'gestion_reservas');
 
 // Verificar conexión
 if(!$conn){

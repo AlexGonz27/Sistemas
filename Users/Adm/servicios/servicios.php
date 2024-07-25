@@ -33,6 +33,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 if ($numE == 1) {
                     echo "<script>alert('No deben haber campos vacios.');</script>";  
                 }else{
+                    $conn = conectarDB();
+                    $query = "SELECT * FROM tbl_servicios";
+                    $result= mysqli_query($conn, $query);
+
                     $tipo = $_POST['tipo'];
                     $descripcion = $_POST['desc'];
                     $costo = $_POST['cost'];
@@ -46,13 +50,31 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             echo "<script>alert('Los tipos no pueden llevar caracteres numericos.');</script>";
                         }else
                         {
-                            $sql = "INSERT INTO tbl_servicios (Tipo,Descripción,Costo) VALUES ('$tipo','$descripcion','$costo')";
-                
-                            if (mysqli_query($conn, $sql)) {
-                                echo "<script>alert('Fila insertada correctamente.');</script>";
-                            } else {
-                                echo "Error al insertar fila: " . mysqli_error($conn);
+                            if (mysqli_num_rows($result) > 0) {
+                                while($fila = mysqli_fetch_assoc($result)){
+                                    
+                                    if($fila['Descripción'] == $descripcion)
+                                    {
+                                        $numE = 1;
+                                        break;
+                                    }
+                                    
+                                }   
                             }
+                            if($numE == 1)
+                            {
+                                echo "<script>alert('Ya existe un servicio con esa descripcion.');</script>";
+                            }else
+                            {
+                                $sql = "INSERT INTO tbl_servicios (Tipo,Descripción,Costo) VALUES ('$tipo','$descripcion','$costo')";
+                
+                                if (mysqli_query($conn, $sql)) {
+                                    echo "<script>alert('Fila insertada correctamente.');</script>";
+                                } else {
+                                    echo "Error al insertar fila: " . mysqli_error($conn);
+                                }
+                            }
+                            
                         }
                     }    
                 }
@@ -64,6 +86,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 if ($numE == 1) {
                     echo "<script>alert('No deben haber campos vacios.');</script>";  
                 }else{
+                    $conn = conectarDB();
+                    $query = "SELECT * FROM tbl_servicios";
+                    $result= mysqli_query($conn, $query);
 
                     $ID = $_POST['ID_Serv'];
                     $tipo = $_POST['tipo'];
@@ -78,13 +103,31 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         {
                             echo "<script>alert('Los tipos no pueden llevar caracteres numericos.');</script>";
                         }else{
-                            $sql = "UPDATE tbl_servicios SET Tipo='$tipo',Descripción='$descripcion',Costo='$costo' WHERE ID_Servicios = '$ID'";
-                
-                            if (mysqli_query($conn, $sql)) {
-                                echo "<script>alert('Fila modificada correctamente.');</script>";
-                            } else {
-                                echo "Error al modificar fila: " . mysqli_error($conn);
+                            if (mysqli_num_rows($result) > 0) {
+                                while($fila = mysqli_fetch_assoc($result)){
+                                    
+                                    if($fila['Descripción'] == $descripcion && $fila['ID_Servicios'] != $ID)
+                                    {
+                                        $numE = 1;
+                                        break;
+                                    }
+                                    
+                                }   
                             }
+                            if($numE == 1)
+                            {
+                                echo "<script>alert('Ya existe un servicio con esa descripcion.');</script>";
+                            }else
+                            {
+                                $sql = "UPDATE tbl_servicios SET Tipo='$tipo',Descripción='$descripcion',Costo='$costo' WHERE ID_Servicios = '$ID'";
+                
+                                if (mysqli_query($conn, $sql)) {
+                                    echo "<script>alert('Fila modificada correctamente.');</script>";
+                                } else {
+                                    echo "Error al modificar fila: " . mysqli_error($conn);
+                                }
+                            }
+                            
                         }
                     }    
                 }

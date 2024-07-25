@@ -79,9 +79,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 
             }
             if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Cat'];
+                $ID = $_POST['ID_Hab'];
 
-                $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
+                $sql = "DELETE FROM tbl_habitaciones_categoria WHERE ID_Habitaciones = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila eliminada correctamente.');</script>";
@@ -247,7 +247,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <td>" . $fila['N_Habitación'] . "</td>
                                 <td>
                                     <span class='btns btn-modificar' onclick='ConfgVentModifiHabit(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Habitaciones'].");'>Eliminar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElimHabit(".$fila['ID_Habitaciones'].");'>Eliminar</span>
                                 </td>
                             </tr>";
                     }
@@ -336,7 +336,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
             <form id="form-agregar" action="" method="post" name="agregar">
-                <input id="ID_ServElim" type="hidden" name="ID_Serv">
+                <input id="ID_HabElim" type="hidden" name="ID_Hab">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit" name="eliminar">eliminar</button>
             </form>

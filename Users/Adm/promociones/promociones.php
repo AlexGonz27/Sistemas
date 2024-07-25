@@ -32,6 +32,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 if ($numE == 1) {
                     echo "<script>alert('No deben haber campos vacios.');</script>";  
                 }else{
+                    
+                    $query = "SELECT * FROM tbl_promociones";
+                    $result= mysqli_query($conn, $query);
+
                     $nombre = $_POST['nombre'];
                     $descripcion = $_POST['descrip'];
                     $descuento = $_POST['descuento'];
@@ -40,13 +44,31 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     {
                         echo "<script>alert('Los descuentos deben ser numericos.');</script>";
                     }else{
-                        $sql = "INSERT INTO tbl_promociones (Nombre,Descripción,Descuento) VALUES ('$nombre','$descripcion','$descuento')";
-                
-                        if (mysqli_query($conn, $sql)) {
-                            echo "<script>alert('Fila insertada correctamente.');</script>";
-                        } else {
-                            echo "Error al insertar fila: " . mysqli_error($conn);
+                        if (mysqli_num_rows($result) > 0) {
+                            while($fila = mysqli_fetch_assoc($result)){
+                                
+                                if($fila['Descripción'] == $descripcion)
+                                {
+                                    $numE = 1;
+                                    break;
+                                }
+                                
+                            }   
                         }
+                        if($numE == 1)
+                        {
+                            echo "<script>alert('Ya existe una promocion con esa descripcion.');</script>";
+                        }else
+                        {
+                            $sql = "INSERT INTO tbl_promociones (Nombre,Descripción,Descuento) VALUES ('$nombre','$descripcion','$descuento')";
+                
+                            if (mysqli_query($conn, $sql)) {
+                                echo "<script>alert('Fila insertada correctamente.');</script>";
+                            } else {
+                                echo "Error al insertar fila: " . mysqli_error($conn);
+                            }
+                        }
+                        
                     }
                 }
                 
@@ -57,6 +79,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 if ($numE == 1) {
                     echo "<script>alert('No deben haber campos vacios.');</script>";  
                 }else{
+                    $query = "SELECT * FROM tbl_promociones";
+                    $result= mysqli_query($conn, $query);
+
                     $ID = $_POST['ID_Promo'];
                     $nombre = $_POST['nombre'];
                     $descripcion = $_POST['descrip'];
@@ -66,13 +91,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     {
                         echo "<script>alert('Los descuentos deben ser numericos.');</script>";
                     }else{
-                        $sql = "UPDATE tbl_promociones SET Nombre='$nombre',Descripción='$descripcion',Descuento='$descuento' WHERE ID_Promociones = '$ID'";
-                
-                        if (mysqli_query($conn, $sql)) {
-                            echo "<script>alert('Fila modificada correctamente.');</script>";
-                        } else {
-                            echo "Error al modificar fila: " . mysqli_error($conn);
+                        if (mysqli_num_rows($result) > 0) {
+                            while($fila = mysqli_fetch_assoc($result)){
+                                
+                                if($fila['Descripción'] == $descripcion && $fila['ID_Promociones'] != $ID)
+                                {
+                                    $numE = 1;
+                                    break;
+                                }
+                            }   
                         }
+                        if($numE == 1)
+                        {
+                            echo "<script>alert('Ya existe una promocion con esa descripcion.');</script>";
+                        }else
+                        {
+                            $sql = "UPDATE tbl_promociones SET Nombre='$nombre',Descripción='$descripcion',Descuento='$descuento' WHERE ID_Promociones = '$ID'";
+                
+                            if (mysqli_query($conn, $sql)) {
+                                echo "<script>alert('Fila modificada correctamente.');</script>";
+                            } else {
+                                echo "Error al modificar fila: " . mysqli_error($conn);
+                            }
+                        }
+                        
                     }
                 }
                 

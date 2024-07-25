@@ -96,3 +96,7 @@ function ConfgVentModifiHabit(FilaJson) {
   document.querySelector("#form-modificar #text-cant_modifi").value = FilaJson.N_Habitación;
   document.querySelector("#form-modificar #Est_modifi").value = FilaJson.Estado;
 }
+
+function ConfgVentElimHabit(ID) {
+  document.getElementById("ID_HabElim").value = ID;
+}

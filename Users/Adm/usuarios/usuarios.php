@@ -32,18 +32,39 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 if ($numE == 1) {
                     echo "<script>alert('No deben haber campos vacios.');</script>";  
                 }else{
+                    $query = "SELECT * FROM tbl_usuario";
+                    $result= mysqli_query($conn, $query);
+
                     $ID_Cliente = $_POST['Clientes'];
                     $Nivel = $_POST['Nivel'];
                     $Correo = $_POST['Correo'];
                     $Contreseña = $_POST['Contraseña'];
-                    
-                    $sql = "INSERT INTO tbl_usuario (ID_Cliente,Nivel,Correo,Contraseña) VALUES ('$ID_Cliente','$Nivel','$Correo','$Contreseña')";
-                
-                    if (mysqli_query($conn, $sql)) {
-                        echo "<script>alert('Fila insertada correctamente.');</script>";
-                    } else {
-                        echo "Error al insertar fila: " . mysqli_error($conn);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while($fila = mysqli_fetch_assoc($result)){
+                            
+                            if($fila['Correo'] == $Correo)
+                            {
+                                $numE = 1;
+                                break;
+                            }
+                            
+                        }   
                     }
+                    if($numE == 1)
+                    {
+                        echo "<script>alert('Ya existe un usuario con ese correo.');</script>";
+                    }else
+                    {
+                        $sql = "INSERT INTO tbl_usuario (ID_Cliente,Nivel,Correo,Contraseña) VALUES ('$ID_Cliente','$Nivel','$Correo','$Contreseña')";
+                
+                        if (mysqli_query($conn, $sql)) {
+                            echo "<script>alert('Fila insertada correctamente.');</script>";
+                        } else {
+                            echo "Error al insertar fila: " . mysqli_error($conn);
+                        }
+                    }                    
+                    
                 }
                   
             }
@@ -51,25 +72,43 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 if ($numE == 1) {
                     echo "<script>alert('No deben haber campos vacios.');</script>";  
                 }else{
+                    $query = "SELECT * FROM tbl_usuario";
+                    $result= mysqli_query($conn, $query);
+
                     $ID_usuario = $_POST['ID_usuario'];
                     $Nivel = $_POST['text-nivel'];
                     $Correo = $_POST['text-correo'];
                     $Contreseña = $_POST['text-contraseña'];
-    
-                    $sql = "UPDATE tbl_usuario SET Nivel='$Nivel', Correo='$Correo', Contraseña='$Contraseña' WHERE ID_Usuario = '$ID'";
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while($fila = mysqli_fetch_assoc($result)){
+                            
+                            if($fila['Correo'] == $Correo && $fila['ID_Usuario'] != $ID_usuario)
+                            {
+                                $numE = 1;
+                                break;
+                            }
+                        }   
+                    }
+                    if($numE == 1)
+                    {
+                        echo "<script>alert('Ya existe un usuario con ese correo.');</script>";
+                    }else
+                    {
+                        $sql = "UPDATE tbl_usuario SET Nivel='$Nivel', Correo='$Correo', Contraseña='$Contraseña' WHERE ID_Usuario = '$ID'";
                     
-                    if (mysqli_query($conn, $sql)) {
-                        echo "<script>alert('Fila modificada correctamente.');</script>";
-                    } else {
-                        echo "Error al modificar fila: " . mysqli_error($conn);
+                        if (mysqli_query($conn, $sql)) {
+                            echo "<script>alert('Fila modificada correctamente.');</script>";
+                        } else {
+                            echo "Error al modificar fila: " . mysqli_error($conn);
+                        }
                     }
                 }
-                
             }
             if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Cat'];
+                $ID = $_POST['ID_user'];
 
-                $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
+                $sql = "DELETE FROM tbl_usuario WHERE ID_Usuario = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila eliminada correctamente.');</script>";
@@ -325,7 +364,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
             <form id="form-agregar" action="" method="post" name="agregar">
-                <input id="ID_ServElim" type="hidden" name="ID_Serv">
+                <input id="ID_UserElim" type="hidden" name="ID_user">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit" name="eliminar">eliminar</button>
             </form>
