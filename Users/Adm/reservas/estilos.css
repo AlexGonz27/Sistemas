@@ -129,6 +129,51 @@ body {
   pointer-events: none;
 }
 
+/* ===================== Cliente Busqueda ===================== */
+
+.cont_cliente {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+}
+
+.cont_cliente .cont_clt {
+  position: relative;
+  display: grid;
+  background: var(--white);
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+.cont_cliente .cont_clt form{
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  text-align: center;
+  padding: 8px;
+  border-radius: 20px;
+}
+.cont_cliente .cont_clt form input{
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 20px;
+}
+.cont_cliente .cont_clt form input::placeholder{
+  text-align: center;
+}
+.cont_cliente .cont_clt div{
+  text-align: center;
+}
+
+.cont_cliente .cont_clt div button{
+  font-size: 15px;
+}
+.cont_cliente .cont_clt div h2 {
+  font-weight: 600;
+  color: var(--blue);
+}
+
 /* ===================== principal ===================== */
 .principal {
   position: absolute;
@@ -225,7 +270,7 @@ body {
   display: grid;
   background: var(--white);
   padding: 20px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
 }
 

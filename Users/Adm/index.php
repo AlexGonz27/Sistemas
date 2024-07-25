@@ -56,7 +56,7 @@ mysqli_close($conn);
                     </a>
                 </li>
                 <li id="Reservas">
-                    <a href="../reservas/reservas.php">
+                    <a href="./reservas/reservas.php">
                         <span class="icon">
                             <ion-icon name="id-card-outline"></ion-icon>
                         </span>

@@ -40,7 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
         paging: false,
         ordering: false,
         Selection: true,
-        language: idiomaPersonalizado
+        language: idiomaPersonalizado,
+        "columnDefs": [
+            { "searchable": false, "targets": -1 } // Excluye la última columna de la búsqueda
+        ]
     });
 
     $('#buscador_tabla').on('keyup', function () {

@@ -182,20 +182,35 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
         <div> 
     </div>
+    <!-- ////////////////// Busqueda Cliente //////////////////-->
+
+     <div class="cont_cliente">
+        <div class="cont_clt">
+            <div>
+                <h2>Cliente</h2>
+            </div>
+            <form action="" class="data_clientes">
+                <div class="case">
+                    <input type="text" placeholder="Identificación">
+                </div>
+            </form>
+            <div>
+                <button class="btns btn-agregar">Buscar</button>
+            </div>
+        </div>
+     </div>
 
     <!-- ////////////////// DataTable //////////////////-->
     <div class="dt-serv">
         <div class="serviciosTable">
             <div class="cartaHeader">
-                <h2>Reservas</h2>
-            </div>
-            <div class="conte-btns">
-                <div>
-                    <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
-                </div>
-                <div>
+                <h2>Reservas</h2><div>
                     <input id="buscador_tabla" type="text" placeholder="Buscar">
                 </div>
+            </div>
+            <div class="conte-btns">
+                <!--<div><div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div></div>-->
+                
             </div>
 
             <table id="Tabla_Datos">
@@ -225,7 +240,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <td>" . $fila['Fecha_Salida'] . "</td>
                                 <td>" . $fila['Estado'] . "</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).")'>Modificar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).")' >Modificar</span>
                                     <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Reservación'].");'>Eliminar</span>
                                 </td>
                             </tr>";
