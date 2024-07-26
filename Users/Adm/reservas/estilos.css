@@ -154,6 +154,7 @@ body {
   border-radius: 20px;
 }
 .cont_cliente .cont_clt form input{
+  margin: 0px 5px; 
   border: 1px solid black;
   padding: 8px;
   border-radius: 20px;
@@ -428,6 +429,20 @@ div.dataTables_wrapper .dataTables_filter {
   background: var(--blue);
   color: var(--white);
   cursor: pointer;
+}
+.btn-buscar{
+  background: var(--blue);
+  color: var(--white);
+  cursor: pointer;
+  border: 0px;
+  padding: 8px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.btn-buscar:hover{
+  background:#1795ce;
+  color: var(--white);
 }
 .btns {
   cursor: pointer;

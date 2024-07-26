@@ -64,6 +64,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     echo "Error al modificar fila: " . mysqli_error($conn);
                 }
             }
+            if (isset($_POST['buscar'])){
+                $ID = $_POST['id_cliente'];
+
+                $sql = "DELETE FROM tbl_cliente WHERE ID_Categoria = '$ID'";
+                
+                if (mysqli_query($conn, $sql)) {
+                    echo "<script>alert('Fila eliminada correctamente.');</script>";
+                } else {
+                    echo "Error al modificar fila: " . mysqli_error($conn);
+                }
+            }
         }
         mysqli_close($conn);
     ?>
@@ -189,14 +200,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div>
                 <h2>Cliente</h2>
             </div>
-            <form action="" class="data_clientes">
+            <form action="" class="data_clientes" id="clientes">
                 <div class="case">
-                    <input type="text" placeholder="Identificación">
+                    <input type="text" placeholder="Identificación" name="id_cliente">
                 </div>
             </form>
-            <div>
-                <button class="btns btn-agregar" >Buscar</button>
-            </div>
+            <form action="" method="post">
+                <div>
+                    <button id="buscar-btn"class="btn-buscar" type="submit" name="buscar">Buscar</button>
+                </div>
+            </form>
         </div>
      </div>
 
