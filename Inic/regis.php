@@ -9,7 +9,7 @@
     
 </head>
 <body>
-    <div class="container">
+    <div class="container toggle">
         <div class="container-form">
             <form method="post" action="login.php" class="sign-in">
                  <h2>Iniciar Sesion</h2>
@@ -82,7 +82,7 @@
 
    
 
-    <script src="../main.js"></script>
+    <script src="./main.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     

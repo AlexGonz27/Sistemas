@@ -152,7 +152,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </a>
                 </li>
                 <li>
-                    <a href="..../Inic/loggout.php">
+                    <a href="../../../Inic/loggout.php">
                         <span class="icon">
                             <ion-icon name="cash-outline"></ion-icon>
                         </span>
@@ -195,7 +195,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
             </form>
             <div>
-                <button class="btns btn-agregar">Buscar</button>
+                <button class="btns btn-agregar" >Buscar</button>
             </div>
         </div>
      </div>
@@ -209,8 +209,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
             </div>
             <div class="conte-btns">
-                <!--<div><div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div></div>-->
-                
+                <!--<div>
+                    <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
+                </div>-->
             </div>
 
             <table id="Tabla_Datos">

@@ -3,68 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posada Cabañas de la Loma</title>
     <link rel="stylesheet" href="estilos.css">
-    <title>Pagina de sistemas</title>
 </head>
 <body>
-    <header class="header">
-
-        <div class="menu container">
-            <label for="menu">
-                <img src="img/mata de coco.png" alt="#" class="imglogo">
-            </label>
-            <a href="#" class="logo">logito</a>
-            <input type="checkbox" id="menu" />
-            <nav class="barra">
+        <section id="inicio">
+        </section>
+    <header>
+        <div class="container">
+            <img src="img/logofuente.jpg" alt="Hotel Logo" class="logo">
+            <span class="hotel-name">Posada Cabañas de la fuente</span>
+            <nav>
                 <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Nosotros</a></li>
-                    <li><a href="#">Servicios</a></li>
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="./Inic/inicio de sesion.php" >Iniciar Sesion</a></li>
-                    <li><a href="#">Registrarse</a></li>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#home">Sobre Nosotros</a></li>
+                    <li><a href="#about">Galería</a></li>
+                    <li><a href="#info">Info</a></li>
                 </ul>
             </nav>
-        </div>
-
-        <div class="header-content container">
-            <div class="header-text">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti unde facilis, 
-                    cum porro maiores consectetur aperiam, placeat veritatis doloremque aut ipsum nam, 
-                    sit velit similique! Commodi consequuntur nulla odit voluptate.
-                </p>
-                <a href="#" class="btn-1">Informacion</a>
-            </div>
-            <div class="header-img">
-                <img src="" alt="">
-            </div>
+            <a href="./Inic/inic.php" class="login-btn">Iniciar Sesión</a>
+            <a href="./Inic/regis.php" class="login-up-btn">Registrate</a>
         </div>
     </header>
 
-    <section class="about container">
-        <div class="about-img">
-            <img src="#" alt="#">
-        </div>
-        <div class="about-txt">
-            <h2>Nosotros</h2>
-            <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores ad rem 
-                minima eum mollitia vitae veritatis cupiditate consequatur corporis labore 
-                quaerat error eveniet officia ea eos assumenda nemo, praesentium quis.
-            </p>
-        </div>
+    <section id="home" class="hero">
+        <h1>Bienvenido a Posada Cabañas de la fuente</h1>
+    </section>
 
-        
-        <main class="servicios">
-            <div class="servicios-content container">
-                <div class="servicio-1">
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Sobre Nosotros</h2>
+            <p>En Posada Cabañas de la Loma, nos enorgullece ofrecer una experiencia de hospedaje inigualable con un servicio al cliente excepcional y comodidades.</p>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2>Galería</h2>
+            <div class="gallery-grid">
+                <img src="img/piscina 3.jpg" alt="Gallery Image 1">
+                <img src="img/piscina1.jpg" alt="Gallery Image 2">
+                <img src="img/habitacion 1.jpg" alt="Gallery Image 3">
+            </div>
+        </div>
+    </section>
+
+    <section id="info" class="info">
+        <div class="container">
+            <h2>Info</h2>
+            <div class="info-content">
+                <div class="map">
+                    <h3>Ubicación</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.559212664884!2d-63.86276047490714!3d11.071637039095615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c3191299b824a11%3A0xd1aae6083270ac8!2sConjunto%20Vacacional%20La%20Fuente!5e0!3m2!1ses-419!2sve!4v1721840355777!5m2!1ses-419!2sve" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="contact">
+                    <h3>Contacto</h3>
+                    <p><img src="img/tlfnlogos.png" alt="Phone Icon" class="contact-icon"> +1 (234) 567-890</p>
+                    <p><img src="img/igpng.png" alt="Instagram Icon" class="contact-icon"> @posadalafuente_mgta</p>
                 </div>
             </div>
-        </main>
-
-
+        </div>
     </section>
-    <script src="main.js"></script>
+
+    <script src="./main.js"></script>
 </body>
 </html>
