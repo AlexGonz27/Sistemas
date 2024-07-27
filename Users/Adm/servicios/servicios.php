@@ -86,7 +86,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 if ($numE == 1) {
                     echo "<script>alert('No deben haber campos vacios.');</script>";  
                 }else{
-                    $conn = conectarDB();
                     $query = "SELECT * FROM tbl_servicios";
                     $result= mysqli_query($conn, $query);
 
@@ -105,7 +104,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         }else{
                             if (mysqli_num_rows($result) > 0) {
                                 while($fila = mysqli_fetch_assoc($result)){
-                                    
                                     if($fila['Descripción'] == $descripcion && $fila['ID_Servicios'] != $ID)
                                     {
                                         $numE = 1;

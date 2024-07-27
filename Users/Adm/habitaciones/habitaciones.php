@@ -33,6 +33,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     echo "<script>alert('Los campos Categoria,numero y estado son obligatorios.');</script>";  
                 }else
                 {
+                    $query = "SELECT * FROM tbl_habitaciones_categoria";
+                    $result= mysqli_query($conn, $query);
+                    
                     $categoria = $_POST['Categoria'];
                     $N_Habitacion = $_POST['NumHabitaciones'];
                     $estado = $_POST['Estado'];
@@ -41,12 +44,28 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     {
                         echo "<script>alert('Ingrese un numero de habitacion valido.');</script>";
                     }else{
-                        $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria,N_Habitación,Estado) VALUES ('$categoria','$N_Habitacion','$estado')";
+                        if (mysqli_num_rows($result) > 0) {
+                            while($fila = mysqli_fetch_assoc($result)){
+                                if($fila['N_Habitación'] == $N_Habitacion)
+                                {
+                                    $numE = 1;
+                                    break;
+                                }
+                                
+                            }   
+                        }
+                        if($numE == 1)
+                        {
+                            echo "<script>alert('Ya existe una habitacion con ese numero.');</script>";
+                        }else
+                        {
+                            $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria,N_Habitación,Estado) VALUES ('$categoria','$N_Habitacion','$estado')";
                     
-                        if (mysqli_query($conn, $sql)) {
-                            echo "<script>alert('Fila insertada correctamente.');</script>";
-                        } else {
-                            echo "Error al insertar fila: " . mysqli_error($conn);
+                            if (mysqli_query($conn, $sql)) {
+                                echo "<script>alert('Fila insertada correctamente.');</script>";
+                            } else {
+                                echo "Error al insertar fila: " . mysqli_error($conn);
+                            }
                         }
                     }
                 }
@@ -56,6 +75,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 if ($numE == 1) {
                     echo "<script>alert('Los campos Categoria,numero y estado son obligatorios.');</script>";  
                 }else{
+                    $query = "SELECT * FROM tbl_habitaciones_categoria";
+                    $result= mysqli_query($conn, $query);
+
                     $ID = $_POST['ID_habit_modifi'];
                     $Categoria = $_POST['Categoria'];
                     $N_Habit = $_POST['NumHabitaciones'];
@@ -65,13 +87,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     {
                         echo "<script>alert('Ingrese un numero de habitacion valido.');</script>";
                     }else{
-                        $sql = "UPDATE tbl_habitaciones_categoria SET ID_Categoria='$Categoria',N_Habitación='$N_Habit',Estado='$Estado' WHERE ID_Habitaciones = '$ID'";
-                    
-                        if (mysqli_query($conn, $sql)) {
-                            echo "<script>alert('Fila modificada correctamente.');</script>";
-                        } else {
-                            echo "Error al modificar fila: " . mysqli_error($conn);
+                        if (mysqli_num_rows($result) > 0) {
+                            while($fila = mysqli_fetch_assoc($result)){
+                                if($fila['N_Habitación'] == $N_Habit && $fila['ID_Habitaciones'] != $ID)
+                                {
+                                    $numE = 1;
+                                    break;
+                                }
+                                
+                            }   
                         }
+                        if($numE == 1)
+                        {
+                            echo "<script>alert('Ya existe una habitacion con ese numero.');</script>";
+                        }else
+                        {
+                            $sql = "UPDATE tbl_habitaciones_categoria SET ID_Categoria='$Categoria',N_Habitación='$N_Habit',Estado='$Estado' WHERE ID_Habitaciones = '$ID'";
+                    
+                            if (mysqli_query($conn, $sql)) {
+                                echo "<script>alert('Fila modificada correctamente.');</script>";
+                            } else {
+                                echo "Error al modificar fila: " . mysqli_error($conn);
+                            }
+                        }
+                        
                     }
     
                    
