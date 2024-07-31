@@ -40,30 +40,38 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $Correo = $_POST['Correo'];
                     $Contreseña = $_POST['Contraseña'];
 
-                    if (mysqli_num_rows($result) > 0) {
-                        while($fila = mysqli_fetch_assoc($result)){
-                            
-                            if($fila['Correo'] == $Correo)
-                            {
-                                $numE = 1;
-                                break;
-                            }
-                            
-                        }   
-                    }
-                    if($numE == 1)
+                    if(!filter_var($Correo, FILTER_VALIDATE_EMAIL))
                     {
-                        echo "<script>alert('Ya existe un usuario con ese correo.');</script>";
+                        echo "<script>alert('Correo no valido.');</script>";
                     }else
                     {
-                        $sql = "INSERT INTO tbl_usuario (ID_Cliente,Nivel,Correo,Contraseña) VALUES ('$ID_Cliente','$Nivel','$Correo','$Contreseña')";
-                
-                        if (mysqli_query($conn, $sql)) {
-                            echo "<script>alert('Fila insertada correctamente.');</script>";
-                        } else {
-                            echo "Error al insertar fila: " . mysqli_error($conn);
+                        if (mysqli_num_rows($result) > 0) {
+                            while($fila = mysqli_fetch_assoc($result)){
+                                
+                                if($fila['Correo'] == $Correo)
+                                {
+                                    $numE = 1;
+                                    break;
+                                }
+                                
+                            }   
                         }
-                    }                    
+                        if($numE == 1)
+                        {
+                            echo "<script>alert('Ya existe un usuario con ese correo.');</script>";
+                        }else
+                        {
+                            $sql = "INSERT INTO tbl_usuario (ID_Cliente,Nivel,Correo,Contraseña) VALUES ('$ID_Cliente','$Nivel','$Correo','$Contreseña')";
+                    
+                            if (mysqli_query($conn, $sql)) {
+                                echo "<script>alert('Fila insertada correctamente.');</script>";
+                            } else {
+                                echo "Error al insertar fila: " . mysqli_error($conn);
+                            }
+                        }           
+                    }
+
+                             
                     
                 }
                   
@@ -80,29 +88,36 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $Correo = $_POST['text-correo'];
                     $Contreseña = $_POST['text-contraseña'];
 
-                    if (mysqli_num_rows($result) > 0) {
-                        while($fila = mysqli_fetch_assoc($result)){
-                            
-                            if($fila['Correo'] == $Correo && $fila['ID_Usuario'] != $ID_usuario)
-                            {
-                                $numE = 1;
-                                break;
-                            }
-                        }   
-                    }
-                    if($numE == 1)
+                    if(!filter_var($Correo, FILTER_VALIDATE_EMAIL))
                     {
-                        echo "<script>alert('Ya existe un usuario con ese correo.');</script>";
+                        echo "<script>alert('Correo no valido.');</script>";
                     }else
                     {
-                        $sql = "UPDATE tbl_usuario SET Nivel='$Nivel', Correo='$Correo', Contraseña='$Contraseña' WHERE ID_Usuario = '$ID'";
-                    
-                        if (mysqli_query($conn, $sql)) {
-                            echo "<script>alert('Fila modificada correctamente.');</script>";
-                        } else {
-                            echo "Error al modificar fila: " . mysqli_error($conn);
+                        if (mysqli_num_rows($result) > 0) {
+                            while($fila = mysqli_fetch_assoc($result)){
+                                
+                                if($fila['Correo'] == $Correo && $fila['ID_Usuario'] != $ID_usuario)
+                                {
+                                    $numE = 1;
+                                    break;
+                                }
+                            }   
+                        }
+                        if($numE == 1)
+                        {
+                            echo "<script>alert('Ya existe un usuario con ese correo.');</script>";
+                        }else
+                        {
+                            $sql = "UPDATE tbl_usuario SET Nivel='$Nivel', Correo='$Correo', Contraseña='$Contraseña' WHERE ID_Usuario = '$ID'";
+                        
+                            if (mysqli_query($conn, $sql)) {
+                                echo "<script>alert('Fila modificada correctamente.');</script>";
+                            } else {
+                                echo "Error al modificar fila: " . mysqli_error($conn);
+                            }
                         }
                     }
+   
                 }
             }
             if (isset($_POST['eliminar'])){

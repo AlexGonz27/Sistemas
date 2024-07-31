@@ -100,15 +100,17 @@ function ConfgVentElim(ID) {
   document.getElementById("ID_ServElim").value = ID;
 }
 
+
+
 function ValidTipo()
 {
-  Tipo = document.querySelector("#form-agregar #text-tipo");
-  for(var i = 0; i < Tipo.value.Length();i++){
-    if(Tipo.value <= '9' && Tipo.value >='0')
+  let t = Tipo.value;
+  for(var i = 0; i < t.Length();i++){
+    if(t[i].value <= '9' && t[i].value >='0')
       {
-        return false;
+        return 0;
       }
   }
-  return true;
+  return 1;
   
 }

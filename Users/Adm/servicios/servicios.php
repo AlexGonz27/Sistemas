@@ -18,6 +18,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 </head>
 
 <body>
+    
+
+
     <?php
         include '../conexion.php';
         $conn = conectarDB(); 
@@ -45,6 +48,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     {
                         echo "<script>alert('Ingrese un costo valido.');</script>";
                     }else{
+                        
                         if(false)
                         {
                             echo "<script>alert('Los tipos no pueden llevar caracteres numericos.');</script>";
