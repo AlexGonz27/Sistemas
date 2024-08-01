@@ -41,31 +41,36 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $capacidad = $_POST['cap'];
                     $costo = $_POST['cost'];
 
-                    if(!is_numeric($capacidad) or !is_numeric($costo))
+                    if(preg_match("/\d/", $nombre))
                     {
-                        echo "<script>alert('Los campos capacidad y precio deben ser numericos.');</script>";
-                    }else
-                    {
-                        if (mysqli_num_rows($result) > 0) {
-                            while($fila = mysqli_fetch_assoc($result)){
-                                if ($fila['Nombre'] == $nombre) {
-                                    $numE=1;
-                                }
-                            }   
-                        }
-                        if($numE == 1)
+                        echo "<script>alert('Los nombres no deben llevar caracteres numericos.');</script>";
+                    }else{
+                        if(!is_numeric($capacidad) or !is_numeric($costo))
                         {
-                            echo "<script>alert('Ya existe otra categoria con el mismo nombre');</script>";
+                            echo "<script>alert('Los campos capacidad y precio deben ser numericos.');</script>";
                         }else
                         {
-                            $sql = "INSERT INTO tbl_categorias (Nombre,Descripción,Capacidad,Precio) VALUES ('$nombre','$descripcion','$capacidad','$costo')";                        
-                            if (mysqli_query($conn, $sql)) {
-                                echo "<script>alert('Fila insertada correctamente.');</script>";
-                            } else {
-                                echo "Error al insertar fila: " . mysqli_error($conn);
+                            if (mysqli_num_rows($result) > 0) {
+                                while($fila = mysqli_fetch_assoc($result)){
+                                    if ($fila['Nombre'] == $nombre) {
+                                        $numE=1;
+                                    }
+                                }   
                             }
-                        }        
-                    }      
+                            if($numE == 1)
+                            {
+                                echo "<script>alert('Ya existe otra categoria con el mismo nombre');</script>";
+                            }else
+                            {
+                                $sql = "INSERT INTO tbl_categorias (Nombre,Descripción,Capacidad,Precio) VALUES ('$nombre','$descripcion','$capacidad','$costo')";                        
+                                if (mysqli_query($conn, $sql)) {
+                                    echo "<script>alert('Fila insertada correctamente.');</script>";
+                                } else {
+                                    echo "Error al insertar fila: " . mysqli_error($conn);
+                                }
+                            }        
+                        }      
+                    }
                 }  
             }
             if (isset($_POST['modificar'])){
@@ -83,32 +88,39 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $capacidad = $_POST['cap'];
                     $costo = $_POST['cost'];
 
-                    if(!is_numeric($capacidad) or !is_numeric($costo))
+                    if(preg_match("/\d/", $nombre))
                     {
-                        echo "<script>alert('Los campos capacidad y precio deben ser numericos.');</script>"; 
-                    }else
-                    {
-                        if (mysqli_num_rows($result) > 0) {
-                            while($fila = mysqli_fetch_assoc($result)){
-                                if ($fila['Nombre'] == $nombre && $fila['ID_Categoria'] != $ID){
-                                    $numE=1;
-                                }
-                            }   
-                        }
-                        if($numE == 1)
+                        echo "<script>alert('Los nombres no deben llevar caracteres numericos.');</script>";
+                    }else{
+                        if(!is_numeric($capacidad) or !is_numeric($costo))
                         {
-                            echo "<script>alert('Ya existe otra categoria con el mismo nombre');</script>";
+                            echo "<script>alert('Los campos capacidad y precio deben ser numericos.');</script>"; 
                         }else
                         {
-                            $sql = "UPDATE tbl_categorias SET Nombre='$nombre',Descripción='$descripcion',Capacidad='$capacidad',Precio='$costo' WHERE ID_Categoria = '$ID'";
-                        
-                            if (mysqli_query($conn, $sql)) {
-                                echo "<script>alert('Fila modificada correctamente.');</script>";
-                            } else {
-                                echo "Error al modificar fila: " . mysqli_error($conn);
+                            if (mysqli_num_rows($result) > 0) {
+                                while($fila = mysqli_fetch_assoc($result)){
+                                    if ($fila['Nombre'] == $nombre && $fila['ID_Categoria'] != $ID){
+                                        $numE=1;
+                                    }
+                                }   
                             }
-                        }
-                    } 
+                            if($numE == 1)
+                            {
+                                echo "<script>alert('Ya existe otra categoria con el mismo nombre');</script>";
+                            }else
+                            {
+                                $sql = "UPDATE tbl_categorias SET Nombre='$nombre',Descripción='$descripcion',Capacidad='$capacidad',Precio='$costo' WHERE ID_Categoria = '$ID'";
+                            
+                                if (mysqli_query($conn, $sql)) {
+                                    echo "<script>alert('Fila modificada correctamente.');</script>";
+                                } else {
+                                    echo "Error al modificar fila: " . mysqli_error($conn);
+                                }
+                            }
+                        } 
+                    }
+
+                    
                 }
             }
             if (isset($_POST['eliminar'])){

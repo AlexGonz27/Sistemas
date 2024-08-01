@@ -42,35 +42,38 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $direc = $_POST['direc'];
                     $tlf = $_POST['tlf'];
                     $fn = $_POST['fn'];
-
-                    if (mysqli_num_rows($result) > 0) {
-                        while($fila = mysqli_fetch_assoc($result)){
-                            if($fila['Identificación'] == $CI)
-                            {
-                                $numE = 1;
-                                break;
-                            }
-                            
-                        }   
-                    }
-                    if($numE == 1)
-                    {
-                        echo "<script>alert('Ya existe un cliente con esa cedula.');</script>";
-                    }else
-                    {
-                        $sql = "INSERT INTO tbl_cliente_persona (Identificación,Nombre_Razón_Social,Dirección,Teléfono,Fecha_Nacimiento) VALUES ('$CI','$name_rs','$direc','$tlf','$fn')";
                     
-                        if (mysqli_query($conn, $sql)) {
-                            echo "<script>alert('Fila insertada correctamente.');</script>";
-                        } else {
-                            echo "Error al insertar fila: " . mysqli_error($conn);
+                    if(preg_match("/\d/", $name_rs))
+                    {
+                        echo "<script>alert('Los nombres no deben llevar valores numericos.');</script>";
+                    }else{
+                        if (mysqli_num_rows($result) > 0) {
+                            while($fila = mysqli_fetch_assoc($result)){
+                                if($fila['Identificación'] == $CI)
+                                {
+                                    $numE = 1;
+                                    break;
+                                }
+                                
+                            }   
                         }
-                    }
-    
-                    
-                }
-                
+                        if($numE == 1)
+                        {
+                            echo "<script>alert('Ya existe un cliente con esa cedula.');</script>";
+                        }else
+                        {
+                            $sql = "INSERT INTO tbl_cliente_persona (Identificación,Nombre_Razón_Social,Dirección,Teléfono,Fecha_Nacimiento) VALUES ('$CI','$name_rs','$direc','$tlf','$fn')";
+                        
+                            if (mysqli_query($conn, $sql)) {
+                                echo "<script>alert('Fila insertada correctamente.');</script>";
+                            } else {
+                                echo "Error al insertar fila: " . mysqli_error($conn);
+                            }
+                        }
+                    }           
+                }            
             }
+
             if (isset($_POST['modificar'])){
                 if($numE ==1)
                 {
@@ -87,29 +90,36 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $tlf = $_POST['tlf'];
                     $fn = $_POST['fn'];
 
-                    if (mysqli_num_rows($result) > 0) {
-                        while($fila = mysqli_fetch_assoc($result)){
-                            if($fila['Identificación'] == $CI && $fila['ID_Cliente'] != $ID)
-                            {
-                                $numE = 1;
-                                break;
-                            }
-                            
-                        }   
-                    }
-                    if($numE == 1)
+                    if(preg_match("/\d/", $name_rs))
                     {
-                        echo "<script>alert('Ya existe un cliente con esa cedula.');</script>";
-                    }else
-                    {
-                        $sql = "UPDATE tbl_cliente_persona SET Identificación='$CI',Nombre_Razón_Social='$name_rs',Dirección='$direc',Teléfono='$tlf',Fecha_Nacimiento='$fn' WHERE ID_Cliente = '$ID'";
+                        echo "<script>alert('Los nombres no deben llevar valores numericos.');</script>";
+                    }else{
+                        if (mysqli_num_rows($result) > 0) {
+                            while($fila = mysqli_fetch_assoc($result)){
+                                if($fila['Identificación'] == $CI && $fila['ID_Cliente'] != $ID)
+                                {
+                                    $numE = 1;
+                                    break;
+                                }
+                                
+                            }   
+                        }
+                        if($numE == 1)
+                        {
+                            echo "<script>alert('Ya existe un cliente con esa cedula.');</script>";
+                        }else
+                        {
+                            $sql = "UPDATE tbl_cliente_persona SET Identificación='$CI',Nombre_Razón_Social='$name_rs',Dirección='$direc',Teléfono='$tlf',Fecha_Nacimiento='$fn' WHERE ID_Cliente = '$ID'";
+                        
+                            if (mysqli_query($conn, $sql)) {
+                                echo "<script>alert('Fila modificada correctamente.');</script>";
+                            } else {
+                                echo "Error al modificar fila: " . mysqli_error($conn);
+                            }         
+                        }
+                    }                    
+
                     
-                        if (mysqli_query($conn, $sql)) {
-                            echo "<script>alert('Fila modificada correctamente.');</script>";
-                        } else {
-                            echo "Error al modificar fila: " . mysqli_error($conn);
-                        }         
-                    }
               
                 }
                 
