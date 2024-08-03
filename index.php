@@ -36,7 +36,7 @@
             <p>En Posada Cabañas de la Fuente, nos enorgullece ofrecer una experiencia de hospedaje inigualable con un servicio al cliente excepcional y comodidades.</p>
         </div>
     </section>
-
+ 
     <section id="gallery" class="gallery">
         <div class="container">
             <h2>Galería</h2>
