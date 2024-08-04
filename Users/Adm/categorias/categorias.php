@@ -60,7 +60,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         {
                             $sql = "INSERT INTO tbl_categorias (Nombre,Descripción,Capacidad,Precio) VALUES ('$nombre','$descripcion','$capacidad','$costo')";                        
                             if (mysqli_query($conn, $sql)) {
-                                echo "<script>alert('Fila insertada correctamente.');</script>";
+                                echo "<script>console.log('persona agregada');</script>";
                             } else {
                                 echo "Error al insertar fila: " . mysqli_error($conn);
                             }
@@ -279,7 +279,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                     <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Categoria'].");'>Eliminar</span>
                                 </td>
                             </tr>";
-                        
                     }
                 ?>
                 </tbody>

@@ -62,6 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+  
+  document.getElementById('forma').addEventListener('submit', function(event) {
+    event.preventDefault();
+  });
 });
 //Funciones para marcar en la navegacion
 let lista = document.querySelectorAll(".navegacion li")
@@ -103,29 +107,3 @@ function ConfgVentModifi(FilaJson) {
   document.querySelector("#form-modificar #Fch_Salida").value = FilaJson.Fecha_Salida;
   document.querySelector("#form-modificar #Estado").value = FilaJson.Estado;
 }
-
-//Boton buscar cliente
-const btnBuscar = document.getElementById("buscar-btn")
-
-
-btnBuscar.addEventListener("click", function(){
-  const nombresInputs = ["Nombre", "Apellido", "Correo"];
-  
-  const clientesContainer = document.getElementById("clientes");
-  
-  nombresInputs.forEach((nombre) => {
-    const nuevoInput = document.createElement("input");
-    nuevoInput.type = "text";
-    nuevoInput.placeholder = nombre; // Usa el nombre como placeholder
-  
-    // Crea un nuevo div para envolver el input
-    const nuevoDiv = document.createElement("div");
-    nuevoDiv.classList.add("case"); // Agrega la clase "case" al div
-  
-    // Adjunta el input al div
-    nuevoDiv.appendChild(nuevoInput);
-  
-    // Adjunta el div al contenedor de clientes
-    clientesContainer.appendChild(nuevoDiv);
-    });
-})

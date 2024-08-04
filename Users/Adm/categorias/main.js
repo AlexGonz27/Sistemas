@@ -63,6 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  document.getElementById('form-agregar').addEventListener('submit', function(event) {
+    event.preventDefault();
+  });
 });
 let lista = document.querySelectorAll(".navegacion li")
 
