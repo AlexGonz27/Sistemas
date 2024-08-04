@@ -41,7 +41,6 @@ if ($resultado->num_rows > 0) {
                  break;
             
               default:
-                 # code...
                  break;
         }
 
@@ -49,11 +48,15 @@ if ($resultado->num_rows > 0) {
     
     }   else {
         // Contraseña incorrecta
-        echo "<script>alert('Correo electrónico o contraseña incorrectos')</script>";
+        echo "<script>alert('Correo electrónico o contraseña incorrectos')
+                        window.location.href = './inic.php'
+                </script>";
     }
 }   else {
         // Usuario no encontrado
-        echo "<script>alert('Usuario no encontrado')</script>";
+        echo "<script>alert('Usuario no encontrado')
+                        window.location.href = './inic.php'
+                </script>";
 }
 
 
