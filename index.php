@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posada Cabañas de la Loma</title>
+    <title>Posada Cabañas de la Fuete</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
@@ -12,13 +12,13 @@
     <header>
         <div class="container">
             <img src="img/logofuente.jpg" alt="Hotel Logo" class="logo">
-            <span class="hotel-name">Posada Cabañas de la fuente</span>
+            <span class="hotel-name">Cabañas de la Fuente</span>
             <nav>
                 <ul>
                     <li><a href="#inicio">Inicio</a></li>
                     <li><a href="#home">Sobre Nosotros</a></li>
                     <li><a href="#about">Galería</a></li>
-                    <li><a href="#info">Info</a></li>
+                    <li><a href="#info">Información</a></li>
                 </ul>
             </nav>
             <a href="./Inic/inic.php" class="login-btn">Iniciar Sesión</a>
@@ -27,16 +27,16 @@
     </header>
 
     <section id="home" class="hero">
-        <h1>Bienvenido a Posada Cabañas de la fuente</h1>
+        <h1>Bienvenido a las Cabañas de la Fuente</h1>
     </section>
 
     <section id="about" class="about">
         <div class="container">
             <h2>Sobre Nosotros</h2>
-            <p>En Posada Cabañas de la Loma, nos enorgullece ofrecer una experiencia de hospedaje inigualable con un servicio al cliente excepcional y comodidades.</p>
+            <p>En Posada Cabañas de la Fuente, nos enorgullece ofrecer una experiencia de hospedaje inigualable con un servicio al cliente excepcional y comodidades.</p>
         </div>
     </section>
-
+ 
     <section id="gallery" class="gallery">
         <div class="container">
             <h2>Galería</h2>
@@ -50,7 +50,7 @@
 
     <section id="info" class="info">
         <div class="container">
-            <h2>Info</h2>
+            <h2>Información</h2>
             <div class="info-content">
                 <div class="map">
                     <h3>Ubicación</h3>
@@ -59,7 +59,9 @@
                 <div class="contact">
                     <h3>Contacto</h3>
                     <p><img src="img/tlfnlogos.png" alt="Phone Icon" class="contact-icon"> +1 (234) 567-890</p>
-                    <p><img src="img/igpng.png" alt="Instagram Icon" class="contact-icon"> @posadalafuente_mgta</p>
+                    <p><img src="img/igpng.png" alt="Instagram Icon" class="contact-icon"><a href="https://www.instagram.com/posadalafuente_mgta/" target="_blank">@posadalafuente_mgta</a></p>
+                    <p></p>
+
                 </div>
             </div>
         </div>
