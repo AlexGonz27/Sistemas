@@ -2,7 +2,10 @@
 session_start();
 
 // Datos de conexión a la base de datos
-$conn = mysqli_connect('localhost', 'root', '', 'gestion_reservas');
+$conn = mysqli_connect('b03oim8xwvf4jpuq5buf-mysql.services.clever-cloud.com', 
+                        'uqcyvv3hrdg9nufd', 
+                        'Rbi6QbmCFiZViAS8dcvY', 
+                        'b03oim8xwvf4jpuq5buf');
 
 // Verificar conexión
 if(!$conn){
@@ -46,7 +49,7 @@ if ($resultado->num_rows > 0) {
     
     }   else {
         // Contraseña incorrecta
-        echo "Correo electrónico o contraseña incorrectos.";
+        echo "Correo electrónico o contraseña incorrectos";
     }
 }   else {
         // Usuario no encontrado
