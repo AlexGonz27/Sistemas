@@ -156,14 +156,21 @@ body {
 }
 #clientes {
   display: flex;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten si no caben en una sola línea */
-  gap: 2px; /* Espacio entre los elementos */
+  flex-wrap: wrap; 
+  gap: 2px; 
   justify-content: center;
 }
-
 #clientes .case {
-  flex: 1; /* Hace que cada input ocupe el mismo espacio */
-  min-width: 150px; /* Ancho mínimo para cada input */
+  flex: 1; 
+  min-width: 150px; 
+}
+.case input {
+  text-align: center; 
+}
+#Nacionalidad {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 7px;
 }
 .cont_cliente .cont_clt form input{
   margin: 0px 5px; 
@@ -654,3 +661,4 @@ div.dataTables_wrapper .dataTables_filter {
     left: initial;
   }
 }
+

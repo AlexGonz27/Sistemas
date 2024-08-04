@@ -63,9 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   
-  document.getElementById('forma').addEventListener('submit', function(event) {
-    event.preventDefault();
-  });
+  
 });
 //Funciones para marcar en la navegacion
 let lista = document.querySelectorAll(".navegacion li")
@@ -106,4 +104,33 @@ function ConfgVentModifi(FilaJson) {
   document.querySelector("#form-modificar #Fch_Entrada").value = FilaJson.Fecha_Entrada;
   document.querySelector("#form-modificar #Fch_Salida").value = FilaJson.Fecha_Salida;
   document.querySelector("#form-modificar #Estado").value = FilaJson.Estado;
+}
+
+function mostrarinfo(datos) {
+
+  document.getElementById('ID_clt').value = datos.Nacionalidad + "-" + datos.Identificación;
+  document.getElementById('ID_clt').readOnly = true;
+  document.getElementById('Nacionalidad').style.display = 'none';
+
+  var divNombre = document.createElement("div");
+  divNombre.className = "case";
+  var inputNombre = document.createElement("input");
+  inputNombre.type = "text";
+  inputNombre.placeholder = "Nombre";
+  inputNombre.name = "nombre";
+  inputNombre.readOnly = true;
+  inputNombre.value = datos.Nombre_Razón_Social; 
+  divNombre.appendChild(inputNombre);
+  document.getElementById('clientes').appendChild(divNombre);
+  
+  var divTelefono = document.createElement("div");
+  divTelefono.className = "case";
+  var inputTelefono = document.createElement("input");
+  inputTelefono.type = "text";
+  inputTelefono.placeholder = "Teléfono";
+  inputTelefono.name = "telefono";
+  inputTelefono.readOnly = true;
+  inputTelefono.value = datos.Teléfono;
+  divTelefono.appendChild(inputTelefono);
+  document.getElementById('clientes').appendChild(divTelefono);
 }

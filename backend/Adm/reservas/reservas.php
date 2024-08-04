@@ -64,17 +64,37 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     echo "Error al modificar fila: " . mysqli_error($conn);
                 }
             }
-            if (isset($_POST['buscar'])){
-                $ID = $_POST['id_cliente'];
-
-                $sql = "SELECT * FROM tbl_cliente_persona WHERE Identificación = '$id_cliente'";
+            if (isset($_POST['buscar'])) {
+                $ID = mysqli_real_escape_string($conn, $_POST['id_cliente']);
+                $NA = mysqli_real_escape_string($conn, $_POST['Nacionalidad']);
+            
+                $sql = "SELECT * FROM tbl_cliente_persona WHERE Nacionalidad = '$NA' AND Identificación = '$ID'";
                 
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>console.log(persona encontra);</script>";
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    $fila = mysqli_fetch_assoc($result);
+                    echo "<script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    mostrarinfo(" . json_encode($fila) . ");
+                                });
+                            </script>";
                 } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
+                    echo "<div class='ventana' style='display: block;'>
+                            <div class='conte-vent'>
+                                <ion-icon name='close-circle-outline' class='btns btn-cerrar' onclick='document.getElementById('ventagregar').style.display = 'none';'></ion-icon>
+                                <form id='form-agregar' method='post'>
+                                    <input name='CI' type='text' placeholder='Identificacion'>
+                                    <input name='name_rs' type='text' placeholder='Nombre/Razón Social'>
+                                    <input name='direc' type='int' placeholder='Direccion'>
+                                    <input name='tlf' type='text' placeholder='Telefono'>
+                                    <input name='fn' type='date' placeholder='Fecha de nacimiento'>
+                                    <button class='btns btn-agregar' type='submit' name='agregar' >Agregar</button>
+                                </form>
+                            </div>
+                        </div>";
                 }
             }
+            
         }
         mysqli_close($conn);
     ?>
@@ -202,7 +222,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <form action="" class="data_clientes" method="post" id="forma" name="buscar">
                 <div id="clientes">
                     <div class="case">
-                        <input type="text" placeholder="Identificación" name="id_cliente">
+                        <div>
+                            <select name="Nacionalidad" id="Nacionalidad">
+                                <option value="V">V</option>
+                                <option value="E">E</option>
+                                <option value="G">G</option>
+                            </select>
+                            <input type="text" placeholder="Identificación" name="id_cliente" id="ID_clt">
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -221,9 +248,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
             </div>
             <div class="conte-btns">
-                <!--<div>
+                <div>
                     <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
-                </div>-->
+                </div>
             </div>
 
             <table id="Tabla_Datos">
@@ -357,7 +384,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </div>
     </div>
     <!-- =========== Scripts =========  -->
-    <script src="main.js"></script>
+    <script src="./main.js"></script>
     <script src="/Sistemas/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
