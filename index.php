@@ -6,7 +6,9 @@
         <title>Conjunto Vacacional La Fuente</title>
         <link rel="stylesheet" href="estilos.css">
 
-        <!-- Booststrap CSS -->
+<!--=====================================
+Booststrap CSS
+======================================-->        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
         <link href="estilos.css" rel="stylesheet">
@@ -15,8 +17,9 @@
 
 
     <body>
-
-        <!-- Navar -->
+<!--=====================================
+Navbar
+======================================--> 
         <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container">
                 <a class="navbar-brand me-auto" href="#">Cabañas de la Fuente</a>
@@ -51,20 +54,51 @@
                     </button>
             </div>
         </nav>
-        <!-- End Navar -->
+<!--=====================================
+End Navbar
+======================================--> 
 
-        <!-- Hero section -->
+
+<!--=====================================
+Hero section
+======================================--> 
         <section class="hero-section">
-                <div class="container d-flex align-items-center justify-content-center fs-1 text-white flex-column">
+                <div class="container d-flex align-items-centerleft justify-content-center fs-1 text-white flex-column">
                     <h1>Conjunto Vacacional La Fuente</h1>
-                    <h2>boostrap 5</h2>
+                    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sequi exercitationem autem necessitatibus voluptatum corporis laboriosam non eaque. Perferendis soluta quas eos veniam ullam id! Officiis quam aliquam mollitia quod?
+                    </h2>
                 </div>
         </section>
+<<<<<<< HEAD
         <!-- End Hero section -->
         
         <!-- Boostrap JS -->
+=======
+<!--=====================================
+End Hero section
+======================================--> 
+
+<!--=====================================
+Habitaciones
+======================================--> 
+        <div>
+            <h1>Holaaa</h1>
+        </div>
+
+<!--=====================================
+End Habitaciones
+======================================--> 
+
+
+
+
+
+
+<!--=====================================
+Booststrap JS
+======================================-->  
+>>>>>>> 993577892fd970042b1fbd84ef319fcc89d3d4ca
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
-       
 
 </html>
