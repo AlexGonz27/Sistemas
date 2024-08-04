@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         table.search(this.value).draw();
     });
 
+    // Codigo AJAX para la subida a la nube
     $('.forma').on('submit', function(e) {
       e.preventDefault(); // Evitar el envío por defecto del formulario
 
