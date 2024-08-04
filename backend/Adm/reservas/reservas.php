@@ -74,13 +74,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     $fila = mysqli_fetch_assoc($result);
-                    echo "<script>
+                    echo    "<script>
                                 document.addEventListener('DOMContentLoaded', function() {
                                     mostrarinfo(" . json_encode($fila) . ");
                                 });
                             </script>";
                 } else {
-                    echo" nada ";
+                    echo    "<script>
+                                var resultado = confirm('¿Deseas agregar el cliente?');
+                                if (resultado) {
+                                    window.location.href = '../clientes/clientes.php';
+                                }
+                            </script>";
                 }
             }
             

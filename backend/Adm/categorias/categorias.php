@@ -15,116 +15,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categorias</title>
     <link rel="stylesheet" href="./estilos.css">
+    <!-- Alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <?php
-        include '../conexion.php';
-        $conn = conectarDB(); 
-        
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $numE = 0;
-            if (empty($_POST['nombre'])or empty($_POST['desc'])or empty($_POST['cap'])or empty($_POST['cost']) ) {
-                $numE = 1;   
-            }
-            if (isset($_POST['agregar'])) {
-                if ($numE == 1) {
-                    echo "<script>alert('Los campos nombre, descripcion, capacidad y precio son obligatorios.');</script>";  
-                }else
-                {
-                    $conn = conectarDB();
-                    $query = "SELECT * FROM tbl_categorias";
-                    $result= mysqli_query($conn, $query);
-
-                    $nombre = $_POST['nombre'];
-                    $descripcion = $_POST['desc'];
-                    $capacidad = $_POST['cap'];
-                    $costo = $_POST['cost'];
-
-                    if(!is_numeric($capacidad) or !is_numeric($costo))
-                    {
-                        echo "<script>alert('Los campos capacidad y precio deben ser numericos.');</script>";
-                    }else
-                    {
-                        if (mysqli_num_rows($result) > 0) {
-                            while($fila = mysqli_fetch_assoc($result)){
-                                if ($fila['Nombre'] == $nombre) {
-                                    $numE=1;
-                                }
-                            }   
-                        }
-                        if($numE == 1)
-                        {
-                            echo "<script>alert('Ya existe otra categoria con el mismo nombre');</script>";
-                        }else
-                        {
-                            $sql = "INSERT INTO tbl_categorias (Nombre,Descripción,Capacidad,Precio) VALUES ('$nombre','$descripcion','$capacidad','$costo')";                        
-                            if (mysqli_query($conn, $sql)) {
-                                echo "<script>console.log('persona agregada');</script>";
-                            } else {
-                                echo "Error al insertar fila: " . mysqli_error($conn);
-                            }
-                        }        
-                    }      
-                }  
-            }
-            if (isset($_POST['modificar'])){
-                if ($numE == 1) {
-                    echo "<script>alert('Los campos nombre, descripcion, capacidad y precio son obligatorios.');</script>";   
-                }else
-                {
-                    $conn = conectarDB();
-                    $query = "SELECT * FROM tbl_categorias";
-                    $result= mysqli_query($conn, $query);
-
-                    $ID = $_POST['ID_Cat'];
-                    $nombre = $_POST['nombre'];
-                    $descripcion = $_POST['desc'];
-                    $capacidad = $_POST['cap'];
-                    $costo = $_POST['cost'];
-
-                    if(!is_numeric($capacidad) or !is_numeric($costo))
-                    {
-                        echo "<script>alert('Los campos capacidad y precio deben ser numericos.');</script>"; 
-                    }else
-                    {
-                        if (mysqli_num_rows($result) > 0) {
-                            while($fila = mysqli_fetch_assoc($result)){
-                                if ($fila['Nombre'] == $nombre && $fila['ID_Categoria'] != $ID){
-                                    $numE=1;
-                                }
-                            }   
-                        }
-                        if($numE == 1)
-                        {
-                            echo "<script>alert('Ya existe otra categoria con el mismo nombre');</script>";
-                        }else
-                        {
-                            $sql = "UPDATE tbl_categorias SET Nombre='$nombre',Descripción='$descripcion',Capacidad='$capacidad',Precio='$costo' WHERE ID_Categoria = '$ID'";
-                        
-                            if (mysqli_query($conn, $sql)) {
-                                echo "<script>alert('Fila modificada correctamente.');</script>";
-                            } else {
-                                echo "Error al modificar fila: " . mysqli_error($conn);
-                            }
-                        }
-                    } 
-                }
-            }
-            if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Cat'];
-    
-                $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
-                    
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila eliminada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
-                }
-            } 
-        }
-        mysqli_close($conn);
-    ?>
     <!-- =============== navegacion ================ -->
     <div class="contenedor-nav">
         <div class="navegacion">
@@ -249,6 +144,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                 </div>
                 <div>
+                    <button id="consulta-btn" onclick="tareaCompletada()" style="display: none;">Hacer Consulta</button>
                     <input id="buscador_tabla" type="text" placeholder="Buscar">
                 </div>
             </div>
@@ -265,6 +161,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </thead>
                 <tbody>
                 <?php
+                    include '../conexion.php';
                     $conn = conectarDB();
                     $sql = "SELECT * FROM tbl_categorias;";
                     $resultado = mysqli_query($conn, $sql);
@@ -289,12 +186,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div id="ventagregar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
-            <form id="form-agregar" action="" method="post">
+            <form class="forma" id="form-agregar" action="" method="post">
+                <input type="hidden" name="agregar">
                 <input id="text-nombre" name="nombre" type="text" placeholder="Nombre">
                 <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
                 <input id="text-cap" name="cap" type="int" placeholder="Capacidad">
                 <input id="text-cost" name="cost" type="text" placeholder="Precio">
-                <button class="btns btn-agregar" type="submit" name="agregar" >Agregar</button>
+                <button class="btns btn-agregar" type="submit">Agregar</button>
             </form>
         </div>
     </div>
@@ -302,13 +200,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div id="ventmodifi" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
-            <form id="form-modificar"action="" method="post" name="modificar">
+            <form class="forma" id="form-modificar"action="" method="post" name="modificar">
+                <input type="hidden" name="modificar">
                 <input id="ID_Cat" type="hidden" name="ID_Cat">
                 <input id="text-nombreCat" name="nombre" type="text" placeholder="Nombre">
                 <input id="text-descCat" name="desc" type="text" placeholder="Descripcion">
                 <input id="text-capCat" name="cap" type="int" placeholder="Capacidad">
                 <input id="text-costCat" name="cost" type="text" placeholder="Precio">
-                <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">modificar</button>
+                <button class="btns btn-modificar"  type="submit" class="forma btn-modificar">modificar</button>
             </form>
         </div>
     </div>
@@ -316,10 +215,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div id="venteliminar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
-            <form id="form-agregar" action="" method="post" name="agregar">
+            <form class="forma" id="form-agregar" action="" method="post" name="agregar">
+                <input type="hidden" name="eliminar">
                 <input id="ID_CatElim" type="hidden" name="ID_Cat">
                 <p>Seguro que desea eliminar esta fila?</p>
-                <button type="submit" name="eliminar">eliminar</button>
+                <button type="submit">eliminar</button>
             </form>
         </div>
     </div>
@@ -332,7 +232,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    
 </body>
 
 </html>
