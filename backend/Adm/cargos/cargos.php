@@ -13,7 +13,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habitaciones</title>
+    <title>Cargos</title>
     <link rel="stylesheet" href="./estilos.css">
 </head>
 
@@ -24,11 +24,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if (isset($_POST['agregar'])) {
-                $categoria = $_POST['Categoria'];
-                $N_Habitacion = $_POST['NumHabitaciones'];
-                $estado = $_POST['Estado'];
+                $Nombre = $_POST['Nombre'];
+                $descripcion = $_POST['desc'];
+                $Nivel = $_POST['Nivel'];
+                $Sueldo = $_POST['Sueldo'];
 
-                $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria,N_Habitación,Estado) VALUES ('$categoria','$N_Habitacion','$estado')";
+                $sql = "INSERT INTO tbl_cargos (Nombre,Descripción,Nivel,Sueldo) VALUES ('$Nombre','$descripcion','$Nivel','$Sueldo')";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila insertada correctamente.');</script>";
@@ -37,12 +38,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 }
             }
             if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_habit_modifi'];
-                $Categoria = $_POST['Categoria'];
-                $N_Habit = $_POST['NumHabitaciones'];
-                $Estado = $_POST['Estado'];
+                $ID = $_POST['ID_Car'];
+                $Nombre = $_POST['Nombre'];
+                $descripcion = $_POST['desc'];
+                $Nivel = $_POST['Nivel'];
+                $Sueldo = $_POST['Sueldo'];
 
-                $sql = "UPDATE tbl_habitaciones_categoria SET ID_Categoria='$Categoria',N_Habitación='$N_Habit',Estado='$Estado' WHERE ID_Habitaciones = '$ID'";
+                $sql = "UPDATE tbl_cargos SET Nombre='$Nombre',Descripción='$descripcion',Nivel='$Nivel',Sueldo='$Sueldo' WHERE ID_Cargo = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila modificada correctamente.');</script>";
@@ -51,9 +53,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 }
             }
             if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Cat'];
+                $ID = $_POST['ID_Car'];
 
-                $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
+                $sql = "DELETE FROM tbl_cargos WHERE ID_Cargo = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila eliminada correctamente.');</script>";
@@ -164,16 +166,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Cerrar Sesion</span>
                     </a>
                 </li>
-                <li>
-                    <a href="..../Inic/loggout.php">
-                        <span class="icon">
-                            <ion-icon name="cash-outline"></ion-icon>
-                        </span>
-                        <span class="title">Cerrar Sesion</span>
-                    </a>
-                </li>
             </ul>
         </div>
+
         <!-- ========================= principal ==================== -->
         
         <div class="principal">
@@ -195,12 +190,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
         <div> 
     </div>
-
-    <!-- ////////////////// DataTable //////////////////-->
     <div class="dt-serv">
         <div class="serviciosTable">
             <div class="cartaHeader">
-                <h2>Habitaciones</h2>
+                <h2>Cargos</h2>
             </div>
             <div class="conte-btns">
                 <div>
@@ -214,117 +207,68 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <table id="Tabla_Datos">
                 <thead>
                     <tr>
-                        <td>Categoria</td>
-                        <td>Estado</td>
-                        <td>N Habitaciones</td>
+                        <td>Nombre</td>
+                        <td>Descripción</td>
+                        <td>Nivel</td>
+                        <td>Sueldo</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                     $conn = conectarDB();
-                    $sql = "SELECT * FROM tbl_habitaciones_categoria;";
+                    $sql = "SELECT * FROM tbl_cargos;";
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                        $idCat = $fila['ID_Categoria'];
-                        $sqlCat = "SELECT Nombre FROM tbl_categorias WHERE ID_Categoria = '$idCat'";
-                        $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlCat));
-                        echo "<tr>  
-                                <td>" . $result['Nombre'] . "</td>
-                                <td>" . $fila['Estado'] . "</td>
-                                <td>" . $fila['N_Habitación'] . "</td>
+                        echo "<tr>
+                                <td>" . $fila['Nombre'] . "</td>
+                                <td>" . $fila['Descripción'] . "</td>
+                                <td>" . $fila['Nivel'] . "</td>
+                                <td>" . $fila['Sueldo'] . "$</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifiHabit(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Habitaciones'].");'>Eliminar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Cargo'].");'>Eliminar</span>
                                 </td>
                             </tr>";
                     }
-                    mysqli_close($conn);
                 ?>
                 </tbody>
             </table>
         </div>
     </div></div>    
     
-    <!-- ////////////////// Ventana MODA de Agregar ////////////////// -->
     <div id="ventagregar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
-            
-            <!-- Forma para agregar  -->
-            <form id="form-modificar"action="" method="post" name="agregar">
-                <select class="mi-select" name="Categoria">
-                    <option value="">Seleccionar una opción</option>
-                    <?php
-                        $conn = conectarDB();
-                        $sql = "SELECT * FROM tbl_categorias;";
-                        $resultado = mysqli_query($conn, $sql);
-                        while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['ID_Categoria'] . '">' . $fila['Nombre'] . '</option>';
-                        }
-                        mysqli_close($conn);
-                    ?>
-                </select>
-
-                <input name="NumHabitaciones" type="text" placeholder="No Habitaciones">
-
-                <select class="mi-select" name="Estado">
-                    <option value="">Seleccionar una opción</option>
-                    <option value="Activo">Activo</option>
-                    <option value="Mantemiento">Mantemiento</option>
-                    <option value="Inactivo">Inactivo</option>
-                </select>
-
-                <button class="btns btn-agregar" type="submit" name="agregar" >Agregar</button>
-            
+            <form id="form-agregar" action="" method="post">
+                <input id="text-Nombre" name="Nombre" type="text" placeholder="Nombre">
+                <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
+                <input id="text-nivel" name="Nivel" type="text" placeholder="Nivel">
+                <input id="text-Sueldo" name="Sueldo" type="text" placeholder="Sueldo">
+                <button class="btns btn-agregar" type="submit" name="agregar" class="forma btn-modificar">Agregar</button>
             </form>
         </div>
     </div>
 
-    <!-- ////////////////// Ventana MODA DE Modificar ////////////////// -->
     <div id="ventmodifi" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
-            
-            <!-- Forma para modificar -->
             <form id="form-modificar"action="" method="post" name="modificar">
-
-                <input id="ID_habit_modifi" type="hidden" name="ID_habit_modifi">
-
-                <select id="Cat_modifi" class="mi-select" name="Categoria">
-                    <option value="">Seleccionar una opción</option>
-                    <?php
-                        $conn = conectarDB();
-                        $sql = "SELECT * FROM tbl_categorias;";
-                        $resultado = mysqli_query($conn, $sql);
-                        while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['ID_Categoria'] . '">' . $fila['Nombre'] . '</option>';
-                        }
-                        mysqli_close($conn);
-                    ?>
-                </select>
-
-                <input id="text-cant_modifi" name="NumHabitaciones" type="text" placeholder="No Habitaciones">
-
-                <select id="Est_modifi" class="mi-select" name="Estado">
-                    <option value="">Seleccionar una opción</option>
-                    <option value="Activo">Activo</option>
-                    <option value="Mantemiento">Mantemiento</option>
-                    <option value="Inactivo">Inactivo</option>
-                </select>
-
+                <input id="ID_Car" type="hidden" name="ID_Car">
+                <input id="text-Nombre" name="Nombre" type="text" placeholder="Nombre">
+                <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
+                <input id="text-nivel" name="Nivel" type="text" placeholder="Nivel">
+                <input id="text-Sueldo" name="Sueldo" type="text" placeholder="Sueldo">
                 <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">Modificar</button>
-            
             </form>
         </div>
     </div>
 
-    <!-- ////////////////// Ventana MODA DE Eliminar ////////////////// -->
     <div id="venteliminar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
             <form id="form-agregar" action="" method="post" name="agregar">
-                <input id="ID_ServElim" type="hidden" name="ID_Serv">
+                <input id="ID_CarElim" type="hidden" name="ID_Car">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit" name="eliminar">eliminar</button>
             </form>
