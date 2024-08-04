@@ -39,13 +39,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 }
             }
             if (isset($_POST['modificar'])){
-                $ID = $_POST['Cliente'];
+                $ID = $_POST['ID_Reserva'];
+                $ID_Clt = $_POST['Cliente'];
                 $Fch_reserva = $_POST['Fch_Reserva'];
                 $Fch_entrada = $_POST['Fch_Entrada'];
                 $Fch_salida = $_POST['Fch_Salida'];
                 $Estado = $_POST['Estado'];
 
-                $sql = "UPDATE tbl_reservacion SET Fecha_Reservación='$Fch_reserva',Fecha_Entrada='$Fch_entrada',Fecha_Salida='$Fch_salida',Estado='$Estado' WHERE ID_Cliente = '$ID'";
+                $sql = "UPDATE tbl_reservacion SET ID_Cliente='$ID_Clt',Fecha_Reservación='$Fch_reserva',Fecha_Entrada='$Fch_entrada',Fecha_Salida='$Fch_salida',Estado='$Estado' WHERE ID_Reservación = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila modificada correctamente.');</script>";
@@ -54,9 +55,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 }
             }
             if (isset($_POST['eliminar'])){
-                $ID = $_POST['Cliente'];
+                $ID = $_POST['ID_Reserva'];
 
-                $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
+                $sql = "DELETE FROM tbl_reservacion WHERE ID_Reservación = '$ID'";
                 
                 if (mysqli_query($conn, $sql)) {
                     echo "<script>alert('Fila eliminada correctamente.');</script>";
@@ -79,19 +80,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 });
                             </script>";
                 } else {
-                    echo "<div class='ventana' style='display: block;'>
-                            <div class='conte-vent'>
-                                <ion-icon name='close-circle-outline' class='btns btn-cerrar' onclick='document.getElementById('ventagregar').style.display = 'none';'></ion-icon>
-                                <form id='form-agregar' method='post'>
-                                    <input name='CI' type='text' placeholder='Identificacion'>
-                                    <input name='name_rs' type='text' placeholder='Nombre/Razón Social'>
-                                    <input name='direc' type='int' placeholder='Direccion'>
-                                    <input name='tlf' type='text' placeholder='Telefono'>
-                                    <input name='fn' type='date' placeholder='Fecha de nacimiento'>
-                                    <button class='btns btn-agregar' type='submit' name='agregar' >Agregar</button>
-                                </form>
-                            </div>
-                        </div>";
+                    echo" nada ";
                 }
             }
             
@@ -185,7 +174,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li>
                     <a href="../../../Inic/loggout.php">
                         <span class="icon">
-                            <ion-icon name="cash-outline"></ion-icon>
+                            <ion-icon name="enter-outline"></ion-icon>
                         </span>
                         <span class="title">Cerrar Sesion</span>
                     </a>
@@ -257,9 +246,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <thead>
                     <tr>
                         <td>Cliente</td>
+                        <td>Identificación</td>
                         <td>Fecha de Reservación</td>
-                        <td>Fecha de Entrada</td>
-                        <td>Fecha de Salida</td>
+                        <td>Entrada</td>
+                        <td>Salida</td>
                         <td>Estado</td>
                         <td>Acciones</td>
                     </tr>
@@ -270,11 +260,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $sql = "SELECT * FROM tbl_reservacion;";
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                        $id = $fila['ID_Reservación'];
-                        $sqlCat = "SELECT Nombre_Razón_Social FROM tbl_cliente_persona WHERE ID_Cliente = '$id'";
+                        $id = $fila['ID_Cliente'];
+                        $sqlCat = "SELECT * FROM tbl_cliente_persona WHERE ID_Cliente = '$id'";
                         $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlCat));
                         echo "<tr>  
                                 <td>" . $result['Nombre_Razón_Social'] . "</td>
+                                <td>" . $result['Nacionalidad'] ."-". $result['Identificación'] . "</td>
                                 <td>" . $fila['Fecha_Reservación'] . "</td>
                                 <td>" . $fila['Fecha_Entrada'] . "</td>
                                 <td>" . $fila['Fecha_Salida'] . "</td>
@@ -377,7 +368,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
             <form id="form-agregar" action="" method="post" name="agregar">
-                <input id="ID_ServElim" type="hidden" name="ID_Serv">
+                <input id="ID_ResElim" type="hidden" name="ID_Reserva">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit" name="eliminar">eliminar</button>
             </form>

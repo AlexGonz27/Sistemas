@@ -51,6 +51,7 @@ body {
 .navegacion ul li {
   position: relative;
   width: 100%;
+  height: 55px;
   list-style: none;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
@@ -120,7 +121,7 @@ body {
   content: "";
   position: absolute;
   right: 0;
-  bottom: -50px;
+  bottom: -45px;
   width: 50px;
   height: 50px;
   background-color: transparent;
@@ -354,23 +355,26 @@ td {
   max-width: 60px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(1) {
-  max-width: 50px;
+  max-width: 30px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(2) {
-  max-width: 50px;
-}
-.dt-serv .serviciosTable table tr td:nth-child(3) {
-  max-width: 40px;
-}
-.dt-serv .serviciosTable table tr td:nth-child(4) {
   max-width: 35px;
 }
+.dt-serv .serviciosTable table tr td:nth-child(3) {
+  max-width: 50px;
+}
+.dt-serv .serviciosTable table tr td:nth-child(4) {
+  max-width: 30px;
+}
 .dt-serv .serviciosTable table tr td:nth-child(5) {
+  max-width: 30px;
+}
+.dt-serv .serviciosTable table tr td:nth-child(6) {
   max-width: 20px;
 }
-.dt-serv .serviciosTable table tbody tr td:nth-child(3) {
+/*.dt-serv .serviciosTable table tbody tr td:nth-child(3) {
   text-align: center;
-}
+}*/
 .dt-serv .serviciosTable table tr td span {
   margin: 10px;
 }

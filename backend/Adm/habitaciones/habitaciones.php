@@ -149,6 +149,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </a>
                 </li>
                 <li>
+                    <a href="../../../Inic/loggout.php">
+                        <span class="icon">
+                            <ion-icon name="enter-outline"></ion-icon>
+                        </span>
+                        <span class="title">Cerrar Sesion</span>
+                    </a>
+                </li>
+                <li>
                     <a href="..../Inic/loggout.php">
                         <span class="icon">
                             <ion-icon name="cash-outline"></ion-icon>

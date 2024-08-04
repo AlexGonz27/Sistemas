@@ -119,6 +119,14 @@ mysqli_close($conn);
                         <span class="title">Promociones</span>
                     </a>
                 </li>
+                <li>
+                    <a href="../../Inic/loggout.php">
+                        <span class="icon">
+                            <ion-icon name="enter-outline"></ion-icon>
+                        </span>
+                        <span class="title">Cerrar Sesion</span>
+                    </a>
+                </li>
             </ul>
         </div>
 

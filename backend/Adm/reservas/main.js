@@ -92,6 +92,7 @@ let main = document.querySelector(".principal")
 toggle.onclick = function () {
   navigation.classList.toggle("active")
   main.classList.toggle("active")
+  $('#Tabla_Datos').DataTable().columns.adjust().draw();
 };
 
 //Modal Modificar Reserva (Propenso a gran cambio)
@@ -104,6 +105,10 @@ function ConfgVentModifi(FilaJson) {
   document.querySelector("#form-modificar #Fch_Entrada").value = FilaJson.Fecha_Entrada;
   document.querySelector("#form-modificar #Fch_Salida").value = FilaJson.Fecha_Salida;
   document.querySelector("#form-modificar #Estado").value = FilaJson.Estado;
+}
+
+function ConfgVentElim(ID) {
+  document.getElementById("ID_ResElim").value = ID;
 }
 
 function mostrarinfo(datos) {
