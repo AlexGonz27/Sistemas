@@ -451,6 +451,20 @@ div.dataTables_wrapper .dataTables_filter {
   color: var(--white);
   cursor: pointer;
 }
+.btn-cancelar{
+  background: #ce1717;
+  color: var(--white);
+  cursor: pointer;
+  border: 0px;
+  padding: 8px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.btn-cancelar:hover{
+  background:red;
+  color: var(--white);
+}
 .btn-buscar{
   background: var(--blue);
   color: var(--white);

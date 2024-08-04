@@ -112,10 +112,10 @@ function ConfgVentElim(ID) {
 }
 
 function mostrarinfo(datos) {
-
   document.getElementById('ID_clt').value = datos.Nacionalidad + "-" + datos.Identificación;
   document.getElementById('ID_clt').readOnly = true;
   document.getElementById('Nacionalidad').style.display = 'none';
+  document.getElementById('buscar-btn').style.display = 'none';
 
   var divNombre = document.createElement("div");
   divNombre.className = "case";
@@ -138,4 +138,9 @@ function mostrarinfo(datos) {
   inputTelefono.value = datos.Teléfono;
   divTelefono.appendChild(inputTelefono);
   document.getElementById('clientes').appendChild(divTelefono);
+
+  var btnCancelar = document.createElement("button");
+  btnCancelar.className = "btn-cancelar";
+  btnCancelar.textContent = "Cancelar";
+  document.getElementById('btns-buscar').appendChild(btnCancelar);;
 }

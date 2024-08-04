@@ -221,7 +221,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div id="btns-buscar">
                     <button id="buscar-btn"class="btn-buscar" type="submit" name="buscar">Buscar</button>
                 </div>
             </form>
