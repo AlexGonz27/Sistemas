@@ -19,10 +19,10 @@
         <!-- Navar -->
         <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container">
-                <a class="navbar-brand me-auto" href="#">Logo</a>
+                <a class="navbar-brand me-auto" href="#">Cabañas de la Fuente</a>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Logo</h5>
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Cabañas de la Fuente</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
@@ -56,12 +56,12 @@
         <!-- Hero section -->
         <section class="hero-section">
                 <div class="container d-flex align-items-center justify-content-center fs-1 text-white flex-column">
-                    <h1>Reponsive Navbar</h1>
+                    <h1>Conjunto Vacacional La Fuente</h1>
                     <h2>boostrap 5</h2>
                 </div>
         </section>
         <!-- End Hero section -->
-
+        
 
         <!-- Boostrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
