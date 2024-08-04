@@ -47,29 +47,35 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     {
                         echo "<script>alert('Los nombres no deben llevar valores numericos.');</script>";
                     }else{
-                        if (mysqli_num_rows($result) > 0) {
-                            while($fila = mysqli_fetch_assoc($result)){
-                                if($fila['Identificación'] == $CI)
-                                {
-                                    $numE = 1;
-                                    break;
-                                }
-                                
-                            }   
-                        }
-                        if($numE == 1)
+                        if(preg_match("/^(212|424|414|416|426)\d{7}$/", $tlf))
                         {
-                            echo "<script>alert('Ya existe un cliente con esa cedula.');</script>";
-                        }else
-                        {
-                            $sql = "INSERT INTO tbl_cliente_persona (Identificación,Nombre_Razón_Social,Dirección,Teléfono,Fecha_Nacimiento) VALUES ('$CI','$name_rs','$direc','$tlf','$fn')";
-                        
-                            if (mysqli_query($conn, $sql)) {
-                                echo "<script>alert('Fila insertada correctamente.');</script>";
-                            } else {
-                                echo "Error al insertar fila: " . mysqli_error($conn);
+                            echo "<script>alert('El numero telefonico tiene que ser numerico y valido para venezuela');</script>";
+                        }else{
+                            if (mysqli_num_rows($result) > 0) {
+                                while($fila = mysqli_fetch_assoc($result)){
+                                    if($fila['Identificación'] == $CI)
+                                    {
+                                        $numE = 1;
+                                        break;
+                                    }
+                                    
+                                }   
                             }
-                        }
+                            if($numE == 1)
+                            {
+                                echo "<script>alert('Ya existe un cliente con esa cedula.');</script>";
+                            }else
+                            {
+                                $sql = "INSERT INTO tbl_cliente_persona (Identificación,Nombre_Razón_Social,Dirección,Teléfono,Fecha_Nacimiento) VALUES ('$CI','$name_rs','$direc','$tlf','$fn')";
+                            
+                                if (mysqli_query($conn, $sql)) {
+                                    echo "<script>alert('Fila insertada correctamente.');</script>";
+                                } else {
+                                    echo "Error al insertar fila: " . mysqli_error($conn);
+                                }
+                            }
+                        }                        
+                        
                     }           
                 }            
             }
@@ -94,29 +100,35 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     {
                         echo "<script>alert('Los nombres no deben llevar valores numericos.');</script>";
                     }else{
-                        if (mysqli_num_rows($result) > 0) {
-                            while($fila = mysqli_fetch_assoc($result)){
-                                if($fila['Identificación'] == $CI && $fila['ID_Cliente'] != $ID)
-                                {
-                                    $numE = 1;
-                                    break;
-                                }
-                                
-                            }   
-                        }
-                        if($numE == 1)
+                        if(preg_match("/^(212|424|414|416|426)\d{7}$/", $tlf))
                         {
-                            echo "<script>alert('Ya existe un cliente con esa cedula.');</script>";
-                        }else
-                        {
-                            $sql = "UPDATE tbl_cliente_persona SET Identificación='$CI',Nombre_Razón_Social='$name_rs',Dirección='$direc',Teléfono='$tlf',Fecha_Nacimiento='$fn' WHERE ID_Cliente = '$ID'";
+                            echo "<script>alert('El numero telefonico tiene que ser numerico y valido para venezuela');</script>";
+                        }else{
+                            if (mysqli_num_rows($result) > 0) {
+                                while($fila = mysqli_fetch_assoc($result)){
+                                    if($fila['Identificación'] == $CI && $fila['ID_Cliente'] != $ID)
+                                    {
+                                        $numE = 1;
+                                        break;
+                                    }
+                                    
+                                }   
+                            }
+                            if($numE == 1)
+                            {
+                                echo "<script>alert('Ya existe un cliente con esa cedula.');</script>";
+                            }else
+                            {
+                                $sql = "UPDATE tbl_cliente_persona SET Identificación='$CI',Nombre_Razón_Social='$name_rs',Dirección='$direc',Teléfono='$tlf',Fecha_Nacimiento='$fn' WHERE ID_Cliente = '$ID'";
+                            
+                                if (mysqli_query($conn, $sql)) {
+                                    echo "<script>alert('Fila modificada correctamente.');</script>";
+                                } else {
+                                    echo "Error al modificar fila: " . mysqli_error($conn);
+                                }         
+                            }
+                        }                        
                         
-                            if (mysqli_query($conn, $sql)) {
-                                echo "<script>alert('Fila modificada correctamente.');</script>";
-                            } else {
-                                echo "Error al modificar fila: " . mysqli_error($conn);
-                            }         
-                        }
                     }                    
 
                     
