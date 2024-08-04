@@ -28,13 +28,13 @@ if ($resultado->num_rows > 0) {
         
         switch ($fila['Nivel']) {
               case '1':
-                 header("Location: ../Users/Adm");
+                 header("Location: ../backend/Adm");
                  break;
               case '2':
-                header("Location: ../Users/Op");
+                header("Location: ../backend/Op");
                  break;
               case '3':
-                header("Location: ../Users/User");
+                header("Location: ../User");
                  break;
             
               default:
