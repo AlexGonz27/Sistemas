@@ -53,7 +53,7 @@
                         $respuesta['mensaje'] = 'Los campos capacidad y precio deben ser numericos.'; 
                     }else
                     {
-                        $sql = "SELECT * FROM tbl_categorias WHERE Nombre = '$nombre'";
+                        $sql = "SELECT * FROM tbl_categorias WHERE Nombre = '$nombre' and ID_Categoria != $ID";
                         $result= mysqli_query($conn, $sql);
 
                         if(mysqli_num_rows($result) > 0)
