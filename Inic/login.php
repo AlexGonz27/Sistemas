@@ -49,11 +49,11 @@ if ($resultado->num_rows > 0) {
     
     }   else {
         // Contraseña incorrecta
-        echo "Correo electrónico o contraseña incorrectos";
+        echo "<script>alert('Correo electrónico o contraseña incorrectos')</script>";
     }
 }   else {
         // Usuario no encontrado
-        echo "Usuario no encontrado";
+        echo "<script>alert('Usuario no encontrado')</script>";
 }
 
 
