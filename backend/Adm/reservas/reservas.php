@@ -65,6 +65,24 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     echo "Error al modificar fila: " . mysqli_error($conn);
                 }
             }
+            if (isset($_POST['buscar'])) {
+                $ID = mysqli_real_escape_string($conn, $_POST['id_cliente']);
+                $NA = mysqli_real_escape_string($conn, $_POST['Nacionalidad']);
+            
+                $sql = "SELECT * FROM tbl_cliente_persona WHERE Nacionalidad = '$NA' AND Identificación = '$ID'";
+                
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    $fila = mysqli_fetch_assoc($result);
+                    echo "<script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    mostrarinfo(" . json_encode($fila) . ");
+                                });
+                            </script>";
+                } else {
+                    echo" nada ";
+                }
+            }
             
         }
         mysqli_close($conn);
@@ -207,26 +225,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <button id="buscar-btn"class="btn-buscar" type="submit" name="buscar">Buscar</button>
                 </div>
             </form>
-            <?php 
-                if (isset($_POST['buscar'])) {
-                    $ID = mysqli_real_escape_string($conn, $_POST['id_cliente']);
-                    $NA = mysqli_real_escape_string($conn, $_POST['Nacionalidad']);
-                
-                    $sql = "SELECT * FROM tbl_cliente_persona WHERE Nacionalidad = '$NA' AND Identificación = '$ID'";
-                    
-                    $result = mysqli_query($conn, $sql);
-                    if (mysqli_num_rows($result) > 0) {
-                        $fila = mysqli_fetch_assoc($result);
-                        echo "<script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        mostrarinfo(" . json_encode($fila) . ");
-                                    });
-                                </script>";
-                    } else {
-                        echo" nada ";
-                    }
-                }
-            ?>
         </div>
      </div>
      
