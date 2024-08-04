@@ -59,7 +59,7 @@ const cartas = contenedorCartas.querySelectorAll(".carta");
 
 // Agrega un event listener a cada carta
 cartas.forEach((carta) => {
-    const cartaNombre = carta.querySelector(".cartaNombre").textContent;
+    const cartaNombre = carta.querySelector(".cartaNombre").textContent.toLowerCase();
     carta.addEventListener("click", function() {
         const url = "./" + cartaNombre + "/" + cartaNombre + ".php";
         window.location.href = url;
