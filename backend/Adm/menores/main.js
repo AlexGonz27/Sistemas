@@ -131,14 +131,13 @@ toggle.onclick = function () {
 function ConfgVentModifiCat(FilaJson) {
   console.log(FilaJson)
 
-  document.querySelector("#form-modificar #ID_Car").value = FilaJson.ID_Cargo;
-  document.querySelector("#form-modificar #text-Nombre").value = FilaJson.Nombre;
-  document.querySelector("#form-modificar #text-desc").value = FilaJson.Descripción;
-  document.querySelector("#form-modificar #text-nivel").value = FilaJson.Nivel;
-  document.querySelector("#form-modificar #text-Sueldo").value = FilaJson.Sueldo;
+  document.querySelector("#form-modificar #ID_Men").value = FilaJson.ID_Menores;
+  document.querySelector("#form-modificar #text-nombre").value = FilaJson.Nombre_Apellido;
+  document.querySelector("#form-modificar #text_Fn").value = FilaJson.Fecha_Nacimiento;
 }
+
 function ConfgVentElimCat(ID) {
-  document.getElementById("ID_CarElim").value = ID;
+  document.getElementById("ID_MenElim").value = ID;
 }
 
 function tareaCompletada(){

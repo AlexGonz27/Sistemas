@@ -13,7 +13,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cargos</title>
+    <title>Menores</title>
     <link rel="stylesheet" href="./estilos.css">
     <!-- Alertas -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -104,12 +104,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Huespedes</span>
                     </a>
                 </li>
-                <li id="Mascotas">
-                    <a href="../mascotas/mascotas.php">
+                <li id="Menores">
+                    <a href="../menores/menores.php">
                         <span class="icon">
                             <ion-icon name="body-outline"></ion-icon>
                         </span>
-                        <span class="title">Mascotas</span>
+                        <span class="title">Menores</span>
                     </a>
                 </li>
                 <li id="Promociones">
@@ -153,7 +153,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div class="dt-serv">
         <div class="serviciosTable">
             <div class="cartaHeader">
-                <h2>Cargos</h2>
+                <h2>Mascotas</h2>
             </div>
             <div class="conte-btns">
                 <div>
@@ -168,10 +168,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <table id="Tabla_Datos">
                 <thead>
                     <tr>
-                        <td>Nombre</td>
-                        <td>Descripción</td>
-                        <td>Nivel</td>
-                        <td>Sueldo</td>
+                        <td>Nombre_Apellido</td>
+                        <td>Fecha_Nacimiento</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
@@ -179,17 +177,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <?php
                     include '../conexion.php';
                     $conn = conectarDB();
-                    $sql = "SELECT * FROM tbl_cargos;";
+                    $sql = "SELECT * FROM tbl_menores;";
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>
-                                <td>" . $fila['Nombre'] . "</td>
-                                <td>" . $fila['Descripción'] . "</td>
-                                <td>" . $fila['Nivel'] . "</td>
-                                <td>" . $fila['Sueldo'] . "$</td>
+                                <td>" . $fila['Nombre_Apellido'] . "</td>
+                                <td>" . $fila['Fecha_Nacimiento'] . "</td>
                                 <td>
                                     <span class='btns btn-modificar' onclick='ConfgVentModifiCat(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Cargo'].");'>Eliminar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Menores'].");'>Eliminar</span>
                                 </td>
                             </tr>";
                     }
@@ -204,10 +200,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
             <form class="forma" id="form-agregar" action="" method="post">
                 <input type="hidden" name="agregar">
-                <input id="text-Nombre" name="Nombre" type="text" placeholder="Nombre">
-                <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
-                <input id="text-nivel" name="Nivel" type="text" placeholder="Nivel">
-                <input id="text-Sueldo" name="Sueldo" type="text" placeholder="Sueldo">
+                <input id="text-nombre" name="nombre" type="text" placeholder="Nombre y apellido">
+                <input id="text_Fn" name="fn" type="date" placeholder="Fecha de nacimiento">
                 <button class="btns btn-agregar" type="submit">Agregar</button>
             </form>
         </div>
@@ -218,11 +212,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
             <form class="forma" id="form-modificar"action="" method="post" name="modificar">
                 <input type="hidden" name="modificar">
-                <input id="ID_Car" type="hidden" name="ID_Car">
-                <input id="text-Nombre" name="Nombre" type="text" placeholder="Nombre">
-                <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
-                <input id="text-nivel" name="Nivel" type="text" placeholder="Nivel">
-                <input id="text-Sueldo" name="Sueldo" type="text" placeholder="Sueldo">
+                <input id="ID_Men" type="hidden" name="ID_Men">
+                <input id="text-nombre" name="nombre" type="text" placeholder="Nombre y apellido">
+                <input id="text_Fn" name="fn" type="date" placeholder="Fecha de nacimiento">
                 <button class="btns btn-modificar"  type="submit" class="forma btn-modificar">modificar</button>
             </form>
         </div>
@@ -233,7 +225,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
             <form class="forma" id="form-agregar" action="" method="post" name="agregar">
                 <input type="hidden" name="eliminar">
-                <input id="ID_CarElim" type="hidden" name="ID_Car">
+                <input id="ID_MenElim" type="hidden" name="ID_Men">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit">eliminar</button>
             </form>
