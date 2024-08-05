@@ -122,31 +122,38 @@
         <div class="container booking-area shadow mb-3">
             <form class="row">
                 <div class="col-lg mb-3 mb-lg-0">
+                    <span class="input-group-text" id="adulto-input">Fecha Entrada</span>
                     <input type="date" class="form-control" placeholder="Date">
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
+                    <span class="input-group-text" id="adulto-input">Fecha Salida</span>
                     <input type="date" class="form-control" placeholder="Date">
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
-                    <div class="input-group">
-                        <span class="input-group-text" id="adulto-input">Adultos</span>
-                        <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="adulto-input" min="0">
+                    <span class="input-group-text" id="adulto-input">Adultos</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="adulto-input" min="0">
+                </div>
+                <div class="col-lg mb-3 mb-lg-0">
+                    <span class="input-group-text" id="menores-input">Niños</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="menores-input" min="0">
+                </div>
+                <div class="col-lg mb-3 mb-lg-0">
+                    <span class="input-group-text" id="Mascotas-input">Mascotas</span>
+                    <div class="form-check" style="margin-top: 10px;">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioMascotaSi" style="background-color: #009970;">
+                        <label class="form-check-label" for="flexRadioMascotaSi">
+                            Si.
+                        </label>
+                    </div>
+                    <div class="form-check" style="margin-top: 10px;">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioMascotaNO" checked style="background-color: #009970;">
+                        <label class="form-check-label" for="flexRadioMascotaNO">
+                            No.
+                        </label>
                     </div>
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
-                    <div class="input-group">
-                        <span class="input-group-text" id="menores-input">Niños</span>
-                        <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="menores-input" min="0">
-                    </div>
-                </div>
-                <div class="col-lg mb-3 mb-lg-0">
-                    <select class="form-select">
-                        <option selected>Mascotas</option>
-                        <option value="1">Si</option>
-                    </select>
-                </div>
-                <div class="col-lg mb-3 mb-lg-0">
-                    <button type="submit"class="main-btn rounded-2 px-lg-3"><a class="nav-link" href="#Rooms">Disponibilidad</a></button>
+                    <button type="submit" class="main-btn rounded-2 px-lg-3"><a class="nav-link" href="./Inic/inic.php">Disponibilidad</a></button>
                 </div>
             </form>
         </div>
