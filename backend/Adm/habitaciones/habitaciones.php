@@ -199,7 +199,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </table>
         </div>
     </div></div>    
-    
     <div id="ventagregar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
@@ -217,6 +216,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         mysqli_close($conn);
                     ?>
                 </select>
+                <div class="file-input-container">
+                    <span class="btn-subir">Seleccionar Archivo</span>
+                    <input type="file" name="imagen" class="file-input" accept="image/*">
+                </div>
 
                 <input name="NumHabitaciones" type="text" placeholder="No Habitaciones">
 
