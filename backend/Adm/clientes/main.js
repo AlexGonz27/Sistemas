@@ -49,6 +49,45 @@ document.addEventListener("DOMContentLoaded", () => {
     $('#buscador_tabla').on('keyup', function () {
         table.search(this.value).draw();
     });
+
+    
+    // Codigo AJAX para la subida a la nube
+    $('.forma').on('submit', function(e) {
+      e.preventDefault(); // Evitar el envío por defecto del formulario
+
+      var formData = new FormData(this); // Serializar los datos del formulario
+
+      $.ajax({
+          url: './consultas.php', // Archivo PHP que procesa la solicitud
+          method: 'POST',
+          data: formData,
+          processData: false, // Evitar que jQuery procese los datos
+          contentType: false,
+          success: function(respuesta) {
+            console.log(respuesta);
+            var data = JSON.parse(respuesta);
+
+            if (data.estado === 'completado') {
+              tareaCompletada();
+              document.querySelectorAll('.ventana').forEach(function(element) {
+                element.style.display = 'none';
+            });
+              setTimeout(function() {
+                  location.reload();
+              }, 3000);
+            } else {
+              tareaError(data.mensaje);
+            }
+          },
+          error: function(xhr, status, error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un problema con la solicitud: ' + error
+            });
+        }
+      });
+    });
   });
 
   const cells = document.querySelectorAll('tbody tr td');
@@ -105,4 +144,41 @@ function ConfgVentModifi(FilaJson) {
 
 function ConfgVentElim(ID) {
   document.getElementById("ID_CltElim").value = ID;
+}
+
+function tareaCompletada(){
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+  Toast.fire({
+    icon: "success",
+    title: "Tarea completada!",
+  });
+}
+
+function tareaError(mensaje){
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+  Toast.fire({
+    icon: "error",
+    title: "error",
+    text: mensaje
+  });
 }

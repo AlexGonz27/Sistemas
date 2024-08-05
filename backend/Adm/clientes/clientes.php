@@ -1,4 +1,5 @@
 <?php 
+include '../conexion.php';
 //LOGEADO??
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -15,59 +16,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes</title>
     <link rel="stylesheet" href="./estilos.css">
+    <!-- Alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <?php
-        include '../conexion.php';
-        $conn = conectarDB(); 
-        
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if (isset($_POST['agregar'])) {
-                $CI = $_POST['CI'];
-                $name_rs = $_POST['name_rs'];
-                $direc = $_POST['direc'];
-                $tlf = $_POST['tlf'];
-                $fn = $_POST['fn'];
-
-                $sql = "INSERT INTO tbl_cliente_persona (Identificación,Nombre_Razón_Social,Dirección,Teléfono,Fecha_Nacimiento) VALUES ('$CI','$name_rs','$direc','$tlf','$fn')";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila insertada correctamente.');</script>";
-                } else {
-                    echo "Error al insertar fila: " . mysqli_error($conn);
-                }
-            }
-            if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_Clt'];
-                $CI = $_POST['CI'];
-                $name_rs = $_POST['name_rs'];
-                $direc = $_POST['direc'];
-                $tlf = $_POST['tlf'];
-                $fn = $_POST['fn'];
-
-                $sql = "UPDATE tbl_cliente_persona SET Identificación='$CI',Nombre_Razón_Social='$name_rs',Dirección='$direc',Teléfono='$tlf',Fecha_Nacimiento='$fn' WHERE ID_Cliente = '$ID'";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila modificada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
-                }
-            }
-            if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Clt'];
-
-                $sql = "DELETE FROM tbl_cliente_persona WHERE ID_Cliente = '$ID'";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila eliminada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
-                }
-            }
-        }
-        mysqli_close($conn);
-    ?>
     <!-- =============== navegacion ================ -->
     <div class="contenedor-nav">
         <div class="navegacion">
@@ -239,7 +192,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>
-                                <td>" . $fila['Identificación'] . "</td>
+                                <td>" . $fila['Nacionalidad'] . "-" . $fila['Identificación'] . "</td>
                                 <td>" . $fila['Nombre_Razón_Social'] . "</td>
                                 <td>" . $fila['Dirección'] . "</td>
                                 <td>" . $fila['Teléfono'] . "</td>
@@ -261,8 +214,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div id="ventagregar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
-            <form id="form-agregar" action="" method="post">
-                <input name="CI" type="text" placeholder="Identificacion">
+            <form id="form-agregar" action="" method="post" class="forma">
+                <input type="hidden" name="agregar">
+                <div class="container-input">
+                    <select class="mi-select" name="Nacionalidad">
+                        <option value="V">V</option>
+                        <option value="E">E</option>
+                        <option value="J">J</option>
+                    </select>
+                    <input id="text_CI" name="CI" type="text" placeholder="Identifiacion">
+                </div>
                 <input name="name_rs" type="text" placeholder="Nombre/Razón Social">
                 <input name="direc" type="int" placeholder="Direccion">
                 <input name="tlf" type="text" placeholder="Telefono">
@@ -275,9 +236,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div id="ventmodifi" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
-            <form id="form-modificar"action="" method="post" name="modificar">
+            <form id="form-modificar"action="" method="post" class="forma">
+                <input type="hidden" name="modificar">
                 <input id="ID_Clt" name="ID_Clt" type="hidden">
-                <input id="text_CI" name="CI" type="text" placeholder="Identifiacion">
+                <div class="container-input">
+                    <select class="mi-select" name="Nacionalidad">
+                        <option value="V">V</option>
+                        <option value="E">E</option>
+                        <option value="J">J</option>
+                    </select>
+                    <input id="text_CI" name="CI" type="text" placeholder="Identifiacion">
+                </div>
                 <input id="text_Name_RS" name="name_rs" type="text" placeholder="Nombre/Razón Social">
                 <input id="text_Direc" name="direc" type="int" placeholder="Dirección">
                 <input id="text_Tlf" name="tlf" type="text" placeholder="Telefono">
@@ -290,7 +259,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div id="venteliminar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
-            <form id="form-agregar" action="" method="post" name="agregar">
+            <form id="form-agregar" action="" method="post" class="forma">
+                <input type="hidden" name="eliminar">
                 <input id="ID_CltElim" type="hidden" name="ID_Clt">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit" name="eliminar">eliminar</button>
