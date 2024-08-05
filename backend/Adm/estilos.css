@@ -130,13 +130,13 @@ Pseudo-elementos solo para los elementos principales */
 /* ===================== contenedor random ===================== */
 
 .cont_cliente {
-  width: 100%;
-  padding: 20px;
+  margin: 50px;
   display: flex;
   justify-content: center;
-  align-items: center;  
+  text-align: center;
 }
 .cont_cliente .cont_clt {
+  justify-content: center;
   position: relative;
   background: var(--white);
   padding: 20px;

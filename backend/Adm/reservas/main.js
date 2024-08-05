@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     $('#buscador_tabla').on('keyup', function () {
         table.search(this.value).draw();
     });
+    
   });
 
   const cells = document.querySelectorAll('tbody tr td');
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   
-  
+  document.getElementById("Fch_Reserva").value = new Date().toISOString().split('T')[0];
 });
 //Funciones para marcar en la navegacion
 let lista = document.querySelectorAll(".navegacion li")
@@ -142,13 +143,44 @@ function mostrarinfo(datos) {
   var btnDisponibilidad = document.createElement("button");
   btnDisponibilidad.className = "btn-buscar";
   btnDisponibilidad.textContent = "Reservar";
-  btnDisponibilidad
+  btnDisponibilidad.addEventListener('click', function(){
+    Reservar(datos);
+    document.getElementById('ventagregar').style.display = 'block';
+    document.getElementById('forma').addEventListener('submit', function(event) {
+      event.preventDefault();
+    });
+  })
   document.getElementById('btns-buscar').appendChild(btnDisponibilidad);
 
   var btnCancelar = document.createElement("button");
   btnCancelar.className = "btn-cancelar";
   btnCancelar.textContent = "Cancelar";
+  btnCancelar.addEventListener('click', function(){
+  })
   document.getElementById('btns-buscar').appendChild(btnCancelar);
 
+}
+function Reservar(datos) {
+  console.log(datos)
+  
+  generarCodigo('Codigo_add');
+  document.querySelector("#form-agregar #Identidad").textContent = datos.Identificación;
+}
+function generarCodigo(text) {
+  const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numeros = '0123456789';
 
+  // Generar dos letras aleatorias
+  let codigo = '';
+  for (let i = 0; i < 2; i++) {
+      codigo += letras.charAt(Math.floor(Math.random() * letras.length));
+  }
+
+  // Generar dos números aleatorios
+  for (let i = 0; i < 2; i++) {
+      codigo += numeros.charAt(Math.floor(Math.random() * numeros.length));
+  }
+
+  // Mostrar el código generado
+  document.getElementById(text).innerText = codigo;
 }

@@ -229,7 +229,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div>
                 <h2>Cliente</h2>
             </div>
-            <form action="" class="data_clientes" method="post" id="forma" name="buscar">
+            <form action="" class="data_clientes" method="post" id="forma" name="buscar" class="forma">
                 <div id="clientes">
                     <div class="case">
                         <div>
@@ -258,9 +258,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
             </div>
             <div class="conte-btns">
+                <!--
                 <div>
                     <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                 </div>
+                -->
             </div>
 
             <table id="Tabla_Datos">
@@ -268,9 +270,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <tr>
                         <td>Cliente</td>
                         <td>Identificación</td>
-                        <td>Fecha de Reservación</td>
-                        <td>Entrada</td>
-                        <td>Salida</td>
+                        <td>Habitacion</td>
+                        <td>Fecha de Reserva</td>
+                        <td>Codigo</td>
                         <td>Estado</td>
                         <td>Acciones</td>
                     </tr>
@@ -278,7 +280,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <tbody>
                 <?php
                     $conn = conectarDB();
-                    $sql = "SELECT * FROM tbl_reservacion;";
+                    $sql = "SELECT r.*, h.N_Habitación 
+                            FROM tbl_reservacion r
+                            JOIN tbl_habitaciones_categoria h ON r.ID_Habitacion = h.ID_Habitaciones";
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         $id = $fila['ID_Cliente'];
@@ -287,9 +291,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         echo "<tr>  
                                 <td>" . $result['Nombre_Razón_Social'] . "</td>
                                 <td>" . $result['Nacionalidad'] ."-". $result['Identificación'] . "</td>
+                                <td>Nº-" . $fila['N_Habitación'] . "</td>
                                 <td>" . $fila['Fecha_Reservación'] . "</td>
-                                <td>" . $fila['Fecha_Entrada'] . "</td>
-                                <td>" . $fila['Fecha_Salida'] . "</td>
+                                <td>" . $fila['Codigo_Reserva'] . "</td>
                                 <td>" . $fila['Estado'] . "</td>
                                 <td>
                                     <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).")' >Modificar</span>
@@ -310,34 +314,41 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
             
             <!-- Forma para agregar  -->
-            <form id="form-agregar"action="" method="post" name="agregar">
-                <select class="mi-select" name="Cliente">
-                    <option value="">Seleccionar una opción</option>
+            <form id="form-agregar" name="agregar">
+
+                <input type="hidden" name="agregar">
+                <input type="hidden" name="Codigo" id="Codigo_add">
+                
+                <h2 id="Nombre" name="Nombre_Razon"></h2>
+                <h2 id="Nacionalidad" name="Nacionalidad"></h2>
+                <h2 id="Identidad" name="Identidad"></h2>
+
+                <select class="mi-select" name="Habitacion">
+                    <option value="">Seleccionar una habitación</option>
                     <?php
                         $conn = conectarDB();
-                        $sql = "SELECT * FROM tbl_cliente_persona;";
+                        $sql = "SELECT * FROM tbl_habitaciones_categoria;";
                         $resultado = mysqli_query($conn, $sql);
                         while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['ID_Cliente'] . '">' . $fila['Nombre_Razón_Social'] . '</option>';
+                            echo '<option value="' . $fila['ID_habitaciones'] . '">N°-' . $fila['N_Habitación'] . '</option>';
                         }
                         mysqli_close($conn);
                     ?>
                 </select>
 
-                <input name="Fch_Reserva" type="date" placeholder="Fecha de Reservación">
+                <input id="Fch_Reserva" name="Fch_Reserva" type="date" placeholder="Fecha de Reservación">
 
                 <input name="Fch_Entrada" type="date" placeholder="Fecha de Entrada">
 
                 <input name="Fch_Salida" type="date" placeholder="Fecha de Salida">
+                
+                <input name="N_Adultos" type="number" placeholder="Número de Adultos">
+                
+                <input name="N_Niños" type="number" placeholder="Número de Niños">
+                
+                <input name="N_Mascotas" type="number" placeholder="Número de Mascotas">
 
-                <select class="mi-select" name="Estado">
-                    <option value="">Seleccionar una opción</option>
-                    <option value="Activo">Activo</option>
-                    <option value="Mantemiento">Mantemiento</option>
-                    <option value="Inactivo">Inactivo</option>
-                </select>
-
-                <button class="btns btn-agregar" type="submit" name="agregar" >Agregar</button>
+                <button class="btns btn-agregar" name="agregar" >Agregar</button>
             
             </form>
         </div>
@@ -370,12 +381,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <input id="Fch_Entrada" name="Fch_Entrada" type="date" placeholder="Fecha de Entrada">
 
                 <input id="Fch_Salida" name="Fch_Salida" type="date" placeholder="Fecha de Salida">
-
-                <select id="Estado" class="mi-select" name="Estado">
+                
+                <select class="mi-select" name="Estado">
                     <option value="">Seleccionar una opción</option>
-                    <option value="Activo">Activo</option>
-                    <option value="Mantemiento">Mantemiento</option>
-                    <option value="Inactivo">Inactivo</option>
+                    <option value="Activo">Finalizada</option>
+                    <option value="Mantemiento">Pendiente</option>
+                    <option value="Inactivo">Anulada</option>
                 </select>
 
                 <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">Modificar</button>
