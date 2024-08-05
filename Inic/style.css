@@ -96,7 +96,10 @@ body{
     margin-top: 10px;
     color: white;
 }
-
+.mi-select{
+    border: none;
+    background-color: transparent;
+}
 
 /*Animation form*/
 .sign-up{
@@ -120,7 +123,7 @@ body{
     display: flex;
     align-items: center;
     transform: translateX(100%);
-    background-color: #009970;
+    background-color: #ff8000;
     transition: transform 0.5s ease-in-out, border-radius 0.5s ease-in-out, background-color 0.5s ease-in-out;
     overflow: hidden;
     border-radius: 50% 0 0 50%;
@@ -129,7 +132,7 @@ body{
 .container.toggle .container-welcome{
     transform: translateX(0);
     border-radius: 0 50% 50% 0 ;
-    background-color: #F6AD34;
+    background-color: #007fff;
 }
 
 .container-welcome .welcome{

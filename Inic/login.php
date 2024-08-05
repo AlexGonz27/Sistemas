@@ -11,54 +11,38 @@ $conn = mysqli_connect('b03oim8xwvf4jpuq5buf-mysql.services.clever-cloud.com',
 if(!$conn){
     die("Error DB");
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $respuesta = ['estado' => 'error', 'mensaje' => 'Ocurrió un error desconocido','nivel' => '0'];
 
-// Recibir datos del formulario
-$usuario = $_POST['usuario'];
-$contrasenia = $_POST['contra'];
+    // Recibir datos del formulario
+    $usuario = $_POST['usuario'];
+    $contrasenia = $_POST['contra'];
 
-// Consulta SQL para verificar el usuario
-$sql = "SELECT * FROM tbl_usuario WHERE Correo = '$usuario'";
-$resultado = mysqli_query($conn,$sql);
+    // Consulta SQL para verificar el usuario
+    $sql = "SELECT * FROM tbl_usuario WHERE Correo = '$usuario'";
+    $resultado = mysqli_query($conn,$sql);
 
-if ($resultado->num_rows > 0) {
-    $fila = mysqli_fetch_assoc($resultado);
-    // Verificar la contraseña en texto plano
-    if ($contrasenia == $fila['Contraseña']) {
-        // Contraseña correcta, iniciar sesión
-        $_SESSION['loggedin'] = true;
-        $_SESSION['user_id'] = $fila['ID_Usuario'];
-        $_SESSION['user_email'] = $fila['Correo'];
-        
-        switch ($fila['Nivel']) {
-              case '1':
-                 header("Location: ../backend/Adm");
-                 break;
-              case '2':
-                header("Location: ../backend/Op");
-                 break;
-              case '3':
-                header("Location: ../User");
-                 break;
-            
-              default:
-                 break;
+    if ($resultado->num_rows > 0) {
+        $fila = mysqli_fetch_assoc($resultado);
+        // Verificar la contraseña en texto plano
+        if ($contrasenia == $fila['Contraseña']) {
+            // Contraseña correcta, iniciar sesión
+            $_SESSION['loggedin'] = true;
+            $_SESSION['user_id'] = $fila['ID_Usuario'];
+            $_SESSION['user_email'] = $fila['Correo'];
+
+            $respuesta['estado'] = 'completado';
+            $respuesta['nivel'] = $fila['Nivel'];
+        }   else {
+            // Contraseña incorrecta
+            $respuesta['mensaje'] = 'Correo electrónico o contraseña incorrectos';
         }
-
-        exit();
-    
     }   else {
-        // Contraseña incorrecta
-        echo "<script>alert('Correo electrónico o contraseña incorrectos')
-                        window.location.href = './inic.php'
-                </script>";
+            // Usuario no encontrado
+            $respuesta['mensaje'] = 'Usuario no encontrado';
     }
-}   else {
-        // Usuario no encontrado
-        echo "<script>alert('Usuario no encontrado')
-                        window.location.href = './inic.php'
-                </script>";
+    echo json_encode($respuesta);
 }
-
 
 $conn->close();
 ?>
