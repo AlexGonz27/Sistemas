@@ -15,55 +15,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habitaciones</title>
     <link rel="stylesheet" href="./estilos.css">
+    <!-- Alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <?php
-        include '../conexion.php';
-        $conn = conectarDB(); 
-        
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if (isset($_POST['agregar'])) {
-                $categoria = $_POST['Categoria'];
-                $N_Habitacion = $_POST['NumHabitaciones'];
-                $estado = $_POST['Estado'];
-
-                $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria,N_Habitación,Estado) VALUES ('$categoria','$N_Habitacion','$estado')";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila insertada correctamente.');</script>";
-                } else {
-                    echo "Error al insertar fila: " . mysqli_error($conn);
-                }
-            }
-            if (isset($_POST['modificar'])){
-                $ID = $_POST['ID_habit_modifi'];
-                $Categoria = $_POST['Categoria'];
-                $N_Habit = $_POST['NumHabitaciones'];
-                $Estado = $_POST['Estado'];
-
-                $sql = "UPDATE tbl_habitaciones_categoria SET ID_Categoria='$Categoria',N_Habitación='$N_Habit',Estado='$Estado' WHERE ID_Habitaciones = '$ID'";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila modificada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
-                }
-            }
-            if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Cat'];
-
-                $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila eliminada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
-                }
-            }
-        }
-        mysqli_close($conn);
-    ?>
     <!-- =============== navegacion ================ -->
     <div class="contenedor-nav">
         <div class="navegacion">
@@ -148,6 +104,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Huespedes</span>
                     </a>
                 </li>
+                <li id="Mascotas">
+                    <a href="../mascotas/mascotas.php">
+                        <span class="icon">
+                            <ion-icon name="body-outline"></ion-icon>
+                        </span>
+                        <span class="title">Mascotas</span>
+                    </a>
+                </li>
                 <li id="Promociones">
                     <a href="../promociones/promociones.php">
                         <span class="icon">
@@ -164,18 +128,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Cerrar Sesion</span>
                     </a>
                 </li>
-                <li>
-                    <a href="..../Inic/loggout.php">
-                        <span class="icon">
-                            <ion-icon name="cash-outline"></ion-icon>
-                        </span>
-                        <span class="title">Cerrar Sesion</span>
-                    </a>
-                </li>
             </ul>
         </div>
         <!-- ========================= principal ==================== -->
-        
         <div class="principal">
             <div class="barratop">
                 <div class="toggle">
@@ -195,8 +150,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
         <div> 
     </div>
-
-    <!-- ////////////////// DataTable //////////////////-->
     <div class="dt-serv">
         <div class="serviciosTable">
             <div class="cartaHeader">
@@ -207,6 +160,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                 </div>
                 <div>
+                    <button id="consulta-btn" onclick="tareaCompletada()" style="display: none;">Hacer Consulta</button>
                     <input id="buscador_tabla" type="text" placeholder="Buscar">
                 </div>
             </div>
@@ -222,6 +176,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </thead>
                 <tbody>
                 <?php
+                    include '../conexion.php';
                     $conn = conectarDB();
                     $sql = "SELECT * FROM tbl_habitaciones_categoria;";
                     $resultado = mysqli_query($conn, $sql);
@@ -234,25 +189,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <td>" . $fila['Estado'] . "</td>
                                 <td>" . $fila['N_Habitación'] . "</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifiHabit(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Habitaciones'].");'>Eliminar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(".json_encode($fila).")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Habitaciones'].");'>Eliminar</span>
                                 </td>
                             </tr>";
                     }
-                    mysqli_close($conn);
                 ?>
                 </tbody>
             </table>
         </div>
     </div></div>    
     
-    <!-- ////////////////// Ventana MODA de Agregar ////////////////// -->
     <div id="ventagregar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
-            
-            <!-- Forma para agregar  -->
-            <form id="form-modificar"action="" method="post" name="agregar">
+            <form class="forma" id="form-agregar" action="" method="post">
+            <input type="hidden" name="agregar">
                 <select class="mi-select" name="Categoria">
                     <option value="">Seleccionar una opción</option>
                     <?php
@@ -274,21 +226,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <option value="Mantemiento">Mantemiento</option>
                     <option value="Inactivo">Inactivo</option>
                 </select>
-
-                <button class="btns btn-agregar" type="submit" name="agregar" >Agregar</button>
-            
+                <button class="btns btn-agregar" type="submit">Agregar</button>
             </form>
         </div>
     </div>
 
-    <!-- ////////////////// Ventana MODA DE Modificar ////////////////// -->
     <div id="ventmodifi" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
-            
-            <!-- Forma para modificar -->
-            <form id="form-modificar"action="" method="post" name="modificar">
-
+            <form class="forma" id="form-modificar"action="" method="post" name="modificar">
+                <input type="hidden" name="modificar">
                 <input id="ID_habit_modifi" type="hidden" name="ID_habit_modifi">
 
                 <select id="Cat_modifi" class="mi-select" name="Categoria">
@@ -313,20 +260,19 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <option value="Inactivo">Inactivo</option>
                 </select>
 
-                <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">Modificar</button>
-            
+                <button class="btns btn-modificar"  type="submit" class="forma btn-modificar">modificar</button>
             </form>
         </div>
     </div>
 
-    <!-- ////////////////// Ventana MODA DE Eliminar ////////////////// -->
     <div id="venteliminar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
-            <form id="form-agregar" action="" method="post" name="agregar">
-                <input id="ID_ServElim" type="hidden" name="ID_Serv">
+            <form class="forma" id="form-agregar" action="" method="post" name="agregar">
+                <input type="hidden" name="eliminar">
+                <input id="ID_HabElim" type="hidden" name="ID_Hab">
                 <p>Seguro que desea eliminar esta fila?</p>
-                <button type="submit" name="eliminar">eliminar</button>
+                <button type="submit">eliminar</button>
             </form>
         </div>
     </div>
