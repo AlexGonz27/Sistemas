@@ -65,6 +65,9 @@
                             <a class="nav-link" href="#Price">Ubicación</a>
                         </li>
                         <li class="nav-item mt-3 mt-lg-0">
+                            <a class="main-btn" href="./Inic/inic.php" >Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item mt-3 mt-lg-0">
                             <a class="main-btn" href="#">Reserva Ahora</a>
                         </li>
 
