@@ -120,14 +120,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Servicios</span>
                     </a>
                 </li>
-                <li id="Usuarios">
-                    <a href="../usuarios/usuarios.php">
-                        <span class="icon">
-                            <ion-icon name="person-circle-outline"></ion-icon>
-                        </span>
-                        <span class="title">Usuarios</span>
-                    </a>
-                </li>
                 <li id="Clientes">
                     <a href="./clientes.php">
                         <span class="icon">
@@ -136,20 +128,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Clientes</span>
                     </a>
                 </li>
+                <li id="Huespedes">
+                    <a href="./empleados.php">
+                        <span class="icon">
+                            <ion-icon name="body-outline"></ion-icon>
+                        </span>
+                        <span class="title">Empleados</span>
+                    </a>
+                </li>
                 <li id="Cargos">
                     <a href="../cargos/cargos.php">
                         <span class="icon">
                             <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Cargos</span>
-                    </a>
-                </li>
-                <li id="Huespedes">
-                    <a href="./huespedes.php">
-                        <span class="icon">
-                            <ion-icon name="body-outline"></ion-icon>
-                        </span>
-                        <span class="title">Huespedes</span>
                     </a>
                 </li>
                 <li id="Promociones">

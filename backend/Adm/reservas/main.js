@@ -139,8 +139,16 @@ function mostrarinfo(datos) {
   divTelefono.appendChild(inputTelefono);
   document.getElementById('clientes').appendChild(divTelefono);
 
+  var btnDisponibilidad = document.createElement("button");
+  btnDisponibilidad.className = "btn-buscar";
+  btnDisponibilidad.textContent = "Reservar";
+  btnDisponibilidad
+  document.getElementById('btns-buscar').appendChild(btnDisponibilidad);
+
   var btnCancelar = document.createElement("button");
   btnCancelar.className = "btn-cancelar";
   btnCancelar.textContent = "Cancelar";
-  document.getElementById('btns-buscar').appendChild(btnCancelar);;
+  document.getElementById('btns-buscar').appendChild(btnCancelar);
+
+
 }
