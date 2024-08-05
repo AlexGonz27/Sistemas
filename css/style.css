@@ -1,17 +1,4 @@
-/* TABLE OF CONTENTS */
-/* ------------------
-1. General
-2. Navbar
-3. Slider
-4. About
-5. Rooms
-6. Services
-8. Gallery
-9. Price
-10. Blog
-11. Footer
--------------------- */
-/* 1 General */
+
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -20,6 +7,7 @@
     margin: 0;
     padding: 0;
 }
+
 
 :root {
     /* Background Color */
@@ -152,7 +140,7 @@ p {
     height: .9375rem;
 }
 
-/*  2 navbar */
+
 .header_wrapper .navbar {
     padding: .9375rem 0;
     background-color: var(--bg-white);
@@ -212,7 +200,6 @@ p {
     }
 }
 
-/* 3. Slider */
 .banner_wrapper {
     height: 40.625rem;
 }
@@ -292,12 +279,11 @@ p {
 }
 
 
-/* 4. About */
 .about_wrapper {
     padding-top: 9.375rem;
 }
 
-/* 5. Rooms */
+
 .room_wrapper .room-items {
     position: relative;
     overflow: hidden;
@@ -357,7 +343,7 @@ p {
 }
 
 
-/* 8 Gallery */
+
 .gallery_wrapper .gallery-item {
     box-shadow: 0 0 .1875rem rgba(0, 0, 0, 0.3);
     overflow: hidden;
@@ -433,7 +419,6 @@ p {
     left: 0;
 }
 
-/* 9  Price */
 .Price_wrapper .card {
     box-shadow: 0.125rem .25rem rgb(34 30 31 / 40%);
     -webkit-transition: all 0.3s ease-in-out;
@@ -456,18 +441,7 @@ p {
     border-color: var(--primary-color);
 }
 
-/*10 Blog */
-.Blog_wrapper .blog-content {
-    margin: -5rem 0 0 4.375rem;
-    box-shadow: 0.125rem .25rem rgb(34 30 31 / 40%);
-}
 
-.our-partner-slider {
-    background-color: var(--bg-color);
-    padding: 3.125rem 0;
-}
-
-/* 11 Footer */
 .footer_wrapper {
     background-color: var(--bg-black);
 }
@@ -546,10 +520,6 @@ p {
 .footer_wrapper .copyright-section a{
     color: var(--secondary-color);
 }
-
-/*=============================================
-MAPA
-=============================================*/
 
 .mapa{
 	position:relative;
