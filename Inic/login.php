@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Consulta SQL para verificar el usuario
     $sql = "SELECT * FROM tbl_usuario WHERE Correo = '$usuario'";
     $resultado = mysqli_query($conn,$sql);
+    
 
     if ($resultado->num_rows > 0) {
         $fila = mysqli_fetch_assoc($resultado);
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($contrasenia == $fila['Contraseña']) {
             // Contraseña correcta, iniciar sesión
             $_SESSION['loggedin'] = true;
-            $_SESSION['user_id'] = $fila['ID_Usuario'];
+            $_SESSION['user_id'] = $fila['ID_Cliente'];
             $_SESSION['user_email'] = $fila['Correo'];
 
             $respuesta['estado'] = 'completado';

@@ -1,3 +1,22 @@
+<?php
+
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: ../../../");
+    exit;
+}else {
+    include './conexion.php';
+    $conn = conectarDB();
+
+    $sql = "SELECT * FROM tbl_cliente_persona WHERE ID_Cliente = '".$_SESSION['user_id']."'";
+    $resultado = mysqli_fetch_assoc(mysqli_query($conn,$sql));
+    echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                cargarInfo(".json_encode($resultado).");
+            });
+        </script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +79,7 @@
                             <a class="nav-link" href="#Price">Ubicación</a>
                         </li>
                         <li class="nav-item">
-                            <a id="name-user" class="nav-link" data-bs-toggle="modal" data-bs-target="#DatosUser">wilmer moreno</a>
+                            <a id="name-user" class="nav-link" data-bs-toggle="modal" data-bs-target="#DatosUser">usuario</a>
                         </li>
 
                     </ul>
@@ -81,12 +100,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div>
-                        <h2>Cédula</h2>
+                    <div id="datos_usuario">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary">Aceptar</button>
                 </div>
             </div>
         </div>
@@ -357,7 +375,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
     <!-- Custom Js Link -->
-    <script src="js/main.js"></script>
+    <script src="./main.js"></script>
 </body>
 
 </html>

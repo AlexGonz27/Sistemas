@@ -1,59 +1,25 @@
-const currentPage = document.title;
-elementoLi = document.getElementById(currentPage);
-
 document.addEventListener("DOMContentLoaded", () => {
-  if (elementoLi) {
-      elementoLi.classList.add("hovered");
-  }
-  
-  const btnsModifi = document.querySelectorAll(".btns.btn-modificar");
-  
-  btnsModifi.forEach((boton) => {
-    boton.addEventListener("click", function(){
-        document.getElementById('ventmodifi').style.display = 'block';
-    })
-  })
 });
-let lista = document.querySelectorAll(".navegacion li")
 
-function activeLink() {
-  lista.forEach((item) => {
-    item.classList.remove("hovered")
+function cargarInfo(datos){
+  console.log(datos);
+
+  document.getElementById('name-user').textContent = datos.Nombre_Razón_Social;
+  var modalDatos = document.getElementById('datos_usuario');
+  const etiquetas = {
+    Dirección: "Dirección: ",
+    Fecha_Nacimiento: "Fecha de Nacimiento: ",
+    Identificación: "Identificación: ",
+    Nacionalidad: "Nacionalidad: ",
+    Nombre_Razón_Social: "Nombre: ",
+    Teléfono: "Teléfono: "
+  };
+  const orden = ["Nombre_Razón_Social", "Identificación", "Nacionalidad", "Fecha_Nacimiento", "Dirección", "Teléfono"];
+  orden.forEach(key => {
+    if (datos[key]) {
+      var h = document.createElement("h5");
+      h.textContent = etiquetas[key] + datos[key];
+      document.getElementById('datos_usuario').appendChild(h);
+    }
   });
-}
-function desactiveLink() {
-  if (elementoLi) {
-    elementoLi.classList.add("hovered");
-  }
-}
-
-lista.forEach((item) => {
-  item.addEventListener("mouseover", activeLink)
-  item.addEventListener("mouseout", desactiveLink)
-});
-
-// Menu Toggle
-let toggle = document.querySelector(".toggle");
-let navigation = document.querySelector(".navegacion")
-let main = document.querySelector(".principal")
-
-toggle.onclick = function () {
-  navigation.classList.toggle("active")
-  main.classList.toggle("active")
-};
-
-const contenedorCartas = document.querySelector(".cartaCaja");
-const cartas = contenedorCartas.querySelectorAll(".carta");
-
-// Agrega un event listener a cada carta
-cartas.forEach((carta) => {
-    const cartaNombre = carta.querySelector(".cartaNombre").textContent;
-    carta.addEventListener("click", function() {
-        const url = "./" + cartaNombre + ".php";
-        window.location.href = url;
-    });
-});
-
-function cerrarEmergente(){
-  document.getElementById('ventmodifi').style.display = 'none';
 }
