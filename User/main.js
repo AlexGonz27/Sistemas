@@ -10,16 +10,21 @@ function cargarInfo(datos){
     Dirección: "Dirección: ",
     Fecha_Nacimiento: "Fecha de Nacimiento: ",
     Identificación: "Identificación: ",
-    Nacionalidad: "Nacionalidad: ",
     Nombre_Razón_Social: "Nombre: ",
     Teléfono: "Teléfono: "
   };
-  const orden = ["Nombre_Razón_Social", "Identificación", "Nacionalidad", "Fecha_Nacimiento", "Dirección", "Teléfono"];
+  const orden = ["Nombre_Razón_Social", "Identificación", "Fecha_Nacimiento", "Dirección", "Teléfono"];
   orden.forEach(key => {
     if (datos[key]) {
-      var h = document.createElement("h5");
-      h.textContent = etiquetas[key] + datos[key];
-      document.getElementById('datos_usuario').appendChild(h);
+      if(key == "Identificación"){
+        var h = document.createElement("h5");
+        h.textContent = etiquetas[key] + datos['Nacionalidad'] + "-" + datos[key];
+        document.getElementById('datos_usuario').appendChild(h);
+      } else{
+        var h = document.createElement("h5");
+        h.textContent = etiquetas[key] + datos[key];
+        document.getElementById('datos_usuario').appendChild(h);
+      }
     }
   });
 }

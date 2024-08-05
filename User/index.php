@@ -10,7 +10,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     $sql = "SELECT * FROM tbl_cliente_persona WHERE ID_Cliente = '".$_SESSION['user_id']."'";
     $resultado = mysqli_fetch_assoc(mysqli_query($conn,$sql));
-    echo "<script>
+    echo"<script>
             document.addEventListener('DOMContentLoaded', function() {
                 cargarInfo(".json_encode($resultado).");
             });
@@ -172,7 +172,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
 
                 <div class="col-lg mb-3 mb-lg-0">
-                    <button type="submit" class="main-btn rounded-2 px-lg-3"><a class="nav-link" href="./Inic/inic.php">Disponibilidad</a></button>
+                    <button type="submit" class="main-btn rounded-2 px-lg-3"><a class="nav-link" href="">Disponibilidad</a></button>
                 </div>
             </form>
         </div>
