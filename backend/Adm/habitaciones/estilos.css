@@ -519,6 +519,33 @@ div.dataTables_wrapper .dataTables_filter {
   right: 0;
   font-size: 1.2rem;
 }
+
+.file-input-container {
+  padding: 10px;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.btn-subir {
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.btn-subir:hover {
+  background-color: #45a049;
+}
 /* ====================== Responsive Design ========================== */
 @media (max-width: 991px) {
   .navegacion {
