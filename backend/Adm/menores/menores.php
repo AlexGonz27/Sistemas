@@ -13,58 +13,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios</title>
+    <title>Menores</title>
     <link rel="stylesheet" href="./estilos.css">
+    <!-- Alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <?php
-        include '../conexion.php';
-        $conn = conectarDB(); 
-        
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if (isset($_POST['agregar'])) {
-                $ID_Cliente = $_POST['Clientes'];
-                $Nivel = $_POST['Nivel'];
-                $Correo = $_POST['Correo'];
-                $Contreseña = $_POST['Contraseña'];
-
-                $sql = "INSERT INTO tbl_usuario (ID_Cliente,Nivel,Correo,Contraseña) VALUES ('$ID_Cliente','$Nivel','$Correo','$Contreseña')";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila insertada correctamente.');</script>";
-                } else {
-                    echo "Error al insertar fila: " . mysqli_error($conn);
-                }
-            }
-            if (isset($_POST['modificar'])){
-                $ID_usuario = $_POST['ID_usuario'];
-                $Nivel = $_POST['text-nivel'];
-                $Correo = $_POST['text-correo'];
-                $Contreseña = $_POST['text-contraseña'];
-
-                $sql = "UPDATE tbl_usuario SET Nivel='$Nivel', Correo='$Correo', Contraseña='$Contraseña' WHERE ID_Usuario = '$ID'";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila modificada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
-                }
-            }
-            if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Cat'];
-
-                $sql = "DELETE FROM tbl_categorias WHERE ID_Categoria = '$ID'";
-                
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('Fila eliminada correctamente.');</script>";
-                } else {
-                    echo "Error al modificar fila: " . mysqli_error($conn);
-                }
-            }
-        }
-        mysqli_close($conn);
-    ?>
     <!-- =============== navegacion ================ -->
     <div class="contenedor-nav">
         <div class="navegacion">
@@ -176,7 +131,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </ul>
         </div>
         <!-- ========================= principal ==================== -->
-        
         <div class="principal">
             <div class="barratop">
                 <div class="toggle">
@@ -196,18 +150,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
         <div> 
     </div>
-
-    <!-- ////////////////// DataTable //////////////////-->
     <div class="dt-serv">
         <div class="serviciosTable">
             <div class="cartaHeader">
-                <h2>Usuarios</h2>
+                <h2>Mascotas</h2>
             </div>
             <div class="conte-btns">
                 <div>
                     <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                 </div>
                 <div>
+                    <button id="consulta-btn" onclick="tareaCompletada()" style="display: none;">Hacer Consulta</button>
                     <input id="buscador_tabla" type="text" placeholder="Buscar">
                 </div>
             </div>
@@ -215,120 +168,66 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <table id="Tabla_Datos">
                 <thead>
                     <tr>
-                        <td>Cliente</td>
-                        <td>Nivel</td>
-                        <td>Correo</td>
-                        <td>Contraseña</td>
+                        <td>Nombre_Apellido</td>
+                        <td>Fecha_Nacimiento</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
+                    include '../conexion.php';
                     $conn = conectarDB();
-                    $sql = "SELECT * FROM tbl_usuario;";
+                    $sql = "SELECT * FROM tbl_menores;";
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                        $idClt = $fila['ID_Cliente'];
-                        $sqlClt = "SELECT Nombre_Razón_Social FROM tbl_cliente_persona WHERE ID_Cliente = '$idClt'";
-                        $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlClt));
-                        echo "<tr>  
-                                <td>" . $result['Nombre_Razón_Social'] . "</td>
-                                <td>" . $fila['Nivel'] . "</td>
-                                <td>" . $fila['Correo'] . "</td>
-                                <td>" . $fila['Contraseña'] . "</td>
+                        echo "<tr>
+                                <td>" . $fila['Nombre_Apellido'] . "</td>
+                                <td>" . $fila['Fecha_Nacimiento'] . "</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifi(".json_encode($fila).",". json_encode($result['Nombre_Razón_Social']) .")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(".$fila['ID_Usuario'].");'>Eliminar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(".json_encode($fila).")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Menores'].");'>Eliminar</span>
                                 </td>
                             </tr>";
                     }
-                    mysqli_close($conn);
                 ?>
                 </tbody>
             </table>
         </div>
     </div></div>    
     
-    <!-- ////////////////// Ventana MODA de Agregar ////////////////// -->
     <div id="ventagregar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
-            
-            <!-- Forma para agregar  -->
-            <form id="form-modificar"action="" method="post" name="agregar">
-
-                <select class="mi-select" name="Clientes">
-                    <option value="">Seleccionar una opción</option>
-                    <?php
-                        $conn = conectarDB();
-                        $sql = "SELECT * FROM tbl_cliente_persona;";
-                        $resultado = mysqli_query($conn, $sql); 
-
-                        while ($fila = mysqli_fetch_assoc($resultado)) {
-                            $id = $fila['ID_Cliente'];
-                            $sqlUser = "SELECT * FROM tbl_usuario WHERE ID_Cliente = '$id';";
-                            $result = mysqli_query($conn, $sqlUser); 
-                            if (mysqli_num_rows($result) < 1) echo '<option value="' . $fila['ID_Cliente'] . '">' . $fila['Nombre_Razón_Social'] . '</option>';
-                        }
-                        mysqli_close($conn);
-                    ?>
-                </select>
-                
-                <select class="mi-select" name="Nivel">
-                    <option value="">Seleccionar una opción</option>
-                    <option value="1">Administrador</option>
-                    <option value="2">Operador</option>
-                    <option value="3">Usuario</option>
-                </select>
-
-                <input name="Correo" type="text" placeholder="Correo">
-
-                <input name="Contraseña" type="text" placeholder="Contraseña">
-
-                <button class="btns btn-agregar" type="submit" name="agregar" >Agregar</button>
-            
+            <form class="forma" id="form-agregar" action="" method="post">
+                <input type="hidden" name="agregar">
+                <input id="text-nombre" name="nombre" type="text" placeholder="Nombre y apellido">
+                <input id="text_Fn" name="fn" type="date" placeholder="Fecha de nacimiento">
+                <button class="btns btn-agregar" type="submit">Agregar</button>
             </form>
         </div>
     </div>
-
-    <!-- ////////////////// Ventana MODA DE Modificar ////////////////// -->
 
     <div id="ventmodifi" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
-            
-            <!-- Forma para modificar -->
-            <form id="form-modificar"action="" method="post" name="modificar">
-
-                <input id="ID_usuario" type="hidden" name="ID_usuario">
-                
-                <h2></h2>
-                
-                <select id="text_nivel" class="mi-select" name="text_nivel">
-                    <option value="">Seleccionar una opción</option>
-                    <option value="1">Administrador</option>
-                    <option value="2">Operador</option>
-                    <option value="3">Usuario</option>
-                </select>
-
-                <input id="text_correo" name="text_correo" type="text" placeholder="Correo">
-
-                <input id="text_contraseña" name="text_contraseña" type="text" placeholder="Contraseña">
-
-                <button class="btns btn-modificar"  type="submit" name="modificar" class="forma btn-modificar">Modificar</button>
-            
+            <form class="forma" id="form-modificar"action="" method="post" name="modificar">
+                <input type="hidden" name="modificar">
+                <input id="ID_Men" type="hidden" name="ID_Men">
+                <input id="text-nombre" name="nombre" type="text" placeholder="Nombre y apellido">
+                <input id="text_Fn" name="fn" type="date" placeholder="Fecha de nacimiento">
+                <button class="btns btn-modificar"  type="submit" class="forma btn-modificar">modificar</button>
             </form>
         </div>
     </div>
 
-    <!-- ////////////////// Ventana MODA DE Eliminar ////////////////// -->
     <div id="venteliminar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
-            <form id="form-agregar" action="" method="post" name="agregar">
-                <input id="ID_ServElim" type="hidden" name="ID_Serv">
+            <form class="forma" id="form-agregar" action="" method="post" name="agregar">
+                <input type="hidden" name="eliminar">
+                <input id="ID_MenElim" type="hidden" name="ID_Men">
                 <p>Seguro que desea eliminar esta fila?</p>
-                <button type="submit" name="eliminar">eliminar</button>
+                <button type="submit">eliminar</button>
             </form>
         </div>
     </div>
