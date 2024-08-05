@@ -8,15 +8,12 @@
     <title>Conjunto Vacacional La Fuente</title>
 
     <!-- FAVICON -->
-    <link  rel="icon" type="image/png" href="images/Favicon_Cabaña.png">
+    <link rel="icon" type="image/png" href="images/Favicon_Cabaña.png">
 
     <!-- Bootstrap 5 CDN Links-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -28,7 +25,7 @@
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
 
-    <!-- navbar section -->
+    <!-- secion navbar  -->
     <header class="header_wrapper">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
@@ -38,11 +35,10 @@
                         <span class="navbar-brand me-auto">Cabañas La Fuente</span>
                     </a>
                 </div>
-                
-                
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <!-- <span class="navbar-toggler-icon"></span> -->
                     <i class="fas fa-stream navbar-toggler "></i>
                 </button>
@@ -65,20 +61,16 @@
                             <a class="nav-link" href="#Price">Ubicación</a>
                         </li>
                         <li class="nav-item mt-3 mt-lg-0">
-                            <a class="main-btn" href="./Inic/inic.php" >Iniciar Sesión</a>
+                            <a class="main-btn" href="./Inic/inic.php">Iniciar Sesión</a>
                         </li>
-                        <li class="nav-item mt-3 mt-lg-0">
-                            <a class="main-btn" href="#">Reserva Ahora</a>
-                        </li>
-
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <!-- navbar section exit -->
+    <!--fin seccion navbar  -->
 
-    <!-- banner section -->
+    <!-- seccion Conocenos -->
     <section id="Home" class="banner_wrapper p-0">
         <div class="swiper myswiper">
             <div class="swiper-wrapper">
@@ -110,24 +102,16 @@
                     <input type="date" class="form-control" placeholder="Date">
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
-                    <select class="form-select">
-                        <option selected>Adultos</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <div class="input-group">
+                        <span class="input-group-text" id="adulto-input">Adultos</span>
+                        <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="adulto-input" min="0">
+                    </div>
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
-                    <select class="form-select">
-                        <option selected>Niños</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <div class="input-group">
+                        <span class="input-group-text" id="menores-input">Niños</span>
+                        <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="menores-input" min="0">
+                    </div>
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
                     <select class="form-select">
@@ -136,7 +120,7 @@
                     </select>
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
-                    <button type="submit" class="main-btn rounded-2 px-lg-3">Disponibilidad</button>
+                    <button type="submit" class="main-btn rounded-2 px-lg-3"><a class="nav-link" href="./Inic/inic.php">Disponibilidad</a></button>
                 </div>
             </form>
         </div>
@@ -151,7 +135,7 @@
                     <h3>Bienvenido a el <span>Conjunto Vacacional <br class="d-none d-lg-block">
                             La Fuente</span> donde la pasaras excelente.</h3>
                     <p> En Conjunto Vacacional La Fuente, te ofrecemos una variedad de cabañas para que disfrutes de una escapada inolvidable. Sumérgete en la relajación y el sol en nuestras cabañas con piscina. Disfruta de un día de poolday junto a la piscina, rodeado de naturaleza y tranquilidad. ¿Buscas un refugio romántico? Nuestras cabañas matrimoniales son perfectas para parejas. Con detalles acogedores, jacuzzi y vistas panorámicas, te brindarán momentos inolvidables.Si vienes en familia, nuestras cabañas familiares son ideales. Espacios amplios, cocina equipada y comodidades para todos. ¡Un fin de semana en familia que no olvidarás!</p>
-                        
+
                     <p>Así que, ya sea en pareja o con tus seres queridos, te esperamos para que vivas momentos especiales en nuestras cabañas. ¡Bienvenidos a la Fuente!</p>
                     <a href="#" class="main-btn mt-4">Explorar</a>
                 </div>
@@ -180,7 +164,7 @@
                                 <h5 class="text-white mb-lg-5 text-decoration-underline">Cabañas Matrimoniales</h5>
                                 <p class="text-white">Nuestras cabañas matrimoniales son mucho más que un lugar para quedarse. Son un regalo para los sentidos, un espacio donde el amor florece y los recuerdos se tejen.</p>
                                 <p class="text-white fw-bold mt-lg-4">$10 / Por Noche</p>
-                                <a class="main-btn border-white text-white mt-lg-5" href="#">Reserva Ahora</a>
+                                <a class="main-btn border-white text-white mt-lg-5" href="./Inic/inic.php">Reserva Ahora</a>
                             </div>
                         </div>
                     </div>
@@ -193,7 +177,7 @@
                                 <h5 class="text-white mb-lg-5 text-decoration-underline">Cabañas familares</h5>
                                 <p class="text-white">Nuestra cabañas Familiares para 4 personas con cocina es un espacio versátil y acogedor, diseñado para crear recuerdos inolvidables. ¡Ven y comparte momentos especiales con tus seres queridos.</p>
                                 <p class="text-white fw-bold mt-lg-4">$20 / Por Noche</p>
-                                <a class="main-btn border-white text-white mt-lg-5" href="#">Reserva Ahora</a>
+                                <a class="main-btn border-white text-white mt-lg-5" href="./Inic/inic.php">Reserva Ahora</a>
                             </div>
                         </div>
                     </div>
@@ -206,7 +190,7 @@
                                 <h5 class="text-white mb-lg-5 text-decoration-underline">Cabañas familares</h5>
                                 <p class="text-white">la Cabaña Familiar para 6 Personas con Cocina es un espacio donde la comodidad, la convivencia y la naturaleza se combinan para ofrecerte una experiencia única. ¡Te esperamos para que compartas momentos inolvidables con tus seres queridos!</p>
                                 <p class="text-white fw-bold mt-lg-4">$30 / Por Noche</p>
-                                <a class="main-btn border-white text-white mt-lg-5" href="#">Reserva Ahora</a>
+                                <a class="main-btn border-white text-white mt-lg-5" href="./Inic/inic.php">Reserva Ahora</a>
                             </div>
                         </div>
                     </div>
@@ -278,7 +262,7 @@
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1164.0955215478027!2d-63.861293791820394!3d11.073447196436595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c3191299b824a11%3A0xd1aae6083270ac8!2sConjunto%20Vacacional%20La%20Fuente!5e0!3m2!1ses!2sve!4v1722833472645!5m2!1ses!2sve" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
             </div>
-            </div>
+        </div>
         </div>
     </section>
     <!-- Fin Ubciacion-->
@@ -299,26 +283,26 @@
                         </ul>
                     </div>
                 </div>
-                    
-                    <div class="col-lg-3 col-md-6">
-                            
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5>Mantente conectado</h5>
-                        <ul class="social-network d-flex align-items-center p-0">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="https://www.instagram.com/p/Cb8ThH3J7qJ/"><i class="fab fa-instagram"></i></a></li>
-                        </ul>
-                    </div>
-                    
+
+                <div class="col-lg-3 col-md-6">
+
                 </div>
+                <div class="col-lg-3 col-md-6">
+
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5>Mantente conectado</h5>
+                    <ul class="social-network d-flex align-items-center p-0">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.instagram.com/p/Cb8ThH3J7qJ/"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+
             </div>
         </div>
-        
+        </div>
+
         <div class="container-fluid copyright-section">
             <p>Copyright <a href="#">© CRUPO NARANJA.</a> Derechos de Autor.</p>
         </div>
@@ -326,12 +310,8 @@
     <!-- footer section Exit-->
 
     <!--Bootstrap 5 JS CDN Links -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-        integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
-        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
