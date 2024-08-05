@@ -127,6 +127,25 @@ Pseudo-elementos solo para los elementos principales */
   pointer-events: none;
 }
 
+/* ===================== contenedor random ===================== */
+
+.cont_cliente {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+.cont_cliente .cont_clt {
+  position: relative;
+  background: var(--white);
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+td{
+
+}
 /* ===================== principal ===================== */
 .principal {
   position: absolute;
@@ -380,12 +399,6 @@ Pseudo-elementos solo para los elementos principales */
   border-radius: 6px;
 }
 
-td {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-}
 .ocultar{
   white-space: nowrap;
   overflow: hidden;

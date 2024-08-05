@@ -32,6 +32,9 @@ mysqli_close($conn);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="./estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src='https://fullcalendar.io/releases/fullcalendar/3.10.2/locale/es.js'></script>
+    <script src='../dist/index.global.js'></script>
 </head>
 
 <body>
@@ -153,18 +156,12 @@ mysqli_close($conn);
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
 
-                <div class="buscar">
-                    <label>
-                        <input type="text" placeholder="Buscar">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
-
                 <div class="user">
                     <img src="assets/imgs/customer01.jpg" alt="">
                 </div>
             </div>
 
+            <!-- ======================= cartas ================== -->
             <!-- ======================= cartas ================== -->
             <div class="cartaCaja">
                 <div class="carta">
@@ -312,86 +309,24 @@ mysqli_close($conn);
             </div>
 
             <!-- ================ Busqueda Cliente ================= -->
-            <!-- ================ Order Details List ================= -->
-            <div class="details">
-                <div class="recentOrders">
-                    <div class="cartaHeader">
-                        <h2>Reservas recientes</h2>
-                        <a href="#" class="btn">Ver Todas</a>
+             
+            <!-- ////////////////// Busqueda Cliente //////////////////-->
+
+            <div class="cont_cliente">
+               <div class="cont_clt">
+                    <div class="recentOrders">
+                        <div id='calendar'> 
                     </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Nomre </td>
-                                <td>Precio</td>
-                                <td>Pago</td>
-                                <td>Fecha</td>
-                                <td>Estado</td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status listo">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status listo">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status listo">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status listo">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status listo">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status listo">Listo</span></td>
-                            </tr>
-                            <tr>
-                                <td>Fulano de tal</td>
-                                <td>$120</td>
-                                <td>Pagado</td>
-                                <td>01/01/2024</td>
-                                <td><span class="status listo">Listo</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="recentOrders">
-
-                </div>
+               </div>
             </div>
         </div>
     </div>
     <!-- =========== Scripts =========  -->
     <script src="main.js"></script>
+    
+    <!-- =========== Scripts =========  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
