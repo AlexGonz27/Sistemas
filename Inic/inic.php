@@ -12,7 +12,7 @@
     <div class="container">
         <div class="container-form">
             <form method="post" action="login.php" class="sign-in">
-                 <h2>Iniciar Sesion</h2>
+                 <h2>Iniciar Sesión</h2>
                  <div class="social-networks">
                     <ion-icon name="call-outline"></ion-icon>
                  </div>
@@ -25,7 +25,6 @@
                     <ion-icon name="lock-closed-outline"></ion-icon>
                     <input name="contra" type="password" placeholder="Contraseña"> 
                  </div>
-                 <a href="#">Olvidaste tu contrasena</a>
                  <button class="button" style="background-color: #ff8000;">INICIAR SESION</button>
              </form>
         </div>
