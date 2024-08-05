@@ -82,7 +82,7 @@
     <section id="Home" class="banner_wrapper p-0">
         <div class="swiper myswiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" style="background-image: url(/images/slider/slider2.jpg);">
+                <div class="swiper-slide" style="background-image: url(./images/slider/slider2.jpg);">
                     <div class="slide-caption text-center">
                         <div>
                             <h1>Bienvenido al Conjunto Vacacional La Fuente</h1>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide" style="background-image: url(/images/slider/slider1.webp);">
+                <div class="swiper-slide" style="background-image: url(./images/slider/slider1.webp);">
                     <div class="slide-caption text-center">
                         <div>
                             <h1>Bienvenido al Conjunto Vacacional La Fuente</h1>
