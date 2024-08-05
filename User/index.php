@@ -139,19 +139,20 @@
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
                     <span class="input-group-text" id="Mascotas-input">Mascotas</span>
-                    <div class="form-check" style="margin-top: 10px;">
+                    <div class="form-check-inline" style="margin-top: 10px;">
                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioMascotaSi" style="background-color: #009970;">
                         <label class="form-check-label" for="flexRadioMascotaSi">
                             Si.
                         </label>
                     </div>
-                    <div class="form-check" style="margin-top: 10px;">
+                    <div class="form-check-inline" style="margin-top: 10px;">
                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioMascotaNO" checked style="background-color: #009970;">
                         <label class="form-check-label" for="flexRadioMascotaNO">
                             No.
                         </label>
                     </div>
                 </div>
+
                 <div class="col-lg mb-3 mb-lg-0">
                     <button type="submit" class="main-btn rounded-2 px-lg-3"><a class="nav-link" href="./Inic/inic.php">Disponibilidad</a></button>
                 </div>
