@@ -22,7 +22,7 @@
                     <ion-icon name="lock-closed-outline"></ion-icon>
                     <input name="contra" type="password" placeholder="Contraseña"> 
                  </div>
-                 <button type="submit" class="button" style="background-color: #ff8000;">INICIAR SESION</button>
+                 <button type="submit" class="button" style="background-color: #009970;">INICIAR SESION</button>
              </form>
         </div>
 
@@ -62,7 +62,7 @@
                     <ion-icon name="lock-closed-outline"></ion-icon>
                     <input type="password" placeholder="Contrasena" name="Contra"> 
                  </div>
-                 <button class="button" style="background-color: #007fff;">Guardar Registro</button>
+                 <button class="button" style="background-color: #F6AD34;">Guardar Registro</button>
             </form>
          </div>
 
