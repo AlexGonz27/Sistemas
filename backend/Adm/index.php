@@ -111,6 +111,22 @@ mysqli_close($conn);
                         <span class="title">Huespedes</span>
                     </a>
                 </li>
+                <li id="Mascotas">
+                    <a href="./mascotas/mascotas.php">
+                        <span class="icon">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Mascotas</span>
+                    </a>
+                </li>
+                <li id="Menores">
+                    <a href="./menores/menores.php">
+                        <span class="icon">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Menores</span>
+                    </a>
+                </li>
                 <li id="Promociones">
                     <a href="./promociones/promociones.php">
                         <span class="icon">
@@ -230,6 +246,34 @@ mysqli_close($conn);
                     <div>
                         <div class="numeros">
                             <?php
+                                echo $tabla_conts['tbl_mascotas'];
+                            ?>
+                            </div>
+                        <div class="cartaNombre">Mascotas</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="carta">
+                    <div>
+                        <div class="numeros">
+                            <?php
+                                echo $tabla_conts['tbl_menores'];
+                            ?>
+                            </div>
+                        <div class="cartaNombre">Menores</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="carta">
+                    <div>
+                        <div class="numeros">
+                            <?php
                                 echo $tabla_conts['tbl_cliente_persona'];
                             ?>
                             </div>
@@ -240,7 +284,6 @@ mysqli_close($conn);
                         <ion-icon name="person-circle-outline"></ion-icon>
                     </div>
                 </div>
-
                 <div class="carta">
                     <div>
                         <div class="numeros">0</div>

@@ -113,11 +113,19 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </a>
                 </li>
                 <li id="Servicios">
-                    <a href="../servicios/servicios.php">
+                    <a href="./servicios/servicios.php">
                         <span class="icon">
                             <ion-icon name="hand-right-outline"></ion-icon>
                         </span>
                         <span class="title">Servicios</span>
+                    </a>
+                </li>
+                <li id="Usuarios">
+                    <a href="../usuarios/usuarios.php">
+                        <span class="icon">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Usuarios</span>
                     </a>
                 </li>
                 <li id="Clientes">
@@ -129,19 +137,27 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </a>
                 </li>
                 <li id="Huespedes">
-                    <a href="./empleados.php">
+                    <a href="../huespedes.php">
                         <span class="icon">
                             <ion-icon name="body-outline"></ion-icon>
                         </span>
-                        <span class="title">Empleados</span>
+                        <span class="title">Huespedes</span>
                     </a>
                 </li>
-                <li id="Cargos">
-                    <a href="../cargos/cargos.php">
+                <li id="Mascotas">
+                    <a href="../mascotas/mascotas.php">
                         <span class="icon">
                             <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
-                        <span class="title">Cargos</span>
+                        <span class="title">Mascotas</span>
+                    </a>
+                </li>
+                <li id="Menores">
+                    <a href="../menores/menores.php">
+                        <span class="icon">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Menores</span>
                     </a>
                 </li>
                 <li id="Promociones">
@@ -153,7 +169,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </a>
                 </li>
                 <li>
-                    <a href="../../../Inic/loggout.php">
+                    <a href="../../Inic/loggout.php">
                         <span class="icon">
                             <ion-icon name="enter-outline"></ion-icon>
                         </span>

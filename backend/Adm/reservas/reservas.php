@@ -160,6 +160,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Empleados</span>
                     </a>
                 </li>
+                <li id="Mascotas">
+                    <a href="../mascotas/mascotas.php">
+                        <span class="icon">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Mascotas</span>
+                    </a>
+                </li>
+                <li id="Menores">
+                    <a href="../menores/menores.php">
+                        <span class="icon">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Menores</span>
+                    </a>
+                </li>
                 <li id="Cargos">
                     <a href="../cargos/cargos.php">
                         <span class="icon">
