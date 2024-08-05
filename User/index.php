@@ -166,7 +166,7 @@
                     <a href="#" class="main-btn mt-4">Explorar</a>
                 </div>
                 <div class="col-lg-6 mb-4 mb-lg-0 ps-lg-4 text-center">
-                    <img src="images/Bienvenido a las Cabañas de la Fuente-Photoroom.png" class="img-fluid" alt="about">
+                    <img src="./images/Bienvenido a las Cabañas de la Fuente-Photoroom.png" class="img-fluid" alt="about">
                 </div>
             </div>
         </div>
