@@ -48,6 +48,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Reservas</span>
                     </a>
                 </li>
+                <li id="Pagos">
+                    <a href="../pagos/pagos.php">
+                        <span class="icon">
+                            <ion-icon name="id-card-outline"></ion-icon>
+                        </span>
+                        <span class="title">Pagos</span>
+                    </a>
+                </li>
                 <li id="Categorias">
                     <a href="../categorias/categorias.php">
                         <span class="icon">
@@ -153,7 +161,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div class="dt-serv">
         <div class="serviciosTable">
             <div class="cartaHeader">
-                <h2>Servicios</h2>
+                <h2>Usuarios</h2>
             </div>
             <div class="conte-btns">
                 <div>

@@ -66,6 +66,14 @@ mysqli_close($conn);
                         <span class="title">Reservas</span>
                     </a>
                 </li>
+                <li id="Pagos">
+                    <a href="./pagos/pagos.php">
+                        <span class="icon">
+                            <ion-icon name="id-card-outline"></ion-icon>
+                        </span>
+                        <span class="title">Pagos</span>
+                    </a>
+                </li>
                 <li id="Categorias">
                     <a href="./categorias/categorias.php">
                         <span class="icon">

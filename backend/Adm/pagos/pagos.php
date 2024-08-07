@@ -13,7 +13,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promociones</title>
+    <title>Pagos</title>
     <link rel="stylesheet" href="./estilos.css">
     <!-- Alertas -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -161,7 +161,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div class="dt-serv">
         <div class="serviciosTable">
             <div class="cartaHeader">
-                <h2>Promociones</h2>
+                <h2>Pagos</h2>
             </div>
             <div class="conte-btns">
                 <div>
@@ -176,9 +176,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <table id="Tabla_Datos">
                 <thead>
                     <tr>
-                        <td>Tipo</td>
-                        <td>Descripción</td>
-                        <td>Descuento</td>
+                        <td>Reserva</td>
+                        <td>Cliente</td>
+                        <td>Monto</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
@@ -186,16 +186,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <?php
                     include '../conexion.php';
                     $conn = conectarDB();
-                    $sql = "SELECT * FROM tbl_promociones;";
+                    $sql = "SELECT * FROM tbl_pagos;";
                     $resultado = mysqli_query($conn, $sql);
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                        echo "<tr>
-                                <td>" . $fila['Nombre'] . "</td>
-                                <td>" . $fila['Descripción'] . "</td>
-                                <td>" . $fila['Descuento'] . "%</td>
+                        $idClt = $fila['ID_Cliente'];
+                        $sqlClt = "SELECT Nombre_Razón_Social FROM tbl_cliente_persona WHERE ID_Cliente = '$idClt'";
+                        $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlClt));
+                        $idres = $fila['ID_Reserva'];
+                        $sqlRes = "SELECT Codigo_Reserva FROM tbl_reservacion WHERE ID_Reservación = '$idres'";
+                        $result2 = mysqli_fetch_assoc(mysqli_query($conn, $sqlRes));
+                        echo "<tr> 
+                                <td>" . $result2['Codigo_Reserva'] . "</td>
+                                <td>" . $result['Nombre_Razón_Social'] . "</td>  
+                                <td>" . $fila['Monto'] . "</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Promociones'].");'>Eliminar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(".json_encode($fila).",". json_encode($result['Nombre_Razón_Social']) . ",".json_encode($result2['Codigo_Reserva']).")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Pago'].");'>Eliminar</span>
                                 </td>
                             </tr>";
                     }
@@ -210,9 +216,36 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
             <form class="forma" id="form-agregar" action="" method="post">
                 <input type="hidden" name="agregar">
-                <input id="text-nombre" name="nombre" type="text" placeholder="Tipo">
-                <input id="text-descrip" name="descrip" type="text" placeholder="Descripcion">
-                <input id="text-descuento" name="descuento" type="text" placeholder="Descuento">
+                <select class="mi-select" name="Clientes">
+                    <option value="">Seleccionar una opción</option>
+                    <?php
+                        $conn = conectarDB();
+                        $sql = "SELECT * FROM tbl_cliente_persona;";
+                        $resultado = mysqli_query($conn, $sql); 
+
+                        while ($fila = mysqli_fetch_assoc($resultado)) {
+                            echo '<option value="' . $fila['ID_Cliente'] . '">' . $fila['Nombre_Razón_Social'] . '</option>';
+                        }
+                        mysqli_close($conn);
+                    ?>
+                </select>
+                <select class="mi-select" name="Reservas">
+                    <option value="">Seleccionar una opción</option>
+                    <?php
+                        $conn = conectarDB();
+                        $sql = "SELECT * FROM tbl_reservacion;";
+                        $resultado = mysqli_query($conn, $sql); 
+                        while ($fila = mysqli_fetch_assoc($resultado)) {
+                            echo '<option value="' . $fila['ID_Reservación'] . '">' . $fila['Codigo_Reserva'] . '</option>';
+                        }
+                        
+                        mysqli_close($conn);
+                    ?>
+                </select>
+                
+
+                <input id ="text-monto" name="Monto" type="text" placeholder="Monto">
+
                 <button class="btns btn-agregar" type="submit">Agregar</button>
             </form>
         </div>
@@ -223,10 +256,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
             <form class="forma" id="form-modificar"action="" method="post" name="modificar">
                 <input type="hidden" name="modificar">
-                <input id="ID_Promo" type="hidden" name="ID_Promo">
-                <input id="text-nombre" name="nombre" type="text" placeholder="Tipo">
-                <input id="text-descrip" name="descrip" type="text" placeholder="Descripcion">
-                <input id="text-descuento" name="descuento" type="text" placeholder="Descuento">
+                <input id="ID_Pago" type="hidden" name="ID_Pago">
+                
+                <h2 id="Cliente"></h2>
+                <h2 id="Reserva"></h2>
+                
+                <input id ="text-monto" name="Monto" type="text" placeholder="Monto">
                 <button class="btns btn-modificar"  type="submit" class="forma btn-modificar">modificar</button>
             </form>
         </div>
@@ -237,7 +272,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
             <form class="forma" id="form-agregar" action="" method="post" name="agregar">
                 <input type="hidden" name="eliminar">
-                <input id="ID_elimPromo" type="hidden" name="ID_Promo">
+                <input id="ID_PagoElim" type="hidden" name="ID_Pago">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit">eliminar</button>
             </form>
