@@ -154,7 +154,7 @@
         </div>
     </section>
     <!-- Fin de Seccion de Informacion-->
-    
+
     <!-- Seccion de Habitaciones -->
     <section id="Rooms" class="room_wrapper">
         <div class="container-fluid">
@@ -165,7 +165,8 @@
             </div>
             <div class="row m-0">
                 <?php
-
+                    include './User/conexion.php';
+                    
                     $conn = conectarDB();
 
                     $sql = "SELECT * FROM tbl_habitaciones_categoria";
