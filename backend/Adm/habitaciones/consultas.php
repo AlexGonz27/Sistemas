@@ -34,6 +34,7 @@
                         $uploadOk = 0;
                     }
                 
+                    $descripcion = $_POST['Descripcion'];
                     $categoria = $_POST['Categoria'];
                     $N_Habitacion = $_POST['NumHabitaciones'];
                     $estado = $_POST['Estado'];
@@ -51,7 +52,7 @@
                                 if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $target_file)) {
                                     $target_dir = "/images/Habitaciones/";
                                     $target_file = $target_dir . basename($_FILES["imagen"]["name"]);
-                                    $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria, imagen, N_Habitación, Estado) VALUES ('$categoria', '$target_file', '$N_Habitacion', '$estado')";
+                                    $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria, Descripción, imagen, N_Habitación, Estado) VALUES ('$categoria','$descripcion', '$target_file', '$N_Habitacion', '$estado')";
                                     if (mysqli_query($conn, $sql)) {
                                         $respuesta['estado'] = 'completado';
                                     } else {
@@ -101,12 +102,21 @@
             }
             if (isset($_POST['eliminar'])){
                 $ID = $_POST['ID_Hab'];
-    
-                $sql = "DELETE FROM tbl_habitaciones_categoria WHERE ID_Habitaciones = '$ID'";
-                    
-                if (mysqli_query($conn, $sql)) {
-                    $respuesta['estado'] = 'completado';
-                } 
+                $Image = $_POST['imagen'];
+
+                $ruta = "../../.." . $Image;
+                
+                // Eliminar el archivo del servidor
+                if (file_exists($ruta)) {
+                    unlink($ruta);
+                    $sql = "DELETE FROM tbl_habitaciones_categoria WHERE ID_Habitaciones = '$ID'";
+                        
+                    if (mysqli_query($conn, $sql)) {
+                        $respuesta['estado'] = 'completado';
+                    } 
+                }else{
+                    $respuesta['mensaje'] = 'No se encontró la imagen!';
+                }
             } 
             echo json_encode($respuesta);
         }

@@ -154,7 +154,47 @@
         </div>
     </section>
     <!-- Fin de Seccion de Informacion-->
+    
+    <section class="slider-container">
+      <div class="slider-wrapper">
+        <div class="slider">
+                <?php
+                    include './User/conexion.php';
 
+                    $conn = conectarDB();
+
+                    $sql = "SELECT * FROM tbl_habitaciones_categoria";
+                    $result = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($fila = mysqli_fetch_assoc($result)) {     
+                            $sql = "SELECT * FROM tbl_categorias WHERE ID_Categoria = '" . $fila['ID_Categoria'] . "'";
+                            $categoria = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+                            echo"<img src='." . $fila['imagen'] . "' class='img-fluid image' alt='room' id='". $categoria['Nombre'] ."'>";
+                        }
+                    }
+          
+                    mysqli_close($conn);
+                ?>
+        </div>
+        <div class="slider-nav">
+          <?php
+            $conn = conectarDB();
+
+            $sql = "SELECT * FROM tbl_habitaciones_categoria";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                while ($fila = mysqli_fetch_assoc($result)) {     
+                    $sql = "SELECT * FROM tbl_categorias WHERE ID_Categoria = '" . $fila['ID_Categoria'] . "'";
+                    $categoria = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+                    echo"<a href='#".$categoria['Nombre']."' class='slider-button'></a> ";
+                }
+            }
+          
+          mysqli_close($conn);
+          ?>
+        </div>
+      </div>
+    </section>
     <!-- Seccion de Habitaciones -->
     <section id="Rooms" class="room_wrapper">
         <div class="container-fluid">
@@ -164,51 +204,41 @@
                 </div>
             </div>
             <div class="row m-0">
-                <div class="col-md-4 mb-4 mb-lg-0">
-                    <div class="room-items">
-                        <img src="images/Habitaciones/Habitacion1.jpg" class="img-fluid" alt="room">
-                        <div class="room-item-wrap">
-                            <div class="room-content">
-                                <h5 class="text-white mb-lg-5 text-decoration-underline">Cabañas Matrimoniales</h5>
-                                <p class="text-white">Nuestras cabañas matrimoniales son mucho más que un lugar para quedarse. Son un regalo para los sentidos, un espacio donde el amor florece y los recuerdos se tejen.</p>
-                                <p class="text-white fw-bold mt-lg-4">$10 / Por Noche</p>
-                                <a class="main-btn border-white text-white mt-lg-5" href="./Inic/inic.php">Reserva Ahora</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4 mb-lg-0">
-                    <div class="room-items">
-                        <img src="images/Habitaciones/Habitacion2.jpg" class="img-fluid" alt="room">
-                        <div class="room-item-wrap">
-                            <div class="room-content">
-                                <h5 class="text-white mb-lg-5 text-decoration-underline">Cabañas familares</h5>
-                                <p class="text-white">Nuestra cabañas Familiares para 4 personas con cocina es un espacio versátil y acogedor, diseñado para crear recuerdos inolvidables. ¡Ven y comparte momentos especiales con tus seres queridos.</p>
-                                <p class="text-white fw-bold mt-lg-4">$20 / Por Noche</p>
-                                <a class="main-btn border-white text-white mt-lg-5" href="./Inic/inic.php">Reserva Ahora</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4 mb-lg-0">
-                    <div class="room-items">
-                        <img src="images/Habitaciones/Habitacion3.jpg" class="img-fluid" alt="room">
-                        <div class="room-item-wrap">
-                            <div class="room-content">
-                                <h5 class="text-white mb-lg-5 text-decoration-underline">Cabañas familares</h5>
-                                <p class="text-white">la Cabaña Familiar para 6 Personas con Cocina es un espacio donde la comodidad, la convivencia y la naturaleza se combinan para ofrecerte una experiencia única. ¡Te esperamos para que compartas momentos inolvidables con tus seres queridos!</p>
-                                <p class="text-white fw-bold mt-lg-4">$30 / Por Noche</p>
-                                <a class="main-btn border-white text-white mt-lg-5" href="./Inic/inic.php">Reserva Ahora</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+
+                    $conn = conectarDB();
+
+                    $sql = "SELECT * FROM tbl_habitaciones_categoria";
+                    $result = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($fila = mysqli_fetch_assoc($result)) {     
+                            $sql = "SELECT * FROM tbl_categorias WHERE ID_Categoria = '" . $fila['ID_Categoria'] . "'";
+                            $categoria = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+                            echo"
+                                <div class='col-md-4 mb-4 mb-lg-0'>
+                                    <div class='room-items'>
+                                        <img src='." . $fila['imagen'] . "' class='img-fluid' alt='room'>
+                                        <div class='room-item-wrap'>
+                                            <div class='room-content'>
+                                                <h5 class='text-white mb-lg-5 text-decoration-underline'>" . $categoria['Nombre'] . "</h5>
+                                                <p class='text-white'>" . $fila['Descripción'] . "</p>
+                                                <p class='text-white fw-bold mt-lg-4'>" . $categoria['Precio'] . "$ / Por Noche</p>
+                                                <a class='main-btn border-white text-white mt-lg-5' href='#'>Reserva Ahora</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>";
+                        }
+                    }
+                    
+                    mysqli_close($conn);
+                ?>
 
             </div>
         </div>
     </section>
     <!-- Fin de Seccion de Habitaciones-->
-
+     
     <!-- Seccion de Galeria -->
     <section id="Gallery" class="gallery_wrapper">
         <div class="container">
@@ -318,6 +348,7 @@
     <!-- footer section Exit-->
 
     <!--Bootstrap 5 JS CDN Links -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 

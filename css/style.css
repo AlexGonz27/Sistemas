@@ -539,160 +539,51 @@ p {
 	font-weight: bold;
 }
 
-/* MODAL */
-.modal{
-    width: 800px;
-    height: 500px;
-    display: flex;
+.slider-container {
+    padding: 20px;
+  }
+  
+  .slider-wrapper {
     position: relative;
-    font-family: "Montserrat", sans-serif;
-}
-
-.modal-form{
-    width: 100%;
-    overflow: hidden;
-}
-
-.modal-form form{
-    height: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .slider {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.5s ease-in;
-}
-
-.modal-form h2{
-    font-size: 30px;
-    margin-bottom: 10px;
-}
-
-.social-networks{
+    aspect-ratio: 16/9;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    box-shadow: 1px 2px 3px 4px hsla(0, 0%, 0%, 0.25);
+    border-radius: 10px;
+  }
+  
+  .image {
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    object-fit: cover;
+  }
+  
+  .slider-nav {
     display: flex;
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-.social-networks ion-icon{
-    border: 1px solid rgb(155, 151, 155);
-    border-radius: 6px;
-    padding: 8px;
-    cursor: pointer;
-}
-
-.modal span{
-    font-size: 12px;
-    margin-bottom: 15px;
-}
-
-.modal-input{
-    width: 300px;
-    height: 40px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    padding: 0 15px;
-    background-color: #EEEEEE;
-}
-
-.modal-input input{
-    border: none;
-    outline: none;
-    width: 100%;
-    height: 100%;
-    background-color: inherit;
-}
-
-.modal-form a{
-    color: black;
-    font-size: 14px;
-    margin-bottom: 20px;
-    margin-top: 5px;
-}
-
-.button{
-    width: 170px;
-    height: 45px;
-    font-size: 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    color: white;
-}
-
-
-/*Animation form*/
-.sign-up{
-    transform: translateX(-100%);
-}
-
-.modal.toggle .sign-in{
-    transform: translateX(100%);
-}
-
-.modal.toggle .sign-up{
-    transform: translateX(0);
-}
-
-
-/*Welcome*/
-.modal-welcome{
+    column-gap: 16px;
     position: absolute;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    transform: translateX(100%);
-    background-color: #009970;
-    transition: transform 0.5s ease-in-out, border-radius 0.5s ease-in-out, background-color 0.5s ease-in-out;
-    overflow: hidden;
-    border-radius: 50% 0 0 50%;
-}
-
-.modal.toggle .modal-welcome{
-    transform: translateX(0);
-    border-radius: 0 50% 50% 0 ;
-    background-color: #F6AD34;
-}
-
-.modal-welcome .welcome{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 0 50px;
-    color: #EEEEEE;
-    transition: transform 0.5s ease-in-out;
-}
-
-.welcome-sing-in{
-    transform: translateX(100%);
-}
-
-.modal-welcome h3{
-    font-size: 40px;
-}
-
-.modal-welcome p{
-    font-size: 14px;
-    text-align: center;
-}
-
-.modal-welcome .button{
-    border: 2px solid white;
-    background-color: transparent;
-}
-
-.modal.toggle .welcome-sing-in{
-    transform: translateX(0);
-}
-
-.modal.toggle .welcome-sing-up{
-    transform: translateX(-100%);
-}
-
-
+    bottom: 20px;
+    left: 50%;
+    translate: translateX(-50%);
+    z-index: 1;
+  }
+  
+  .slider-button {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    opacity: 0.75;
+    transition: opacity ease 250ms;
+    border-radius: 50%;
+  }
+  
+  .slider-button:hover {
+    opacity: 1;
+  }

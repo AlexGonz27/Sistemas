@@ -137,8 +137,10 @@ function ConfgVentModifiCat(FilaJson) {
   document.querySelector("#form-modificar #Est_modifi").value = FilaJson.Estado;
 }
 
-function ConfgVentElimCat(ID) {
+function ConfgVentElimCat(ID,imagen) {
+  console.log(ID,imagen)
   document.getElementById("ID_HabElim").value = ID;
+  document.getElementById("imagen").value = imagen;
 }
 
 function tareaCompletada(){

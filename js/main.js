@@ -38,20 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
         current = start,
         range = end -start,
         increment = end > start ? 1 : -1,
-        step = Math.abs(Math.floor(duration / range)),
-        timer = setInterval(() => {
-            current += increment;
-            obj.textContent = current;
-            if(current == end){
-                clearInterval(timer);
-            }
-        }, step);
+        step = Math.abs(Math.floor(duration / range))
     }
     counter("count1", 0 , 1287, 3000);
     counter("count2", 100 , 5786, 2500);
     counter("count3", 0 , 1440, 3000);
     counter("count4", 0 , 7110, 3000);
-})
+});
 
 
 // Our Partner
@@ -74,10 +67,8 @@ var swiper = new Swiper(".our-partner", {
         '320': {
             slidesPerView: 2,
             spaceBetween: 8,
-        },
-
-
-    },
+        }
+    }
 });
 
 

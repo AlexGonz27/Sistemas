@@ -190,7 +190,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <td>" . $fila['N_Habitación'] . "</td>
                                 <td>
                                     <span class='btns btn-modificar' onclick='ConfgVentModifiCat(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Habitaciones'].");'>Eliminar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Habitaciones'].",".json_encode($fila['imagen']).");'>Eliminar</span>
                                 </td>
                             </tr>";
                     }
@@ -220,6 +220,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <span class="btn-subir">Seleccionar Archivo</span>
                     <input type="file" name="imagen" class="file-input" accept="image/*">
                 </div>
+
+                <input name="Descripcion" type="text" placeholder="Descripción">
 
                 <input name="NumHabitaciones" type="text" placeholder="No Habitaciones">
 
@@ -254,6 +256,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     ?>
                 </select>
 
+                <input name="Descripcion" type="text" placeholder="Descripción">
+                
                 <input id="text-cant_modifi" name="NumHabitaciones" type="text" placeholder="No Habitaciones">
 
                 <select id="Est_modifi" class="mi-select" name="Estado">
@@ -274,6 +278,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <form class="forma" id="form-agregar" action="" method="post" name="agregar">
                 <input type="hidden" name="eliminar">
                 <input id="ID_HabElim" type="hidden" name="ID_Hab">
+                <input id="imagen" type="hidden" name="imagen">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit">eliminar</button>
             </form>
