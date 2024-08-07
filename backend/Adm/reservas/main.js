@@ -49,6 +49,19 @@ document.addEventListener("DOMContentLoaded", () => {
     $('#buscador_tabla').on('keyup', function () {
         table.search(this.value).draw();
     });
+
+    $('#F_E, #F_S').on('change', function(){
+        var valor1 = $('#F_E').val();
+        var valor2 = $('#F_S').val();
+        $.ajax({
+          url: 'Funcion.php',
+          type: 'POST',
+          data: {F_E: valor1, F_S: valor2},
+          success: function(response){
+              $('#Hab').html(response);
+        }
+      });
+    });
     
   });
 

@@ -15,6 +15,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservas</title>
     <link rel="stylesheet" href="./estilos.css">
+    
 </head>
 
 <body>
@@ -258,11 +259,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
             </div>
             <div class="conte-btns">
-                <!--
+                
                 <div>
                     <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                 </div>
-                -->
+                
             </div>
 
             <table id="Tabla_Datos">
@@ -323,24 +324,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h2 id="Nacionalidad" name="Nacionalidad"></h2>
                 <h2 id="Identidad" name="Identidad"></h2>
 
-                <select class="mi-select" name="Habitacion">
+                <select class="mi-select" id="Hab" name="Habitacion">
                     <option value="">Seleccionar una habitación</option>
-                    <?php
-                        $conn = conectarDB();
-                        $sql = "SELECT * FROM tbl_habitaciones_categoria;";
-                        $resultado = mysqli_query($conn, $sql);
-                        while ($fila = mysqli_fetch_assoc($resultado)) {
-                            echo '<option value="' . $fila['ID_habitaciones'] . '">N°-' . $fila['N_Habitación'] . '</option>';
-                        }
-                        mysqli_close($conn);
-                    ?>
+                    
                 </select>
 
                 <input id="Fch_Reserva" name="Fch_Reserva" type="date" placeholder="Fecha de Reservación">
 
-                <input name="Fch_Entrada" type="date" placeholder="Fecha de Entrada">
+                <input id= "F_E"name="Fch_Entrada" type="date" placeholder="Fecha de Entrada">
 
-                <input name="Fch_Salida" type="date" placeholder="Fecha de Salida">
+                <input id="F_S" name="Fch_Salida" type="date" placeholder="Fecha de Salida">
                 
                 <input name="N_Adultos" type="number" placeholder="Número de Adultos">
                 
