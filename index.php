@@ -25,7 +25,7 @@
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
 
-    <!-- secion navbar  -->
+<!-- secion navbar  -->
     <header class="header_wrapper">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
@@ -68,9 +68,9 @@
             </div>
         </nav>
     </header>
-    <!--fin seccion navbar  -->
+<!--fin seccion navbar  -->
 
-    <!-- seccion Conocenos -->
+<!-- seccion Conocenos -->
     <section id="Home" class="banner_wrapper p-0">
         <div class="swiper myswiper">
             <div class="swiper-wrapper">
@@ -133,9 +133,9 @@
             </form>
         </div>
     </section>
-    <!-- banner section exit-->
+<!-- banner section exit-->
 
-    <!-- Seccion de Informacion -->
+<!-- Seccion de Informacion -->
     <section id="About" class="about_wrapper">
         <div class="container">
             <div class="row flex-lg-row flex-column-reverse">
@@ -153,9 +153,9 @@
             </div>
         </div>
     </section>
-    <!-- Fin de Seccion de Informacion-->
+<!-- Fin de Seccion de Informacion-->
 
-    <!-- Seccion de Habitaciones -->
+<!-- Seccion de Habitaciones -->
     <section id="Rooms" class="room_wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -198,9 +198,9 @@
             </div>
         </div>
     </section>
-    <!-- Fin de Seccion de Habitaciones-->
+<!-- Fin de Seccion de Habitaciones-->
      
-    <!-- Seccion de Galeria -->
+<!-- Seccion de Galeria -->
     <section id="Gallery" class="gallery_wrapper">
         <div class="container">
             <div class="row">
