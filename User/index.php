@@ -186,12 +186,38 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="container text-center">
                 <div class="row">
                     <div class="col-sm">
-                        <h2 class="text-start">Habitación</h2>
+                        <h2 class="text-start">Reservación</h2>
+                        <h4 class="text-start">Habitación</h4>
                         <h4 class="text-start mt-1">Descripción</h4>
                         <h4 class="text-start mt-1">Precio</h4>
                     </div>
                     <div class="col">
-                        
+                        <div class="slider-wrapper">
+                          <div class="slider">
+                            <img
+                              src="./images/Habitacion1.jpg"
+                              id="slider-1"
+                              alt="island"
+                              class="image"
+                            />
+                            <img
+                              src="./images/Habitacion1.jpg"
+                              id="slider-2"
+                              alt="mountain"
+                              class="image"
+                            />
+                            <img 
+                                src="./images/Habitacion1.jpg" 
+                                id="slider-3" 
+                                alt="stars" 
+                                class="image" />
+                          </div>
+                          <div class="slider-nav">
+                            <a href="#slider-1" class="slider-button"></a>
+                            <a href="#slider-2" class="slider-button"></a>
+                            <a href="#slider-3" class="slider-button"></a>
+                          </div>
+                        </div>
                     </div>
               </div>
             </div>

@@ -155,46 +155,6 @@
     </section>
     <!-- Fin de Seccion de Informacion-->
     
-    <section class="slider-container">
-      <div class="slider-wrapper">
-        <div class="slider">
-                <?php
-                    include './User/conexion.php';
-
-                    $conn = conectarDB();
-
-                    $sql = "SELECT * FROM tbl_habitaciones_categoria";
-                    $result = mysqli_query($conn, $sql);
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($fila = mysqli_fetch_assoc($result)) {     
-                            $sql = "SELECT * FROM tbl_categorias WHERE ID_Categoria = '" . $fila['ID_Categoria'] . "'";
-                            $categoria = mysqli_fetch_assoc(mysqli_query($conn, $sql));
-                            echo"<img src='." . $fila['imagen'] . "' class='img-fluid image' alt='room' id='". $categoria['Nombre'] ."'>";
-                        }
-                    }
-          
-                    mysqli_close($conn);
-                ?>
-        </div>
-        <div class="slider-nav">
-          <?php
-            $conn = conectarDB();
-
-            $sql = "SELECT * FROM tbl_habitaciones_categoria";
-            $result = mysqli_query($conn, $sql);
-            if (mysqli_num_rows($result) > 0) {
-                while ($fila = mysqli_fetch_assoc($result)) {     
-                    $sql = "SELECT * FROM tbl_categorias WHERE ID_Categoria = '" . $fila['ID_Categoria'] . "'";
-                    $categoria = mysqli_fetch_assoc(mysqli_query($conn, $sql));
-                    echo"<a href='#".$categoria['Nombre']."' class='slider-button'></a> ";
-                }
-            }
-          
-          mysqli_close($conn);
-          ?>
-        </div>
-      </div>
-    </section>
     <!-- Seccion de Habitaciones -->
     <section id="Rooms" class="room_wrapper">
         <div class="container-fluid">
