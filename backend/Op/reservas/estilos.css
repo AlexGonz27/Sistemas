@@ -42,7 +42,7 @@ body {
 }
 
 .navegacion ul {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -51,17 +51,19 @@ body {
 .navegacion ul li {
   position: relative;
   width: 100%;
+  height: 55px;
   list-style: none;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 }
+
 .navegacion ul li:hover,
 .navegacion ul li.hovered {
   background-color: var(--white);
 }
 
 .navegacion ul li:nth-child(1) {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   pointer-events: none;
 }
 
@@ -79,6 +81,7 @@ body {
 }
 
 .navegacion ul li a .icon {
+  position: relative;
   display: block;
   min-width: 60px;
   height: 60px;
@@ -88,6 +91,7 @@ body {
 .navegacion ul li a .icon ion-icon {
   font-size: 1.75rem;
 }
+
 .navegacion ul li a .title {
   position: relative;
   display: block;
@@ -97,10 +101,10 @@ body {
   text-align: start;
   white-space: nowrap;
 }
-/* --------- curve outside ---------- 
-Pseudo-elementos solo para los elementos principales */
-.navegacion > ul > li:hover a::before,
-.navegacion > ul > li.hovered a::before {
+
+/* --------- curve outside ---------- */
+.navegacion ul li:hover a::before,
+.navegacion ul li.hovered a::before {
   content: "";
   position: absolute;
   right: 0;
@@ -112,13 +116,12 @@ Pseudo-elementos solo para los elementos principales */
   box-shadow: 35px 35px 0 10px var(--white);
   pointer-events: none;
 }
-
-.navegacion > ul > li:hover a::after,
-.navegacion > ul > li.hovered a::after {
+.navegacion ul li:hover a::after,
+.navegacion ul li.hovered a::after {
   content: "";
   position: absolute;
   right: 0;
-  bottom: -50px;
+  bottom: -45px;
   width: 50px;
   height: 50px;
   background-color: transparent;
@@ -127,22 +130,69 @@ Pseudo-elementos solo para los elementos principales */
   pointer-events: none;
 }
 
-/* ===================== contenedor random ===================== */
+/* ===================== Cliente Busqueda ===================== */
 
 .cont_cliente {
-  margin: 50px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
 }
 .cont_cliente .cont_clt {
-  justify-content: center;
   position: relative;
+  display: grid;
   background: var(--white);
   padding: 20px;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
 }
+.cont_cliente .cont_clt form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  text-align: center;
+  padding: 8px;
+  border-radius: 20px;
+}
+#clientes {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 2px; 
+  justify-content: center;
+}
+#clientes .case {
+  flex: 1; 
+  min-width: 150px; 
+}
+.case input {
+  text-align: center; 
+}
+#Nacionalidad {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 7px;
+}
+.cont_cliente .cont_clt form input{
+  margin: 0px 5px; 
+  margin-bottom: 10px;
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 20px;
+}
+.cont_cliente .cont_clt form input::placeholder,
+.cont_cliente .cont_clt div{
+  text-align: center;
+}
+.cont_cliente .cont_clt div button{
+  font-size: 15px;
+  margin-right: 5px;
+}
+.cont_cliente .cont_clt div h2 {
+  font-weight: 600;
+  color: var(--blue);
+}
+
 /* ===================== principal ===================== */
 .principal {
   position: absolute;
@@ -156,7 +206,6 @@ Pseudo-elementos solo para los elementos principales */
   width: calc(100% - 80px);
   left: 80px;
 }
-
 .barratop {
   width: 100%;
   height: 60px;
@@ -165,7 +214,6 @@ Pseudo-elementos solo para los elementos principales */
   align-items: center;
   padding: 0 10px;
 }
-
 .toggle {
   position: relative;
   width: 60px;
@@ -176,18 +224,15 @@ Pseudo-elementos solo para los elementos principales */
   font-size: 2.5rem;
   cursor: pointer;
 }
-
 .buscar {
   position: relative;
   width: 400px;
   margin: 0 10px;
 }
-
 .buscar label {
   position: relative;
   width: 100%;
 }
-
 .buscar label input {
   width: 100%;
   height: 40px;
@@ -224,141 +269,7 @@ Pseudo-elementos solo para los elementos principales */
   object-fit: cover;
 }
 
-/* ======================= cartas ====================== */
-.cartaCaja {
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 30px;
-}
-
-.cartaCaja .carta {
-  position: relative;
-  background: var(--white);
-  padding: 30px;
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
-}
-
-.cartaCaja .carta .numeros {
-  position: relative;
-  font-weight: 500;
-  font-size: 2.5rem;
-  color: var(--blue);
-}
-
-.cartaCaja .carta .cartaName {
-  color: var(--black2);
-  font-size: 1.1rem;
-  margin-top: 5px;
-}
-
-.cartaCaja .carta .iconBx {
-  font-size: 3.5rem;
-  color: var(--black2);
-}
-
-.cartaCaja .carta:hover {
-  background: var(--blue);
-}
-.cartaCaja .carta:hover .numeros,
-.cartaCaja .carta:hover .cartaName,
-.cartaCaja .carta:hover .iconBx {
-  color: var(--white);
-}
-
-/* ================== Cuadro de Busqueda Usuario ============== */
-.cont_busqueda{
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  display: grid;
-  grid-gap: 30px;
-}
-.cont_busqueda .recentOrders {
-  position: relative;
-  text-align: center;
-  display: grid;
-  min-height: 100px;
-  background: var(--white);
-  padding: 20px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-}
-/* ================== Lista de Detalles Index ============== */
-.details {
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  display: grid;
-  grid-gap: 30px;
-}
-
-.details .recentOrders {
-  position: relative;
-  display: grid;
-  background: var(--white);
-  padding: 20px;
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-}
-
-.details .cartaHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.cartaHeader h2 {
-  font-weight: 600;
-  color: var(--blue);
-}
-.cartaHeader .btn {
-  position: relative;
-  padding: 5px 10px;
-  background: var(--blue);
-  text-decoration: none;
-  color: var(--white);
-  border-radius: 6px;
-}
-
-.details table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-.details table thead td {
-  font-weight: 600;
-}
-.details .recentOrders table tr {
-  color: var(--black1);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-.details .recentOrders table tr:last-child {
-  border-bottom: none;
-}
-.details .recentOrders table tbody tr:hover {
-  background: var(--blue);
-  color: var(--white);
-}
-.details .recentOrders table tr td {
-  padding: 10px;
-}
-.details .recentOrders table tr td:last-child {
-  text-align: end;
-}
-.details .recentOrders table tr td:nth-child(2) {
-  text-align: end;
-}
-.details .recentOrders table tr td:nth-child(3) {
-  text-align: center;
-}
-
-/* ================== Lista de Detalles Servicios ============== */
+/* ================== Tabla de Datos ============== */
 
 .dt-serv {
   position: relative;
@@ -395,6 +306,15 @@ Pseudo-elementos solo para los elementos principales */
   border-radius: 6px;
 }
 
+#form-agregar input {
+  width: 100%;
+}
+td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
 .ocultar{
   white-space: nowrap;
   overflow: hidden;
@@ -433,17 +353,32 @@ Pseudo-elementos solo para los elementos principales */
 }
 .dt-serv .serviciosTable table tr td:last-child {
   text-align: center;
-  max-width: 90px;
+  max-width: 50px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(1) {
-  max-width: 100px;
+  max-width: 50px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(2) {
-  max-width: 200px;
+  max-width: 35px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(3) {
-  max-width: 30px;
+  max-width: 27px;
 }
+.dt-serv .serviciosTable table tbody tr td:nth-child(3) {
+  text-align: center;
+}
+.dt-serv .serviciosTable table tr td:nth-child(4) {
+  max-width: 40px;
+}
+.dt-serv .serviciosTable table tr td:nth-child(5) {
+  max-width: 10px;
+}
+.dt-serv .serviciosTable table tr td:nth-child(6) {
+  max-width: 28px;
+}
+/*.dt-serv .serviciosTable table tbody tr td:nth-child(3) {
+  text-align: center;
+}*/
 .dt-serv .serviciosTable table tr td span {
   margin: 10px;
 }
@@ -519,6 +454,34 @@ div.dataTables_wrapper .dataTables_filter {
   background: var(--blue);
   color: var(--white);
   cursor: pointer;
+}
+.btn-cancelar{
+  background: #ce1717;
+  color: var(--white);
+  cursor: pointer;
+  border: 0px;
+  padding: 8px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.btn-cancelar:hover{
+  background:red;
+  color: var(--white);
+}
+.btn-buscar{
+  background: var(--blue);
+  color: var(--white);
+  cursor: pointer;
+  border: 0px;
+  padding: 8px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.btn-buscar:hover{
+  background:#1795ce;
+  color: var(--white);
 }
 .btns {
   cursor: pointer;
@@ -720,3 +683,4 @@ div.dataTables_wrapper .dataTables_filter {
     left: initial;
   }
 }
+
