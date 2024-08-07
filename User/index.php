@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: ../../../");
+    header("Location: ../");
     exit;
 }else {
     include './conexion.php';
@@ -105,6 +105,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <a type="button" class="btn btn-danger" href="../Inic/loggout.php">Cerrar Sesion</a>
                     <button type="button" class="btn btn-primary">Aceptar</button>
                 </div>
             </div>
@@ -180,8 +181,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </section>
     <!-- banner section exit-->
 
+    <section id="Prueba" class="about_wrapper mt-5">
+        <div class="container booking-area shadow">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-sm">
+                        <h2 class="text-start">Habitación</h2>
+                        <h4 class="text-start mt-1">Descripción</h4>
+                        <h4 class="text-start mt-1">Precio</h4>
+                    </div>
+                    <div class="col">
+                        
+                    </div>
+              </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Seccion de Informacion -->
-    <section id="About" class="about_wrapper">
+    <section id="About">
         <div class="container">
             <div class="row flex-lg-row flex-column-reverse">
                 <div class="col-lg-6 text-center text-lg-start">
