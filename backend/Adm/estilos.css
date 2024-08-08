@@ -38,11 +38,12 @@ body {
   overflow-y: auto;
 }
 .navegacion.active {
-  width: 80px;
+  width: 95px;
 }
 
 .navegacion ul {
   position: relative;
+  padding-left: 0;
   top: 0;
   left: 0;
   width: 100%;
