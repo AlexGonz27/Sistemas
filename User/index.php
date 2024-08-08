@@ -4,15 +4,15 @@ session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../");
     exit;
-}else {
+} else {
     include './conexion.php';
     $conn = conectarDB();
 
-    $sql = "SELECT * FROM tbl_cliente_persona WHERE ID_Cliente = '".$_SESSION['user_id']."'";
-    $resultado = mysqli_fetch_assoc(mysqli_query($conn,$sql));
-    echo"<script>
+    $sql = "SELECT * FROM tbl_cliente_persona WHERE ID_Cliente = '" . $_SESSION['user_id'] . "'";
+    $resultado = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+    echo "<script>
             document.addEventListener('DOMContentLoaded', function() {
-                cargarInfo(".json_encode($resultado).");
+                cargarInfo(" . json_encode($resultado) . ");
             });
         </script>";
     mysqli_close($conn);
@@ -181,20 +181,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </section>
     <!-- banner section exit-->
 
-<!-- Sección de Disponibilidad -->
-<section id="Disponibilidad" class="about_wrapper mt-5">
-    <div class="container booking-area shadow">
-        <div class="row">
-            <div class="col-sm-6">
-                <h2 class="text-start">Reservación</h2>
-                <h4 class="text-start">Habitación: <span id="room-name">Nombre de la Habitación</span></h4>
-                <h4 class="text-start mt-1">Descripción: <span id="room-description">Descripción de la habitación</span></h4>
-                <h4 class="text-start mt-1">Precio: <span id="room-price">Precio</span> $ / Por Noche</h4>
-            </div>
-            <div class="col-sm-6">
-                <div id="carouselImages" class="carousel slide" data-bs-ride="false">
-                    <div class="carousel-inner">
-                        <?php
+    <!-- Sección de Disponibilidad -->
+    <section id="Disponibilidad" class="about_wrapper mt-5">
+        <div class="container booking-area shadow">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2 class="text-start">Reservación</h2>
+                    <h4 class="text-start">Habitación: <span id="room-name"></span></h4>
+                    <h4 class="text-start mt-1">Descripción: <span id="room-description"></span></h4>
+                    <h4 class="text-start mt-1">Precio: <span id="room-price"></span> $ / Por Noche</h4>
+                </div>
+                <div class="col-sm-6">
+                    <div id="carouselImages" class="carousel slide" data-bs-ride="false">
+                        <div class="carousel-inner">
+                            <?php
                             // Conectar a la base de datos
                             $conn = conectarDB();
 
@@ -212,7 +212,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                                     // Mostrar la imagen del carrusel
                                     echo "<div class='carousel-item " . ($roomCount === 0 ? 'active' : '') . "' data-room-name='" . $categoria['Nombre'] . "' data-room-description='" . $fila['Descripción'] . "' data-room-price='" . $categoria['Precio'] . "'>";
-                                    echo "<img src='.." . $fila['imagen'] . "' class='d-block w-100' alt='room'>";
+                                    echo "<div class='d-flex justify-content-center'>";
+                                    echo "<img src='.." . $fila['imagen'] . "' class='d-block img-fluid w-50' alt='room'>";
+                                    echo "</div>";
                                     echo "</div>";
                                     $roomCount++;
                                 }
@@ -220,45 +222,33 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                             // Cerrar la conexión a la base de datos
                             mysqli_close($conn);
-                        ?>
+                            ?>
+                        </div>
+                        <!-- Botones de control del carrusel -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+
+                        <style>
+                            .carousel-control-prev-icon,
+                            .carousel-control-next-icon {
+                                background-color: #009970;
+                                border-radius: 50%;
+                            }
+                        </style>
                     </div>
-                    <!-- Botones de control del carrusel -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Siguiente</span>
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- Fin de Sección de Disponibilidad -->
+    </section>
+    <!-- Fin de Sección de Disponibilidad -->
 
-<script>
-    // Función para actualizar la descripción y el precio al cambiar de imagen
-    document.addEventListener('DOMContentLoaded', function () {
-        const carouselItems = document.querySelectorAll('#carouselImages .carousel-item');
-        const roomName = document.getElementById('room-name');
-        const roomDescription = document.getElementById('room-description');
-        const roomPrice = document.getElementById('room-price');
 
-        carouselItems.forEach(item => {
-            item.addEventListener('slide.bs.carousel', function () {
-                const name = item.getAttribute('data-room-name');
-                const description = item.getAttribute('data-room-description');
-                const price = item.getAttribute('data-room-price');
-
-                roomName.textContent = name;
-                roomDescription.textContent = description;
-                roomPrice.textContent = price;
-            });
-        });
-    });
-</script>
 
     <!-- Seccion de Informacion -->
     <section id="About">
@@ -278,20 +268,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
         </div>
     </section>
-<!-- Fin de Seccion de Informacion-->
+    <!-- Fin de Seccion de Informacion-->
 
-<!-- Sección de Habitaciones -->
-<section id="Rooms" class="room_wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 section-title text-center mb-5">
-                <h3>Nuestras Habitaciones</h3>
+    <!-- Sección de Habitaciones -->
+    <section id="Rooms" class="room_wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 section-title text-center mb-5">
+                    <h3>Nuestras Habitaciones</h3>
+                </div>
             </div>
-        </div>
-        <div id="carouselRooms" class="carousel slide" data-bs-ride="carousel">
-            <!-- Indicadores del carrusel -->
-            <div class="carousel-indicators">
-                <?php
+            <div id="carouselRooms" class="carousel slide" data-bs-ride="carousel">
+                <!-- Indicadores del carrusel -->
+                <div class="carousel-indicators">
+                    <?php
                     // Conectar a la base de datos
                     $conn = conectarDB();
 
@@ -314,16 +304,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             $roomCount++;
                         }
                     }
-                ?>
-            </div>
-            <div class="carousel-inner">
-                <?php
+                    ?>
+                </div>
+                <div class="carousel-inner">
+                    <?php
                     // Reiniciar el contador de habitaciones para mostrar el contenido
                     $roomCount = 0; // Reiniciar el contador de habitaciones
 
                     // Verificar si hay habitaciones disponibles
                     if ($totalRooms > 0) {
-                        while ($fila = mysqli_fetch_assoc($result)) {     
+                        while ($fila = mysqli_fetch_assoc($result)) {
                             // Obtener la categoría de la habitación
                             $sql = "SELECT * FROM tbl_categorias WHERE ID_Categoria = '" . $fila['ID_Categoria'] . "'";
                             $categoria = mysqli_fetch_assoc(mysqli_query($conn, $sql));
@@ -352,7 +342,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                         </div>
                                     </div>
                                 </div>";
-                            
+
                             $roomCount++;
                         }
                         // Cerrar la última diapositiva
@@ -361,23 +351,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                     // Cerrar la conexión a la base de datos
                     mysqli_close($conn);
-                ?>
+                    ?>
+                </div>
+                <!-- Botones de control del carrusel -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselRooms" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselRooms" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
             </div>
-            <!-- Botones de control del carrusel -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselRooms" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselRooms" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Siguiente</span>
-            </button>
         </div>
-    </div>
-</section>
-<!-- Fin de Sección de Habitaciones -->
+    </section>
+    <!-- Fin de Sección de Habitaciones -->
 
-<!-- Seccion de Galeria -->
+    <!-- Seccion de Galeria -->
     <section id="Gallery" class="gallery_wrapper">
         <div class="container">
             <div class="row">
