@@ -46,7 +46,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <!-- Alertas -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
@@ -88,15 +88,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         </li>
                         <li class="nav-item">
                             <?php
-                                
-                                $conn = conectarDB();
-                            
-                                $sql = "SELECT * FROM tbl_cliente_persona WHERE ID_Cliente = '" . $_SESSION['user_id'] . "'";
-                                $resultado = mysqli_fetch_assoc(mysqli_query($conn, $sql));
-                                echo "<a id='name-user' class='nav-link mod' data-bs-toggle='modal' data-bs-target='#DatosUser' onclick='ConfgVentModifi(" . json_encode($resultado) . ")'>usuario</a>";
-                                mysqli_close($conn);
+
+                            $conn = conectarDB();
+
+                            $sql = "SELECT * FROM tbl_cliente_persona WHERE ID_Cliente = '" . $_SESSION['user_id'] . "'";
+                            $resultado = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+                            echo "<a id='name-user' class='nav-link mod' data-bs-toggle='modal' data-bs-target='#DatosUser' onclick='ConfgVentModifi(" . json_encode($resultado) . ")'>usuario</a>";
+                            mysqli_close($conn);
                             ?>
-                            
+
                         </li>
 
                     </ul>
@@ -112,11 +112,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div class="modal fade" id="DatosUser" tabindex="-1" aria-labelledby="User" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="User">Datos de Usuario</h5>
+                <div class="modal-header" style="background-color: #009970;">
+                    <h5 class="modal-title" id="User" style="color: white;">Datos de Usuario</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form-modificar" action="" method="post" class ="forma">
+                <form id="form-modificar" action="" method="post" class="forma">
                     <input type="hidden" name="modificar">
                     <input type="hidden" name="Nacionalidad">
                     <input id="ID_Clt" type="hidden" name="ID_Clt">
@@ -127,89 +127,88 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         </div>
 
                         <div class="mb-3">
-                            <label for="text-CI" class="form-label">Identificacion:</label>
-                            <input id="text-CI" name="CI" type="text" class="form-control"  required>
+                            <label for="text-CI" class="form-label">Identificación:</label>
+                            <input id="text-CI" name="CI" type="text" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="text-Direc" class="form-label">Direccion:</label>
-                            <input id="text-Direc" name="direc" type="text" class="form-control"  required>
+                            <label for="text-Direc" class="form-label">Dirección:</label>
+                            <input id="text-Direc" name="direc" type="text" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="text-Tlf" class="form-label">Telefono:</label>
-                            <input id="text-Tlf" name="tlf" type="text" class="form-control"  required>
+                            <label for="text-Tlf" class="form-label">Teléfono:</label>
+                            <input id="text-Tlf" name="tlf" type="text" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="text-Fn" class="form-label">Fecha de Nacimiento:</label>
-                            <input id="text-Fn" name="fn" type="date" class="form-control"  required>
+                            <input id="text-Fn" name="fn" type="date" class="form-control" required>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" name="modificar" type="submit">Aceptar</button>
-                    </div>                    
-                    
+                    <div class="modal-footer d-flex justify-content-between">
+                        <button class="btn btn-primary" name="modificar" type="submit" style="background-color: #009970; border-color: #009970;">Editar</button>
+                        <div>
+                            <a type="button" class="btn" style="background-color: #F6AD34; color: white;" data-bs-toggle="modal" data-bs-target="#Lis_res">Reservas</a>
+                            <a type="button" class="btn btn-danger" href="../Inic/loggout.php">Cerrar Sesión</a>
+                        </div>
+                    </div>
                 </form>
-                <div class="modal-footer">
-                    <a type="button" class="btn btn-danger" href="../Inic/loggout.php">Cerrar Sesion</a>
-                    <span class="btn btn-primary" name="Reservas" data-bs-toggle="modal" data-bs-target="#Lis_res">Reservas</span>
-                </div>
-                
             </div>
         </div>
     </div>
 
-    
+    <!-- Modal Datos de Reservas -->
     <div class="modal fade" id="Lis_res" tabindex="-1" aria-labelledby="User" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="User">Datos de Reservas</h5>
+                <div class="modal-header" style="background-color: #009970;">
+                    <h5 class="modal-title" id="User" style="color: white;">Datos de Reservas</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" >
-                    <table id= "Tabla_Datos">
+                <div class="modal-body">
+                    <table id="Tabla_Datos" class="table table-striped">
                         <thead>
                             <tr>
-                                <td>Codigo</td>
-                                <td>Habitacion</td>
-                                <td>Fecha de Entrada</td>
-                                <td>Fecha de Salida</td>
-                                <td>Estado</td>
-                                <td>Acciones</td>
+                                <th>Código</th>
+                                <th>Habitación</th>
+                                <th>Fecha de Entrada</th>
+                                <th>Fecha de Salida</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $conn = conectarDB();
-                                $sql = "SELECT * FROM tbl_reservacion WHERE ID_Cliente = '" . $_SESSION['user_id'] . "'";
-                                $resultado = mysqli_query($conn, $sql);
-                                while ($fila = mysqli_fetch_assoc($resultado)) {
-                                    $id = $fila['ID_Habitacion'];
-                                    $sqlCat = "SELECT * FROM tbl_habitaciones_categoria WHERE ID_Habitaciones = '$id'";
-                                    $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlCat));
-                                    echo "<tr>
-                                            <td>" . $fila['Codigo_Reserva'] . "</td>  
-                                            <td>Nº-" . $result['N_Habitación'] . "</td>
-                                            <td>" . $fila['Fecha_Entrada'] . "</td>
-                                            <td>" . $fila['Fecha_Salida'] . "</td>
-                                            <td>" . $fila['Estado'] . "</td>
-                                            <td>
-                                                <span class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#ventanular' onclick='ConfgVentElim(" . $fila['ID_Reservación'] . ")';>Anular</span>
-                                            </td>
-                                        </tr>";
-                                    }
-                                mysqli_close($conn);
+                            $conn = conectarDB();
+                            $sql = "SELECT * FROM tbl_reservacion WHERE ID_Cliente = '" . $_SESSION['user_id'] . "'";
+                            $resultado = mysqli_query($conn, $sql);
+                            while ($fila = mysqli_fetch_assoc($resultado)) {
+                                $id = $fila['ID_Habitacion'];
+                                $sqlCat = "SELECT * FROM tbl_habitaciones_categoria WHERE ID_Habitaciones = '$id'";
+                                $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlCat));
+                                echo "<tr>
+                                <td>" . htmlspecialchars($fila['Codigo_Reserva']) . "</td>  
+                                <td>Nº-" . htmlspecialchars($result['N_Habitación']) . "</td>
+                                <td>" . htmlspecialchars($fila['Fecha_Entrada']) . "</td>
+                                <td>" . htmlspecialchars($fila['Fecha_Salida']) . "</td>
+                                <td>" . htmlspecialchars($fila['Estado']) . "</td>
+                                <td>
+                                    <span class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#ventanular' onclick='ConfgVentElim(" . $fila['ID_Reservación'] . ")'>Anular</span>
+                                </td>
+                            </tr>";
+                            }
+                            mysqli_close($conn);
                             ?>
                         </tbody>
                     </table>
-                    
                 </div>
             </div>
         </div>
     </div>
 
-     
+
+
+
     <div id="ventanular" class="modal fade" tabindex="-1" aria-labelledby="User" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -224,7 +223,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <p>¿Seguro que desea anular esta reserva?</p>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-danger" name="anular "type="submit">Anular</button>
+                        <button class="btn btn-danger" name="anular " type="submit">Anular</button>
                     </div>
                 </form>
             </div>
@@ -298,32 +297,32 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <!-- Sección de Disponibilidad -->
     <section id="Disponibilidad" class="about_wrapper mt-5" style="display: none;">
-        <div class="container booking-area shadow">
+        <div class="container booking-area shadow p-4">
             <div class="row">
                 <div class="col-sm-6">
-                    <form action="">
-                        
-                        <div class="row mb-5 position-relative">
-                            <h2 class="text-start">Reservación</h2>
-                            <h4 class="text-start">Categoria: <span id="room-name"></span></h4>
-                            <h4 class="text-start">Nº Habitación: <span id="room-numH"></span></h4>
-                            <h4 class="text-start mt-1">Descripción: <span id="room-description"></span></h4>
-                            <h4 class="text-start mt-1">Precio: <span id="room-price"></span> $ / Por Noche</h4>
-                            <div class="col-sm-6 position-absolute bottom-0 end-0" style="paddin-right: 0;" >
-                                <button class="btn btn-primary " style="background-color: #F6AD34; border: 0;"> Reservar</button>
-                            </div>
-                        </div>
-                        <div id="habitaciones-container">
-                                    
-                        </div>
-                    </form>
+                    <h2 class="text-start mb-4" style="color: #009970; font-size: 1.8rem;">Reservación</h2>
+                    <h4 class="text-start" style="font-weight: bold;">Categoría:</h4>
+                    <p id="room-name" class="text-start" style="font-size: 1.2rem;"></p>
+
+                    <h4 class="text-start" style="font-weight: bold;">Nº Habitación:</h4>
+                    <p id="room-numH" class="text-start" style="font-size: 1.2rem;"></p>
+
+                    <h4 class="text-start" style="font-weight: bold;">Descripción:</h4>
+                    <p id="room-description" class="text-start" style="font-size: 1.2rem;"></p>
+
+                    <h4 class="text-start" style="font-weight: bold;">Precio:</h4>
+                    <p id="room-price" class="text-start" style="font-size: 1.2rem;"></p>
+
+                    <div class="text-end mt-4">
+                        <button class="btn btn-primary" style="background-color: #F6AD34; border: none;">Reservar</button>
+                    </div>
+
+                    <div id="habitaciones-container" class="mt-4"></div>
                 </div>
                 <div class="col-sm-6">
-                    <div id="carouselImages" class="carousel slide " data-bs-ride="false">
-    
-                        <!-- Habitaciones disponibles -->
+                    <div id="carouselImages" class="carousel slide" data-bs-ride="false">
                         <div class="carousel-inner" id="resultadoDisponibilidad">
-                            
+                            <!-- Habitaciones disponibles -->
                         </div>
 
                         <!-- Botones de control del carrusel -->
@@ -336,17 +335,19 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <span class="visually-hidden">Siguiente</span>
                         </button>
                     </div>
-                    <div id="noContentMessage" class="no-content">
-                        No hay habitaciones disponibles.
+                    <div id="noContentMessage" class="no-content text-center mt-3" style="display: none;">
+                        <p>No hay habitaciones disponibles.</p>
                     </div>
-                    <div class="text-center mt-2" >
-                        <button id="btn-addHabitacion" type="button" class="btn btn-success text-center" >Añadir</button>
+                    <div class="text-center mt-2">
+                        <button id="btn-addHabitacion" type="button" class="btn btn-success">Añadir</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Fin de Sección de Disponibilidad -->
+
+
 
     <!-- Seccion de Informacion -->
     <section id="About" class="about_wrapper mt-2">
