@@ -116,7 +116,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
 
-    <!-- banner section -->
+    <!-- seccion Conocenos -->
     <section id="Home" class="banner_wrapper p-0">
         <div class="swiper myswiper">
             <div class="swiper-wrapper">
@@ -174,7 +174,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
 
                 <div class="col-lg mb-3 mb-lg-0">
-                    <button type="submit" class="main-btn rounded-2 px-lg-3"><a class="nav-link" href="">Disponibilidad</a></button>
+                    <button type="submit" class="main-btn rounded-2 px-lg-3"><a class="nav-link" href="./Inic/inic.php">Disponibilidad</a></button>
                 </div>
             </form>
         </div>
@@ -233,7 +233,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Siguiente</span>
                         </button>
-
                         <style>
                             .carousel-control-prev-icon,
                             .carousel-control-next-icon {
@@ -247,6 +246,27 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </div>
     </section>
     <!-- Fin de Sección de Disponibilidad -->
+
+    <script>
+        // Función para actualizar los datos de la habitación
+        function updateRoomData() {
+            const activeItem = document.querySelector('.carousel-item.active');
+            const roomName = activeItem.getAttribute('data-room-name');
+            const roomDescription = activeItem.getAttribute('data-room-description');
+            const roomPrice = activeItem.getAttribute('data-room-price');
+
+            document.getElementById('room-name').textContent = roomName;
+            document.getElementById('room-description').textContent = roomDescription;
+            document.getElementById('room-price').textContent = roomPrice;
+        }
+
+        // Actualizar los datos cuando se cambia la diapositiva
+        document.getElementById('carouselImages').addEventListener('slid.bs.carousel', updateRoomData);
+
+        // Actualizar los datos al cargar la página
+        document.addEventListener('DOMContentLoaded', updateRoomData);
+    </script>
+
 
 
 
