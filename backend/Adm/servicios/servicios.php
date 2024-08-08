@@ -248,10 +248,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <input id="text-cost" name="cost" type="number" class="form-control" placeholder="Precio" min="1" required>
                             </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-primary" name="agregar" type="submit" style="background-color: #009970; border-color: #009970;">Agregar</button>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-primary" name="agregar" type="submit" style="background-color: #009970; border-color: #009970;">Agregar</button>
+                            </div>
                     </form>
                 </div>
             </div>
@@ -260,19 +260,43 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
 
-        <div id="ventmodifi" class="ventana">
-            <div class="conte-vent">
-                <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
-                <form class="forma" id="form-modificar" action="" method="post" name="modificar">
-                    <input type="hidden" name="modificar">
-                    <input id="ID_Serv" type="hidden" name="ID_Serv">
-                    <input id="text-tipo" name="tipo" type="text" placeholder="Tipo">
-                    <input id="text-desc" name="desc" type="text" placeholder="Descripcion">
-                    <input id="text-cost" name="cost" type="text" placeholder="Costo">
-                    <button class="btns btn-modificar" type="submit" class="forma btn-modificar">modificar</button>
-                </form>
+        <!-- Ventana Modificar -->
+        <div id="ventmodifi" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #009970;">
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">Modificar Servicio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="forma" id="form-modificar" action="" method="post" name="modificar">
+                        <input type="hidden" name="modificar">
+                        <input id="ID_Serv" type="hidden" name="ID_Serv">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="text-tipo" class="form-label">Tipo:</label>
+                                <input id="text-tipo" name="tipo" type="text" class="form-control" placeholder="Tipo" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="text-desc" class="form-label">Descripción:</label>
+                                <input id="text-desc" name="desc" type="text" class="form-control" placeholder="Descripción" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="text-cost" class="form-label">Costo:</label>
+                                <input id="text-cost" name="cost" type="text" class="form-control" placeholder="Costo" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-primary" name="modificar" type="submit" style="background-color: #009970; border-color: #009970;">Modificar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+        <!-- Fin de Ventana Modificar -->
+
 
         <div id="venteliminar" class="ventana">
             <div class="conte-vent">
