@@ -301,16 +301,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div class="container booking-area shadow">
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="row mb-5">
-                        <h2 class="text-start">Reservación</h2>
-                        <h4 class="text-start">Categoria: <span id="room-name"></span></h4>
-                        <h4 class="text-start">Nº Habitación: <span id="room-numH"></span></h4>
-                        <h4 class="text-start mt-1">Descripción: <span id="room-description"></span></h4>
-                        <h4 class="text-start mt-1">Precio: <span id="room-price"></span> $ / Por Noche</h4>
-                    </div>
-                    <div id="habitaciones-container">
-
-                    </div>
+                    <form action="">
+                        
+                        <div class="row mb-5 position-relative">
+                            <h2 class="text-start">Reservación</h2>
+                            <h4 class="text-start">Categoria: <span id="room-name"></span></h4>
+                            <h4 class="text-start">Nº Habitación: <span id="room-numH"></span></h4>
+                            <h4 class="text-start mt-1">Descripción: <span id="room-description"></span></h4>
+                            <h4 class="text-start mt-1">Precio: <span id="room-price"></span> $ / Por Noche</h4>
+                            <div class="col-sm-6 position-absolute bottom-0 end-0" style="paddin-right: 0;" >
+                                <button class="btn btn-primary " style="background-color: #F6AD34; border: 0;"> Reservar</button>
+                            </div>
+                        </div>
+                        <div id="habitaciones-container">
+                                    
+                        </div>
+                    </form>
                 </div>
                 <div class="col-sm-6">
                     <div id="carouselImages" class="carousel slide " data-bs-ride="false">

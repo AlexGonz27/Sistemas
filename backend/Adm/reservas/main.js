@@ -57,6 +57,39 @@ document.addEventListener("DOMContentLoaded", () => {
         table.search(this.value).draw();
     });
 
+    // Codigo AJAX para la subida a la nube
+    $('.forma').on('submit', function(e) {
+      e.preventDefault(); // Evitar el envío por defecto del formulario
+
+      var formData = new FormData(this); // Serializar los datos del formulario
+
+      $.ajax({
+          url: './consultas.php', // Archivo PHP que procesa la solicitud
+          method: 'POST',
+          data: formData,
+          processData: false, // Evitar que jQuery procese los datos
+          contentType: false,
+          success: function(respuesta) {
+            console.log(respuesta)
+            var data = JSON.parse(respuesta);
+
+            if (data.estado === 'completado') {
+              localStorage.setItem('showAlert', 'true');
+              location.reload();
+            } else {
+              tareaError(data.mensaje);
+            }
+          },
+          error: function(xhr, status, error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un problema con la solicitud: ' + error
+            });
+        }
+      });
+    });
+
     $('#F_E, #F_S').on('change', function(){
         var valor1 = $('#F_E').val();
         var valor2 = $('#F_S').val();
@@ -184,7 +217,9 @@ function Reservar(datos) {
   console.log(datos)
   
   generarCodigo('Codigo_add');
-  document.querySelector("#form-agregar #Identidad").textContent = datos.Identificación;
+  document.querySelector("#form-agregar #ID_Cliente_add").value = datos.ID_Cliente;
+  document.querySelector("#form-agregar #Nombre").textContent = datos.Nombre_Razón_Social;
+  document.querySelector("#form-agregar #Identidad").textContent = datos.Nacionalidad + "-" + datos.Identificación;
 }
 function generarCodigo(text) {
   const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -202,5 +237,42 @@ function generarCodigo(text) {
   }
 
   // Mostrar el código generado
-  document.getElementById(text).innerText = codigo;
+  document.getElementById(text).value = codigo;
+}
+
+function tareaCompletada(){
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+  Toast.fire({
+    icon: "success",
+    title: "Tarea completada!",
+  });
+}
+
+function tareaError(mensaje){
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+  Toast.fire({
+    icon: "error",
+    title: "error",
+    text: mensaje
+  });
 }

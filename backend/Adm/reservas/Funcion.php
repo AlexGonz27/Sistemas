@@ -14,7 +14,7 @@
             $id = $fila['ID_Habitaciones'];
             $sqlRev = "SELECT * FROM tbl_reservacion WHERE ID_Habitacion = '$id' AND Fecha_Entrada <= '$FS' AND Fecha_Salida >= '$FE';";
             $result = mysqli_query($conn, $sqlRev); 
-            if (mysqli_num_rows($result) < 1) echo '<option value="' . $fila['ID_Habitaciones'] . '">' . $fila['N_Habitación'] . '</option>';
+            if (mysqli_num_rows($result) < 1) echo '<option value="' . $fila['ID_Habitaciones'] . '">Nº-' . $fila['N_Habitación'] . '</option>';
         } 
         mysqli_close($conn);
     }

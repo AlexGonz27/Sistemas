@@ -21,6 +21,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <title>Reservas</title>
     <link rel="stylesheet" href="./estilos.css">
 
+    <!-- Alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -282,11 +284,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </div>
                 </div>
                 <div class="conte-btns">
-
+                <!-- 
                     <div>
                         <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                     </div>
-
+                -->
                 </div>
 
                 <table id="Tabla_Datos">
@@ -339,18 +341,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
 
             <!-- Forma para agregar  -->
-            <form id="form-agregar" name="agregar">
+            <form id="form-agregar" name="agregar" class="forma" >
 
                 <input type="hidden" name="agregar">
+                
                 <input type="hidden" name="Codigo" id="Codigo_add">
+                <input type="hidden" name="ID_Clt" id="ID_Cliente_add">
+                <input type="hidden" name="Identidad_add" id="Identidad_add">
+                <input type="hidden" name="Nacionalidad_add" id="Nacionalidad_add">
 
                 <h2 id="Nombre" name="Nombre_Razon"></h2>
-                <h2 id="Nacionalidad" name="Nacionalidad"></h2>
                 <h2 id="Identidad" name="Identidad"></h2>
 
                 <select class="mi-select" id="Hab" name="Habitacion">
                     <option value="">Seleccionar una habitación</option>
-
                 </select>
 
                 <input id="Fch_Reserva" name="Fch_Reserva" type="date" placeholder="Fecha de Reservación">
@@ -359,11 +363,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                 <input id="F_S" name="Fch_Salida" type="date" placeholder="Fecha de Salida">
 
-                <input name="N_Adultos" type="number" placeholder="Número de Adultos">
+                <input name="N_Adultos" type="number" placeholder="Número de Adultos" min="1" value="1">
 
-                <input name="N_Niños" type="number" placeholder="Número de Niños">
+                <input name="N_Niños" type="number" placeholder="Número de Niños" min="0" value="0">
 
-                <input name="N_Mascotas" type="number" placeholder="Número de Mascotas">
+                <input name="Mascotas" type="number" placeholder="Número de Mascotas" min="0" max="1" value="0">
 
                 <button class="btns btn-agregar" name="agregar">Agregar</button>
 
