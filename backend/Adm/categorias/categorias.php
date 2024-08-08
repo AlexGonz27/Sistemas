@@ -17,14 +17,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <link rel="stylesheet" href="./estilos.css">
     <!-- Bootstrap 5 CDN Links-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Alertas -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <!-- =============== navegacion ================ -->
+    <!-- =============== Navegación ================ -->
     <div class="contenedor-nav">
         <div class="navegacion">
             <ul>
@@ -33,7 +33,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="icon">
                             <ion-icon name="desktop-outline"></ion-icon>
                         </span>
-                        <span class="title" id="Titulo">Sitema de reservas</span>
+                        <span class="title" id="Titulo">Sistema de Reservas</span>
                     </a>
                 </li>
                 <li id="Inicio">
@@ -55,7 +55,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li id="Pagos">
                     <a href="../pagos/pagos.php">
                         <span class="icon">
-                            <ion-icon name="id-card-outline"></ion-icon>
+                            <ion-icon name="cash-outline"></ion-icon>
                         </span>
                         <span class="title">Pagos</span>
                     </a>
@@ -65,13 +65,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="icon">
                             <ion-icon name="bookmarks-outline"></ion-icon>
                         </span>
-                        <span class="title">Categorias</span>
+                        <span class="title">Categorías</span>
                     </a>
                 </li>
                 <li id="Habitaciones">
                     <a href="../habitaciones/habitaciones.php">
                         <span class="icon">
-                            <ion-icon name="bookmarks-outline"></ion-icon>
+                            <ion-icon name="bed-outline"></ion-icon>
                         </span>
                         <span class="title">Habitaciones</span>
                     </a>
@@ -95,7 +95,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li id="Clientes">
                     <a href="../clientes/clientes.php">
                         <span class="icon">
-                            <ion-icon name="person-circle-outline"></ion-icon>
+                            <ion-icon name="people-outline"></ion-icon>
                         </span>
                         <span class="title">Clientes</span>
                     </a>
@@ -103,7 +103,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li id="Cargos">
                     <a href="../cargos/cargos.php">
                         <span class="icon">
-                            <ion-icon name="person-circle-outline"></ion-icon>
+                            <ion-icon name="briefcase-outline"></ion-icon>
                         </span>
                         <span class="title">Cargos</span>
                     </a>
@@ -113,13 +113,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="icon">
                             <ion-icon name="body-outline"></ion-icon>
                         </span>
-                        <span class="title">Huespedes</span>
+                        <span class="title">Huéspedes</span>
                     </a>
                 </li>
                 <li id="Mascotas">
                     <a href="../mascotas/mascotas.php">
                         <span class="icon">
-                            <ion-icon name="body-outline"></ion-icon>
+                            <ion-icon name="paw-outline"></ion-icon>
                         </span>
                         <span class="title">Mascotas</span>
                     </a>
@@ -137,56 +137,56 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="icon">
                             <ion-icon name="enter-outline"></ion-icon>
                         </span>
-                        <span class="title">Cerrar Sesion</span>
+                        <span class="title">Cerrar Sesión</span>
                     </a>
                 </li>
             </ul>
         </div>
-        <!-- ========================= principal ==================== -->
-        <div class="principal">
-            <div class="barratop">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
-                </div>
+    </div>
 
-                <div class="buscar">
-                    <label>
-                        <input type="text" placeholder="Buscar">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
+    <!-- ========================= principal ==================== -->
+    <div class="principal">
+        <div class="barratop">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
 
-                <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
+            <div class="buscar">
+                <div class="input-group">
+                    <input id="buscador_tabla" type="text" class="form-control ps-4 rounded-pill" placeholder="  Buscar" aria-label="Buscar">
+                    <span class="input-group-text bg-transparent border-0">
+                        <i class="bi bi-search"></i>
+                    </span>
                 </div>
             </div>
-            <div>
+
+
+            <div class="user">
+                <i class="bi bi-person-circle" style="font-size: 30px; color: #009970;"></i>
             </div>
+        </div>
+        <div class="container mt-5">
             <div class="dt-serv">
                 <div class="serviciosTable">
-                    <div class="cartaHeader">
-                        <h2>Categorias</h2>
-                    </div>
-                    <div class="conte-btns">
-                        <div>
-                            <div class="btn-agregar" data-bs-toggle="modal" data-bs-target="#ventagregar">
-                                Agregar
+                    <div class="cartaHeader d-flex justify-content-between align-items-center">
+                        <h2 style="color: #009970;">Categorías</h2>
+                        <div class="conte-btns">
+                            <div>
+                                <div class="btn-agregar" data-bs-toggle="modal" data-bs-target="#ventagregar" style="background-color: #009970; color: white; padding: 10px 20px; border-radius: 5px; text-align: center;">
+                                    Agregar
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <button id="consulta-btn" onclick="tareaCompletada()" style="display: none;">Hacer Consulta</button>
-                            <input id="buscador_tabla" type="text" placeholder="Buscar">
                         </div>
                     </div>
 
-                    <table id="Tabla_Datos">
+                    <table id="Tabla_Datos" class="table mt-3">
                         <thead>
                             <tr>
-                                <td>Nombre</td>
-                                <td>Descripción</td>
-                                <td>Capacidad</td>
-                                <td>Precio</td>
-                                <td>Acciones</td>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Capacidad</th>
+                                <th>Precio</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -197,13 +197,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             $resultado = mysqli_query($conn, $sql);
                             while ($fila = mysqli_fetch_assoc($resultado)) {
                                 echo "<tr>
-                                <td>" . $fila['Nombre'] . "</td>
-                                <td>" . $fila['Descripción'] . "</td>
-                                <td>" . $fila['Capacidad'] . "</td>
-                                <td>" . $fila['Precio'] . "$</td>
+                                <td>" . htmlspecialchars($fila['Nombre']) . "</td>
+                                <td>" . htmlspecialchars($fila['Descripción']) . "</td>
+                                <td>" . htmlspecialchars($fila['Capacidad']) . "</td>
+                                <td>" . htmlspecialchars($fila['Precio']) . "$</td>
                                 <td>
-                                    <span class='btns btn-modificar' data-bs-toggle='modal' data-bs-target='#ventmodifi' onclick='ConfgVentModifiCat(" . json_encode($fila) . ")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(" . $fila['ID_Categoria'] . ");'>Eliminar</span>
+                                    <span class='btns btn-modificar' data-bs-toggle='modal' data-bs-target='#ventmodifi' onclick='ConfgVentModifiCat(" . json_encode($fila) . ")'>
+                                        <i class='bi bi-pencil-square'></i>
+                                    </span>
+                                    <span class='btns btn-eliminar' data-bs-toggle='modal' data-bs-target='#venteliminar' onclick='ConfgVentElimCat(" . $fila['ID_Categoria'] . ");'>
+                                        <i class='bi bi-trash'></i>
+                                    </span>
                                 </td>
                             </tr>";
                             }
@@ -214,14 +218,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
         </div>
 
+
+        <!-- Ventana Agregar -->
         <div id="ventagregar" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalLabel">Agregar Categoría</h5>
+                    <div class="modal-header" style="background-color: #009970;">
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">Agregar Categoría</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
                     </div>
-                    <form id="form-agregar" action="" method="post" class = "forma">
+                    <form id="form-agregar" action="" method="post" class="forma">
                         <input type="hidden" name="agregar">
                         <div class="modal-body">
                             <div class="mb-3">
@@ -246,22 +253,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-primary" name ="agregar" type="submit">Agregar</button>
+                            <button class="btn btn-primary" name="agregar" type="submit" style="background-color: #009970; border-color: #009970;">Agregar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <!-- Fin de Ventana Agregar -->
 
-
+        <!-- Ventana Modificar -->
         <div id="ventmodifi" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalLabel">modificar Categoría</h5>
+                    <div class="modal-header" style="background-color: #009970;">
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">modificar Categoría</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="form-modificar" action="" method="post" class = "forma">
+                    <form id="form-modificar" action="" method="post" class="forma">
                         <input type="hidden" name="modificar">
                         <input id="ID_Cat" type="hidden" name="ID_Cat">
                         <div class="modal-body">
@@ -287,25 +295,38 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-primary" name ="modificar" type="submit">Modificar</button>
+                            <button class="btn btn-primary" name="agregar" type="submit" style="background-color: #009970; border-color: #009970;">Modificar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <!-- Fin de Ventana Modificar -->
 
-        
-        <div id="venteliminar" class="ventana">
-            <div class="conte-vent">
-                <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
-                <form class="forma" id="form-agregar" action="" method="post" name="agregar">
-                    <input type="hidden" name="eliminar">
-                    <input id="ID_CatElim" type="hidden" name="ID_Cat">
-                    <p>Seguro que desea eliminar esta fila?</p>
-                    <button type="submit">eliminar</button>
-                </form>
+        <!-- Ventana Eliminar -->
+        <div id="venteliminar" class="modal fade" tabindex="-1" aria-labelledby="modalLabelEliminar" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #009970;">
+                        <h5 class="modal-title" id="modalLabelEliminar" style="color: white;">Eliminar Categoría</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="form-eliminar" action="" method="post" class="forma">
+                        <input type="hidden" name="eliminar">
+                        <input id="ID_CatElim" type="hidden" name="ID_Cat">
+                        <div class="modal-body">
+                            <p>¿Seguro que desea eliminar esta fila?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+        <!-- Fin de Ventana Eliminar -->
+
         <!--Bootstrap 5 JS CDN Links -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
