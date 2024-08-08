@@ -41,6 +41,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <!-- Custom File's Link -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive-style.css">
+
+    <!-- Alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
@@ -80,7 +83,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <a class="nav-link" href="#Price">Ubicación</a>
                         </li>
                         <li class="nav-item">
-                            <a id="name-user" class="nav-link" data-bs-toggle="modal" data-bs-target="#DatosUser">usuario</a>
+                            <?php
+                                
+                                $conn = conectarDB();
+                            
+                                $sql = "SELECT * FROM tbl_cliente_persona WHERE ID_Cliente = '" . $_SESSION['user_id'] . "'";
+                                $resultado = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+                                echo "<a id='name-user' class='nav-link mod' data-bs-toggle='modal' data-bs-target='#DatosUser' onclick='ConfgVentModifi(" . json_encode($resultado) . ")'>usuario</a>";
+                                mysqli_close($conn);
+                            ?>
+                            
                         </li>
 
                     </ul>
@@ -100,14 +112,43 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <h5 class="modal-title" id="User">Datos de Usuario</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div id="datos_usuario">
+                <form id="form-modificar" action="" method="post" class ="forma">
+                    <input type="hidden" name="modificar">
+                    <input type="hidden" name="Nacionalidad">
+                    <input id="ID_Clt" type="hidden" name="ID_Clt">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="text-Name_RS" class="form-label">Nombre:</label>
+                            <input id="text-Name_RS" name="name_rs" type="text" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="text-CI" class="form-label">Identificacion:</label>
+                            <input id="text-CI" name="CI" type="text" class="form-control"  required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="text-Direc" class="form-label">Direccion:</label>
+                            <input id="text-Direc" name="direc" type="text" class="form-control"  required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="text-Tlf" class="form-label">Telefono:</label>
+                            <input id="text-Tlf" name="tlf" type="text" class="form-control"  required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="text-Fn" class="form-label">Fecha de Nacimiento:</label>
+                            <input id="text-Fn" name="fn" type="date" class="form-control"  required>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <a type="button" class="btn btn-danger" href="../Inic/loggout.php">Cerrar Sesion</a>
-                    <button type="button" class="btn btn-primary">Aceptar</button>
-                </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-danger" href="../Inic/loggout.php">Cerrar Sesion</a>
+                        <button class="btn btn-primary" name="modificar" type="submit">Aceptar</button>
+                    </div>                    
+                    
+                </form>
+
+                
             </div>
         </div>
     </div>
@@ -511,6 +552,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <!-- Custom Js Link -->
     <script src="./main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 
 </html>
