@@ -220,7 +220,7 @@ mysqli_close($conn);
                         echo $tabla_conts['tbl_categorias'];
                         ?>
                     </div>
-                    <div class="cartaNombre">Categorías</div>
+                    <div class="cartaNombre">Categorias</div>
                 </div>
 
                 <div class="iconBx">

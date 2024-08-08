@@ -63,6 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       var formData = new FormData(this); // Serializar los datos del formulario
 
+      formData.append('sel_servi', JSON.stringify(guardarServicios()));
+
       $.ajax({
           url: './consultas.php', // Archivo PHP que procesa la solicitud
           method: 'POST',
@@ -194,15 +196,19 @@ function mostrarinfo(datos) {
   document.getElementById('clientes').appendChild(divTelefono);
 
   var btnDisponibilidad = document.createElement("button");
-  btnDisponibilidad.className = "btn-buscar";
+  btnDisponibilidad.className = "btn btn-primary"; // Cambié la clase para que coincida con Bootstrap
+  btnDisponibilidad.type = "button";
   btnDisponibilidad.textContent = "Reservar";
+  btnDisponibilidad.setAttribute("data-bs-toggle", "modal");
+  btnDisponibilidad.setAttribute("data-bs-target", "#ventagregar");
+  
   btnDisponibilidad.addEventListener('click', function(){
-    Reservar(datos);
-    document.getElementById('ventagregar').style.display = 'block';
-    document.getElementById('forma').addEventListener('submit', function(event) {
-      event.preventDefault();
-    });
-  })
+      Reservar(datos);
+      document.getElementById('forma').addEventListener('submit', function(event) {
+        event.preventDefault();
+      });
+  });
+
   document.getElementById('btns-buscar').appendChild(btnDisponibilidad);
 
   var btnCancelar = document.createElement("button");
@@ -218,8 +224,19 @@ function Reservar(datos) {
   
   generarCodigo('Codigo_add');
   document.querySelector("#form-agregar #ID_Cliente_add").value = datos.ID_Cliente;
-  document.querySelector("#form-agregar #Nombre").textContent = datos.Nombre_Razón_Social;
-  document.querySelector("#form-agregar #Identidad").textContent = datos.Nacionalidad + "-" + datos.Identificación;
+  document.querySelector("#form-agregar #Identidad").textContent = datos.Nombre_Razón_Social + "   " + datos.Nacionalidad + "-" + datos.Identificación;
+  document.getElementById('Fch_Reserva').value = new Date().toISOString().split('T')[0];
+  var dato = 'servicios';
+  $.ajax({
+    url: 'consultas.php',
+    type: 'POST',
+    data: dato,
+    success: function(response){
+      var data = JSON.parse(response);
+      $('#Add_servicios').html(data['mensaje']);
+      
+  }
+});
 }
 function generarCodigo(text) {
   const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -275,4 +292,15 @@ function tareaError(mensaje){
     title: "error",
     text: mensaje
   });
+}
+function guardarServicios() {
+  const serviciosSeleccionados = [];
+  const checkboxes = document.querySelectorAll('#form-agregar .btn-check');
+  console.log(checkboxes);
+  checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+          serviciosSeleccionados.push(checkbox.value);
+      }
+  });
+  return serviciosSeleccionados;
 }
