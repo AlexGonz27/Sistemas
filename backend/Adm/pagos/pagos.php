@@ -163,24 +163,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <!-- ========================= principal ==================== -->
     <div class="principal">
-        <div class="barratop">
+        <div class="barratop d-flex justify-content-between align-items-center">
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
 
             <div class="buscar">
-                <label>
-                    <input type="text" placeholder="Buscar">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
+                <div class="input-group">
+                    <input id="buscador_tabla" type="text" class="form-control ps-4 rounded-pill" placeholder="  Buscar" aria-label="Buscar">
+                    <span class="input-group-text bg-transparent border-0">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
             </div>
 
             <div class="user">
-                <img src="assets/imgs/customer01.jpg" alt="">
+                <i class="bi bi-person-circle" style="font-size: 30px; color: #009970;"></i>
             </div>
         </div>
-        <div>
-        </div>
+
         <div class="dt-serv">
             <div class="serviciosTable">
                 <div class="cartaHeader">
