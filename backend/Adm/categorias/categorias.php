@@ -241,7 +241,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                             <div class="mb-3">
                                 <label for="text-cost" class="form-label">Precio:</label>
-                                <input id="text-cost" name="cost" type="text" class="form-control" placeholder="Precio" required>
+                                <input id="text-cost" name="cost" type="number" class="form-control" placeholder="Precio" required>
                             </div>
                         </div>
                         <div class="modal-footer">
