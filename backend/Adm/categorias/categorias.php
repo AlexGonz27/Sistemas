@@ -221,7 +221,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <h5 class="modal-title" id="modalLabel">Agregar Categoría</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="form-agregar" action="" method="post">
+                    <form id="form-agregar" action="" method="post" class = "forma">
                         <input type="hidden" name="agregar">
                         <div class="modal-body">
                             <div class="mb-3">
@@ -246,14 +246,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-primary" type="submit">Agregar</button>
+                            <button class="btn btn-primary" name ="agregar" type="submit">Agregar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div id="ventmodifi" class="ventana">
+        
+
+        <div id="ventmodifi" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="conte-vent">
                 <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
                 <form class="forma" id="form-modificar" action="" method="post" name="modificar">
