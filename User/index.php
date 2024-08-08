@@ -181,48 +181,84 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </section>
     <!-- banner section exit-->
 
-    <section id="Prueba" class="about_wrapper mt-5">
-        <div class="container booking-area shadow">
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col-sm">
-                        <h2 class="text-start">Reservación</h2>
-                        <h4 class="text-start">Habitación</h4>
-                        <h4 class="text-start mt-1">Descripción</h4>
-                        <h4 class="text-start mt-1">Precio</h4>
+<!-- Sección de Disponibilidad -->
+<section id="Disponibilidad" class="about_wrapper mt-5">
+    <div class="container booking-area shadow">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2 class="text-start">Reservación</h2>
+                <h4 class="text-start">Habitación: <span id="room-name">Nombre de la Habitación</span></h4>
+                <h4 class="text-start mt-1">Descripción: <span id="room-description">Descripción de la habitación</span></h4>
+                <h4 class="text-start mt-1">Precio: <span id="room-price">Precio</span> $ / Por Noche</h4>
+            </div>
+            <div class="col-sm-6">
+                <div id="carouselImages" class="carousel slide" data-bs-ride="false">
+                    <div class="carousel-inner">
+                        <?php
+                            // Conectar a la base de datos
+                            $conn = conectarDB();
+
+                            // Consulta para obtener las habitaciones
+                            $sql = "SELECT * FROM tbl_habitaciones_categoria";
+                            $result = mysqli_query($conn, $sql);
+                            $roomCount = 0;
+
+                            // Verificar si hay habitaciones disponibles
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($fila = mysqli_fetch_assoc($result)) {
+                                    // Obtener la categoría de la habitación
+                                    $sql = "SELECT * FROM tbl_categorias WHERE ID_Categoria = '" . $fila['ID_Categoria'] . "'";
+                                    $categoria = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+
+                                    // Mostrar la imagen del carrusel
+                                    echo "<div class='carousel-item " . ($roomCount === 0 ? 'active' : '') . "' data-room-name='" . $categoria['Nombre'] . "' data-room-description='" . $fila['Descripción'] . "' data-room-price='" . $categoria['Precio'] . "'>";
+                                    echo "<img src='.." . $fila['imagen'] . "' class='d-block w-100' alt='room'>";
+                                    echo "</div>";
+                                    $roomCount++;
+                                }
+                            }
+
+                            // Cerrar la conexión a la base de datos
+                            mysqli_close($conn);
+                        ?>
                     </div>
-                    <div class="col">
-                        <div class="slider-wrapper">
-                          <div class="slider">
-                            <img
-                              src="./images/Habitacion1.jpg"
-                              id="slider-1"
-                              alt="island"
-                              class="image"
-                            />
-                            <img
-                              src="./images/Habitacion1.jpg"
-                              id="slider-2"
-                              alt="mountain"
-                              class="image"
-                            />
-                            <img 
-                                src="./images/Habitacion1.jpg" 
-                                id="slider-3" 
-                                alt="stars" 
-                                class="image" />
-                          </div>
-                          <div class="slider-nav">
-                            <a href="#slider-1" class="slider-button"></a>
-                            <a href="#slider-2" class="slider-button"></a>
-                            <a href="#slider-3" class="slider-button"></a>
-                          </div>
-                        </div>
-                    </div>
-              </div>
+                    <!-- Botones de control del carrusel -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+<!-- Fin de Sección de Disponibilidad -->
+
+<script>
+    // Función para actualizar la descripción y el precio al cambiar de imagen
+    document.addEventListener('DOMContentLoaded', function () {
+        const carouselItems = document.querySelectorAll('#carouselImages .carousel-item');
+        const roomName = document.getElementById('room-name');
+        const roomDescription = document.getElementById('room-description');
+        const roomPrice = document.getElementById('room-price');
+
+        carouselItems.forEach(item => {
+            item.addEventListener('slide.bs.carousel', function () {
+                const name = item.getAttribute('data-room-name');
+                const description = item.getAttribute('data-room-description');
+                const price = item.getAttribute('data-room-price');
+
+                roomName.textContent = name;
+                roomDescription.textContent = description;
+                roomPrice.textContent = price;
+            });
+        });
+    });
+</script>
 
     <!-- Seccion de Informacion -->
     <section id="About">
