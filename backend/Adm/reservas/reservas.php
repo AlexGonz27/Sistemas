@@ -40,27 +40,51 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             $NA = mysqli_real_escape_string($conn, $_POST['Nacionalidad']);
 
             $sql = "SELECT * FROM tbl_cliente_persona WHERE Nacionalidad = '$NA' AND Identificación = '$ID'";
-
             $result = mysqli_query($conn, $sql);
+
             if (mysqli_num_rows($result) > 0) {
                 $fila = mysqli_fetch_assoc($result);
-                echo    "<script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    mostrarinfo(" . json_encode($fila) . ");
-                                });
-                            </script>";
+                echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    $('#ventaler').modal('show');
+                    mostrarinfo(" . json_encode($fila) . ");
+                });
+            </script>";
             } else {
-                echo    "<script>
-                                var resultado = confirm('¿Deseas agregar el cliente?');
-                                if (resultado) {
-                                    window.location.href = '../clientes/clientes.php';
-                                }
-                            </script>";
+                echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    $('#ventaler').modal('show');
+                });
+            </script>";
             }
         }
     }
     mysqli_close($conn);
     ?>
+
+    <!-- Ventana alerta -->
+    <div id="ventaler" class="modal fade" tabindex="-1" aria-labelledby="modalLabelAgregar" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #009970;">
+                    <h5 class="modal-title" id="modalLabelAgregar" style="color: white;">Agregar Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form-agregar-cliente" action="../clientes/clientes.php" method="post" class="forma">
+                    <input type="hidden" name="agregar_cliente" value="1">
+                    <div class="modal-body">
+                        <p>¿Deseas agregar el cliente?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-success" type="submit">Agregar Cliente</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Fin de Ventana alerta -->
+
     <!-- =============== navegacion ================ -->
     <div class="contenedor-nav">
         <div class="navegacion">
@@ -190,24 +214,24 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </div>
 
     <!-- ========================= principal ==================== -->
-
     <div class="principal">
-        <div class="barratop">
+        <div class="barratop d-flex justify-content-between align-items-center">
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
+
             <div class="buscar">
-                <label>
-                    <input type="text" placeholder="Buscar">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
+                <div class="input-group">
+                    <input id="buscador_tabla" type="text" class="form-control ps-4 rounded-pill" placeholder="  Buscar" aria-label="Buscar">
+                    <span class="input-group-text bg-transparent border-0">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
             </div>
 
             <div class="user">
-                <img src="assets/imgs/customer01.jpg" alt="">
+                <i class="bi bi-person-circle" style="font-size: 30px; color: #009970;"></i>
             </div>
-        </div>
-        <div>
         </div>
         <!-- ////////////////// Busqueda Cliente //////////////////-->
 
@@ -226,7 +250,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                     <option value="E">E</option>
                                     <option value="G">G</option>
                                 </select>
-                                <input type="text"  placeholder="Identificación" name="id_cliente" id="ID_clt">
+                                <input type="text" placeholder="Identificación" name="id_cliente" id="ID_clt">
                             </div>
                         </div>
                     </div>
@@ -247,7 +271,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </div>
                 </div>
                 <div class="conte-btns">
-                <!-- 
+                    <!-- 
                     <div>
                         <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                     </div>
@@ -299,7 +323,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </div>
 
     <!-- ////////////////// Ventana MODA de Agregar ////////////////// -->
-     <div class="modal fade" id="ventagregar" tabindex="-1" aria-labelledby="ventagregarLabel" aria-hidden="true">
+    <div class="modal fade" id="ventagregar" tabindex="-1" aria-labelledby="ventagregarLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -345,7 +369,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <div class="container text-center">
                                 <div class="form-group">
                                     <label for="F_E">Servicios</label>
-                                    <div class="row d-flex flex-wrap" id="Add_servicios" >
+                                    <div class="row d-flex flex-wrap" id="Add_servicios">
 
                                     </div>
                                 </div>
@@ -379,7 +403,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
 
             <!-- Forma para modificar -->
-            <form id="form-modificar" action="" method="post" name="modificar" >
+            <form id="form-modificar" action="" method="post" name="modificar">
 
                 <input id="ID_Reserva" type="hidden" name="ID_Reserva">
                 <select id="ID_Cliente" class="mi-select" name="Cliente">
@@ -431,7 +455,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <!--Bootstrap 5 JS CDN Links -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
-    
+
     <script src="/Sistemas/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
