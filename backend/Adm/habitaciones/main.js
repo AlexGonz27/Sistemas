@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
           processData: false, // Evitar que jQuery procese los datos
           contentType: false,
           success: function(respuesta) {
+            console.log(respuesta);
             var data = JSON.parse(respuesta);
 
             if (data.estado === 'completado') {
