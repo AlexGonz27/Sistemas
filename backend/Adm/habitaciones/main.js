@@ -136,6 +136,7 @@ function ConfgVentModifiCat(FilaJson) {
   document.querySelector("#form-modificar #Cat_modifi").value = FilaJson.ID_Categoria;
   document.querySelector("#form-modificar #text-cant_modifi").value = FilaJson.N_Habitación;
   document.querySelector("#form-modificar #Est_modifi").value = FilaJson.Estado;
+  document.querySelector("#form-modificar #descripcion").value = FilaJson.Descripción;
 }
 
 function ConfgVentElimCat(ID,imagen) {
