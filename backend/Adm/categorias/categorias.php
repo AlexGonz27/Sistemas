@@ -30,125 +30,127 @@ else{
 </head>
 
 <body>
-    <!-- =============== Navegación ================ -->
-    <div class="contenedor-nav">
-        <div class="navegacion">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="desktop-outline"></ion-icon>
-                        </span>
-                        <span class="title" id="Titulo">Sistema de Reservas</span>
-                    </a>
-                </li>
-                <li id="Inicio">
-                    <a href="../index.php">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                        <span class="title">Inicio</span>
-                    </a>
-                </li>
-                <li id="Reservas">
-                    <a href="../reservas/reservas.php">
-                        <span class="icon">
-                            <ion-icon name="id-card-outline"></ion-icon>
-                        </span>
-                        <span class="title">Reservas</span>
-                    </a>
-                </li>
-                <li id="Pagos">
-                    <a href="../pagos/pagos.php">
-                        <span class="icon">
-                            <ion-icon name="cash-outline"></ion-icon>
-                        </span>
-                        <span class="title">Pagos</span>
-                    </a>
-                </li>
-                <li id="Categorias">
-                    <a href="../categorias/categorias.php">
-                        <span class="icon">
-                            <ion-icon name="bookmarks-outline"></ion-icon>
-                        </span>
-                        <span class="title">Categorías</span>
-                    </a>
-                </li>
-                <li id="Habitaciones">
-                    <a href="../habitaciones/habitaciones.php">
-                        <span class="icon">
-                            <ion-icon name="bed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Habitaciones</span>
-                    </a>
-                </li>
-                <li id="Servicios">
-                    <a href="../servicios/servicios.php">
-                        <span class="icon">
-                            <ion-icon name="hand-right-outline"></ion-icon>
-                        </span>
-                        <span class="title">Servicios</span>
-                    </a>
-                </li>
-                <li id="Usuarios">
-                    <a href="../usuarios/usuarios.php">
-                        <span class="icon">
-                            <ion-icon name="person-circle-outline"></ion-icon>
-                        </span>
-                        <span class="title">Usuarios</span>
-                    </a>
-                </li>
-                <li id="Clientes">
-                    <a href="../clientes/clientes.php">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Clientes</span>
-                    </a>
-                </li>
-                <li id="Cargos">
-                    <a href="../cargos/cargos.php">
-                        <span class="icon">
-                            <ion-icon name="briefcase-outline"></ion-icon>
-                        </span>
-                        <span class="title">Cargos</span>
-                    </a>
-                </li>
-                <li id="Huespedes">
-                    <a href="./huespedes.php">
-                        <span class="icon">
-                            <ion-icon name="body-outline"></ion-icon>
-                        </span>
-                        <span class="title">Huéspedes</span>
-                    </a>
-                </li>
-                <li id="Mascotas">
-                    <a href="../mascotas/mascotas.php">
-                        <span class="icon">
-                            <ion-icon name="paw-outline"></ion-icon>
-                        </span>
-                        <span class="title">Mascotas</span>
-                    </a>
-                </li>
-                <li id="Promociones">
-                    <a href="../promociones/promociones.php">
-                        <span class="icon">
-                            <ion-icon name="cash-outline"></ion-icon>
-                        </span>
-                        <span class="title">Promociones</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../../Inic/loggout.php">
-                        <span class="icon">
-                            <ion-icon name="enter-outline"></ion-icon>
-                        </span>
-                        <span class="title">Cerrar Sesión</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+<!-- =============== Navegación ================ -->
+<div class="contenedor-nav">
+    <div class="navegacion">
+        <ul>
+            <li>
+                <a href="#">
+                    <span class="icon">
+                        <ion-icon name="desktop-outline"></ion-icon>
+                    </span>
+                    <span class="title" id="Titulo">Sistema de Reservas</span>
+                </a>
+            </li>
+            <li id="Inicio">
+                <a href="../index.php">
+                    <span class="icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </span>
+                    <span class="title">Inicio</span>
+                </a>
+            </li>
+            <li id="Reservas">
+                <a href="../reservas/reservas.php">
+                    <span class="icon">
+                        <ion-icon name="card-outline"></ion-icon>
+                    </span>
+                    <span class="title">Reservas</span>
+                </a>
+            </li>
+            <li id="Pagos">
+                <a href="../pagos/pagos.php">
+                    <span class="icon">
+                        <ion-icon name="cash-outline"></ion-icon>
+                    </span>
+                    <span class="title">Pagos</span>
+                </a>
+            </li>
+            <li id="Categorias">
+                <a href="../categorias/categorias.php">
+                    <span class="icon">
+                        <ion-icon name="bookmark-outline"></ion-icon>
+                    </span>
+                    <span class="title">Categorías</span>
+                </a>
+            </li>
+            <li id="Habitaciones">
+                <a href="../habitaciones/habitaciones.php">
+                    <span class="icon">
+                        <ion-icon name="bed-outline"></ion-icon>
+                    </span>
+                    <span class="title">Habitaciones</span>
+                </a>
+            </li>
+            <li id="Servicios">
+                <a href="../servicios/servicios.php">
+                    <span class="icon">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                    </span>
+                    <span class="title">Servicios</span>
+                </a>
+            </li>
+            <li id="Usuarios">
+                <a href="../usuarios/usuarios.php">
+                    <span class="icon">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                    </span>
+                    <span class="title">Usuarios</span>
+                </a>
+            </li>
+            <li id="Clientes">
+                <a href="../clientes/clientes.php">
+                    <span class="icon">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </span>
+                    <span class="title">Clientes</span>
+                </a>
+            </li>
+            <li id="Cargos">
+                <a href="../cargos/cargos.php">
+                    <span class="icon">
+                        <ion-icon name="briefcase-outline"></ion-icon>
+                    </span>
+                    <span class="title">Cargos</span>
+                </a>
+            </li>
+            <li id="Huespedes">
+                <a href="./huespedes.php">
+                    <span class="icon">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </span>
+                    <span class="title">Huéspedes</span>
+                </a>
+            </li>
+            <li id="Mascotas">
+                <a href="../mascotas/mascotas.php">
+                    <span class="icon">
+                        <ion-icon name="paw-outline"></ion-icon>
+                    </span>
+                    <span class="title">Mascotas</span>
+                </a>
+            </li>
+            <li id="Promociones">
+                <a href="../promociones/promociones.php">
+                    <span class="icon">
+                        <ion-icon name="pricetag-outline"></ion-icon>
+                    </span>
+                    <span class="title">Promociones</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../../Inic/loggout.php">
+                    <span class="icon">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </span>
+                    <span class="title">Cerrar Sesión</span>
+                </a>
+            </li>
+        </ul>
     </div>
+</div>
+
+
 
     <!-- ========================= principal ==================== -->
     <div class="principal">
