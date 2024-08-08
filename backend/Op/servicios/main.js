@@ -2,6 +2,14 @@ const currentPage = document.title;
 elementoLi = document.getElementById(currentPage);
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  if (localStorage.getItem('showAlert') === 'true') {
+    
+    tareaCompletada();
+
+    localStorage.removeItem('showAlert');
+  }
+
   if (elementoLi) {
       elementoLi.classList.add("hovered");
   }
@@ -66,13 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
             var data = JSON.parse(respuesta);
 
             if (data.estado === 'completado') {
-              tareaCompletada();
-              document.querySelectorAll('.ventana').forEach(function(element) {
-                element.style.display = 'none';
-            });
-              setTimeout(function() {
-                  location.reload();
-              }, 3000);
+              localStorage.setItem('showAlert', 'true');
+              location.reload();
             } else {
               tareaError(data.mensaje);
             }

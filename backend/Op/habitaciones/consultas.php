@@ -10,7 +10,6 @@
                 }else
                 {
                     $target_dir = "../../../images/Habitaciones/"; // Carpeta donde se guardarán las imágenes
-                
                     $target_file = $target_dir . basename($_FILES["imagen"]["name"]);
                     $uploadOk = 1;
                     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -34,6 +33,7 @@
                         $uploadOk = 0;
                     }
                 
+                    $descripcion = $_POST['Descripcion'];
                     $categoria = $_POST['Categoria'];
                     $N_Habitacion = $_POST['NumHabitaciones'];
                     $estado = $_POST['Estado'];
@@ -48,17 +48,41 @@
                             $respuesta['mensaje'] = 'Ya existe otra habitación con el mismo número.';
                         } else {
                             if ($uploadOk != 0) {
-                                if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $target_file)) {
-                                    $target_dir = "/images/Habitaciones/";
-                                    $target_file = $target_dir . basename($_FILES["imagen"]["name"]);
-                                    $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria, imagen, N_Habitación, Estado) VALUES ('$categoria', '$target_file', '$N_Habitacion', '$estado')";
-                                    if (mysqli_query($conn, $sql)) {
-                                        $respuesta['estado'] = 'completado';
-                                    } else {
-                                        $respuesta['mensaje'] = 'Error al insertar la categoría: ' . mysqli_error($conn);
-                                    }
+                                // Establecer el tamaño deseado
+                                $max_width = 1350;
+                                $max_height = 1080;
+                            
+                                // Obtener las dimensiones originales
+                                list($width, $height) = getimagesize($_FILES["imagen"]["tmp_name"]);
+                                
+                                // Calcular las nuevas dimensiones
+                                $ratio = $width / $height;
+                                if ($width > $height) {
+                                    $new_width = $max_width;
+                                    $new_height = $max_width / $ratio;
                                 } else {
-                                    $respuesta['mensaje'] = 'Error al mover el archivo subido.';
+                                    $new_height = $max_height;
+                                    $new_width = $max_height * $ratio;
+                                }
+                                $src = imagecreatefromstring(file_get_contents($_FILES["imagen"]["tmp_name"]));
+                                $dst = imagecreatetruecolor($new_width, $new_height);
+                                imagecopyresampled($dst, $src, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+                                if ($new_width > $max_width || $new_height > $max_height) {
+                                    $respuesta['mensaje'] = "no pudo ser redimensionada. {$new_width}px de ancho y {$new_height}px de alto.";
+                                }else{
+                                    if (imagejpeg($dst, $target_file)) {
+                                        $target_dir = "/images/Habitaciones/";
+                                        $target_file = $target_dir . basename($_FILES["imagen"]["name"]);
+                                        $sql = "INSERT INTO tbl_habitaciones_categoria (ID_Categoria, Descripción, imagen, N_Habitación, Estado) VALUES ('$categoria','$descripcion', '$target_file', '$N_Habitacion', '$estado')";
+                                        if (mysqli_query($conn, $sql)) {
+                                            $respuesta['estado'] = 'completado';
+                                        } else {
+                                            $respuesta['mensaje'] = 'Error al insertar la categoría: ' . mysqli_error($conn);
+                                        }
+                                    } else {
+                                        $respuesta['mensaje'] = 'Error al mover el archivo subido.';
+                                    }
                                 }
                             }
                         }
@@ -101,12 +125,21 @@
             }
             if (isset($_POST['eliminar'])){
                 $ID = $_POST['ID_Hab'];
-    
-                $sql = "DELETE FROM tbl_habitaciones_categoria WHERE ID_Habitaciones = '$ID'";
-                    
-                if (mysqli_query($conn, $sql)) {
-                    $respuesta['estado'] = 'completado';
-                } 
+                $Image = $_POST['imagen'];
+
+                $ruta = "../../.." . $Image;
+                
+                // Eliminar el archivo del servidor
+                if (file_exists($ruta)) {
+                    unlink($ruta);
+                    $sql = "DELETE FROM tbl_habitaciones_categoria WHERE ID_Habitaciones = '$ID'";
+                        
+                    if (mysqli_query($conn, $sql)) {
+                        $respuesta['estado'] = 'completado';
+                    } 
+                }else{
+                    $respuesta['mensaje'] = 'No se encontró la imagen!';
+                }
             } 
             echo json_encode($respuesta);
         }

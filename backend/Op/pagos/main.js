@@ -130,17 +130,17 @@ toggle.onclick = function () {
   main.classList.toggle("active")
 };
 
-function ConfgVentModifiCat(FilaJson) {
+function ConfgVentModifiCat(FilaJson,nombre,reserva) {
   console.log(FilaJson)
 
-  document.querySelector("#form-modificar #ID_Car").value = FilaJson.ID_Cargo;
-  document.querySelector("#form-modificar #text-Nombre").value = FilaJson.Nombre;
-  document.querySelector("#form-modificar #text-desc").value = FilaJson.Descripción;
-  document.querySelector("#form-modificar #text-nivel").value = FilaJson.Nivel;
-  document.querySelector("#form-modificar #text-Sueldo").value = FilaJson.Sueldo;
+  document.querySelector("#form-modificar #ID_Pago").value = FilaJson.ID_Pago;
+  document.querySelector("#form-modificar #Cliente").textContent = nombre;
+  document.querySelector("#form-modificar #Reserva").textContent = reserva;
+  document.querySelector("#form-modificar #text-monto").value = FilaJson.Monto;
 }
+
 function ConfgVentElimCat(ID) {
-  document.getElementById("ID_CarElim").value = ID;
+  document.getElementById("ID_PagoElim").value = ID;
 }
 
 function tareaCompletada(){
@@ -179,4 +179,3 @@ function tareaError(mensaje){
     text: mensaje
   });
 }
-

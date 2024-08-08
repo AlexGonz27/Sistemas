@@ -2,6 +2,13 @@ const currentPage = document.title;
 elementoLi = document.getElementById(currentPage);
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  if (localStorage.getItem('showAlert') === 'true') {
+    
+    tareaCompletada();
+
+    localStorage.removeItem('showAlert');
+  }
   if (elementoLi) {
       elementoLi.classList.add("hovered");
   }
@@ -66,13 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
             var data = JSON.parse(respuesta);
 
             if (data.estado === 'completado') {
-              tareaCompletada();
-              document.querySelectorAll('.ventana').forEach(function(element) {
-                element.style.display = 'none';
-            });
-              setTimeout(function() {
-                  location.reload();
-              }, 3000);
+              localStorage.setItem('showAlert', 'true');
+              location.reload();
             } else {
               tareaError(data.mensaje);
             }
@@ -132,7 +134,7 @@ function ConfgVentModifiCat(FilaJson,nombre) {
   console.log(FilaJson)
 
   document.querySelector("#form-modificar #ID_usuario").value = FilaJson.ID_Usuario;
-  document.querySelector("#form-modificar h2").textContent = nombre;
+
   document.querySelector("#form-modificar #text_nivel").value = FilaJson.Nivel;
   document.querySelector("#form-modificar #text_correo").value = FilaJson.Correo;
   document.querySelector("#form-modificar #text_contraseña").value = FilaJson.Contraseña;

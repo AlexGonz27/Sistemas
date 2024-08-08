@@ -18,7 +18,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empleados</title>
+    <title>Pagos</title>
     <link rel="stylesheet" href="./estilos.css">
     <!-- Alertas -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -109,8 +109,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Cargos</span>
                     </a>
                 </li>
+<<<<<<< Updated upstream
                 <li id="Empleados">
                     <a href="../empleados/empleados.php">
+=======
+                <li id="Huespedes">
+                    <a href="../huespedes/huespedes.php">
+>>>>>>> Stashed changes
                         <span class="icon">
                             <ion-icon name="briefcase-outline"></ion-icon>
                         </span>
@@ -184,7 +189,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div class="dt-serv">
             <div class="serviciosTable">
                 <div class="cartaHeader">
-                    <h2>Empleados</h2>
+                    <h2>Pagos</h2>
                 </div>
                 <div class="conte-btns">
                     <div>
@@ -199,7 +204,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <table id="Tabla_Datos">
                     <thead>
                         <tr>
-                            <td>Nombre</td>
+                            <td>Reserva</td>
+                            <td>Cliente</td>
+                            <td>Monto</td>
                             <td>Acciones</td>
                         </tr>
                     </thead>
@@ -207,17 +214,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <?php
                         include '../conexion.php';
                         $conn = conectarDB();
-                        $sql = "SELECT * FROM tbl_empleados;";
+                        $sql = "SELECT * FROM tbl_pagos;";
                         $resultado = mysqli_query($conn, $sql);
                         while ($fila = mysqli_fetch_assoc($resultado)) {
-                            $idPer = $fila['ID_Cliente_Persona'];
-                            $sqlPer = "SELECT * FROM tbl_cliente_persona WHERE ID_Cliente = '$idPer'";
-                            $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlPer));
-                            echo "<tr>
-                                <td>" . $result['Nombre_Razón_Social'] . "</td>
+                            $idClt = $fila['ID_Cliente'];
+                            $sqlClt = "SELECT Nombre_Razón_Social FROM tbl_cliente_persona WHERE ID_Cliente = '$idClt'";
+                            $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlClt));
+                            $idres = $fila['ID_Reserva'];
+                            $sqlRes = "SELECT Codigo_Reserva FROM tbl_reservacion WHERE ID_Reservación = '$idres'";
+                            $result2 = mysqli_fetch_assoc(mysqli_query($conn, $sqlRes));
+                            echo "<tr> 
+                                <td>" . $result2['Codigo_Reserva'] . "</td>
+                                <td>" . $result['Nombre_Razón_Social'] . "</td>  
+                                <td>" . $fila['Monto'] . "</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(" . json_encode($fila) . ")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(" . $fila['ID_Empleado'] . ");'>Eliminar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(" . json_encode($fila) . "," . json_encode($result['Nombre_Razón_Social']) . "," . json_encode($result2['Codigo_Reserva']) . ")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(" . $fila['ID_Pago'] . ");'>Eliminar</span>
                                 </td>
                             </tr>";
                         }
@@ -241,14 +253,28 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $resultado = mysqli_query($conn, $sql);
 
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                        $id = $fila['ID_Cliente'];
-                        $sqlUser = "SELECT * FROM tbl_empleados WHERE ID_Cliente_Persona = '$id';";
-                        $result = mysqli_query($conn, $sqlUser);
-                        if (mysqli_num_rows($result) < 1) echo '<option value="' . $fila['ID_Cliente'] . '">' . $fila['Nombre_Razón_Social'] . '</option>';
+                        echo '<option value="' . $fila['ID_Cliente'] . '">' . $fila['Nombre_Razón_Social'] . '</option>';
                     }
                     mysqli_close($conn);
                     ?>
                 </select>
+                <select class="mi-select" name="Reservas">
+                    <option value="">Seleccionar una opción</option>
+                    <?php
+                    $conn = conectarDB();
+                    $sql = "SELECT * FROM tbl_reservacion;";
+                    $resultado = mysqli_query($conn, $sql);
+                    while ($fila = mysqli_fetch_assoc($resultado)) {
+                        echo '<option value="' . $fila['ID_Reservación'] . '">' . $fila['Codigo_Reserva'] . '</option>';
+                    }
+
+                    mysqli_close($conn);
+                    ?>
+                </select>
+
+
+                <input id="text-monto" name="Monto" type="text" placeholder="Monto">
+
                 <button class="btns btn-agregar" type="submit">Agregar</button>
             </form>
         </div>
@@ -259,8 +285,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
             <form class="forma" id="form-modificar" action="" method="post" name="modificar">
                 <input type="hidden" name="modificar">
-                <input id="ID_Emp" type="hidden" name="ID_Emp">
-                <h2></h2>
+                <input id="ID_Pago" type="hidden" name="ID_Pago">
+
+                <h2 id="Cliente"></h2>
+                <h2 id="Reserva"></h2>
+
+                <input id="text-monto" name="Monto" type="text" placeholder="Monto">
                 <button class="btns btn-modificar" type="submit" class="forma btn-modificar">modificar</button>
             </form>
         </div>
@@ -271,7 +301,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
             <form class="forma" id="form-agregar" action="" method="post" name="agregar">
                 <input type="hidden" name="eliminar">
-                <input id="ID_EmpElim" type="hidden" name="ID_Emp">
+                <input id="ID_PagoElim" type="hidden" name="ID_Pago">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit">eliminar</button>
             </form>

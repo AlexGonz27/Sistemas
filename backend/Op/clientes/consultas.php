@@ -15,7 +15,7 @@
                     $direc = $_POST['direc'];
                     $tlf = $_POST['tlf'];
                     $fn = $_POST['fn'];
-                    if(!preg_match("/\d{7,8}/",$CI)) {
+                    if (!is_numeric($CI)) {
                         $respuesta['mensaje'] = 'La identidad solo debe contener números!';
                     }else {
                         if(preg_match("/\d/",$name_rs))
@@ -58,7 +58,7 @@
                     $fn = $_POST['fn'];
 
                     
-                    if(!preg_match("/\d{7,8}/",$CI))
+                    if(preg_match("/\d/",$name_rs))
                     {
                         $respuesta['mensaje'] = 'El campo nombre no debe contener números!';
                     }else

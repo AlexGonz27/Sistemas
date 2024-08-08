@@ -2,6 +2,13 @@ const currentPage = document.title;
 elementoLi = document.getElementById(currentPage);
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  if (localStorage.getItem('showAlert') === 'true') {
+    
+    tareaCompletada();
+
+    localStorage.removeItem('showAlert');
+  }
   if (elementoLi) {
       elementoLi.classList.add("hovered");
   }
@@ -63,16 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
           processData: false, // Evitar que jQuery procese los datos
           contentType: false,
           success: function(respuesta) {
+            console.log(respuesta);
             var data = JSON.parse(respuesta);
 
             if (data.estado === 'completado') {
-              tareaCompletada();
-              document.querySelectorAll('.ventana').forEach(function(element) {
-                element.style.display = 'none';
-            });
-              setTimeout(function() {
-                  location.reload();
-              }, 3000);
+              localStorage.setItem('showAlert', 'true');
+              location.reload();
             } else {
               tareaError(data.mensaje);
             }
@@ -135,10 +138,13 @@ function ConfgVentModifiCat(FilaJson) {
   document.querySelector("#form-modificar #Cat_modifi").value = FilaJson.ID_Categoria;
   document.querySelector("#form-modificar #text-cant_modifi").value = FilaJson.N_Habitación;
   document.querySelector("#form-modificar #Est_modifi").value = FilaJson.Estado;
+  document.querySelector("#form-modificar #descripcion").value = FilaJson.Descripción;
 }
 
-function ConfgVentElimCat(ID) {
+function ConfgVentElimCat(ID,imagen) {
+  console.log(ID,imagen)
   document.getElementById("ID_HabElim").value = ID;
+  document.getElementById("imagen").value = imagen;
 }
 
 function tareaCompletada(){
