@@ -115,7 +115,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </a>
                 </li>
                 <li id="Huespedes">
-                    <a href="./huespedes.php">
+                    <a href="../huespedes/huespedes.php">
                         <span class="icon">
                             <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
