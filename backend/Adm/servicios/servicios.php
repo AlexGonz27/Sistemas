@@ -114,13 +114,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Cargos</span>
                     </a>
                 </li>
-<<<<<<< Updated upstream
                 <li id="Empleados">
                     <a href="../empleados/empleados.php">
-=======
                 <li id="Huespedes">
                     <a href="../huespedes/huespedes.php">
->>>>>>> Stashed changes
                         <span class="icon">
                             <ion-icon name="briefcase-outline"></ion-icon>
                         </span>
