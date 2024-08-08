@@ -62,6 +62,10 @@ function ConfgVentModifi(FilaJson) {
   document.querySelector("#form-modificar #text-Fn").value = FilaJson.Fecha_Nacimiento;
 }
 
+function ConfgVentElim(ID){
+  document.getElementById("ID_ResElim").value = ID;
+}
+
 function tareaCompletada(){
   const Toast = Swal.mixin({
     toast: true,

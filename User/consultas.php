@@ -45,6 +45,15 @@
                     } 
                 }
             }
+            if (isset($_POST['anular'])){
+                $ID = $_POST['ID_Res'];
+    
+                $sql = "UPDATE tbl_reservacion SET Estado ='Anulada' WHERE ID_Reservación = '$ID'";
+                    
+                if (mysqli_query($conn, $sql)) {
+                    $respuesta['estado'] = 'completado';
+                } 
+            } 
             echo json_encode($respuesta);
         }
         mysqli_close($conn);

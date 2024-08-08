@@ -142,20 +142,90 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a type="button" class="btn btn-danger" href="../Inic/loggout.php">Cerrar Sesion</a>
                         <button class="btn btn-primary" name="modificar" type="submit">Aceptar</button>
                     </div>                    
                     
                 </form>
-
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-danger" href="../Inic/loggout.php">Cerrar Sesion</a>
+                    <span class="btn btn-primary" name="Reservas" data-bs-toggle="modal" data-bs-target="#Lis_res">Reservas</span>
+                </div>
                 
             </div>
         </div>
     </div>
 
+    
+    <div class="modal fade" id="Lis_res" tabindex="-1" aria-labelledby="User" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="User">Datos de Reservas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" >
+                    <table id= "Tabla_Datos">
+                        <thead>
+                            <tr>
+                                <td>Codigo</td>
+                                <td>Habitacion</td>
+                                <td>Fecha de Entrada</td>
+                                <td>Fecha de Salida</td>
+                                <td>Estado</td>
+                                <td>Acciones</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $conn = conectarDB();
+                                $sql = "SELECT * FROM tbl_reservacion WHERE ID_Cliente = '" . $_SESSION['user_id'] . "'";
+                                $resultado = mysqli_query($conn, $sql);
+                                while ($fila = mysqli_fetch_assoc($resultado)) {
+                                    $id = $fila['ID_Habitacion'];
+                                    $sqlCat = "SELECT * FROM tbl_habitaciones_categoria WHERE ID_Habitaciones = '$id'";
+                                    $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlCat));
+                                    echo "<tr>
+                                            <td>" . $fila['Codigo_Reserva'] . "</td>  
+                                            <td>Nº-" . $result['N_Habitación'] . "</td>
+                                            <td>" . $fila['Fecha_Entrada'] . "</td>
+                                            <td>" . $fila['Fecha_Salida'] . "</td>
+                                            <td>" . $fila['Estado'] . "</td>
+                                            <td>
+                                                <span class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#ventanular' onclick='ConfgVentElim(" . $fila['ID_Reservación'] . ")';>Anular</span>
+                                            </td>
+                                        </tr>";
+                                    }
+                                mysqli_close($conn);
+                            ?>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-
+     
+    <div id="ventanular" class="modal fade" tabindex="-1" aria-labelledby="User" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #009970;">
+                    <h5 class="modal-title" id="modalLabelEliminar" style="color: white;">Anular Reserva</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form-eliminar" action="" method="post" class="forma">
+                    <input type="hidden" name="anular">
+                    <input id="ID_ResElim" type="hidden" name="ID_Res">
+                    <div class="modal-body">
+                        <p>¿Seguro que desea anular esta reserva?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" name="anular "type="submit">Anular</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- seccion Conocenos -->
     <section id="Home" class="banner_wrapper p-0">
