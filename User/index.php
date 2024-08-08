@@ -27,6 +27,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conjunto Vacacional La Fuente</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="images/Favicon_Cabaña.png">
 
@@ -41,9 +43,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <!-- Custom File's Link -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive-style.css">
+<<<<<<< Updated upstream
 
     <!-- Alertas -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+=======
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+>>>>>>> Stashed changes
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
@@ -250,23 +257,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
             <div class="swiper-pagination"></div>
         </div>
-        <div class="container booking-area shadow mb-3">
-            <form class="row">
+        <div class="container booking-area shadow mb-3" id="forma-disponibilidad">
+            <form class="row forma">
                 <div class="col-lg mb-3 mb-lg-0">
                     <span class="input-group-text" id="adulto-input">Fecha Entrada</span>
-                    <input type="date" class="form-control" placeholder="Date">
+                    <input type="date" class="form-control" placeholder="Date" name="fch_ent">
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
                     <span class="input-group-text" id="adulto-input">Fecha Salida</span>
-                    <input type="date" class="form-control" placeholder="Date">
+                    <input type="date" class="form-control" placeholder="Date" name="fch_sal">
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
                     <span class="input-group-text" id="adulto-input">Adultos</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="adulto-input" min="0">
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="adulto-input" min="1" value="1">
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
                     <span class="input-group-text" id="menores-input">Niños</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="menores-input" min="0">
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="menores-input" min="0" value="0">
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
                     <span class="input-group-text" id="Mascotas-input">Mascotas</span>
@@ -285,7 +292,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
 
                 <div class="col-lg mb-3 mb-lg-0">
-                    <button type="submit" class="main-btn rounded-2 px-lg-3"><a class="nav-link" href="./Inic/inic.php">Disponibilidad</a></button>
+                    <button type="submit" class="main-btn rounded-2 px-lg-3">disponible</button>
                 </div>
             </form>
         </div>
@@ -293,48 +300,29 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <!-- banner section exit-->
 
     <!-- Sección de Disponibilidad -->
-    <section id="Disponibilidad" class="about_wrapper mt-5">
+    <section id="Disponibilidad" class="about_wrapper mt-5" style="display: none;">
         <div class="container booking-area shadow">
             <div class="row">
                 <div class="col-sm-6">
-                    <h2 class="text-start">Reservación</h2>
-                    <h4 class="text-start">Habitación: <span id="room-name"></span></h4>
-                    <h4 class="text-start mt-1">Descripción: <span id="room-description"></span></h4>
-                    <h4 class="text-start mt-1">Precio: <span id="room-price"></span> $ / Por Noche</h4>
+                    <div class="row mb-5">
+                        <h2 class="text-start">Reservación</h2>
+                        <h4 class="text-start">Categoria: <span id="room-name"></span></h4>
+                        <h4 class="text-start">Nº Habitación: <span id="room-numH"></span></h4>
+                        <h4 class="text-start mt-1">Descripción: <span id="room-description"></span></h4>
+                        <h4 class="text-start mt-1">Precio: <span id="room-price"></span> $ / Por Noche</h4>
+                    </div>
+                    <div id="habitaciones-container">
+
+                    </div>
                 </div>
                 <div class="col-sm-6">
-                    <div id="carouselImages" class="carousel slide" data-bs-ride="false">
-                        <div class="carousel-inner">
-                            <?php
-                            // Conectar a la base de datos
-                            $conn = conectarDB();
-
-                            // Consulta para obtener las habitaciones
-                            $sql = "SELECT * FROM tbl_habitaciones_categoria";
-                            $result = mysqli_query($conn, $sql);
-                            $roomCount = 0;
-
-                            // Verificar si hay habitaciones disponibles
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($fila = mysqli_fetch_assoc($result)) {
-                                    // Obtener la categoría de la habitación
-                                    $sql = "SELECT * FROM tbl_categorias WHERE ID_Categoria = '" . $fila['ID_Categoria'] . "'";
-                                    $categoria = mysqli_fetch_assoc(mysqli_query($conn, $sql));
-
-                                    // Mostrar la imagen del carrusel
-                                    echo "<div class='carousel-item " . ($roomCount === 0 ? 'active' : '') . "' data-room-name='" . $categoria['Nombre'] . "' data-room-description='" . $fila['Descripción'] . "' data-room-price='" . $categoria['Precio'] . "'>";
-                                    echo "<div class='d-flex justify-content-center'>";
-                                    echo "<img src='.." . $fila['imagen'] . "' class='d-block img-fluid w-50' alt='room'>";
-                                    echo "</div>";
-                                    echo "</div>";
-                                    $roomCount++;
-                                }
-                            }
-
-                            // Cerrar la conexión a la base de datos
-                            mysqli_close($conn);
-                            ?>
+                    <div id="carouselImages" class="carousel slide " data-bs-ride="false">
+    
+                        <!-- Habitaciones disponibles -->
+                        <div class="carousel-inner" id="resultadoDisponibilidad">
+                            
                         </div>
+
                         <!-- Botones de control del carrusel -->
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -344,13 +332,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Siguiente</span>
                         </button>
-                        <style>
-                            .carousel-control-prev-icon,
-                            .carousel-control-next-icon {
-                                background-color: #009970;
-                                border-radius: 50%;
-                            }
-                        </style>
+                    </div>
+                    <div id="noContentMessage" class="no-content">
+                        No hay habitaciones disponibles.
+                    </div>
+                    <div class="text-center mt-2" >
+                        <button id="btn-addHabitacion" type="button" class="btn btn-success text-center" >Añadir</button>
                     </div>
                 </div>
             </div>
@@ -358,31 +345,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </section>
     <!-- Fin de Sección de Disponibilidad -->
 
-    <script>
-        // Función para actualizar los datos de la habitación
-        function updateRoomData() {
-            const activeItem = document.querySelector('.carousel-item.active');
-            const roomName = activeItem.getAttribute('data-room-name');
-            const roomDescription = activeItem.getAttribute('data-room-description');
-            const roomPrice = activeItem.getAttribute('data-room-price');
-
-            document.getElementById('room-name').textContent = roomName;
-            document.getElementById('room-description').textContent = roomDescription;
-            document.getElementById('room-price').textContent = roomPrice;
-        }
-
-        // Actualizar los datos cuando se cambia la diapositiva
-        document.getElementById('carouselImages').addEventListener('slid.bs.carousel', updateRoomData);
-
-        // Actualizar los datos al cargar la página
-        document.addEventListener('DOMContentLoaded', updateRoomData);
-    </script>
-
-
-
-
     <!-- Seccion de Informacion -->
-    <section id="About">
+    <section id="About" class="about_wrapper mt-2">
         <div class="container">
             <div class="row flex-lg-row flex-column-reverse">
                 <div class="col-lg-6 text-center text-lg-start">
@@ -612,6 +576,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!--Bootstrap 5 JS CDN Links -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>

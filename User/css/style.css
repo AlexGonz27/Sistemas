@@ -579,3 +579,10 @@ p {
   background-color: #009970;
   border-radius: 50%;
 }
+.no-content {
+  display: none;
+  text-align: center;
+  padding: 50px;
+  font-size: 1.5em;
+  color: #777;
+}
