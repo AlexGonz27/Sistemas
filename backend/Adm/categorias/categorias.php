@@ -146,7 +146,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <!-- ========================= principal ==================== -->
     <div class="principal">
-        <div class="barratop">
+        <div class="barratop d-flex justify-content-between align-items-center">
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
@@ -160,11 +160,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
             </div>
 
-
             <div class="user">
                 <i class="bi bi-person-circle" style="font-size: 30px; color: #009970;"></i>
             </div>
         </div>
+
         <div class="container mt-5">
             <div class="dt-serv">
                 <div class="serviciosTable">
@@ -266,7 +266,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #009970;">
-                        <h5 class="modal-title" id="modalLabel" style="color: white;">modificar Categoría</h5>
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">Modificar Categoría</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form id="form-modificar" action="" method="post" class="forma">
@@ -315,7 +315,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <input type="hidden" name="eliminar">
                         <input id="ID_CatElim" type="hidden" name="ID_Cat">
                         <div class="modal-body">
-                            <p>¿Seguro que desea eliminar esta fila?</p>
+                            <p>¿Seguro que desea eliminar esta Categoria?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
