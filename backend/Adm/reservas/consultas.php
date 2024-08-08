@@ -22,7 +22,7 @@
 
                     $sql = "INSERT INTO tbl_reservacion (ID_Cliente,ID_Habitacion,Codigo_Reserva,Fecha_Reservación,
                                         Fecha_Entrada,Fecha_Salida,N_Adultos,N_Ninos,Sn_mascotas,Estado,Monto) 
-                                    VALUES ('$ID','$Hab','$codigo','$Fch_reserva','$Fch_reserva','$Fch_salida','$N_Adultos','$N_niños','$Mascotas','Pendiente',100)";                        
+                                    VALUES ('$ID','$Hab','$codigo','$Fch_reserva','$Fch_entrada','$Fch_salida','$N_Adultos','$N_niños','$Mascotas','Pendiente',100)";                        
                     if (mysqli_query($conn,$sql)) {
                         $reserva_id = mysqli_insert_id($conn);
                         foreach ($servicios as $servicio) {

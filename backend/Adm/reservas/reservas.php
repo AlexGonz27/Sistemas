@@ -46,16 +46,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 $fila = mysqli_fetch_assoc($result);
                 echo "<script>
                 document.addEventListener('DOMContentLoaded', function() {
-                    $('#ventaler').modal('show');
                     mostrarinfo(" . json_encode($fila) . ");
                 });
-            </script>";
-            } else {
-                echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    $('#ventaler').modal('show');
-                });
-            </script>";
+                </script>";
+                } else {
+                    echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        $('#ventaler').modal('show');
+                    });
+                </script>";
             }
         }
     }
