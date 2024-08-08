@@ -5,7 +5,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../../../");
     exit;
 } else {
-    if ($_SESSION['nivel'] > 1) {
+    if ($_SESSION['nivel'] > 2) {
         header("Location: ../../../");
         exit;
     }
@@ -193,13 +193,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <div class="serviciosTable">
                     <div class="cartaHeader d-flex justify-content-between align-items-center">
                         <h2 style="color: #009970;">Habitaciones</h2>
-                        <div class="conte-btns d-flex align-items-center">
-                            <div>
-                                <div class="btn-agregar" data-bs-toggle="modal" data-bs-target="#ventagregar" style="background-color: #009970; color: white; padding: 10px 20px; border-radius: 5px; text-align: center;">
-                                    Agregar
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <table id="Tabla_Datos" class="table mt-3">
                         <thead>
@@ -207,7 +200,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <th>Categoría</th>
                                 <th>Descripción</th>
                                 <th>Estado</th>
-                                <th>N Habitaciones</th>
+                                <th>N Habitación</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -229,9 +222,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <td>
                     <span class='btns btn-modificar' data-bs-toggle='modal' data-bs-target='#ventmodifi' onclick='ConfgVentModifiCat(" . json_encode($fila) . ")'>
                         <i class='bi bi-pencil-square'></i>
-                    </span>
-                    <span class='btns btn-eliminar' data-bs-toggle='modal' data-bs-target='#venteliminar' onclick='ConfgVentElimCat(" . $fila['ID_Habitaciones'] . "," . json_encode($fila['imagen']) . ");'>
-                        <i class='bi bi-trash'></i>
                     </span>
                 </td>
             </tr>";
@@ -319,32 +309,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                     <input type="hidden" name="modificar">
                                     <input id="ID_habit_modifi" type="hidden" name="ID_habit_modifi">
                                     <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label for="Cat_modifi" class="form-label">Categoría:</label>
-                                            <select id="Cat_modifi" class="form-select" name="Categoria" required>
-                                                <option value="">Seleccionar una opción</option>
-                                                <?php
-                                                $conn = conectarDB();
-                                                $sql = "SELECT * FROM tbl_categorias;";
-                                                $resultado = mysqli_query($conn, $sql);
-                                                while ($fila = mysqli_fetch_assoc($resultado)) {
-                                                    echo '<option value="' . $fila['ID_Categoria'] . '">' . htmlspecialchars($fila['Nombre']) . '</option>';
-                                                }
-                                                mysqli_close($conn);
-                                                ?>
-                                            </select>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="descripcion" class="form-label">Descripción:</label>
-                                            <input id="descripcion" name="Descripcion" type="text" class="form-control" placeholder="Descripción" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="text-cant_modifi" class="form-label">Número de Habitaciones:</label>
-                                            <input id="text-cant_modifi" name="NumHabitaciones" type="number" class="form-control" placeholder="Número de Habitaciones" required>
-                                        </div>
-
                                         <div class="mb-3">
                                             <label for="Est_modifi" class="form-label">Estado:</label>
                                             <select id="Est_modifi" class="form-select" name="Estado" required>

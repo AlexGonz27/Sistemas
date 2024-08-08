@@ -5,7 +5,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../../../");
     exit;
 } else {
-    if ($_SESSION['nivel'] > 1) {
+    if ($_SESSION['nivel'] > 2) {
         header("Location: ../../../");
         exit;
     }
@@ -193,13 +193,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <div class="serviciosTable">
                     <div class="cartaHeader d-flex justify-content-between align-items-center">
                         <h2 style="color: #009970;">Categorías</h2>
-                        <div class="conte-btns">
-                            <div>
-                                <div class="btn-agregar" data-bs-toggle="modal" data-bs-target="#ventagregar" style="background-color: #009970; color: white; padding: 10px 20px; border-radius: 5px; text-align: center;">
-                                    Agregar
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <table id="Tabla_Datos" class="table mt-3">
@@ -209,7 +203,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <th>Descripción</th>
                                 <th>Capacidad</th>
                                 <th>Precio</th>
-                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -224,14 +217,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <td>" . htmlspecialchars($fila['Descripción']) . "</td>
                                 <td>" . htmlspecialchars($fila['Capacidad']) . "</td>
                                 <td>" . htmlspecialchars($fila['Precio']) . "$</td>
-                                <td>
-                                    <span class='btns btn-modificar' data-bs-toggle='modal' data-bs-target='#ventmodifi' onclick='ConfgVentModifiCat(" . json_encode($fila) . ")'>
-                                        <i class='bi bi-pencil-square'></i>
-                                    </span>
-                                    <span class='btns btn-eliminar' data-bs-toggle='modal' data-bs-target='#venteliminar' onclick='ConfgVentElimCat(" . $fila['ID_Categoria'] . ");'>
-                                        <i class='bi bi-trash'></i>
-                                    </span>
-                                </td>
                             </tr>";
                             }
                             ?>

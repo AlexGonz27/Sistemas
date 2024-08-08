@@ -5,7 +5,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../../../");
     exit;
 } else {
-    if ($_SESSION['nivel'] > 1) {
+    if ($_SESSION['nivel'] > 2) {
         header("Location: ../../../");
         exit;
     }

@@ -41,14 +41,13 @@
                 }  
             }
             if (isset($_POST['modificar'])){
-                if (empty($_POST['nivel'])or empty($_POST['correo']) or empty($_POST['contraseña'])) {
+                if (empty($_POST['nivel'])or empty($_POST['correo'])) {
                     $respuesta['mensaje'] = 'Alguno de los campos se encuentra vacio.';
                 }else
                 {
                     $ID = $_POST['ID_usuario'];
                     $Nivel = $_POST['nivel'];
                     $Correo = $_POST['correo'];
-                    $Contraseña = $_POST['contraseña'];
 
                     if(!filter_var($Correo, FILTER_VALIDATE_EMAIL))
                     {
@@ -64,7 +63,7 @@
                             $respuesta['mensaje'] = 'Ya existe otro usuario con ese correo.';
                         }else
                         {
-                            $sql = "UPDATE tbl_usuario SET Nivel='$Nivel', Correo='$Correo', Contraseña='$Contraseña' WHERE ID_Usuario = '$ID'";
+                            $sql = "UPDATE tbl_usuario SET Nivel='$Nivel', Correo='$Correo' WHERE ID_Usuario = '$ID'";
                             
                             if (mysqli_query($conn, $sql)) {
                                 $respuesta['estado'] = 'completado';

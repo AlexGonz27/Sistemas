@@ -5,7 +5,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../../../");
     exit;
 } else {
-    if ($_SESSION['nivel'] > 1) {
+    if ($_SESSION['nivel'] > 2) {
         header("Location: ../../../");
         exit;
     }
@@ -113,13 +113,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Cargos</span>
                     </a>
                 </li>
-<<<<<<< Updated upstream
                 <li id="Empleados">
                     <a href="../empleados/empleados.php">
-=======
-                <li id="Huespedes">
-                    <a href="../huespedes/huespedes.php">
->>>>>>> Stashed changes
                         <span class="icon">
                             <ion-icon name="briefcase-outline"></ion-icon>
                         </span>
@@ -210,7 +205,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <th>Cliente</th>
                                 <th>Nivel</th>
                                 <th>Correo</th>
-                                <th>Contraseña</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -228,13 +222,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <td>" . htmlspecialchars($result['Nombre_Razón_Social']) . "</td>
                             <td>" . htmlspecialchars($fila['Nivel']) . "</td>
                             <td>" . htmlspecialchars($fila['Correo']) . "</td>
-                            <td>" . htmlspecialchars($fila['Contraseña']) . "</td>
                             <td>
                                 <span class='btns btn-modificar' data-bs-toggle='modal' data-bs-target='#ventmodifi' onclick='ConfgVentModifiCat(" . json_encode($fila) . "," . json_encode($result['Nombre_Razón_Social']) . ")'>
                                     <i class='bi bi-pencil-square'></i>
-                                </span>
-                                <span class='btns btn-eliminar' data-bs-toggle='modal' data-bs-target='#venteliminar' onclick='ConfgVentElimCat(" . $fila['ID_Usuario'] . ");'>
-                                    <i class='bi bi-trash'></i>
                                 </span>
                             </td>
                         </tr>";
@@ -337,10 +327,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <input id="text_correo" name="correo" type="email" class="form-control" placeholder="Correo" required>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="text_contraseña" class="form-label">Contraseña:</label>
-                                <input id="text_contraseña" name="contraseña" type="password" class="form-control" placeholder="Contraseña" required>
-                            </div>
+                            <input id="text_contraseña" type="hidden" name="contraseñas">
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
