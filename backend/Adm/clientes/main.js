@@ -184,3 +184,15 @@ function tareaError(mensaje){
     text: mensaje
   });
 }
+
+function isNumber(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  var allowedChars = [45, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57]; // Códigos ASCII para "-" y números
+  
+  if (allowedChars.indexOf(charCode) === -1) {
+    return false;
+  }
+  
+  return true;
+}
