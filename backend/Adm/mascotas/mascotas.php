@@ -5,6 +5,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../../../");
     exit;
 }
+else{
+    if ($_SESSION['nivel'] > 1) {
+        header("Location: ../../../");
+        exit;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

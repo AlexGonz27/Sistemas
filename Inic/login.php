@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['loggedin'] = true;
             $_SESSION['user_id'] = $fila['ID_Cliente'];
             $_SESSION['user_email'] = $fila['Correo'];
-
+            $_SESSION['nivel'] = $fila['Nivel'];
             $respuesta['estado'] = 'completado';
             $respuesta['nivel'] = $fila['Nivel'];
         }   else {

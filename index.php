@@ -1,3 +1,26 @@
+<?php
+
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == true) {
+    if (isset($_SESSION['nivel'])) {
+        switch ($_SESSION['nivel']) {
+            case '1':
+                header("Location: ./backend/Adm");
+                break;
+            case '2':
+                header("Location: ./backend/Op");
+                break;
+            case '3':
+                header("Location: ./User");
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+    }
+} 
+?>
 <!DOCTYPE html>
 <html lang="en">
 

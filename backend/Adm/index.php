@@ -6,6 +6,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../../../");
     exit;
 }
+else{
+    if ($_SESSION['nivel'] > 1) {
+        header("Location: ../../");
+        exit;
+    }
+}
 $conn = conectarDB();
 $sql = "SHOW TABLES";
 $resultado = mysqli_query($conn, $sql);
