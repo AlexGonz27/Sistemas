@@ -38,7 +38,7 @@ body {
   overflow-y: auto;
 }
 .navegacion.active {
-  width: 80px;
+  width: 90px;
 }
 
 .navegacion ul {
@@ -137,7 +137,7 @@ Pseudo-elementos solo para los elementos principales */
   transition: 0.5s;
 }
 .principal.active {
-  width: calc(100% - 80px);
+  width: calc(100% - 90px);
   left: 80px;
 }
 
