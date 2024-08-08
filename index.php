@@ -155,30 +155,69 @@
     </section>
 <!-- Fin de Seccion de Informacion-->
 
-<!-- Seccion de Habitaciones -->
+    <!-- Sección de Habitaciones -->
     <section id="Rooms" class="room_wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 section-title text-center mb-5">
+                    <h6>Ven y Disfruta de Nuestras Habitaciones</h6>
                     <h3>Nuestras Habitaciones</h3>
                 </div>
             </div>
-            <div class="row m-0">
-                <?php
-                    include './User/conexion.php';
-                    
+            <div id="carouselRooms" class="carousel slide" data-bs-ride="carousel">
+                <!-- Indicadores del carrusel -->
+                <div class="carousel-indicators">
+                    <?php
+                    // Conectar a la base de datos
                     $conn = conectarDB();
 
+                    // Consulta para obtener las habitaciones
                     $sql = "SELECT * FROM tbl_habitaciones_categoria";
                     $result = mysqli_query($conn, $sql);
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($fila = mysqli_fetch_assoc($result)) {     
+                    $totalRooms = mysqli_num_rows($result);
+                    $roomsPerSlide = 3; // Número de habitaciones por diapositiva
+                    $roomCount = 0; // Contador de habitaciones en la diapositiva actual
+                    $slideCount = 0; // Contador de diapositivas
+
+                    // Verificar si hay habitaciones disponibles
+                    if ($totalRooms > 0) {
+                        // Generar indicadores
+                        while ($roomCount < $totalRooms) {
+                            if ($roomCount % $roomsPerSlide == 0) {
+                                echo "<button type='button' data-bs-target='#carouselRooms' data-bs-slide-to='$slideCount' class='" . ($slideCount === 0 ? 'active' : '') . "' aria-current='" . ($slideCount === 0 ? 'true' : 'false') . "' aria-label='Slide " . ($slideCount + 1) . "'></button>";
+                                $slideCount++;
+                            }
+                            $roomCount++;
+                        }
+                    }
+                    ?>
+                </div>
+                <div class="carousel-inner">
+                    <?php
+                    // Reiniciar el contador de habitaciones para mostrar el contenido
+                    $roomCount = 0; // Reiniciar el contador de habitaciones
+
+                    // Verificar si hay habitaciones disponibles
+                    if ($totalRooms > 0) {
+                        while ($fila = mysqli_fetch_assoc($result)) {
+                            // Obtener la categoría de la habitación
                             $sql = "SELECT * FROM tbl_categorias WHERE ID_Categoria = '" . $fila['ID_Categoria'] . "'";
                             $categoria = mysqli_fetch_assoc(mysqli_query($conn, $sql));
-                            echo"
-                                <div class='col-md-4 mb-4 mb-lg-0'>
+
+                            // Iniciar una nueva diapositiva si el contador de habitaciones alcanza el número por diapositiva
+                            if ($roomCount % $roomsPerSlide == 0) {
+                                if ($roomCount > 0) {
+                                    echo "</div></div>"; // Cerrar la diapositiva anterior
+                                }
+                                echo "<div class='carousel-item " . ($roomCount === 0 ? 'active' : '') . "'>";
+                                echo "<div class='row m-0'>";
+                            }
+
+                            // Mostrar el elemento de la habitación
+                            echo "
+                                <div class='col-md-4 mb-4'>
                                     <div class='room-items'>
-                                        <img src='." . $fila['imagen'] . "' class='img-fluid' alt='room'>
+                                        <img src='.." . $fila['imagen'] . "' class='img-fluid' alt='room'>
                                         <div class='room-item-wrap'>
                                             <div class='room-content'>
                                                 <h5 class='text-white mb-lg-5 text-decoration-underline'>" . $categoria['Nombre'] . "</h5>
@@ -189,16 +228,31 @@
                                         </div>
                                     </div>
                                 </div>";
-                        }
-                    }
-                    
-                    mysqli_close($conn);
-                ?>
 
+                            $roomCount++;
+                        }
+                        // Cerrar la última diapositiva
+                        echo "</div></div>";
+                    }
+
+                    // Cerrar la conexión a la base de datos
+                    mysqli_close($conn);
+                    ?>
+                </div>
+                <!-- Botones de control del carrusel -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselRooms" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselRooms" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
             </div>
         </div>
     </section>
-<!-- Fin de Seccion de Habitaciones-->
+    <!-- Fin de Sección de Habitaciones -->
+
      
 <!-- Seccion de Galeria -->
     <section id="Gallery" class="gallery_wrapper">
