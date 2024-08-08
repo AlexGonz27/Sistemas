@@ -29,7 +29,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 </head>
 
 <body>
-    <!-- =============== Navegación ================ -->
+    <!-- =============== navegacion ================ -->
     <div class="contenedor-nav">
         <div class="navegacion">
             <ul>
@@ -52,7 +52,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li id="Reservas">
                     <a href="../reservas/reservas.php">
                         <span class="icon">
-                            <ion-icon name="card-outline"></ion-icon>
+                            <ion-icon name="calendar-outline"></ion-icon>
                         </span>
                         <span class="title">Reservas</span>
                     </a>
@@ -68,7 +68,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li id="Categorias">
                     <a href="../categorias/categorias.php">
                         <span class="icon">
-                            <ion-icon name="bookmark-outline"></ion-icon>
+                            <ion-icon name="pricetags-outline"></ion-icon>
                         </span>
                         <span class="title">Categorías</span>
                     </a>
@@ -84,7 +84,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li id="Servicios">
                     <a href="../servicios/servicios.php">
                         <span class="icon">
-                            <ion-icon name="thumbs-up-outline"></ion-icon>
+                            <ion-icon name="restaurant-outline"></ion-icon>
                         </span>
                         <span class="title">Servicios</span>
                     </a>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li id="Usuarios">
                     <a href="../usuarios/usuarios.php">
                         <span class="icon">
-                            <ion-icon name="person-circle-outline"></ion-icon>
+                            <ion-icon name="people-outline"></ion-icon>
                         </span>
                         <span class="title">Usuarios</span>
                     </a>
@@ -100,7 +100,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li id="Clientes">
                     <a href="../clientes/clientes.php">
                         <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
+                            <ion-icon name="person-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Clientes</span>
                     </a>
@@ -116,7 +116,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <li id="Huespedes">
                     <a href="./huespedes.php">
                         <span class="icon">
-                            <ion-icon name="person-outline"></ion-icon>
+                            <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Huéspedes</span>
                     </a>
@@ -127,6 +127,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <ion-icon name="paw-outline"></ion-icon>
                         </span>
                         <span class="title">Mascotas</span>
+                    </a>
+                </li>
+                <li id="Menores">
+                    <a href="../menores/menores.php">
+                        <span class="icon">
+                            <ion-icon name="accessibility-outline"></ion-icon>
+                        </span>
+                        <span class="title">Menores</span>
                     </a>
                 </li>
                 <li id="Promociones">
@@ -148,6 +156,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </ul>
         </div>
     </div>
+
     <!-- ========================= principal ==================== -->
     <div class="principal">
         <div class="barratop d-flex justify-content-between align-items-center">
@@ -354,7 +363,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
         </div>
         <!-- Fin de Ventana Eliminar -->
-         
+
         <!--Bootstrap 5 JS CDN Links -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
