@@ -6,7 +6,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../../../");
     exit;
 } else {
-    if ($_SESSION['nivel'] > 1) {
+    if ($_SESSION['nivel'] > 2) {
         header("Location: ../../../");
         exit;
     }
@@ -174,17 +174,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
 
             <div class="buscar">
-                <label>
-                    <input id="buscador_tabla" type="text" placeholder="Buscar">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
+                <div class="input-group">
+                    <input id="buscador_tabla" type="text" class="form-control ps-4 rounded-pill" placeholder="  Buscar" aria-label="Buscar">
+                    <span class="input-group-text bg-transparent border-0">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
             </div>
 
             <div class="user">
                 <i class="bi bi-person-circle" style="font-size: 30px; color: #009970;"></i>
             </div>
         </div>
-
         <div class="container mt-5">
             <div class="dt-serv">
                 <div class="serviciosTable">
@@ -226,9 +227,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                     <span class='btns btn-modificar'data-bs-toggle='modal'data-bs-target='#ventmodifi' onclick='ConfgVentModifi(" . json_encode($fila) . ")'>
                                     <i class='bi bi-pencil-square'></i>
                                     </span>
-                                </span>
-                                    <span class='btns btn-eliminar'data-bs-toggle='modal' data-bs-target='#venteliminar' onclick='ConfgVentElim(" . $fila['ID_Cliente'] . ");'><i class='bi bi-trash'></i>
-                                </span>
                                 </td>
                             </tr>";
                             }

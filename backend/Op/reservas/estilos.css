@@ -369,10 +369,10 @@ td {
   text-align: center;
 }
 .dt-serv .serviciosTable table tr td:nth-child(4) {
-  max-width: 40px;
+  max-width: 30px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(5) {
-  max-width: 10px;
+  max-width: 20px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(6) {
   max-width: 28px;

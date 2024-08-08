@@ -307,6 +307,7 @@ td {
 .dt-serv .serviciosTable table tr td:nth-child(4) {
   max-width: 30px;
 }
+
 .dt-serv .serviciosTable table tbody tr td:nth-child(3) {
   text-align: center;
 }

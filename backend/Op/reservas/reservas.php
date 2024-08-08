@@ -5,7 +5,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../../../");
     exit;
 } else {
-    if ($_SESSION['nivel'] > 1) {
+    if ($_SESSION['nivel'] > 2) {
         header("Location: ../../../");
         exit;
     }
@@ -21,6 +21,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <title>Reservas</title>
     <link rel="stylesheet" href="./estilos.css">
 
+    <!-- Bootstrap 5 CDN Links-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Alertas -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -31,74 +35,56 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     $conn = conectarDB();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['agregar'])) {
-            $ID = $_POST['Cliente'];
-            $Fch_reserva = $_POST['Fch_Reserva'];
-            $Fch_entrada = $_POST['Fch_Entrada'];
-            $Fch_salida = $_POST['Fch_Salida'];
-            $Estado = $_POST['Estado'];
-
-            $sql = "INSERT INTO tbl_reservacion (ID_Cliente,Fecha_Reservación,Fecha_Entrada,Fecha_Salida,Estado) VALUES ('$ID','$Fch_reserva','$Fch_entrada','$Fch_salida','$Estado')";
-
-            if (mysqli_query($conn, $sql)) {
-                echo "<script>alert('Fila insertada correctamente.');</script>";
-            } else {
-                echo "Error al insertar fila: " . mysqli_error($conn);
-            }
-        }
-        if (isset($_POST['modificar'])) {
-            $ID = $_POST['ID_Reserva'];
-            $ID_Clt = $_POST['Cliente'];
-            $Fch_reserva = $_POST['Fch_Reserva'];
-            $Fch_entrada = $_POST['Fch_Entrada'];
-            $Fch_salida = $_POST['Fch_Salida'];
-            $Estado = $_POST['Estado'];
-
-            $sql = "UPDATE tbl_reservacion SET ID_Cliente='$ID_Clt',Fecha_Reservación='$Fch_reserva',Fecha_Entrada='$Fch_entrada',Fecha_Salida='$Fch_salida',Estado='$Estado' WHERE ID_Reservación = '$ID'";
-
-            if (mysqli_query($conn, $sql)) {
-                echo "<script>alert('Fila modificada correctamente.');</script>";
-            } else {
-                echo "Error al modificar fila: " . mysqli_error($conn);
-            }
-        }
-        if (isset($_POST['eliminar'])) {
-            $ID = $_POST['ID_Reserva'];
-
-            $sql = "DELETE FROM tbl_reservacion WHERE ID_Reservación = '$ID'";
-
-            if (mysqli_query($conn, $sql)) {
-                echo "<script>alert('Fila eliminada correctamente.');</script>";
-            } else {
-                echo "Error al modificar fila: " . mysqli_error($conn);
-            }
-        }
         if (isset($_POST['buscar'])) {
             $ID = mysqli_real_escape_string($conn, $_POST['id_cliente']);
             $NA = mysqli_real_escape_string($conn, $_POST['Nacionalidad']);
 
             $sql = "SELECT * FROM tbl_cliente_persona WHERE Nacionalidad = '$NA' AND Identificación = '$ID'";
-
             $result = mysqli_query($conn, $sql);
+
             if (mysqli_num_rows($result) > 0) {
                 $fila = mysqli_fetch_assoc($result);
-                echo    "<script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    mostrarinfo(" . json_encode($fila) . ");
-                                });
-                            </script>";
+                echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    $('#ventaler').modal('show');
+                    mostrarinfo(" . json_encode($fila) . ");
+                });
+            </script>";
             } else {
-                echo    "<script>
-                                var resultado = confirm('¿Deseas agregar el cliente?');
-                                if (resultado) {
-                                    window.location.href = '../clientes/clientes.php';
-                                }
-                            </script>";
+                echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    $('#ventaler').modal('show');
+                });
+            </script>";
             }
         }
     }
     mysqli_close($conn);
     ?>
+
+    <!-- Ventana alerta -->
+    <div id="ventaler" class="modal fade" tabindex="-1" aria-labelledby="modalLabelAgregar" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #009970;">
+                    <h5 class="modal-title" id="modalLabelAgregar" style="color: white;">Agregar Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form-agregar-cliente" action="../clientes/clientes.php" method="post" class="forma">
+                    <input type="hidden" name="agregar_cliente" value="1">
+                    <div class="modal-body">
+                        <p>¿Deseas agregar el cliente?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-success" type="submit">Agregar Cliente</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Fin de Ventana alerta -->
+
     <!-- =============== navegacion ================ -->
     <div class="contenedor-nav">
         <div class="navegacion">
@@ -228,24 +214,24 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </div>
 
     <!-- ========================= principal ==================== -->
-
     <div class="principal">
-        <div class="barratop">
+        <div class="barratop d-flex justify-content-between align-items-center">
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
+
             <div class="buscar">
-                <label>
-                    <input type="text" placeholder="Buscar">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
+                <div class="input-group">
+                    <input id="buscador_tabla" type="text" class="form-control ps-4 rounded-pill" placeholder="  Buscar" aria-label="Buscar">
+                    <span class="input-group-text bg-transparent border-0">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
             </div>
 
             <div class="user">
-                <img src="assets/imgs/customer01.jpg" alt="">
+                <i class="bi bi-person-circle" style="font-size: 30px; color: #009970;"></i>
             </div>
-        </div>
-        <div>
         </div>
         <!-- ////////////////// Busqueda Cliente //////////////////-->
 
@@ -254,10 +240,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <div>
                     <h2>Cliente</h2>
                 </div>
-                <form action="" class="data_clientes" method="post" id="forma" name="buscar" class="forma">
+                <form action="" class="data_clientes" method="post" id="forma" name="buscar">
                     <div id="clientes">
                         <div class="case">
                             <div>
+                                <input type="hidden" name="servicios">
                                 <select name="Nacionalidad" id="Nacionalidad">
                                     <option value="V">V</option>
                                     <option value="E">E</option>
@@ -284,7 +271,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </div>
                 </div>
                 <div class="conte-btns">
-                <!-- 
+                    <!-- 
                     <div>
                         <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
                     </div>
@@ -323,7 +310,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <td>" . $fila['Estado'] . "</td>
                                 <td>
                                     <span class='btns btn-modificar' onclick='ConfgVentModifi(" . json_encode($fila) . ")' >Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElim(" . $fila['ID_Reservación'] . ");'>Eliminar</span>
                                 </td>
                             </tr>";
                         }
@@ -336,45 +322,80 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </div>
 
     <!-- ////////////////// Ventana MODA de Agregar ////////////////// -->
-    <div id="ventagregar" class="ventana">
-        <div class="conte-vent">
-            <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
+    <div class="modal fade" id="ventagregar" tabindex="-1" aria-labelledby="ventagregarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ventagregarLabel">Agregar Reserva</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Forma para agregar -->
+                    <form id="form-agregar" name="agregar" class="forma">
+                        <input type="hidden" name="agregar">
+                        <input type="hidden" name="Codigo" id="Codigo_add">
 
-            <!-- Forma para agregar  -->
-            <form id="form-agregar" name="agregar" class="forma" >
+                        <input type="hidden" name="ID_Clt" id="ID_Cliente_add">
+                        <input type="hidden" name="Identidad_add" id="Identidad_add">
+                        <input type="hidden" name="Nacionalidad_add" id="Nacionalidad_add">
 
-                <input type="hidden" name="agregar">
-                
-                <input type="hidden" name="Codigo" id="Codigo_add">
-                <input type="hidden" name="ID_Clt" id="ID_Cliente_add">
-                <input type="hidden" name="Identidad_add" id="Identidad_add">
-                <input type="hidden" name="Nacionalidad_add" id="Nacionalidad_add">
+                        <h2 id="Identidad" name="Identidad"></h2>
 
-                <h2 id="Nombre" name="Nombre_Razon"></h2>
-                <h2 id="Identidad" name="Identidad"></h2>
+                        <div class="form-group">
+                            <label for="Fch_Reserva">Fecha de Reservación</label>
+                            <input id="Fch_Reserva" name="Fch_Reserva" type="date" class="form-control" placeholder="Fecha de Reservación" readonly>
+                        </div>
 
-                <select class="mi-select" id="Hab" name="Habitacion">
-                    <option value="">Seleccionar una habitación</option>
-                </select>
+                        <div class="form-group">
+                            <label for="Hab">Habitación</label>
+                            <select class="form-control" id="Hab" name="Habitacion">
+                                <option value="">Seleccionar una habitación</option>
+                            </select>
+                        </div>
 
-                <input id="Fch_Reserva" name="Fch_Reserva" type="date" placeholder="Fecha de Reservación">
+                        <div class="form-group">
+                            <label for="F_E">Fecha de Entrada</label>
+                            <input id="F_E" name="Fch_Entrada" type="date" class="form-control" placeholder="Fecha de Entrada">
+                        </div>
 
-                <input id="F_E" name="Fch_Entrada" type="date" placeholder="Fecha de Entrada">
+                        <div class="form-group">
+                            <label for="F_S">Fecha de Salida</label>
+                            <input id="F_S" name="Fch_Salida" type="date" class="form-control" placeholder="Fecha de Salida">
+                        </div>
 
-                <input id="F_S" name="Fch_Salida" type="date" placeholder="Fecha de Salida">
+                        <div class="form-group">
+                            <div class="container text-center">
+                                <div class="form-group">
+                                    <label for="F_E">Servicios</label>
+                                    <div class="row d-flex flex-wrap" id="Add_servicios">
 
-                <input name="N_Adultos" type="number" placeholder="Número de Adultos" min="1" value="1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                <input name="N_Niños" type="number" placeholder="Número de Niños" min="0" value="0">
+                        <div class="form-group">
+                            <label for="N_Adultos">Número de Adultos</label>
+                            <input name="N_Adultos" type="number" class="form-control" placeholder="Número de Adultos" min="1" value="1">
+                        </div>
 
-                <input name="Mascotas" type="number" placeholder="Número de Mascotas" min="0" max="1" value="0">
+                        <div class="form-group">
+                            <label for="N_Niños">Número de Niños</label>
+                            <input name="N_Niños" type="number" class="form-control" placeholder="Número de Niños" min="0" value="0">
+                        </div>
 
-                <button class="btns btn-agregar" name="agregar">Agregar</button>
+                        <div class="form-group">
+                            <label for="Mascotas">Número de Mascotas</label>
+                            <input name="Mascotas" type="number" class="form-control" placeholder="Número de Mascotas" min="0" max="1" value="0">
+                        </div>
 
-            </form>
+                        <button type="submit" class="btn btn-primary" name="agregar">Agregar</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-
     <!-- ////////////////// Ventana MODA DE Modificar ////////////////// -->
     <div id="ventmodifi" class="ventana">
         <div class="conte-vent">
@@ -420,15 +441,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <div id="venteliminar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
-            <form id="form-agregar" action="" method="post" name="agregar">
+            <form id="form-eliminar" action="" method="post" name="agregar">
                 <input id="ID_ResElim" type="hidden" name="ID_Reserva">
                 <p>Seguro que desea eliminar esta fila?</p>
                 <button type="submit" name="eliminar">eliminar</button>
             </form>
         </div>
     </div>
+
     <!-- =========== Scripts =========  -->
     <script src="./main.js"></script>
+    <!--Bootstrap 5 JS CDN Links -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+
     <script src="/Sistemas/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>

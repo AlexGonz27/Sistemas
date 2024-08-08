@@ -314,10 +314,10 @@ td {
   max-width: 40px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(4) {
-  max-width: 40px;
+  max-width: 600px;
 }
 .dt-serv .serviciosTable table tr td:nth-child(5) {
-  max-width: 60px;
+  max-width: 40px;
 }
 .dt-serv .serviciosTable table tr td span {
   margin: 10px;
