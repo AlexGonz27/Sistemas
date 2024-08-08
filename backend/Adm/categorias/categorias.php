@@ -202,7 +202,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <td>" . $fila['Capacidad'] . "</td>
                                 <td>" . $fila['Precio'] . "$</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(" . json_encode($fila) . ")'>Modificar</span>
+                                    <span class='btns btn-modificar' data-bs-toggle='modal' data-bs-target='#ventmodifi' onclick='ConfgVentModifiCat(" . json_encode($fila) . ")'>Modificar</span>
                                     <span class='btns btn-eliminar' onclick='ConfgVentElimCat(" . $fila['ID_Categoria'] . ");'>Eliminar</span>
                                 </td>
                             </tr>";
@@ -236,7 +236,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                             <div class="mb-3">
                                 <label for="text-cap" class="form-label">Capacidad:</label>
-                                <input id="text-cap" name="cap" type="number" class="form-control" placeholder="Capacidad" required>
+                                <input id="text-cap" name="cap" type="number" class="form-control" min="1" max="10" placeholder="Capacidad" required>
                             </div>
 
                             <div class="mb-3">
@@ -253,23 +253,48 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
         </div>
 
-        
 
         <div id="ventmodifi" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="conte-vent">
-                <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
-                <form class="forma" id="form-modificar" action="" method="post" name="modificar">
-                    <input type="hidden" name="modificar">
-                    <input id="ID_Cat" type="hidden" name="ID_Cat">
-                    <input id="text-nombreCat" name="nombre" type="text" placeholder="Nombre">
-                    <input id="text-descCat" name="desc" type="text" placeholder="Descripcion">
-                    <input id="text-capCat" name="cap" type="int" placeholder="Capacidad">
-                    <input id="text-costCat" name="cost" type="text" placeholder="Precio">
-                    <button class="btns btn-modificar" type="submit" class="forma btn-modificar">modificar</button>
-                </form>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">modificar Categoría</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="form-modificar" action="" method="post" class = "forma">
+                        <input type="hidden" name="modificar">
+                        <input id="ID_Cat" type="hidden" name="ID_Cat">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="text-nombreCat" class="form-label">Nombre:</label>
+                                <input id="text-nombreCat" name="nombre" type="text" class="form-control" placeholder="Nombre" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="text-descCat" class="form-label">Descripción:</label>
+                                <input id="text-descCat" name="desc" type="text" class="form-control" placeholder="Descripción" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="text-capCat" class="form-label">Capacidad:</label>
+                                <input id="text-capCat" name="cap" type="number" class="form-control" min="1" max="10" placeholder="Capacidad" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="text-costCat" class="form-label">Precio:</label>
+                                <input id="text-costCat" name="cost" type="text" class="form-control" placeholder="Precio" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-primary" name ="modificar" type="submit">Modificar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
+        
         <div id="venteliminar" class="ventana">
             <div class="conte-vent">
                 <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
