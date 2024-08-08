@@ -14,7 +14,7 @@
                     $costo = $_POST['cost'];
 
 
-                    if(!is_numeric($costos))
+                    if(!is_numeric($costo))
                     {
                         $respuesta['mensaje'] = 'Los precios deben ser numericos.'; 
                     }else
