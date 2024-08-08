@@ -116,7 +116,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <h5 class="modal-title" id="User" style="color: white;">Datos de Usuario</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form-modificar" action="" method="post" class="forma">
+                <form id="form-modificar" action="" method="post" class="formaU">
                     <input type="hidden" name="modificar">
                     <input type="hidden" name="Nacionalidad">
                     <input id="ID_Clt" type="hidden" name="ID_Clt">
@@ -216,7 +216,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <h5 class="modal-title" id="modalLabelEliminar" style="color: white;">Anular Reserva</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form-eliminar" action="" method="post" class="forma">
+                <form id="form-eliminar" action="" method="post" class="formaU">
                     <input type="hidden" name="anular">
                     <input id="ID_ResElim" type="hidden" name="ID_Res">
                     <div class="modal-body">
