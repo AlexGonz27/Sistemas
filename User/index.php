@@ -254,7 +254,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="swiper-pagination"></div>
         </div>
         <div class="container booking-area shadow mb-3" id="forma-disponibilidad">
-            <form class="row forma">
+            <form class="row forma" id="form-disp">
                 <div class="col-lg mb-3 mb-lg-0">
                     <span class="input-group-text" id="adulto-input">Fecha Entrada</span>
                     <input type="date" class="form-control" placeholder="Date" name="fch_ent">
@@ -265,11 +265,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
                     <span class="input-group-text" id="adulto-input">Adultos</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="adulto-input" min="1" value="1">
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="adulto-input" min="1" value="1" name="C_Adultos" >
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
                     <span class="input-group-text" id="menores-input">Niños</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="menores-input" min="0" value="0">
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="menores-input" min="0" value="0" name="C_Niños">
                 </div>
                 <div class="col-lg mb-3 mb-lg-0">
                     <span class="input-group-text" id="Mascotas-input">Mascotas</span>
@@ -313,10 +313,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </p>
 
                     <div class="text-end mt-4">
-                        <button class="btn btn-primary" style="background-color: #F6AD34; border: none;">Reservar</button>
+                        <button class="btn btn-primary" style="background-color: #F6AD34; border: none;" onclick="reservarHabits()" >Reservar</button>
                     </div>
-
-                    <div id="habitaciones-container" class="mt-4"></div>
+                    <form id="form-habit">
+                        <div id="habitaciones-container" class="mt-4"></div>
+                    </form>
+                    
+                    <div class="text-start mt-4">
+                    <h4 class="text-start" style="font-weight: bold;" id="room-total-text">Total: 0<span id="room-total" data-room-total="0" class="ms-2" style="font-size: 1.2rem; font-weight: normal;">$ / Por Noche</span></h4>
+                    </div>
                 </div>
                 <div class="col-sm-6">
                     <div id="carouselImages" class="carousel slide" data-bs-ride="false">

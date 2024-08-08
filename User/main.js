@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  var total = 0;
+
   document
     .getElementById("btn-addHabitacion")
     .addEventListener("click", function () {
@@ -12,18 +15,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Añadir el contenido HTML a la nueva habitación
       nuevaHabitacion.innerHTML = `
-        <div class="col-md-12">
+        <div class="col-md-12 habitacion-obj">
             <h5 class="text-start" style="font-weight: bold;">Categoría:</h5>
-            <p class="text-start" style="font-size: 1.2rem; font-weight: normal;">${roomName}</p>
+            <p class="text-start" data-room-name="${roomName}" style="font-size: 1.2rem; font-weight: normal;">${roomName}</p>
             <h5 class="text-start" style="font-weight: bold;">Nº Habitación:</h5>
-            <p class="text-start" style="font-size: 1.2rem; font-weight: normal;">${roomNumH}</p>
+            <p class="text-start" data-room-num="${roomNumH}" style="font-size: 1.2rem; font-weight: normal;">${roomNumH}</p>
             <h5 class="text-start" style="font-weight: bold;">Precio:</h5>
-            <p class="text-start" style="font-size: 1.2rem; font-weight: normal;">${roomPrice} $ por noche</p>
+            <p class="text-start" data-room-price="${roomPrice}" style="font-size: 1.2rem; font-weight: normal;">${roomPrice} $ por noche</p>
         </div>
         <div class="col-md-12 text-end">
             <span class='btn btn-danger btn-delete'><i class='bi bi-trash'></i></span>
         </div>
     `;
+
+
+      var precio = parseInt(roomPrice);
+      
+      total = total + precio;
+      
+      document.getElementById('room-total-text').textContent = "Total: " + total + "$ / Por Noche";
 
       // Añadir la nueva habitación al contenedor principal
       document
@@ -68,6 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
               .getElementById("resultadoDisponibilidad")
               .appendChild(removedElement); // Volver a agregar el elemento al carrusel
             removedElement = null; // Limpiar la referencia
+            var precio = parseInt(roomPrice);
+            
+            total = total - precio;
+
+            document.getElementById('room-total-text').textContent = "Total: " + total + "$ / Por Noche";
           } else {
             console.log("No hay elemento para mostrar");
           }
@@ -192,3 +207,42 @@ document
   .getElementById("carouselImages")
   .addEventListener("slid.bs.carousel", updateRoomData);
 // Actualizar los datos al cargar la página
+function guardarServicios() {
+  const habitacionesSeleccionadas = [];
+  const habitaciones = document.querySelectorAll('#form-habit .habitacion-obj');
+  habitaciones.forEach(habitacion => {
+    const roomName = habitacion.querySelector('[data-room-name]').getAttribute('data-room-name');
+    const roomNumH = habitacion.querySelector('[data-room-num]').getAttribute('data-room-num');
+    const roomPrice = habitacion.querySelector('[data-room-price]').getAttribute('data-room-price');
+
+    habitacionesSeleccionadas.push({
+        roomName: roomName,
+        roomNumH: roomNumH,
+        roomPrice: roomPrice
+    });
+  });
+  return habitacionesSeleccionadas;
+}
+
+function reservarHabits(){
+  var habitaciones = guardarServicios();
+  
+  var formData = new FormData(document.getElementById('form-disp'));
+
+  formData.append('habitaciones',habitaciones);
+
+  $.ajax({
+    url: "./agregarReserva.php", // Reemplaza con tu URL de subida
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (respuesta) {
+      console.log(respuesta);
+    },
+    error: function (error) {
+      // Manejar el error
+      console.error("Error:", error);
+    },
+  });
+}

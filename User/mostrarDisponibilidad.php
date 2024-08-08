@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $categoria = mysqli_fetch_assoc(mysqli_query($conn, $sql));
                 // Mostrar la imagen del carrusel
                 $respuesta['mensaje'] .= "<div id='H". $fila['N_Habitación'] ."' class='carousel-item " . ($roomCount === 0 ? 'active' : '') . "'
-                                    data-room-numH='" . $fila['N_Habitación'] . "'  
+                                    data-room-numH='" . $fila['N_Habitación'] . "'   
                                     data-room-name='" . $categoria['Nombre'] . "' 
                                     data-room-description='" . $fila['Descripción'] . "' 
                                     data-room-price='" . $categoria['Precio'] . "'>
