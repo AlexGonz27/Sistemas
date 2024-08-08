@@ -168,6 +168,7 @@
                 <!-- Indicadores del carrusel -->
                 <div class="carousel-indicators">
                     <?php
+                    include './User/conexion.php';
                     // Conectar a la base de datos
                     $conn = conectarDB();
 
@@ -217,7 +218,7 @@
                             echo "
                                 <div class='col-md-4 mb-4'>
                                     <div class='room-items'>
-                                        <img src='.." . $fila['imagen'] . "' class='img-fluid' alt='room'>
+                                        <img src='." . $fila['imagen'] . "' class='img-fluid' alt='room'>
                                         <div class='room-item-wrap'>
                                             <div class='room-content'>
                                                 <h5 class='text-white mb-lg-5 text-decoration-underline'>" . $categoria['Nombre'] . "</h5>

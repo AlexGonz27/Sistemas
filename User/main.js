@@ -90,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Manejar el error
         console.error('Error:', error);
       }
->>>>>>> Stashed changes
     });
   });
 });
@@ -131,7 +130,6 @@ function tareaCompletada(){
       toast.onmouseleave = Swal.resumeTimer;
     }
   });
-<<<<<<< Updated upstream
   Toast.fire({
     icon: "success",
     title: "Tarea completada!",
@@ -156,8 +154,7 @@ function tareaError(mensaje){
     text: mensaje
   });
 }
-=======
-}
+
 function toggleDisponibilidad() {
   var div1 = document.getElementById("Disponibilidad");
   if (div1.style.display === "none") {
@@ -179,4 +176,3 @@ function updateRoomData() {
 // Actualizar los datos cuando se cambia la diapositiva
 document.getElementById('carouselImages').addEventListener('slid.bs.carousel', updateRoomData);
 // Actualizar los datos al cargar la página
->>>>>>> Stashed changes
