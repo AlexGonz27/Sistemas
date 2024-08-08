@@ -168,7 +168,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == true) {
                     <p> En Conjunto Vacacional La Fuente, te ofrecemos una variedad de cabañas para que disfrutes de una escapada inolvidable. Sumérgete en la relajación y el sol en nuestras cabañas con piscina. Disfruta de un día de poolday junto a la piscina, rodeado de naturaleza y tranquilidad. ¿Buscas un refugio romántico? Nuestras cabañas matrimoniales son perfectas para parejas. Con detalles acogedores, jacuzzi y vistas panorámicas, te brindarán momentos inolvidables.Si vienes en familia, nuestras cabañas familiares son ideales. Espacios amplios, cocina equipada y comodidades para todos. ¡Un fin de semana en familia que no olvidarás!</p>
 
                     <p>Así que, ya sea en pareja o con tus seres queridos, te esperamos para que vivas momentos especiales en nuestras cabañas. ¡Bienvenidos a la Fuente!</p>
-                    <a href="#" class="main-btn mt-4">Explorar</a>
+                    <a href="./Inic/inic.php" class="main-btn mt-4">Explorar</a>
                 </div>
                 <div class="col-lg-6 mb-4 mb-lg-0 ps-lg-4 text-center">
                     <img src="images/Bienvenido a las Cabañas de la Fuente-Photoroom.png" class="img-fluid" alt="about">
@@ -247,7 +247,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == true) {
                                                 <h5 class='text-white mb-lg-5 text-decoration-underline'>" . $categoria['Nombre'] . "</h5>
                                                 <p class='text-white'>" . $fila['Descripción'] . "</p>
                                                 <p class='text-white fw-bold mt-lg-4'>" . $categoria['Precio'] . "$ / Por Noche</p>
-                                                <a class='main-btn border-white text-white mt-lg-5' href='#'>Reserva Ahora</a>
+                                                <a class='main-btn border-white text-white mt-lg-5' href='./Inic/inic.php'>Reserva Ahora</a>
                                             </div>
                                         </div>
                                     </div>
