@@ -160,6 +160,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 section-title text-center mb-5">
+                    <h6>Ven y Disfruta de Nuestras Habitaciones</h6>
                     <h3>Nuestras Habitaciones</h3>
                 </div>
             </div>
