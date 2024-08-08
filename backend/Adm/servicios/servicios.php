@@ -299,17 +299,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <!-- Fin de Ventana Modificar -->
 
 
-        <div id="venteliminar" class="ventana">
-            <div class="conte-vent">
-                <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
-                <form class="forma" id="form-agregar" action="" method="post" name="agregar">
-                    <input type="hidden" name="eliminar">
-                    <input id="ID_ServElim" type="hidden" name="ID_Serv">
-                    <p>Seguro que desea eliminar esta fila?</p>
-                    <button type="submit">eliminar</button>
-                </form>
+        <!-- Ventana Eliminar -->
+        <div id="venteliminar" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #009970;">
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">Eliminar Servicio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="forma" id="form-eliminar" action="" method="post" name="eliminar">
+                        <input type="hidden" name="eliminar">
+                        <input id="ID_ServElim" type="hidden" name="ID_Serv">
+                        <div class="modal-body">
+                            <p>¿Está seguro que desea eliminar este servicio?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-danger" name="eliminar" type="submit" style="background-color: #dc3545; border-color: #dc3545;">Eliminar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+        <!-- Fin de Ventana Eliminar -->
+
 
         <!--Bootstrap 5 JS CDN Links -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
