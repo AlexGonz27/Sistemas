@@ -166,12 +166,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
 
             <div class="buscar">
-                <div class="input-group">
-                    <input id="buscador_tabla" type="text" class="form-control ps-4 rounded-pill" placeholder="  Buscar" aria-label="Buscar">
-                    <span class="input-group-text bg-transparent border-0">
-                        <i class="bi bi-search"></i>
-                    </span>
-                </div>
+                <label>
+                    <input id="buscador_tabla" type="text" placeholder="Buscar">
+                    <ion-icon name="search-outline"></ion-icon>
+                </label>
             </div>
 
             <div class="user">
