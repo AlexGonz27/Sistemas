@@ -1,11 +1,10 @@
-<?php 
+<?php
 //LOGEADO??
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: ../../../");
     exit;
-}
-else{
+} else {
     if ($_SESSION['nivel'] > 1) {
         header("Location: ../../../");
         exit;
@@ -35,7 +34,7 @@ else{
                         <span class="icon">
                             <ion-icon name="desktop-outline"></ion-icon>
                         </span>
-                        <span class="title" id="Titulo">Sitema de reservas</span>
+                        <span class="title" id="Titulo">Sistema de Reservas</span>
                     </a>
                 </li>
                 <li id="Inicio">
@@ -49,7 +48,7 @@ else{
                 <li id="Reservas">
                     <a href="../reservas/reservas.php">
                         <span class="icon">
-                            <ion-icon name="id-card-outline"></ion-icon>
+                            <ion-icon name="calendar-outline"></ion-icon>
                         </span>
                         <span class="title">Reservas</span>
                     </a>
@@ -57,7 +56,7 @@ else{
                 <li id="Pagos">
                     <a href="../pagos/pagos.php">
                         <span class="icon">
-                            <ion-icon name="id-card-outline"></ion-icon>
+                            <ion-icon name="cash-outline"></ion-icon>
                         </span>
                         <span class="title">Pagos</span>
                     </a>
@@ -65,15 +64,15 @@ else{
                 <li id="Categorias">
                     <a href="../categorias/categorias.php">
                         <span class="icon">
-                            <ion-icon name="bookmarks-outline"></ion-icon>
+                            <ion-icon name="pricetags-outline"></ion-icon>
                         </span>
-                        <span class="title">Categorias</span>
+                        <span class="title">Categorías</span>
                     </a>
                 </li>
                 <li id="Habitaciones">
                     <a href="../habitaciones/habitaciones.php">
                         <span class="icon">
-                            <ion-icon name="bookmarks-outline"></ion-icon>
+                            <ion-icon name="bed-outline"></ion-icon>
                         </span>
                         <span class="title">Habitaciones</span>
                     </a>
@@ -81,7 +80,7 @@ else{
                 <li id="Servicios">
                     <a href="../servicios/servicios.php">
                         <span class="icon">
-                            <ion-icon name="hand-right-outline"></ion-icon>
+                            <ion-icon name="restaurant-outline"></ion-icon>
                         </span>
                         <span class="title">Servicios</span>
                     </a>
@@ -89,7 +88,7 @@ else{
                 <li id="Usuarios">
                     <a href="../usuarios/usuarios.php">
                         <span class="icon">
-                            <ion-icon name="person-circle-outline"></ion-icon>
+                            <ion-icon name="people-outline"></ion-icon>
                         </span>
                         <span class="title">Usuarios</span>
                     </a>
@@ -105,7 +104,7 @@ else{
                 <li id="Cargos">
                     <a href="../cargos/cargos.php">
                         <span class="icon">
-                            <ion-icon name="person-circle-outline"></ion-icon>
+                            <ion-icon name="briefcase-outline"></ion-icon>
                         </span>
                         <span class="title">Cargos</span>
                     </a>
@@ -113,15 +112,15 @@ else{
                 <li id="Huespedes">
                     <a href="./huespedes.php">
                         <span class="icon">
-                            <ion-icon name="body-outline"></ion-icon>
+                            <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
-                        <span class="title">Huespedes</span>
+                        <span class="title">Huéspedes</span>
                     </a>
                 </li>
                 <li id="Mascotas">
                     <a href="../mascotas/mascotas.php">
                         <span class="icon">
-                            <ion-icon name="body-outline"></ion-icon>
+                            <ion-icon name="paw-outline"></ion-icon>
                         </span>
                         <span class="title">Mascotas</span>
                     </a>
@@ -129,7 +128,7 @@ else{
                 <li id="Menores">
                     <a href="../menores/menores.php">
                         <span class="icon">
-                            <ion-icon name="body-outline"></ion-icon>
+                            <ion-icon name="accessibility-outline"></ion-icon>
                         </span>
                         <span class="title">Menores</span>
                     </a>
@@ -137,7 +136,7 @@ else{
                 <li id="Promociones">
                     <a href="../promociones/promociones.php">
                         <span class="icon">
-                            <ion-icon name="cash-outline"></ion-icon>
+                            <ion-icon name="pricetag-outline"></ion-icon>
                         </span>
                         <span class="title">Promociones</span>
                     </a>
@@ -145,78 +144,81 @@ else{
                 <li>
                     <a href="../../../Inic/loggout.php">
                         <span class="icon">
-                            <ion-icon name="enter-outline"></ion-icon>
+                            <ion-icon name="log-out-outline"></ion-icon>
                         </span>
-                        <span class="title">Cerrar Sesion</span>
+                        <span class="title">Cerrar Sesión</span>
                     </a>
                 </li>
             </ul>
         </div>
-        <!-- ========================= principal ==================== -->
-        <div class="principal">
-            <div class="barratop">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
-                </div>
-
-                <div class="buscar">
-                    <label>
-                        <input type="text" placeholder="Buscar">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
-
-                <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
-                </div>
-            </div>
-        <div> 
     </div>
-    <div class="dt-serv">
-        <div class="serviciosTable">
-            <div class="cartaHeader">
-                <h2>Mascotas</h2>
-            </div>
-            <div class="conte-btns">
-                <div>
-                    <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
-                </div>
-                <div>
-                    <button id="consulta-btn" onclick="tareaCompletada()" style="display: none;">Hacer Consulta</button>
-                    <input id="buscador_tabla" type="text" placeholder="Buscar">
-                </div>
+
+    <!-- ========================= principal ==================== -->
+    <div class="principal">
+        <div class="barratop">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
             </div>
 
-            <table id="Tabla_Datos">
-                <thead>
-                    <tr>
-                        <td>Nombre_Apellido</td>
-                        <td>Fecha_Nacimiento</td>
-                        <td>Acciones</td>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                    include '../conexion.php';
-                    $conn = conectarDB();
-                    $sql = "SELECT * FROM tbl_menores;";
-                    $resultado = mysqli_query($conn, $sql);
-                    while ($fila = mysqli_fetch_assoc($resultado)) {
-                        echo "<tr>
+            <div class="buscar">
+                <label>
+                    <input type="text" placeholder="Buscar">
+                    <ion-icon name="search-outline"></ion-icon>
+                </label>
+            </div>
+
+            <div class="user">
+                <img src="assets/imgs/customer01.jpg" alt="">
+            </div>
+        </div>
+        <div>
+        </div>
+        <div class="dt-serv">
+            <div class="serviciosTable">
+                <div class="cartaHeader">
+                    <h2>Mascotas</h2>
+                </div>
+                <div class="conte-btns">
+                    <div>
+                        <div class="btn-agregar" onclick="document.getElementById('ventagregar').style.display = 'block'">Agregar</div>
+                    </div>
+                    <div>
+                        <button id="consulta-btn" onclick="tareaCompletada()" style="display: none;">Hacer Consulta</button>
+                        <input id="buscador_tabla" type="text" placeholder="Buscar">
+                    </div>
+                </div>
+
+                <table id="Tabla_Datos">
+                    <thead>
+                        <tr>
+                            <td>Nombre_Apellido</td>
+                            <td>Fecha_Nacimiento</td>
+                            <td>Acciones</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        include '../conexion.php';
+                        $conn = conectarDB();
+                        $sql = "SELECT * FROM tbl_menores;";
+                        $resultado = mysqli_query($conn, $sql);
+                        while ($fila = mysqli_fetch_assoc($resultado)) {
+                            echo "<tr>
                                 <td>" . $fila['Nombre_Apellido'] . "</td>
                                 <td>" . $fila['Fecha_Nacimiento'] . "</td>
                                 <td>
-                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(".json_encode($fila).")'>Modificar</span>
-                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(".$fila['ID_Menores'].");'>Eliminar</span>
+                                    <span class='btns btn-modificar' onclick='ConfgVentModifiCat(" . json_encode($fila) . ")'>Modificar</span>
+                                    <span class='btns btn-eliminar' onclick='ConfgVentElimCat(" . $fila['ID_Menores'] . ");'>Eliminar</span>
                                 </td>
                             </tr>";
-                    }
-                ?>
-                </tbody>
-            </table>
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div></div>    
-    
+    </div>
+
     <div id="ventagregar" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventagregar').style.display = 'none';"></ion-icon>
@@ -232,12 +234,12 @@ else{
     <div id="ventmodifi" class="ventana">
         <div class="conte-vent">
             <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
-            <form class="forma" id="form-modificar"action="" method="post" name="modificar">
+            <form class="forma" id="form-modificar" action="" method="post" name="modificar">
                 <input type="hidden" name="modificar">
                 <input id="ID_Men" type="hidden" name="ID_Men">
                 <input id="text-nombre" name="nombre" type="text" placeholder="Nombre y apellido">
                 <input id="text_Fn" name="fn" type="date" placeholder="Fecha de nacimiento">
-                <button class="btns btn-modificar"  type="submit" class="forma btn-modificar">modificar</button>
+                <button class="btns btn-modificar" type="submit" class="forma btn-modificar">modificar</button>
             </form>
         </div>
     </div>
