@@ -134,7 +134,7 @@ function ConfgVentModifiCat(FilaJson,nombre) {
   console.log(FilaJson)
 
   document.querySelector("#form-modificar #ID_usuario").value = FilaJson.ID_Usuario;
-  document.querySelector("#form-modificar h2").textContent = nombre;
+
   document.querySelector("#form-modificar #text_nivel").value = FilaJson.Nivel;
   document.querySelector("#form-modificar #text_correo").value = FilaJson.Correo;
   document.querySelector("#form-modificar #text_contraseña").value = FilaJson.Contraseña;

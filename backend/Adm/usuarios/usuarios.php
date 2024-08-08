@@ -288,41 +288,73 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </div>
         <!-- Fin de Ventana Agregar -->
 
-        <div id="ventmodifi" class="ventana">
-            <div class="conte-vent">
-                <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
-                <form class="forma" id="form-modificar" action="" method="post" name="modificar">
-                    <input type="hidden" name="modificar">
-                    <input id="ID_usuario" type="hidden" name="ID_usuario">
+        <!-- Ventana Modificar -->
+        <div id="ventmodifi" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #009970;">
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">Modificar Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="forma" id="form-modificar" action="" method="post" name="modificar">
+                        <input type="hidden" name="modificar">
+                        <input id="ID_usuario" type="hidden" name="ID_usuario">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="text_nivel" class="form-label">Nivel:</label>
+                                <select id="text_nivel" class="form-select" name="nivel" required>
+                                    <option value="">Seleccionar una opción</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Operador</option>
+                                    <option value="3">Usuario</option>
+                                </select>
+                            </div>
 
-                    <h2></h2>
+                            <div class="mb-3">
+                                <label for="text_correo" class="form-label">Correo:</label>
+                                <input id="text_correo" name="correo" type="email" class="form-control" placeholder="Correo" required>
+                            </div>
 
-                    <select id="text_nivel" class="mi-select" name="nivel">
-                        <option value="">Seleccionar una opción</option>
-                        <option value="1">Administrador</option>
-                        <option value="2">Operador</option>
-                        <option value="3">Usuario</option>
-                    </select>
-
-                    <input id="text_correo" name="correo" type="text" placeholder="Correo">
-
-                    <input id="text_contraseña" name="contraseña" type="text" placeholder="Contraseña">
-                    <button class="btns btn-modificar" type="submit" class="forma btn-modificar">modificar</button>
-                </form>
+                            <div class="mb-3">
+                                <label for="text_contraseña" class="form-label">Contraseña:</label>
+                                <input id="text_contraseña" name="contraseña" type="password" class="form-control" placeholder="Contraseña" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-primary" name="modificar" type="submit" style="background-color: #009970; border-color: #009970;">Modificar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+        <!-- Fin de Ventana Modificar -->
 
-        <div id="venteliminar" class="ventana">
-            <div class="conte-vent">
-                <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
-                <form class="forma" id="form-agregar" action="" method="post" name="agregar">
-                    <input type="hidden" name="eliminar">
-                    <input id="ID_UserElim" type="hidden" name="ID_User">
-                    <p>Seguro que desea eliminar esta fila?</p>
-                    <button type="submit">eliminar</button>
-                </form>
+
+        <!-- Ventana Eliminar -->
+        <div id="venteliminar" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #009970;">
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">Eliminar Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="forma" id="form-eliminar" action="" method="post" name="eliminar">
+                        <input type="hidden" name="eliminar">
+                        <input id="ID_UserElim" type="hidden" name="ID_User">
+                        <div class="modal-body">
+                            <p>¿Está seguro que desea eliminar este usuario?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-danger" name="eliminar" type="submit" style="background-color: #dc3545; border-color: #dc3545;">Eliminar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+        <!-- Fin de Ventana Eliminar -->
+        <!-- Fin de Ventana Eliminar -->
         <!--Bootstrap 5 JS CDN Links -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
