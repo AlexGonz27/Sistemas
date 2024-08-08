@@ -301,17 +301,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="row">
                 <div class="col-sm-6">
                     <h2 class="text-start mb-4" style="color: #009970; font-size: 1.8rem;">Reservación</h2>
-                    <h4 class="text-start" style="font-weight: bold;">Categoría:</h4>
-                    <p id="room-name" class="text-start" style="font-size: 1.2rem;"></p>
+                    <h4 class="text-start" style="font-weight: bold;">Categoría: <span id="room-name" class="ms-2" style="font-size: 1.2rem; font-weight: normal;"></span></h4>
 
-                    <h4 class="text-start" style="font-weight: bold;">Nº Habitación:</h4>
-                    <p id="room-numH" class="text-start" style="font-size: 1.2rem;"></p>
+                    <h4 class="text-start" style="font-weight: bold;">Nº Habitación: <span id="room-numH" class="ms-2" style="font-size: 1.2rem; font-weight: normal;"></span></h4>
 
-                    <h4 class="text-start" style="font-weight: bold;">Descripción:</h4>
-                    <p id="room-description" class="text-start" style="font-size: 1.2rem;"></p>
+                    <h4 class="text-start" style="font-weight: bold;">Descripción: <span id="room-description" class="ms-2" style="font-size: 1.2rem; font-weight: normal;"></span></h4>
 
                     <h4 class="text-start" style="font-weight: bold;">Precio:</h4>
-                    <p id="room-price" class="text-start" style="font-size: 1.2rem;"></p>
+                    <p class="text-start" style="font-size: 1.2rem; font-weight: normal;">
+                        <span id="room-price"></span> $ / Por Noche
+                    </p>
 
                     <div class="text-end mt-4">
                         <button class="btn btn-primary" style="background-color: #F6AD34; border: none;">Reservar</button>
@@ -339,14 +338,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <p>No hay habitaciones disponibles.</p>
                     </div>
                     <div class="text-center mt-2">
-                        <button id="btn-addHabitacion" type="button" class="btn btn-success">Añadir</button>
+                        <button id="btn-addHabitacion" type="button" class="btn btn-success" style="background-color: #009970;">
+                            <i class="bi bi-plus-circle"></i> Añadir
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Fin de Sección de Disponibilidad -->
-
 
 
     <!-- Seccion de Informacion -->
