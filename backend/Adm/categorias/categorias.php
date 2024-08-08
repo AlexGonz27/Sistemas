@@ -113,10 +113,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Cargos</span>
                     </a>
                 </li>
-                <li id="Huespedes">
-                    <a href="./huespedes.php">
+                <li id="Empleados">
+                    <a href="../empleados/empleados.php">
                         <span class="icon">
-                            <ion-icon name="people-circle-outline"></ion-icon>
+                            <ion-icon name="briefcase-outline"></ion-icon>
+                        </span>
+                        <span class="title">Empleados</span>
+                    </a>
+                </li>
+                <li id="Huespedes">
+                    <a href="../huespedes/huespedes.php">
+                        <span class="icon">
+                            <ion-icon name="person-outline"></ion-icon>
                         </span>
                         <span class="title">Huéspedes</span>
                     </a>

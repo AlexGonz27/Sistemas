@@ -29,51 +29,28 @@
                    
             }
             if (isset($_POST['modificar'])){
-                if (empty($_POST['Nombre']) or empty($_POST['desc']) or empty($_POST['Nivel']) or empty($_POST['Sueldo'])) {
+                if (empty($_POST['fi'])) {
                     $respuesta['mensaje'] = 'Alguno de los campos se encuentra vacio.';
                 }else
                 {
-                    $ID = $_POST['ID_Car'];
-                    $Nombre = $_POST['Nombre'];
-                    $descripcion = $_POST['desc'];
-                    $Nivel = $_POST['Nivel'];
-                    $Sueldo = $_POST['Sueldo'];
+                    $ID = $_POST['ID_Hue'];
+                    $fi = $_POST['fi'];
                     
-                    if(!is_numeric($Nivel) or !is_numeric($Sueldo))
-                    {
-                        $respuesta['mensaje'] = 'Los campos Nivel y Sueldo deben ser numericos.';
-                    }else
-                    {
-                        if(preg_match("/\d/",$Nombre))
-                        {
-                            $respuesta['mensaje'] = 'Los Nombres no deben contener numeros.';
-                        }else
-                        {
-                            $sql = "SELECT * FROM tbl_cargos WHERE Nombre = '$Nombre' and ID_Cargo != $ID";
-                            $result= mysqli_query($conn, $sql);
-    
-                            if(mysqli_num_rows($result) > 0)
-                            {
-                                $respuesta['mensaje'] = 'Ya existe un cargo con el mismo nombre.';
-                            }else
-                            {
-                                $sql = "UPDATE tbl_cargos SET Nombre='$Nombre',Descripción='$descripcion',Nivel='$Nivel',Sueldo='$Sueldo' WHERE ID_Cargo = '$ID'";
+                    
                             
-                                if (mysqli_query($conn, $sql)) {
-                                    $respuesta['estado'] = 'completado';
-                                } else {
-                                    $respuesta['mensaje'] = 'Error al modificar la categoria';
-                                }
-                            }
-                        }                        
-                        
-                    } 
+                    $sql = "UPDATE tbl_huespedes SET Fecha_Ingreso='$fi' WHERE ID_Huesped = '$ID'";
+                            
+                    if (mysqli_query($conn, $sql)) {
+                        $respuesta['estado'] = 'completado';
+                    } else {
+                        $respuesta['mensaje'] = 'Error al modificar la categoria';
+                    }       
                 }
             }
             if (isset($_POST['eliminar'])){
-                $ID = $_POST['ID_Car'];
+                $ID = $_POST['ID_Hue'];
     
-                $sql = "DELETE FROM tbl_cargos WHERE ID_Cargo = '$ID'";
+                $sql = "DELETE FROM tbl_huespedes WHERE ID_Huesped = '$ID'";
                     
                 if (mysqli_query($conn, $sql)) {
                     $respuesta['estado'] = 'completado';

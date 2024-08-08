@@ -113,6 +113,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <span class="title">Cargos</span>
                     </a>
                 </li>
+                <li id="Empleados">
+                    <a href="../empleados/empleados.php">
+                        <span class="icon">
+                            <ion-icon name="briefcase-outline"></ion-icon>
+                        </span>
+                        <span class="title">Empleados</span>
+                    </a>
+                </li>
                 <li id="Huespedes">
                     <a href="../huespedes/huespedes.php">
                         <span class="icon">
@@ -231,7 +239,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #009970;">
-                        <h5 class="modal-title" id="modalLabel" style="color: white;">Agregar Cargo</h5>
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">Agregar Huesped</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form id="form-agregar" action="" method="post" class="forma">
@@ -283,31 +291,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #009970;">
-                        <h5 class="modal-title" id="modalLabel" style="color: white;">Modificar Cargo</h5>
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">Modificar Huesped</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form id="form-modificar" action="" method="post" class="forma">
                         <input type="hidden" name="modificar">
-                        <input id="ID_Car" name="ID_Car" type="hidden">
+                        <input id="ID_Hue" name="ID_Hue" type="hidden">
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="text-Nombre" class="form-label">Nombre:</label>
-                                <input id="text-Nombre" name="Nombre" type="text" class="form-control" placeholder="Nombre" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="text-desc" class="form-label">Descripción:</label>
-                                <input id="text-desc" name="desc" type="text" class="form-control" placeholder="Descripción" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="text-nivel" class="form-label">Nivel:</label>
-                                <input id="text-nivel" name="Nivel" type="text" class="form-control" placeholder="Nivel" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="text-Sueldo" class="form-label">Sueldo:</label>
-                                <input id="text-Sueldo" name="Sueldo" type="text" class="form-control" placeholder="Sueldo" required>
+                                <label for="fi" class="form-label">Fecha de Ingreso:</label>
+                                <input id="fi" name="fi" type="date" class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -325,14 +318,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #009970;">
-                        <h5 class="modal-title" id="modalLabel" style="color: white;">Eliminar Cargo</h5>
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">Eliminar Huesped</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form class="forma" id="form-eliminar" action="" method="post" name="eliminar">
                         <input type="hidden" name="eliminar">
-                        <input id="ID_CarElim" type="hidden" name="ID_Car">
+                        <input id="ID_HueElim" type="hidden" name="ID_Hue">
                         <div class="modal-body">
-                            <p>¿Está seguro que desea eliminar este cargo?</p>
+                            <p>¿Está seguro que desea eliminar este huesped?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

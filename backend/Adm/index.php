@@ -131,6 +131,14 @@ mysqli_close($conn);
                         <span class="title">Cargos</span>
                     </a>
                 </li>
+                <li id="Empleados">
+                    <a href="../empleados/empleados.php">
+                        <span class="icon">
+                            <ion-icon name="briefcase-outline"></ion-icon>
+                        </span>
+                        <span class="title">Empleados</span>
+                    </a>
+                </li>
                 <li id="Huespedes">
                     <a href="./huespedes/huespedes.php">
                         <span class="icon">
