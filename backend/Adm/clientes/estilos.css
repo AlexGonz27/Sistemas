@@ -166,12 +166,10 @@ Pseudo-elementos solo para los elementos principales */
   width: 400px;
   margin: 0 10px;
 }
-
 .buscar label {
   position: relative;
   width: 100%;
 }
-
 .buscar label input {
   width: 100%;
   height: 40px;
