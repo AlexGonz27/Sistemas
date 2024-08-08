@@ -75,50 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-<<<<<<< HEAD
   $(".forma").on("submit", function (e) {
-=======
-  })
-
-  $('.formaU').on('submit', function(e) {
-    e.preventDefault(); // Evitar el envío por defecto del formulario
-
-    var formData = new FormData(this); // Serializar los datos del formulario
-
-    $.ajax({
-        url: 'consultasU.php', // Archivo PHP que procesa la solicitud
-        method: 'POST',
-        data: formData,
-        processData: false, // Evitar que jQuery procese los datos
-        contentType: false,
-        success: function(respuesta) {
-          console.log(respuesta);
-          var data = JSON.parse(respuesta);
-
-          if (data.estado === 'completado') {
-            tareaCompletada();
-            document.querySelectorAll('.ventana').forEach(function(element) {
-              element.style.display = 'none';
-          });
-            setTimeout(function() {
-                location.reload();
-            }, 3000);
-          } else {
-            tareaError(data.mensaje);
-          }
-        },
-        error: function(xhr, status, error) {
-          Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'Hubo un problema con la solicitud: ' + error
-          });
-        }
-    });
-  });
-
-  $('.forma').on('submit', function(e) {
->>>>>>> ff85f8e36451607ea754d42a493d06c233e9c12c
     e.preventDefault(); // Evitar el envío por defecto del formulario
 
     var formData = new FormData(this); // Serializar los datos del formulario
