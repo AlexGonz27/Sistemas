@@ -189,9 +189,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                     Agregar
                                 </div>
                             </div>
-                            <div>
-                                <input id="buscador_tabla" type="text" class="form-control" placeholder="Buscar" aria-label="Buscar">
-                            </div>
+
                         </div>
                     </div>
 
@@ -262,30 +260,63 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </div>
         <!-- Fin de Ventana Agregar -->
 
-        <div id="ventmodifi" class="ventana">
-            <div class="conte-vent">
-                <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('ventmodifi').style.display = 'none';"></ion-icon>
-                <form class="forma" id="form-modificar" action="" method="post" name="modificar">
-                    <input type="hidden" name="modificar">
-                    <input id="ID_Men" type="hidden" name="ID_Men">
-                    <input id="text-nombre" name="nombre" type="text" placeholder="Nombre y apellido">
-                    <input id="text_Fn" name="fn" type="date" placeholder="Fecha de nacimiento">
-                    <button class="btns btn-modificar" type="submit" class="forma btn-modificar">modificar</button>
-                </form>
-            </div>
-        </div>
+        <!-- Ventana Modificar -->
+        <div id="ventmodifi" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #009970;">
+                        <h5 class="modal-title" id="modalLabel" style="color: white;">Modificar Menor</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="form-modificar" action="" method="post" class="forma">
+                        <input type="hidden" name="modificar">
+                        <input id="ID_Men" type="hidden" name="ID_Men">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="text-nombre" class="form-label">Nombre y Apellido:</label>
+                                <input id="text-nombre" name="nombre" type="text" class="form-control" placeholder="Nombre y apellido" required>
+                            </div>
 
-        <div id="venteliminar" class="ventana">
-            <div class="conte-vent">
-                <ion-icon name="close-circle-outline" class="btns btn-cerrar" onclick="document.getElementById('venteliminar').style.display = 'none';"></ion-icon>
-                <form class="forma" id="form-agregar" action="" method="post" name="agregar">
-                    <input type="hidden" name="eliminar">
-                    <input id="ID_MenElim" type="hidden" name="ID_Men">
-                    <p>Seguro que desea eliminar esta fila?</p>
-                    <button type="submit">eliminar</button>
-                </form>
+                            <div class="mb-3">
+                                <label for="text_Fn" class="form-label">Fecha de Nacimiento:</label>
+                                <input id="text_Fn" name="fn" type="date" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-primary" name="modificar" type="submit" style="background-color: #009970; border-color: #009970;">Modificar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+        <!-- Fin de Ventana Modificar -->
+
+
+        <!-- Ventana Eliminar -->
+        <div id="venteliminar" class="modal fade" tabindex="-1" aria-labelledby="modalLabelEliminar" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #009970;">
+                        <h5 class="modal-title" id="modalLabelEliminar" style="color: white;">Eliminar Menor</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="form-eliminar" action="" method="post" class="forma">
+                        <input type="hidden" name="eliminar">
+                        <input id="ID_MenElim" type="hidden" name="ID_Men">
+                        <div class="modal-body">
+                            <p>¿Está seguro que desea eliminar este menor?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Fin de Ventana Eliminar -->
+
 
 
         <!--Bootstrap 5 JS CDN Links -->
