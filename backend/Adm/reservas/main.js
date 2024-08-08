@@ -2,6 +2,13 @@ const currentPage = document.title;
 elementoLi = document.getElementById(currentPage);
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  if (localStorage.getItem('showAlert') === 'true') {
+    
+    tareaCompletada();
+
+    localStorage.removeItem('showAlert');
+  }
   if (elementoLi) {
       elementoLi.classList.add("hovered");
   }

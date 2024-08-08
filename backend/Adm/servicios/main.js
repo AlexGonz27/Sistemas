@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tareaCompletada();
 
     localStorage.removeItem('showAlert');
-}
+  }
 
   if (elementoLi) {
       elementoLi.classList.add("hovered");
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
             var data = JSON.parse(respuesta);
 
             if (data.estado === 'completado') {
-              if (data.estado === 'completado')
+              localStorage.setItem('showAlert', 'true');
               location.reload();
             } else {
               tareaError(data.mensaje);
