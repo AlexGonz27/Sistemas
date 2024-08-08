@@ -174,17 +174,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
 
             <div class="buscar">
-                <label>
-                    <input id="buscador_tabla" type="text" placeholder="Buscar">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
+                <div class="input-group">
+                    <input id="buscador_tabla" type="text" class="form-control ps-4 rounded-pill" placeholder="  Buscar" aria-label="Buscar">
+                    <span class="input-group-text bg-transparent border-0">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
             </div>
 
             <div class="user">
                 <i class="bi bi-person-circle" style="font-size: 30px; color: #009970;"></i>
             </div>
         </div>
-
         <div class="container mt-5">
             <div class="dt-serv">
                 <div class="serviciosTable">
